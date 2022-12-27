@@ -11,10 +11,10 @@
     fd
     tree
     htop-vim
+    alejandra
   ];
 
   cliPkgs = with pkgs; [
-    alejandra
   ];
 
   guiPkgs = with pkgs; [
@@ -25,7 +25,7 @@ in {
   home.homeDirectory = "${homePrefix}/mo";
 
   # TODO: Remove karabiner-elements from here
-  imports = map mkMod ["git" "fish" "nvim" "kitty" "vscode" "tldr" "karabiner-elements"];
+  imports = map mkMod ["git" "fish" "nvim" "kitty" "vscode" "tldr" "rbw" "karabiner-elements"];
 
   programs.fzf = {
     enable = true;
