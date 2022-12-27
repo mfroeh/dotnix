@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   programs.fish = {
     enable = true;
     shellInit = ''
@@ -7,8 +7,8 @@
       bind -M insert \cp up-or-search
       bind -M insert \cf accept-autosuggestion
     '';
-    shellAbbrs = { };
-    shellAliases = { };
+    shellAbbrs = {};
+    shellAliases = {};
     plugins = with pkgs.fishPlugins; [
       {
         name = "pure";
