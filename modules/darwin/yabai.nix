@@ -1,8 +1,8 @@
 {pkgs, ...}: {
   services.yabai = {
-    enable = false; # TODO: Enable after PR merged
+    enable = true;
     package = pkgs.yabai;
-    enableScriptingAddition = true;
+    enableScriptingAddition = false;
     config = {
       mouse_follows_focus = "off";
       focus_follows_mouse = "off";

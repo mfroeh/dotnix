@@ -8,7 +8,10 @@
       bind -M insert \cf accept-autosuggestion
     '';
     shellAbbrs = {};
-    shellAliases = {};
+    shellAliases = {
+      l = "ls -la";
+      cat = "bat";
+    };
     plugins = with pkgs.fishPlugins; [
       {
         name = "pure";

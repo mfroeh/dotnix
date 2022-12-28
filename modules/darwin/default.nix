@@ -14,16 +14,13 @@
   services.karabiner-elements.enable = true;
 
   environment = {
-    loginShell = "${pkgs.fish}/bin/fish";
     variables = {
-      editor = "nvim";
+      EDITOR = "nvim";
     };
   };
 
-  programs.bash.enable = true;
-  programs.zsh.enable = true;
   programs.fish.enable = true;
-  environment.shells = with pkgs; [fish zsh bashInteractive];
+  environment.shells = with pkgs; [fish];
 
   fonts.fontDir.enable = true;
   fonts.fonts = with pkgs; [

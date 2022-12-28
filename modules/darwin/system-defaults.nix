@@ -24,7 +24,6 @@
     };
 
     finder = {
-      # Allow quitting via ⌘ + Q; doing so will also hide desktop icons
       QuitMenuItem = true;
       AppleShowAllExtensions = true;
       AppleShowAllFiles = true;
@@ -46,26 +45,18 @@
     };
 
     trackpad = {
+      # Tap to click
       Clicking = true;
-      TrackpadRightClick = true;
     };
 
     NSGlobalDomain = {
-      # Theme
-      AppleInterfaceStyle = "Dark";
-
       # Use key repeat over press and hold
       ApplePressAndHoldEnabled = false;
       KeyRepeat = 1;
-      InitialKeyRepeat = 20;
-      "com.apple.mouse.tapBehavior" = 1;
-      "com.apple.trackpad.enableSecondaryClick" = true;
+      InitialKeyRepeat = 15;
 
       # Full keyboard access
       AppleKeyboardUIMode = 3;
-
-      # Use function keys as media keys
-      "com.apple.keyboard.fnState" = false;
 
       # Disable opening and closing window animations
       NSAutomaticWindowAnimationsEnabled = false;
