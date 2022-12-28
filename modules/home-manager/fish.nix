@@ -1,4 +1,9 @@
-{pkgs, ...}: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   programs.fish = {
     enable = true;
     shellInit = ''
@@ -6,10 +11,12 @@
       bind -M insert \cn down-or-search
       bind -M insert \cp up-or-search
       bind -M insert \cf accept-autosuggestion
+      bind -M insert \ca beginning-of-line
+      bind -M insert \ce end-of-line
     '';
     shellAbbrs = {};
     shellAliases = {
-      l = "ls -la";
+      l = "ll";
       cat = "bat";
     };
     plugins = with pkgs.fishPlugins; [

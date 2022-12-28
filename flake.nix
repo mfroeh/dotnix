@@ -1,5 +1,5 @@
 {
-  description = "";
+  description = "Me systems flake";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
@@ -35,6 +35,13 @@
         config.allowUnfree = true;
       };
 
+    mkNixosConfig = {
+      system,
+      host,
+      user,
+      extraModules ? [],
+    }: {};
+
     mkDarwinConfig = {
       system,
       host,
@@ -48,18 +55,40 @@
           [
             ./hosts/${host}
             ./modules/darwin
-            home-manager.darwinModule
+            # home-manager.darwinModule
+            # {
+            #   home-manager.useGlobalPkgs = true;
+            #   home-manager.useUserPackages = true;
+            #   home-manager.users.${user}.username = "${user}";
+            #   home-manager.users.${user}.homeDirectory = "${homePrefix system}/${user}";
+            #   home-manager.users.${user} = import ./users/${user}/home.nix {
+            #     inherit self pkgs;
+            #     homePrefix = homePrefix system;
+            #   };
+            # }
+          ]
+          ++ extraModules;
+        specialArgs = {inherit self pkgs system inputs;};
+      };
+
+    mkHomeConfig = {
+      user,
+      system,
+      extraModules ? [],
+    }:
+      home-manager.lib.homeManagerConfiguration {
+        pkgs = mkPkgs system;
+        modules =
+          [
+            ./modules/home-manager
             {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.mo = import ./users/${user}/home.nix {
-                inherit self pkgs;
-                homePrefix = homePrefix system;
+              home = {
+                username = user;
+                homeDirectory = "${homePrefix system}/${user}";
               };
             }
           ]
           ++ extraModules;
-        specialArgs = {inherit self pkgs system inputs;};
       };
   in {
     darwinConfigurations = {
@@ -67,6 +96,27 @@
         system = "aarch64-darwin";
         host = "gus";
         user = "mo";
+      };
+    };
+
+    nixosConfigurations = {
+      monk = mkNixosConfig {
+        system = "x86_64-linux";
+        host = "monk";
+        user = "mo";
+      };
+    };
+
+    homeConfigurations = {
+      "mo@gus" = mkHomeConfig {
+        user = "mo";
+        system = "aarch64-darwin";
+        extraModules = [./modules/home-manager/karabiner.nix];
+      };
+      "mo@monk" = mkHomeConfig {
+        user = "mo";
+        system = "x86_64-linux";
+        extraModules = [];
       };
     };
   };
