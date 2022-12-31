@@ -12,6 +12,8 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+    hyprland.url = "github:hyprwm/Hyprland";
+
     # To get yabai scripting addition to work with macos 13.1
     # ivar-nixpkgs-yabai-5_0_2.url = "github:IvarWithoutBones/nixpkgs?rev=27d6a8b410d9e5280d6e76692156dce5d9d6ef86";
   };
@@ -21,6 +23,7 @@
     nixpkgs,
     darwin,
     home-manager,
+    hyprland,
     ...
   }: let
     isDarwin = system: (builtins.elem system inputs.nixpkgs.lib.platforms.darwin);
@@ -40,7 +43,11 @@
       host,
       user,
       extraModules ? [],
-    }: {};
+    }: nixpkgs.lib.nixosSystem {
+      inherit system;
+      pkgs = mkPkgs system;
+      modules = [./hosts/${host} ./modules/nixos ./users/${user}/nixos.nix] ++ extraModules;
+    };
 
     mkDarwinConfig = {
       system,
@@ -55,17 +62,7 @@
           [
             ./hosts/${host}
             ./modules/darwin
-            # home-manager.darwinModule
-            # {
-            #   home-manager.useGlobalPkgs = true;
-            #   home-manager.useUserPackages = true;
-            #   home-manager.users.${user}.username = "${user}";
-            #   home-manager.users.${user}.homeDirectory = "${homePrefix system}/${user}";
-            #   home-manager.users.${user} = import ./users/${user}/home.nix {
-            #     inherit self pkgs;
-            #     homePrefix = homePrefix system;
-            #   };
-            # }
+            ./users/${user}/darwin.nix
           ]
           ++ extraModules;
         specialArgs = {inherit self pkgs system inputs;};
@@ -100,10 +97,11 @@
     };
 
     nixosConfigurations = {
-      monk = mkNixosConfig {
+      herc = mkNixosConfig {
         system = "x86_64-linux";
-        host = "monk";
+        host = "herc";
         user = "mo";
+        extraModules = [hyprland.nixosModules.default {programs.hyprland.enable = true;}];
       };
     };
 
@@ -113,7 +111,7 @@
         system = "aarch64-darwin";
         extraModules = [./modules/home-manager/karabiner.nix];
       };
-      "mo@monk" = mkHomeConfig {
+      "mo@herc" = mkHomeConfig {
         user = "mo";
         system = "x86_64-linux";
         extraModules = [];

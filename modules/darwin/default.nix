@@ -1,35 +1,23 @@
-{pkgs, ...}: {
-  nix.extraOptions = "experimental-features = nix-command flakes";
-
-  imports = [./system-defaults.nix ./brew.nix ./yabai.nix ./skhd.nix ./spacebar.nix ./wallpaper.nix];
-
-  # wallpaper = {
-  #   enable = true;
-  #   file = "/Users/mo/nix.png";
-  # };
+{config, pkgs, lib, ...}: 
+let
+  cliPkgs = with pkgs; [ git ripgrep fd ];
+  guiPkgs = with pkgs; [ ];
+  editors = with pkgs; [ neovim vscode ];
+in {
+  imports = [../common.nix ./system-defaults.nix ./brew.nix ./yabai.nix ./skhd.nix ./spacebar.nix ./wallpaper.nix];
 
   # Make sure the nix daemon always runs
   services.nix-daemon.enable = true;
 
   services.karabiner-elements.enable = true;
 
-  environment = {
-    variables = {
-      EDITOR = "nvim";
-    };
+  environment.variables = {
+    EDITOR = "nvim";
   };
 
   programs.fish.enable = true;
   environment.shells = with pkgs; [fish];
-
-  fonts.fontDir.enable = true;
-  fonts.fonts = with pkgs; [
-    (nerdfonts.override {fonts = ["RobotoMono"];})
-  ];
-
-  environment.systemPackages = with pkgs; [
-    neovim
-  ];
+  environment.systemPackages = cliPkgs ++ guiPkgs ++ editors ++ (with pkgs; []);
 
   system.stateVersion = 4;
 }
