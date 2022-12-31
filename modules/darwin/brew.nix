@@ -9,6 +9,7 @@
       "raycast"
       "spotify"
       "balenaetcher"
+      "bitwarden"
     ];
   };
 }

@@ -1,9 +1,12 @@
-{ config, pkgs, lib, ... }: 
-let 
-  cliPkgs = with pkgs; [ git ripgrep fd ];
-  guiPkgs = with pkgs; [ spotify google-chrome ];
-  editors = with pkgs; [ neovim vscode ];
-in {
+{
+  config,
+  pkgs,
+  lib,
+  self,
+  inputs,
+  ...
+}: 
+{
   imports = [../common.nix];
 
   system.stateVersion = "22.11";
@@ -28,9 +31,13 @@ in {
 
   services.xserver.layout = "us";
 
-  services.xserver.enable = true;
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.xfce.enable = true;
+  services.xserver = {
+    enable = true;
+    displayManager.lightdm.enable = true;
+    windowManager.i3.enable = true;
+    windowManager.i3.configFile = "${self}/config/i3/config";
+    desktopManager.xfce.enable = true;
+  };
 
   sound.enable = true;
   hardware.pulseaudio.enable = true;
@@ -38,11 +45,13 @@ in {
   virtualisation.virtualbox.host.enable = true;
 
   environment.variables = {
-    EDITOR = "nvim";
+    EDITOR = "vim";
+    VISUAL = "vim";
+    # KDEWM = "${lib.meta.getExe pkgs.bspwm}/bin/bspwm";
   };
 
   programs.fish.enable = true;
   environment.shells = with pkgs; [fish];
 
-  environment.systemPackages = cliPkgs ++ guiPkgs ++ editors ++ (with pkgs; []);
+  environment.systemPackages = with pkgs; [ vim git ];
 }

@@ -1,8 +1,12 @@
-{config, pkgs, lib, ...}: 
-let
-  cliPkgs = with pkgs; [ git ripgrep fd ];
-  guiPkgs = with pkgs; [ ];
-  editors = with pkgs; [ neovim vscode ];
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}: let
+  cliPkgs = with pkgs; [git ripgrep fd];
+  guiPkgs = with pkgs; [];
+  editors = with pkgs; [neovim vscode];
 in {
   imports = [../common.nix ./system-defaults.nix ./brew.nix ./yabai.nix ./skhd.nix ./spacebar.nix ./wallpaper.nix];
 

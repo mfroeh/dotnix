@@ -1,5 +1,10 @@
-{ config, pkgs, ... }: {
-  imports = [ # Include the results of the hardware scan.
+{
+  config,
+  pkgs,
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ../modules/vim.nix
   ];
@@ -48,14 +53,12 @@
   # Enable the XFCE Desktop Environment.
   services.xserver.desktopManager.gnome.enable = true;
 
-
-  services.xserver.videoDrivers = [ "nvidia" ];
+  services.xserver.videoDrivers = ["nvidia"];
   hardware.opengl.enable = true;
 
   nix.settings = {
-    substituters = [ "https://hyprland.cachix.org" ];
-    trusted-public-keys =
-      [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
+    substituters = ["https://hyprland.cachix.org"];
+    trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
   };
 
   # Virtualbox
@@ -67,7 +70,7 @@
     isNormalUser = true;
     initialPassword = "";
     description = "mo";
-    extraGroups = [ "networkmanager" "wheel" "audio" ];
+    extraGroups = ["networkmanager" "wheel" "audio"];
     shell = pkgs.fish;
   };
 
@@ -76,7 +79,7 @@
   ];
 
   # List packages installed in system profile. To search, run:
-  environment.systemPackages = with pkgs; [ vim htop-vim nvtop ];
+  environment.systemPackages = with pkgs; [vim htop-vim nvtop];
 
   # services.xserver.videoDriver = "nvidia";
   # hardware.opengl.enable = true;
@@ -107,5 +110,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "22.11"; # Did you read the comment?
-
 }

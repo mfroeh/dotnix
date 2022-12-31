@@ -43,11 +43,13 @@
       host,
       user,
       extraModules ? [],
-    }: nixpkgs.lib.nixosSystem {
-      inherit system;
-      pkgs = mkPkgs system;
-      modules = [./hosts/${host} ./modules/nixos ./users/${user}/nixos.nix] ++ extraModules;
-    };
+    }:
+      nixpkgs.lib.nixosSystem {
+        inherit system;
+        pkgs = mkPkgs system;
+        modules = [./hosts/${host} ./modules/nixos ./users/${user}/nixos.nix] ++ extraModules;
+        specialArgs = {inherit self system inputs;};
+      };
 
     mkDarwinConfig = {
       system,
@@ -77,7 +79,7 @@
         pkgs = mkPkgs system;
         modules =
           [
-            ./modules/home-manager
+            (./. + "/modules/home-manager/${if isDarwin system then "darwin" else "nixos"}")
             {
               home = {
                 username = user;
@@ -101,7 +103,7 @@
         system = "x86_64-linux";
         host = "herc";
         user = "mo";
-        extraModules = [hyprland.nixosModules.default {programs.hyprland.enable = true;}];
+        extraModules = [];
       };
     };
 
@@ -109,7 +111,7 @@
       "mo@gus" = mkHomeConfig {
         user = "mo";
         system = "aarch64-darwin";
-        extraModules = [./modules/home-manager/karabiner.nix];
+        extraModules = [];
       };
       "mo@herc" = mkHomeConfig {
         user = "mo";
