@@ -31,6 +31,7 @@
 
       # Theme
       onedark-nvim
+      rose-pine
 
       # Status line
       lualine-nvim
@@ -48,6 +49,8 @@
       plenary-nvim
       telescope-nvim
       telescope-fzf-native-nvim
+
+      harpoon
     ];
     extraPackages = with pkgs; [
       # LSP servers

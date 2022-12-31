@@ -8,14 +8,30 @@
 }: let
   homeDir = config.home.homeDirectory;
 
+  # Shared gui packages
+  guiPkgs = with pkgs; [
+    obsidian
+  ];
+
+  # Shared cli packages
   cliPkgs = with pkgs; [
     ripgrep
     fd
 
     alejandra
   ];
+
+  # x86_64-linux only packages
+  linuxPkgs = with pkgs; [
+    spotify
+    google-chrome
+  ];
+
+  # aarch64-darwin only packages
+  darwinPkgs = with pkgs; [
+  ];
+
 in {
-  # TODO: Remove karabiner-elements from here
   imports = [
     ./kitty.nix
     ./fish.nix
@@ -40,7 +56,6 @@ in {
 
   programs = {
     bat.enable = true;
-    dircolors.enable = true;
     lsd = {
       enable = true;
       enableAliases = true;
@@ -66,5 +81,5 @@ in {
   home.packages = with pkgs;
     [
     ]
-    ++ cliPkgs;
+    ++ cliPkgs ++ guiPkgs ++ (if stdenv.isLinux then linuxPkgs else darwinPkgs);
 }

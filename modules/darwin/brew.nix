@@ -7,6 +7,8 @@
       "google-chrome"
       "google-drive"
       "raycast"
+      "spotify"
+      "balenaetcher"
     ];
   };
 }
