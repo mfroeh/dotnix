@@ -1,3 +1,8 @@
+-- Setup neovim lua configuration
+require('neodev').setup()
+
+require('fidget').setup()
+
 local servers = {
   clangd = {},
   rnix = {},
@@ -58,9 +63,6 @@ local on_attach = function(_, bufnr)
   end, { desc = 'Format current buffer with LSP' })
 end
 
--- Setup neovim lua configuration
-require('neodev').setup()
-
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
@@ -73,4 +75,9 @@ for server, cfg in pairs(servers) do
   }
 end
 
-require('fidget').setup()
+
+-- Diagnostic keymaps
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)

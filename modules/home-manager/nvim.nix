@@ -11,14 +11,15 @@
     plugins = with pkgs.vimPlugins; [
       # LSP and plugins
       nvim-lspconfig
-      fidget-nvim
       neodev-nvim
+      fidget-nvim
 
       # Autocompletion
       nvim-cmp
       cmp-nvim-lsp
       luasnip
       cmp_luasnip
+      friendly-snippets
 
       # Treesitter and more text-objects
       (nvim-treesitter.withPlugins (p: [p.c p.cpp p.nix p.lua]))
@@ -29,8 +30,7 @@
       vim-rhubarb
       gitsigns-nvim
 
-      # Theme
-      onedark-nvim
+      # Themes
       rose-pine
 
       # Status line
@@ -49,8 +49,6 @@
       plenary-nvim
       telescope-nvim
       telescope-fzf-native-nvim
-
-      harpoon
     ];
     extraPackages = with pkgs; [
       # LSP servers

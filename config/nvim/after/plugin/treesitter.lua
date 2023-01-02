@@ -22,6 +22,8 @@ require ('nvim-treesitter.configs').setup {
         ['if'] = '@function.inner',
         ['ac'] = '@class.outer',
         ['ic'] = '@class.inner',
+        ['il'] = '@loop.inner',
+        ['al'] = '@loop.inner',
       },
     },
     move = {
