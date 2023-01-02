@@ -5,9 +5,8 @@
   self,
   inputs,
   ...
-}: 
-{
-  imports = [../common.nix];
+}: {
+  imports = [../common.nix ./xremap.nix ./picom.nix ./xfce-i3.nix];
 
   system.stateVersion = "22.11";
 
@@ -29,15 +28,10 @@
     LC_TIME = "sv_SE.UTF-8";
   };
 
+  services.xserver.enable = true;
   services.xserver.layout = "us";
-
-  services.xserver = {
-    enable = true;
-    displayManager.lightdm.enable = true;
-    windowManager.i3.enable = true;
-    windowManager.i3.configFile = "${self}/config/i3/config";
-    desktopManager.xfce.enable = true;
-  };
+  services.xserver.autoRepeatDelay = 250;
+  services.xserver.autoRepeatInterval = 50;
 
   sound.enable = true;
   hardware.pulseaudio.enable = true;
@@ -47,11 +41,10 @@
   environment.variables = {
     EDITOR = "vim";
     VISUAL = "vim";
-    # KDEWM = "${lib.meta.getExe pkgs.bspwm}/bin/bspwm";
   };
 
   programs.fish.enable = true;
   environment.shells = with pkgs; [fish];
 
-  environment.systemPackages = with pkgs; [ vim git ];
+  environment.systemPackages = with pkgs; [vim git];
 }

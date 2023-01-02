@@ -10,7 +10,7 @@ vim.opt.expandtab = true
 vim.opt.smartindent = true
 
 -- Line wrapping
-vim.opt.wrap = true
+vim.opt.wrap = false
 
 -- Save undo history
 vim.opt.swapfile = false

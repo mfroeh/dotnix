@@ -5,11 +5,10 @@
   lib,
   inputs,
   ...
-}: 
-let
+}: let
   cliPkgs = with pkgs; [git ripgrep fd alejandra neofetch];
-  guiPkgs = with pkgs; [];
-  otherPkgs = with pkgs; [ ];
+  guiPkgs = with pkgs; [discord];
+  otherPkgs = with pkgs; [];
 in {
   imports = [
     ./kitty.nix

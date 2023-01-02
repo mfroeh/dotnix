@@ -14,6 +14,9 @@
 
     hyprland.url = "github:hyprwm/Hyprland";
 
+    xremap-flake.url = "github:xremap/nix-flake";
+    xremap-flake.inputs.nixpkgs.follows = "nixpkgs";
+
     # To get yabai scripting addition to work with macos 13.1
     # ivar-nixpkgs-yabai-5_0_2.url = "github:IvarWithoutBones/nixpkgs?rev=27d6a8b410d9e5280d6e76692156dce5d9d6ef86";
   };
@@ -23,6 +26,7 @@
     nixpkgs,
     darwin,
     home-manager,
+    xremap-flake,
     hyprland,
     ...
   }: let
@@ -79,7 +83,12 @@
         pkgs = mkPkgs system;
         modules =
           [
-            (./. + "/modules/home-manager/${if isDarwin system then "darwin" else "nixos"}")
+            (./.
+              + "/modules/home-manager/${
+                if isDarwin system
+                then "darwin"
+                else "nixos"
+              }")
             {
               home = {
                 username = user;
@@ -103,7 +112,7 @@
         system = "x86_64-linux";
         host = "herc";
         user = "mo";
-        extraModules = [];
+        extraModules = [xremap-flake.nixosModules.default];
       };
     };
 
