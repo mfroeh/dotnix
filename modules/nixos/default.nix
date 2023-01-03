@@ -6,7 +6,7 @@
   inputs,
   ...
 }: {
-  imports = [../common.nix ./xremap.nix ./picom.nix ./xfce-i3.nix];
+  imports = [../common.nix ./xremap.nix ./picom.nix ./xfce-i3.nix ./thunar.nix ];
 
   system.stateVersion = "22.11";
 

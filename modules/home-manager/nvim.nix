@@ -4,6 +4,7 @@
   lib,
   ...
 }: {
+  home.packages = lib.mkIf pkgs.stdenv.isLinux (with pkgs; [ xclip ]);
   programs.neovim = {
     enable = true;
     viAlias = true;

@@ -114,6 +114,11 @@
         user = "mo";
         extraModules = [xremap-flake.nixosModules.default];
       };
+      eta = mkNixosConfig {
+        system = "aarch64-linux";
+        host = "eta";
+        user = "mo";
+      };
     };
 
     homeConfigurations = {
@@ -125,6 +130,11 @@
       "mo@herc" = mkHomeConfig {
         user = "mo";
         system = "x86_64-linux";
+        extraModules = [];
+      };
+      "mo@eta" = mkHomeConfig {
+        user = "mo";
+        system = "aarch64-linux";
         extraModules = [];
       };
     };

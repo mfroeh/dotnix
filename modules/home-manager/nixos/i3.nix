@@ -94,6 +94,17 @@ in {
         "${cmd}+Control+8" = "move container to workspace number ${ws8}";
         "${cmd}+Control+9" = "move container to workspace number ${ws9}";
 
+        "${cmd}+Shift+0" = "move container to workspace number ${ws0}, workspace number ${ws0}";
+        "${cmd}+Shift+1" = "move container to workspace number ${ws1}, workspace number ${ws1}";
+        "${cmd}+Shift+2" = "move container to workspace number ${ws2}, workspace number ${ws2}";
+        "${cmd}+Shift+3" = "move container to workspace number ${ws2}, workspace number ${ws3}";
+        "${cmd}+Shift+4" = "move container to workspace number ${ws4}, workspace number ${ws4}";
+        "${cmd}+Shift+5" = "move container to workspace number ${ws5}, workspace number ${ws5}";
+        "${cmd}+Shift+6" = "move container to workspace number ${ws6}, workspace number ${ws6}";
+        "${cmd}+Shift+7" = "move container to workspace number ${ws7}, workspace number ${ws7}";
+        "${cmd}+Shift+8" = "move container to workspace number ${ws8}, workspace number ${ws8}";
+        "${cmd}+Shift+9" = "move container to workspace number ${ws9}, workspace number ${ws9}";
+
         "${alt}+h" = "focus left";
         "${alt}+j" = "focus down";
         "${alt}+k" = "focus up";
@@ -110,6 +121,10 @@ in {
         "${alt}+Control+l" = "move right";
 
         "${alt}+f" = "fullscreen toggle";
+        "${cmd}+Control+h" = "move container to workspace number 11";
+        "${cmd}+Shift+h" = "move container to workspace number 11, workspace number 11";
+        "${cmd}+h" = "workspace number 11";
+        "${alt}+Control+space" = "floating toggle";
       };
       focus = {
         followMouse = false;
