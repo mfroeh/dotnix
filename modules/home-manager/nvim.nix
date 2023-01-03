@@ -45,6 +45,9 @@
       # Detect tabstop and shiftwidth automatically
       vim-sleuth
 
+# Floating terminal
+toggleterm-nvim
+
       # Fuzzy finder
       plenary-nvim
       telescope-nvim
