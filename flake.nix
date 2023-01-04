@@ -51,7 +51,7 @@
       nixpkgs.lib.nixosSystem {
         inherit system;
         pkgs = mkPkgs system;
-        modules = [./hosts/${host} ./modules/nixos ./users/${user}/nixos.nix] ++ extraModules;
+        modules = [./hosts/${host} ./modules/nixos ./users/${user}/user.nix] ++ extraModules;
         specialArgs = {inherit self system inputs;};
       };
 
@@ -68,7 +68,7 @@
           [
             ./hosts/${host}
             ./modules/darwin
-            ./users/${user}/darwin.nix
+            ./users/${user}/user.nix
           ]
           ++ extraModules;
         specialArgs = {inherit self pkgs system inputs;};

@@ -7,7 +7,7 @@
   ...
 }: let
   cliPkgs = with pkgs; [git ripgrep fd alejandra neofetch];
-  guiPkgs = with pkgs; [discord];
+  guiPkgs = with pkgs; [discord neovide];
   otherPkgs = with pkgs; [];
 in {
   imports = [
@@ -50,9 +50,6 @@ in {
       package = pkgs.htop-vim;
     };
     zathura.enable = true;
-
-    # Try out!
-    yt-dlp.enable = true;
   };
 
   home.packages = cliPkgs ++ guiPkgs ++ otherPkgs;

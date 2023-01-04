@@ -4,7 +4,7 @@
   lib,
   ...
 }: {
-  home.packages = lib.mkIf pkgs.stdenv.isLinux (with pkgs; [ xclip ]);
+  home.packages = lib.mkIf pkgs.stdenv.isLinux (with pkgs; [xclip]);
   programs.neovim = {
     enable = true;
     viAlias = true;
@@ -46,8 +46,8 @@
       # Detect tabstop and shiftwidth automatically
       vim-sleuth
 
-# Floating terminal
-toggleterm-nvim
+      # Floating terminal
+      toggleterm-nvim
 
       # Fuzzy finder
       plenary-nvim

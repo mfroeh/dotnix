@@ -12,7 +12,7 @@ in {
     terminal = "${lib.meta.getExe pkgs.kitty}";
     extraConfig = {
       # Unset some bindings
-      kb-remove-to-eol= "";
+      kb-remove-to-eol = "";
       kb-accept-entry = "Return";
       kb-remove-char-back = "BackSpace";
       kb-mode-complete = "";
