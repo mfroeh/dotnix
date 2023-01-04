@@ -9,6 +9,9 @@
     darwin.url = "github:lnl7/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
 
+    nixos-m1.url = "github:tpwrules/nixos-m1";
+    nixos-m1.flake = false;
+
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -16,9 +19,6 @@
 
     xremap-flake.url = "github:xremap/nix-flake";
     xremap-flake.inputs.nixpkgs.follows = "nixpkgs";
-
-    # To get yabai scripting addition to work with macos 13.1
-    # ivar-nixpkgs-yabai-5_0_2.url = "github:IvarWithoutBones/nixpkgs?rev=27d6a8b410d9e5280d6e76692156dce5d9d6ef86";
   };
 
   outputs = inputs @ {
@@ -118,6 +118,7 @@
         system = "aarch64-linux";
         host = "eta";
         user = "mo";
+        extraModules = [xremap-flake.nixosModules.default];
       };
     };
 
