@@ -6,7 +6,7 @@
   inputs,
   ...
 }: {
-  imports = [../common.nix ./xremap.nix ./picom.nix ./xfce-i3.nix ./thunar.nix];
+  imports = [../common.nix ./xremap.nix ./xfce-i3.nix ./thunar.nix]; #./picom.nix 
 
   system.stateVersion = "22.11";
 
@@ -33,7 +33,7 @@
   sound.enable = true;
   hardware.pulseaudio.enable = true;
 
-  virtualisation.virtualbox.host.enable = true;
+  # virtualisation.virtualbox.host.enable = true;
 
   environment.variables = {
     EDITOR = "vim";

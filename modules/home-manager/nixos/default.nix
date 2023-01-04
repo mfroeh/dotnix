@@ -5,7 +5,8 @@
   ...
 }: let
   cliPkgs = with pkgs; [xorg.xwininfo];
-  guiPkgs = with pkgs; [spotify google-chrome bitwarden obsidian];
+  # guiPkgs = with pkgs; [spotify google-chrome bitwarden obsidian];
+guiPkgs = [];
   otherPkgs = with pkgs; [];
 in {
   imports = [../common.nix ./i3.nix ./rofi.nix];

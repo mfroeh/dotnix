@@ -11,6 +11,14 @@
     withX11 = true;
     watch = true;
     config = {
+      modmap = [
+        {
+          name = "CapsLock -> Ctrl_L";
+          remap = {
+            CapsLock = "Ctrl_L";
+          };
+        }
+      ];
       keymap = [
         {
           name = "C-[ -> Esc";

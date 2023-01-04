@@ -7,7 +7,8 @@
   ...
 }: let
   cliPkgs = with pkgs; [git ripgrep fd alejandra neofetch];
-  guiPkgs = with pkgs; [discord neovide];
+  # guiPkgs = with pkgs; [discord neovide];
+guiPkgs = [];
   otherPkgs = with pkgs; [];
 in {
   imports = [

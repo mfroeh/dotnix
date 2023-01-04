@@ -11,7 +11,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
 # Remove if issue during rebuild
-  hardware.asahi.pkgsSystem = "x86_64-linux";
+  # hardware.asahi.pkgsSystem = "x86_64-linux";
 
   hardware.asahi.peripheralFirmwareDirectory = ./firmware;
 
@@ -21,7 +21,14 @@
   # Needed for trackpad
   services.xserver.libinput.enable = true;
 
+  hardware.asahi.useExperimentalGPUDriver = true;
+  hardware.opengl.enable = true;
+
   networking.hostName = "eta";
+
+  # hardware.video.hidpi.enable = true;
+
+  environment.systemPackages = with pkgs; [ chromium alacritty ];
 
   time.timeZone = "Europe/Stockholm";
 }
