@@ -4,6 +4,7 @@
   lib,
   ...
 }: {
+  home.packages = with pkgs; [lsd bat fzf];
   programs.fish = {
     enable = true;
     shellInit = ''

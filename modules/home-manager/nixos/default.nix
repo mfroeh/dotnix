@@ -3,13 +3,20 @@
   pkgs,
   lib,
   ...
-}: let
-  cliPkgs = with pkgs; [xorg.xwininfo];
-  # guiPkgs = with pkgs; [spotify google-chrome bitwarden obsidian];
-guiPkgs = with pkgs; [ screenkey ];
-  otherPkgs = with pkgs; [];
-in {
-  imports = [../common.nix ./i3.nix ./rofi.nix];
+}: {
+  imports = [./i3.nix ./rofi.nix];
 
-  home.packages = cliPkgs ++ guiPkgs ++ otherPkgs;
+  home.packages = with pkgs;
+    [
+      xorg.xwininfo
+      screenkey
+      obsidian
+    ]
+    ++ lib.optionals (pkgs.system == "x86_64-linux") [spotify obsidian google-chrome bitwarden];
+
+  programs = {
+    chromium = {
+      enable = true;
+    };
+  };
 }

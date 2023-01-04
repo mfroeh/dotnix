@@ -78,17 +78,13 @@
       user,
       system,
       extraModules ? [],
+      extraPkgs ? [],
     }:
       home-manager.lib.homeManagerConfiguration {
         pkgs = mkPkgs system;
         modules =
           [
-            (./.
-              + "/modules/home-manager/${
-                if isDarwin system
-                then "darwin"
-                else "nixos"
-              }")
+            ./modules/home-manager
             {
               home = {
                 username = user;
@@ -97,7 +93,9 @@
             }
           ]
           ++ extraModules;
+        extraSpecialArgs = {inherit extraPkgs system;};
       };
+
   in {
     darwinConfigurations = {
       gus = mkDarwinConfig {

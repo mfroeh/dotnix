@@ -4,5 +4,5 @@
   lib,
   ...
 }: {
-  imports = [./karabiner.nix];
+  home.packages = with pkgs; [neovide];
 }

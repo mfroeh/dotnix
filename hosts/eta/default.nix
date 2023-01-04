@@ -10,7 +10,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-# Remove if issue during rebuild
+  # Remove if issue during rebuild
   # hardware.asahi.pkgsSystem = "x86_64-linux";
 
   hardware.asahi.peripheralFirmwareDirectory = ./firmware;
@@ -29,9 +29,7 @@
 
   networking.hostName = "eta";
 
-
-
-  environment.systemPackages = with pkgs; [ chromium alacritty ];
+  environment.systemPackages = with pkgs; [chromium alacritty];
 
   time.timeZone = "Europe/Stockholm";
 }
