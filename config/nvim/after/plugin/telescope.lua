@@ -32,7 +32,6 @@ local nnmap = function(from, to)
 end
 
 vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
-vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
 
 
 -- 'l' for list or live
@@ -54,6 +53,7 @@ nnmap("<C-p>", builtin.git_files)
 -- Grep
 telemap("g", builtin.live_grep)
 nnmap("<C-g>", builtin.live_grep)
+telemap("*", builtin.grep_string)
 
 -- Diagnostics
 telemap("d", builtin.diagnostics)
@@ -63,3 +63,4 @@ telemap("h", builtin.help_tags)
 
 -- Resume last telescope picker
 telemap("l", builtin.resume)
+

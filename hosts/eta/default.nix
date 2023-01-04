@@ -19,14 +19,17 @@
   # hardware.asahi.use4KPages = true;
 
   # Needed for trackpad
-  services.xserver.libinput.enable = true;
+  services.xserver = {
+    libinput.enable = true;
+    dpi = 180;
+  };
 
   hardware.asahi.useExperimentalGPUDriver = true;
   hardware.opengl.enable = true;
 
   networking.hostName = "eta";
 
-  # hardware.video.hidpi.enable = true;
+
 
   environment.systemPackages = with pkgs; [ chromium alacritty ];
 

@@ -6,7 +6,7 @@
   inputs,
   ...
 }: {
-  imports = [../common.nix ./xremap.nix ./xfce-i3.nix ./thunar.nix]; #./picom.nix 
+  imports = [../common.nix ./xremap.nix ./xfce-i3.nix ./thunar.nix]; #./picom.nix
 
   system.stateVersion = "22.11";
 
@@ -38,6 +38,12 @@
   environment.variables = {
     EDITOR = "vim";
     VISUAL = "vim";
+  };
+
+  services.remap = {
+    enable = true;
+    capsToCtrl = true;
+    swpBackslashBackspace = true;
   };
 
   programs.fish.enable = true;
