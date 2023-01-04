@@ -6,17 +6,21 @@
   system,
   ...
 }: {
-  imports =
-    [
-      ./cli.nix
-      ./gui.nix
-      ./kitty.nix
-      ./fish.nix
-      ./nvim.nix
-      ./vscode.nix
-      (if (lib.hasSuffix "darwin" system) then ./darwin else ./nixos)
-    ]
-    ++ extraPkgs;
+  imports = [
+    ./cli.nix
+    ./gui.nix
+    ./kitty.nix
+    ./fish.nix
+    ./nvim.nix
+    ./vscode.nix
+    (
+      if (lib.hasSuffix "darwin" system)
+      then ./darwin
+      else ./nixos
+    )
+  ];
+
+  home.packages = extraPkgs;
 
   # Let home-manager install and mange itself
   programs.home-manager.enable = true;

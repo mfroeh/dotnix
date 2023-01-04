@@ -1,4 +1,9 @@
-{pkgs, ...}: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   services.spacebar = {
     enable = false;
     package = pkgs.spacebar;

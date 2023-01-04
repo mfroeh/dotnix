@@ -1,4 +1,18 @@
-{pkgs, ...}: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}: let
+in {
+  imports = [./base.nix];
+
+  system.stateVersion = 4;
+
+  # Make sure the nix daemon always runs
+  services.nix-daemon.enable = true;
+  services.karabiner-elements.enable = true;
+
   system.defaults = {
     # Disable application quarantine message
     LaunchServices.LSQuarantine = false;

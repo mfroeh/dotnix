@@ -51,7 +51,10 @@
       nixpkgs.lib.nixosSystem {
         inherit system;
         pkgs = mkPkgs system;
-        modules = [./hosts/${host} ./modules/nixos ./users/${user}/user.nix] ++ extraModules;
+        modules =
+          [./modules/nixos-base.nix ./users/${user}.nix ./hosts/${host}]
+          ++ [xremap-flake.nixosModules.default hyprland.nixosModules.default] # Flake modules
+          ++ extraModules;
         specialArgs = {inherit self system inputs;};
       };
 
@@ -66,12 +69,12 @@
         pkgs = mkPkgs system;
         modules =
           [
+            ./modules/darwin-base.nix
             ./hosts/${host}
-            ./modules/darwin
-            ./users/${user}/user.nix
+            ./users/${user}.nix
           ]
           ++ extraModules;
-        specialArgs = {inherit self pkgs system inputs;};
+        specialArgs = {inherit self system inputs;};
       };
 
     mkHomeConfig = {
@@ -93,15 +96,19 @@
             }
           ]
           ++ extraModules;
-        extraSpecialArgs = {inherit extraPkgs system;};
+        extraSpecialArgs = {inherit self system inputs extraPkgs;};
       };
-
   in {
     darwinConfigurations = {
       gus = mkDarwinConfig {
         system = "aarch64-darwin";
         host = "gus";
         user = "mo";
+        extraModules = [
+          ./modules/darwin/brew.nix
+          ./modules/darwin/yabai.nix
+          ./modules/darwin/shkd.nix
+        ];
       };
     };
 
@@ -110,13 +117,20 @@
         system = "x86_64-linux";
         host = "herc";
         user = "mo";
-        extraModules = [xremap-flake.nixosModules.default];
+        extraModules = [
+          ./modules/nixos/xfce-i3.nix
+          ./modules/nixos/picom.nix
+          ./modules/nixos/remap.nix
+        ];
       };
       eta = mkNixosConfig {
         system = "aarch64-linux";
         host = "eta";
         user = "mo";
-        extraModules = [xremap-flake.nixosModules.default];
+        extraModules = [
+          ./modules/nixos/xfce-i3.nix
+          ./modules/nixos/remap.nix
+        ];
       };
     };
 
@@ -125,16 +139,19 @@
         user = "mo";
         system = "aarch64-darwin";
         extraModules = [];
+        extraPkgs = [];
       };
       "mo@herc" = mkHomeConfig {
         user = "mo";
         system = "x86_64-linux";
         extraModules = [];
+        extraPkgs = [];
       };
       "mo@eta" = mkHomeConfig {
         user = "mo";
         system = "aarch64-linux";
         extraModules = [];
+        extraPkgs = [];
       };
     };
   };
