@@ -5,13 +5,13 @@
   inputs,
   ...
 }: {
-  imports = [./hardware-configuration.nix "${inputs.nixos-m1}/nix/m1-support"];
+  imports = [
+    ./hardware-configuration.nix
+    "${inputs.nixos-m1}/nix/m1-support"
+  ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-
-  # Remove if issue during rebuild
-  # hardware.asahi.pkgsSystem = "x86_64-linux";
 
   hardware.asahi.peripheralFirmwareDirectory = ./firmware;
 
@@ -27,9 +27,12 @@
   hardware.asahi.useExperimentalGPUDriver = true;
   hardware.opengl.enable = true;
 
+  time.timeZone = "Europe/Stockholm";
   networking.hostName = "eta";
 
-  environment.systemPackages = with pkgs; [chromium alacritty];
-
-  time.timeZone = "Europe/Stockholm";
+  services.remap = {
+    enable = true;
+    capsToCtrl = true;
+    swpBackslashBackspace = true;
+  };
 }

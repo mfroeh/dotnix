@@ -139,19 +139,19 @@
         user = "mo";
         system = "aarch64-darwin";
         extraModules = [];
-        extraPkgs = [];
+        extraPkgs = with pkgs; [];
       };
       "mo@herc" = mkHomeConfig {
         user = "mo";
         system = "x86_64-linux";
         extraModules = [];
-        extraPkgs = [];
+        extraPkgs = with pkgs; [];
       };
       "mo@eta" = mkHomeConfig {
         user = "mo";
         system = "aarch64-linux";
         extraModules = [];
-        extraPkgs = [];
+        extraPkgs = with pkgs; [alacritty];
       };
     };
   };
