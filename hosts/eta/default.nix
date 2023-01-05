@@ -3,6 +3,7 @@
   pkgs,
   lib,
   inputs,
+  self,
   ...
 }: {
   imports = [
@@ -23,6 +24,12 @@
     libinput.enable = true;
     libinput.touchpad.naturalScrolling = true;
     dpi = 180;
+  };
+
+  # set wallpaper
+  fetchBackground = {
+    enable = true;
+    url = "${self}/config/wallpaper.png";
   };
 
   hardware.asahi.useExperimentalGPUDriver = true;
