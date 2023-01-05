@@ -1,10 +1,14 @@
 # Module stolen from @crazazy
-{ config, lib, pkgs, ... }:
-with lib;
 {
-  # IMPORTANT: make sure you have internet connection before you log 
-  # into your computer, otherwise the background fetching process will fail. 
-  # of course if you are using a file path instead of a URL, you don't have 
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib; {
+  # IMPORTANT: make sure you have internet connection before you log
+  # into your computer, otherwise the background fetching process will fail.
+  # of course if you are using a file path instead of a URL, you don't have
   # to worry about that
   options.fetchBackground = {
     enable = mkOption {
@@ -19,7 +23,7 @@ with lib;
     };
   };
   config = {
-    environment.systemPackages = with pkgs; [ feh ];
+    environment.systemPackages = with pkgs; [feh];
     services.xserver.displayManager.sessionCommands = mkIf config.fetchBackground.enable ''
       ${pkgs.feh}/bin/feh --bg-scale ${config.fetchBackground.url}
     '';

@@ -58,7 +58,7 @@ in {
       assigns = {
         "workspace ${ws0}" = [{class = "Code";}];
         "${ws1}" = [];
-        "workspace ${ws2}" = [{class = "Google-chrome";}];
+        "workspace ${ws2}" = [{class = "Google-chrome";} {class = "Chromium";}];
         "${ws3}" = [];
         "${ws4}" = [];
         "workspace ${ws5}" = [{class = ".spotify-wrapped";}];
@@ -150,11 +150,6 @@ in {
         icons = "awesome";
         blocks = [
           {
-            block = "time";
-            interval = 60;
-            format = "%a %d/%m %k:%M %p";
-          }
-          {
             block = "disk_space";
             format = "{icon}{used}/{total}";
           }
@@ -170,6 +165,22 @@ in {
           }
           {
             block = "net";
+          }
+          {
+            block = "backlight";
+          }
+          {
+            block = "battery";
+            interval = 10;
+            format = "{percentage}";
+          }
+          {
+            block = "sound";
+          }
+          {
+            block = "time";
+            interval = 60;
+            format = "%a %d/%m %k:%M %p";
           }
         ];
       };

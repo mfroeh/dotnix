@@ -10,6 +10,9 @@ require ('nvim-treesitter.configs').setup {
       node_decremental = '<c-backspace>',
     },
   },
+  endwise = {
+    enable = true,
+  },
   textobjects = {
     select = {
       enable = true,

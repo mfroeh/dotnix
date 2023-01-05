@@ -3,7 +3,20 @@
   pkgs,
   lib,
   ...
-}: {
+}: 
+let
+# installs a vim plugin from git with a given tag / branch
+  pluginGit = ref: repo: pkgs.vimUtils.buildVimPluginFrom2Nix {
+    pname = "${lib.strings.sanitizeDerivationName repo}";
+    version = ref;
+    src = builtins.fetchGit {
+      url = "https://github.com/${repo}.git";
+      ref = ref;
+    };
+  };
+
+  plugin = pluginGit "HEAD";
+in {
   home.packages = lib.mkIf pkgs.stdenv.isLinux (with pkgs; [xclip]);
   programs.neovim = {
     enable = true;
@@ -25,6 +38,12 @@
       # Treesitter and more text-objects
       (nvim-treesitter.withPlugins (p: [p.c p.cpp p.nix p.lua]))
       nvim-treesitter-textobjects
+      (plugin "RRethy/nvim-treesitter-endwise")
+      # pkgs.fetchFromGitHub {
+      #   owner = "RRethy";
+      #   name = "nvim-treesitter-endwise";
+      #   rev = "master";
+      # }
 
       # Git
       vim-fugitive
@@ -42,6 +61,10 @@
 
       # vim-commentary
       comment-nvim
+
+      vim-surround
+
+      nvim-autopairs
 
       # Detect tabstop and shiftwidth automatically
       vim-sleuth

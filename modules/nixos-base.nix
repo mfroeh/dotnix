@@ -30,8 +30,5 @@
   services.xserver.autoRepeatDelay = 200;
   services.xserver.autoRepeatInterval = 25;
 
-  services.pipewire = {
-    enable = true;
-    pulse.enable = true;
-  };
+  hardware.pulseaudio.enable = true;
 }

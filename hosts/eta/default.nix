@@ -23,7 +23,7 @@
   services.xserver = {
     libinput.enable = true;
     libinput.touchpad.naturalScrolling = true;
-    dpi = 180;
+    dpi = 200;
   };
 
   # set wallpaper

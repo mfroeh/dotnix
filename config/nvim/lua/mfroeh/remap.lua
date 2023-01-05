@@ -23,6 +23,7 @@ vim.keymap.set("n", "<leader>y", "\"+y")
 vim.keymap.set("v", "<leader>y", "\"+y")
 vim.keymap.set("v", "<leader>Y", "\"+Y")
 vim.keymap.set("n", "<leader>p", "\"+p");
+vim.keymap.set("n", "<leader>P", "\"+P");
 
 -- Testing these :)
 -- Something quick fix, not sure yet
