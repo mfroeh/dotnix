@@ -13,16 +13,16 @@
   # ws3 = "3: term";
   # ws4 = "4: music";
   # ws5 = "5: social";
-  ws0 = "0";
-  ws1 = "1";
-  ws2 = "2";
-  ws3 = "3";
-  ws4 = "4";
-  ws5 = "5";
-  ws6 = "6";
-  ws7 = "7";
-  ws8 = "8";
-  ws9 = "9";
+  ws0 = "0] dev";
+  ws1 = "1] misc";
+  ws2 = "2] web";
+  ws3 = "3] misc";
+  ws4 = "4] music";
+  ws5 = "5] social";
+  ws6 = "6]";
+  ws7 = "7]";
+  ws8 = "8]";
+  ws9 = "9]";
 in {
   home.packages = with pkgs; [
     i3wsr
@@ -37,10 +37,10 @@ in {
 
     config = {
       startup = [
-        {
-          command = "${lib.meta.getExe pkgs.i3wsr} --icons awesome";
-          always = true;
-        }
+        # {
+        #   command = "${lib.meta.getExe pkgs.i3wsr} --icons awesome";
+        #   always = true;
+        # }
         {
           command = "${lib.meta.getExe pkgs.autotiling}";
           always = true;
@@ -56,12 +56,12 @@ in {
       ];
 
       assigns = {
-        "workspace number ${ws0}" = [{class = "Code";}];
+        "workspace ${ws0}" = [{class = "Code";}];
         "${ws1}" = [];
-        "workspace number ${ws2}" = [{class = "Google-chrome";}];
+        "workspace ${ws2}" = [{class = "Google-chrome";}];
         "${ws3}" = [];
         "${ws4}" = [];
-        "workspace number ${ws5}" = [{class = ".spotify-wrapped";}];
+        "workspace ${ws5}" = [{class = ".spotify-wrapped";}];
       };
       keybindings = {
         "${cmd}+Shift+r" = "restart";
@@ -72,59 +72,59 @@ in {
 
         "${cmd}+w" = "kill";
 
-        "${cmd}+0" = "workspace number ${ws0}";
-        "${cmd}+1" = "workspace number ${ws1}";
-        "${cmd}+2" = "workspace number ${ws2}";
-        "${cmd}+3" = "workspace number ${ws2}";
-        "${cmd}+4" = "workspace number ${ws4}";
-        "${cmd}+5" = "workspace number ${ws5}";
-        "${cmd}+6" = "workspace number ${ws6}";
-        "${cmd}+7" = "workspace number ${ws7}";
-        "${cmd}+8" = "workspace number ${ws8}";
-        "${cmd}+9" = "workspace number ${ws9}";
+        "${cmd}+0" = "workspace ${ws0}";
+        "${cmd}+1" = "workspace ${ws1}";
+        "${cmd}+2" = "workspace ${ws2}";
+        "${cmd}+3" = "workspace ${ws2}";
+        "${cmd}+4" = "workspace ${ws4}";
+        "${cmd}+5" = "workspace ${ws5}";
+        "${cmd}+6" = "workspace ${ws6}";
+        "${cmd}+7" = "workspace ${ws7}";
+        "${cmd}+8" = "workspace ${ws8}";
+        "${cmd}+9" = "workspace ${ws9}";
 
-        "${cmd}+Control+0" = "move container to workspace number ${ws0}";
-        "${cmd}+Control+1" = "move container to workspace number ${ws1}";
-        "${cmd}+Control+2" = "move container to workspace number ${ws2}";
-        "${cmd}+Control+3" = "move container to workspace number ${ws2}";
-        "${cmd}+Control+4" = "move container to workspace number ${ws4}";
-        "${cmd}+Control+5" = "move container to workspace number ${ws5}";
-        "${cmd}+Control+6" = "move container to workspace number ${ws6}";
-        "${cmd}+Control+7" = "move container to workspace number ${ws7}";
-        "${cmd}+Control+8" = "move container to workspace number ${ws8}";
-        "${cmd}+Control+9" = "move container to workspace number ${ws9}";
+        "${cmd}+Control+0" = "move container to workspace ${ws0}";
+        "${cmd}+Control+1" = "move container to workspace ${ws1}";
+        "${cmd}+Control+2" = "move container to workspace ${ws2}";
+        "${cmd}+Control+3" = "move container to workspace ${ws2}";
+        "${cmd}+Control+4" = "move container to workspace ${ws4}";
+        "${cmd}+Control+5" = "move container to workspace ${ws5}";
+        "${cmd}+Control+6" = "move container to workspace ${ws6}";
+        "${cmd}+Control+7" = "move container to workspace ${ws7}";
+        "${cmd}+Control+8" = "move container to workspace ${ws8}";
+        "${cmd}+Control+9" = "move container to workspace ${ws9}";
 
-        "${cmd}+Shift+0" = "move container to workspace number ${ws0}, workspace number ${ws0}";
-        "${cmd}+Shift+1" = "move container to workspace number ${ws1}, workspace number ${ws1}";
-        "${cmd}+Shift+2" = "move container to workspace number ${ws2}, workspace number ${ws2}";
-        "${cmd}+Shift+3" = "move container to workspace number ${ws2}, workspace number ${ws3}";
-        "${cmd}+Shift+4" = "move container to workspace number ${ws4}, workspace number ${ws4}";
-        "${cmd}+Shift+5" = "move container to workspace number ${ws5}, workspace number ${ws5}";
-        "${cmd}+Shift+6" = "move container to workspace number ${ws6}, workspace number ${ws6}";
-        "${cmd}+Shift+7" = "move container to workspace number ${ws7}, workspace number ${ws7}";
-        "${cmd}+Shift+8" = "move container to workspace number ${ws8}, workspace number ${ws8}";
-        "${cmd}+Shift+9" = "move container to workspace number ${ws9}, workspace number ${ws9}";
+        "${cmd}+Shift+0" = "move container to workspace ${ws0}, workspace ${ws0}";
+        "${cmd}+Shift+1" = "move container to workspace ${ws1}, workspace ${ws1}";
+        "${cmd}+Shift+2" = "move container to workspace ${ws2}, workspace ${ws2}";
+        "${cmd}+Shift+3" = "move container to workspace ${ws2}, workspace ${ws3}";
+        "${cmd}+Shift+4" = "move container to workspace ${ws4}, workspace ${ws4}";
+        "${cmd}+Shift+5" = "move container to workspace ${ws5}, workspace ${ws5}";
+        "${cmd}+Shift+6" = "move container to workspace ${ws6}, workspace ${ws6}";
+        "${cmd}+Shift+7" = "move container to workspace ${ws7}, workspace ${ws7}";
+        "${cmd}+Shift+8" = "move container to workspace ${ws8}, workspace ${ws8}";
+        "${cmd}+Shift+9" = "move container to workspace ${ws9}, workspace ${ws9}";
 
-        "${alt}+h" = "focus left";
-        "${alt}+j" = "focus down";
-        "${alt}+k" = "focus up";
-        "${alt}+l" = "focus right";
+        "${cmd}+h" = "focus left";
+        "${cmd}+j" = "focus down";
+        "${cmd}+k" = "focus up";
+        "${cmd}+l" = "focus right";
 
-        "${alt}+Shift+h" = "resize shrink width 15px";
-        "${alt}+Shift+j" = "resize grow height 15px";
-        "${alt}+Shift+k" = "resize shrink height 15px";
-        "${alt}+Shift+l" = "resize grow width 15px";
+        "${cmd}+Shift+h" = "resize shrink width 15px";
+        "${cmd}+Shift+j" = "resize grow height 15px";
+        "${cmd}+Shift+k" = "resize shrink height 15px";
+        "${cmd}+Shift+l" = "resize grow width 15px";
 
-        "${alt}+Control+h" = "move left";
-        "${alt}+Control+j" = "move down";
-        "${alt}+Control+k" = "move up";
-        "${alt}+Control+l" = "move right";
+        "${cmd}+Control+h" = "move left";
+        "${cmd}+Control+j" = "move down";
+        "${cmd}+Control+k" = "move up";
+        "${cmd}+Control+l" = "move right";
 
-        "${alt}+f" = "fullscreen toggle";
-        "${cmd}+Control+h" = "move container to workspace number 11";
-        "${cmd}+Shift+h" = "move container to workspace number 11, workspace number 11";
-        "${cmd}+h" = "workspace number 11";
-        "${alt}+Control+space" = "floating toggle";
+        "${cmd}+f" = "fullscreen toggle";
+        # "${cmd}+Control+h" = "move container to workspace number 11";
+        # "${cmd}+Shift+h" = "move container to workspace number 11, workspace number 11";
+        # "${cmd}+h" = "workspace number 11";
+        "${cmd}+Shift+space" = "floating toggle";
       };
       focus = {
         followMouse = false;

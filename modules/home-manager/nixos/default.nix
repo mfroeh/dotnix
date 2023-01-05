@@ -9,6 +9,7 @@
   home.packages = with pkgs;
     [
       xorg.xwininfo
+      wmctrl
       screenkey
       obsidian
     ]
