@@ -21,6 +21,7 @@
   # Needed for trackpad
   services.xserver = {
     libinput.enable = true;
+    libinput.touchpad.naturalScrolling = true;
     dpi = 180;
   };
 

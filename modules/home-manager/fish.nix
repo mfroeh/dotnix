@@ -4,7 +4,7 @@
   lib,
   ...
 }: {
-  home.packages = with pkgs; [lsd bat fzf];
+  home.packages = with pkgs; [lsd bat fzf xclip];
   programs.fish = {
     enable = true;
     shellInit = ''
@@ -19,6 +19,7 @@
     shellAliases = {
       l = "ll";
       cat = "bat";
+      clip = "xclip -sel clip";
     };
     plugins = with pkgs.fishPlugins; [
       {
