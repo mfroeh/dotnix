@@ -2,7 +2,6 @@
   config,
   pkgs,
   lib,
-  extraPkgs,
   system,
   ...
 }: {
@@ -19,8 +18,6 @@
       else ./nixos
     )
   ];
-
-  home.packages = extraPkgs;
 
   # Let home-manager install and mange itself
   programs.home-manager.enable = true;

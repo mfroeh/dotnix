@@ -27,9 +27,11 @@
 
   services.xserver.enable = true;
   services.xserver.layout = "us";
-  services.xserver.autoRepeatDelay = 250;
-  services.xserver.autoRepeatInterval = 50;
+  services.xserver.autoRepeatDelay = 200;
+  services.xserver.autoRepeatInterval = 25;
 
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
+  services.pipewire = {
+    enable = true;
+    pulse.enable = true;
+  };
 }

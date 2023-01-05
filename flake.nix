@@ -81,9 +81,9 @@
       user,
       system,
       extraModules ? [],
-      extraPkgs ? [],
+      extraPkgs ? pkgs: [],
     }:
-      home-manager.lib.homeManagerConfiguration {
+      home-manager.lib.homeManagerConfiguration rec {
         pkgs = mkPkgs system;
         modules =
           [
@@ -92,11 +92,12 @@
               home = {
                 username = user;
                 homeDirectory = "${homePrefix system}/${user}";
+                packages = extraPkgs pkgs;
               };
             }
           ]
           ++ extraModules;
-        extraSpecialArgs = {inherit self system inputs extraPkgs;};
+        extraSpecialArgs = {inherit self system inputs;};
       };
   in {
     darwinConfigurations = {
@@ -139,19 +140,17 @@
         user = "mo";
         system = "aarch64-darwin";
         extraModules = [];
-        extraPkgs = with pkgs; [];
       };
       "mo@herc" = mkHomeConfig {
         user = "mo";
         system = "x86_64-linux";
         extraModules = [];
-        extraPkgs = with pkgs; [];
       };
-      "mo@eta" = mkHomeConfig {
+      "mo@eta" = mkHomeConfig rec {
         user = "mo";
         system = "aarch64-linux";
         extraModules = [];
-        extraPkgs = with pkgs; [alacritty];
+        extraPkgs = pkgs: with pkgs; [alacritty];
       };
     };
   };
