@@ -38,12 +38,9 @@ in {
       # Treesitter and more text-objects
       (nvim-treesitter.withPlugins (p: [p.c p.cpp p.nix p.lua]))
       nvim-treesitter-textobjects
+
+      # Just an example on how to install using pluginGit
       (plugin "RRethy/nvim-treesitter-endwise")
-      # pkgs.fetchFromGitHub {
-      #   owner = "RRethy";
-      #   name = "nvim-treesitter-endwise";
-      #   rev = "master";
-      # }
 
       # Git
       vim-fugitive
@@ -63,7 +60,6 @@ in {
       comment-nvim
 
       vim-surround
-
       nvim-autopairs
 
       # Detect tabstop and shiftwidth automatically

@@ -54,6 +54,7 @@ nnmap("<C-p>", builtin.git_files)
 telemap("g", builtin.live_grep)
 nnmap("<C-g>", builtin.live_grep)
 telemap("*", builtin.grep_string)
+nnmap("<C-8>", builtin.live_grep)
 
 -- Diagnostics
 telemap("d", builtin.diagnostics)

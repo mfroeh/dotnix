@@ -1,1 +1,4 @@
-require("nvim-autopairs").setup { check_ts = true, }
+require("nvim-autopairs").setup {
+  -- Check for treesitter pairs
+  check_ts = true,
+}
