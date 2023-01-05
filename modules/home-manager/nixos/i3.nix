@@ -70,7 +70,7 @@ in {
         "${cmd}+Return" = "exec kitty";
         "${cmd}+space" = "exec \"rofi -show combi -combi-modes 'window,drun' -modes combi -show-icons\"";
 
-        "${cmd}+w" = "kill";
+        "${cmd}+q" = "kill";
 
         "${cmd}+0" = "workspace ${ws0}";
         "${cmd}+1" = "workspace ${ws1}";

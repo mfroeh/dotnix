@@ -9,6 +9,8 @@
     fd
     alejandra
     neofetch
+    zip
+    unzip
   ];
 
   programs = {
