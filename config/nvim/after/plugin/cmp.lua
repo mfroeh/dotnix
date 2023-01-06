@@ -4,7 +4,7 @@ local luasnip = require 'luasnip'
 require("luasnip.loaders.from_vscode").lazy_load()
 
 -- If you want insert `(` after select function or method item
-cmp.event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done())
+cmp.event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done({}))
 
 cmp.setup {
   snippet = {

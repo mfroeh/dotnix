@@ -1,5 +1,3 @@
-local builtin = require("telescope.builtin")
-
 require('telescope').setup {
   defaults = {
     mappings = {
@@ -12,8 +10,13 @@ require('telescope').setup {
   },
 }
 
+local builtin = require("telescope.builtin")
+
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
+
+-- Projectc management integration
+require('telescope').load_extension("projects")
 
 -- See `:help telescope.builtin`
 vim.keymap.set('n', '<leader>?', builtin.oldfiles, { desc = '[?] Find recently opened files' })
@@ -65,3 +68,5 @@ telemap("h", builtin.help_tags)
 -- Resume last telescope picker
 telemap("l", builtin.resume)
 
+-- Project picker
+telemap("p", require("telescope").extensions.projects.projects)

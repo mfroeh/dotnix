@@ -9,6 +9,7 @@
     ./cli.nix
     ./gui.nix
     ./kitty.nix
+    ./alacritty.nix
     ./fish.nix
     ./nvim.nix
     ./vscode.nix

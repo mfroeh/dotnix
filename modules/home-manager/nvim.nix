@@ -1,11 +1,10 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}: 
+{ config
+, pkgs
+, lib
+, ...
+}:
 let
-# installs a vim plugin from git with a given tag / branch
+  # installs a vim plugin from git with a given tag / branch
   pluginGit = ref: repo: pkgs.vimUtils.buildVimPluginFrom2Nix {
     pname = "${lib.strings.sanitizeDerivationName repo}";
     version = ref;
@@ -16,8 +15,9 @@ let
   };
 
   plugin = pluginGit "HEAD";
-in {
-  home.packages = lib.mkIf pkgs.stdenv.isLinux (with pkgs; [xclip]);
+in
+{
+  home.packages = lib.mkIf pkgs.stdenv.isLinux (with pkgs; [ xclip ]);
   programs.neovim = {
     enable = true;
     viAlias = true;
@@ -36,11 +36,12 @@ in {
       friendly-snippets
 
       # Treesitter and more text-objects
-      (nvim-treesitter.withPlugins (p: [p.c p.cpp p.nix p.lua]))
+      (nvim-treesitter.withPlugins (p: [ p.c p.cpp p.nix p.lua p.rust ]))
       nvim-treesitter-textobjects
 
       # Just an example on how to install using pluginGit
-      (plugin "RRethy/nvim-treesitter-endwise")
+      # You have to pass the --impure flag to home-manager in order for this to work
+      # (plugin "RRethy/nvim-treesitter-endwise")
 
       # Git
       vim-fugitive
@@ -62,6 +63,9 @@ in {
       vim-surround
       nvim-autopairs
 
+      # Project manager
+      project-nvim
+
       # Detect tabstop and shiftwidth automatically
       vim-sleuth
 
@@ -77,6 +81,9 @@ in {
       # LSP servers
       rnix-lsp
       sumneko-lua-language-server
+      clang_14
+      clang-tools_14
+      rust-analyzer
 
       # Treesitter
       tree-sitter
