@@ -1,12 +1,13 @@
 {
   config,
-  pkgs,
-  lib,
-  ...
+    pkgs,
+    lib,
+    ...
 }: {
-  # Gnome extensions
+# Gnome extensions
   home.packages = with pkgs.gnomeExtensions; [
     pop-shell
+    space-bar
   ];
 
   dconf.settings = {
@@ -22,7 +23,22 @@
 
       enabled-extensions = [
         "pop-shell@system76.com"
+          "space-bar@luchrioh"
       ];
+    };
+
+    "org/gnome/shell/extensions/space-bar/behavior" = {
+      show-empty-workspaces = true;
+      smart-workspace-names = false;
+      scroll-wheel = "panel";
+    };
+
+    "org/gnome/shell/extensions/space-bar/shortcuts" = {
+      enable-activate-workspace-shortcuts = false;
+      enable-move-to-workspace-shortcuts = false;
+      activate-empty-key = [ ];
+      open-menu = [ ];
+      activate-previous-key = [ ];
     };
 
     "org/gnome/shell/extensions/pop-shell" = {
@@ -30,15 +46,23 @@
       active-hint = true;
       show-title = true;
       active-hint-border-radius = 5;
-      gap-inner = 4;
-      gap-outer = 4;
+      smart-gaps = true;
+# gap-inner = "uint32 4";
+# gap-outer = "uint32 4";
     };
 
-    "org/gnome/mutter" = {
-      edge-tiling = true;
+    "org/gnome/desktop/wm/preferences" = {
+      num-workspaces = 6;
+      dynamic-workspaces = false;
+      workspace-names = [ "0::dev" "1::" "2::web" "3::" "4::" "5::social" ] ;
     };
 
-    # Configure according to https://github.com/pop-os/shell/blob/master_jammy/scripts/configure.sh
+    # "org/gnome/mutter" = {
+    #   edge-tiling = true;
+    # };
+    
+
+# Configure according to https://github.com/pop-os/shell/blob/master_jammy/scripts/configure.sh
     "org/gnome/desktop/wm/keybindings" = {
       minimize = ["<Super>period"];
       maximize = [];
@@ -55,14 +79,18 @@
       switch-to-workspace-up = ["<Primary><Super>Up" "<Primary><Super>k"];
       toggle-maximized = ["<Super>f"];
       close = ["<Super>q"];
-      switch-to-workspace-1 = ["<Super>1"];
-      switch-to-workspace-2 = ["<Super>2"];
-      switch-to-workspace-3 = ["<Super>3"];
-      switch-to-workspace-4 = ["<Super>4"];
-      move-to-workspace-1 = ["<Super><Control>1"];
-      move-to-workspace-2 = ["<Super><Control>2"];
-      move-to-workspace-3 = ["<Super><Control>3"];
-      move-to-workspace-4 = ["<Super><Control>4"];
+      switch-to-workspace-1 = ["<Super>0"];
+      switch-to-workspace-2 = ["<Super>1"];
+      switch-to-workspace-3 = ["<Super>2"];
+      switch-to-workspace-4 = ["<Super>3"];
+      switch-to-workspace-5 = ["<Super>4"];
+      switch-to-workspace-6 = ["<Super>5"];
+      move-to-workspace-1 = ["<Super><Control>0"];
+      move-to-workspace-2 = ["<Super><Control>1"];
+      move-to-workspace-3 = ["<Super><Control>2"];
+      move-to-workspace-4 = ["<Super><Control>3"];
+      move-to-workspace-5 = ["<Super><Control>4"];
+      move-to-workspace-6 = ["<Super><Control>5"];
       switch-input-source = [];
       switch-input-source-backward = [];
     };
@@ -88,7 +116,7 @@
     "org/gnome/settings-daemon/plugins/media-keys" = {
       custom-keybindings = [
         "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
-        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
+          "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
       ];
       screensaver = ["<Super>Escape"];
       rotate-video-lock-static = [];

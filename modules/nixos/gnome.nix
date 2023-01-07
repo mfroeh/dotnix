@@ -24,7 +24,7 @@
       hitori # sudoku game
       atomix # puzzle game
     ]);
-  # programs.dconf.enable = true;
+  programs.dconf.enable = true;
   environment.systemPackages = with pkgs; [
     gnome.gnome-tweaks
   ];

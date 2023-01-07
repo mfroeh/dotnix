@@ -31,6 +31,7 @@ in {
       # Autocompletion
       nvim-cmp
       cmp-nvim-lsp
+      cmp-path
       luasnip
       cmp_luasnip
       friendly-snippets
