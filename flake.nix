@@ -128,8 +128,9 @@
         host = "eta";
         username = "mo";
         extraModules = [
-          ./modules/nixos/xfce-i3.nix
-          ./modules/nixos/picom.nix
+          # ./modules/nixos/xfce-i3.nix
+          # ./modules/nixos/picom.nix
+          ./modules/nixos/gnome.nix
           ./modules/nixos/remap.nix
           ./modules/nixos/wallpaper.nix
         ];
