@@ -2,7 +2,7 @@
   description = "Me systems flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     stable.url = "github:nixos/nixpkgs/nixos-22.11";
 
     darwin.url = "github:lnl7/nix-darwin";
@@ -36,7 +36,7 @@
       else "/home";
 
     mkPkgs = system:
-      import nixpkgs { 
+      import nixpkgs {
         inherit system;
         config.allowUnfree = true;
       };
@@ -52,7 +52,7 @@
         pkgs = mkPkgs system;
         modules =
           [./modules/nixos-base.nix ./users/${username}.nix ./hosts/${host}]
-          # ++ [hyprland.nixosModules.default] # Flake modules xremap-flake.nixosModules.default 
+          ++ [xremap-flake.nixosModules.default] # Flake modules
           ++ extraModules;
         specialArgs = {inherit self system username inputs;};
       };
@@ -134,16 +134,15 @@
           ./modules/nixos/wallpaper.nix
         ];
       };
-    lambda = mkNixosConfig {
-      system = "x86_64-linux";
-      host = "lambda";
-      username = "mo";
-      extraModules = [
-        ./modules/nixos/gnome.nix
-        # ./modules/nixos/xfce-i3.nix
-        # ./modules/nixos/remap.nix
-      ];
-    };
+      lambda = mkNixosConfig {
+        system = "x86_64-linux";
+        host = "lambda";
+        username = "mo";
+        extraModules = [
+          ./modules/nixos/gnome.nix
+          ./modules/nixos/remap.nix
+        ];
+      };
     };
 
     homeConfigurations = {
@@ -167,7 +166,7 @@
         username = "mo";
         system = "x86_64-linux";
         extraModules = [];
-        extraPkgs = pkgs: with pkgs; [ ];
+        extraPkgs = pkgs: with pkgs; [];
       };
     };
   };

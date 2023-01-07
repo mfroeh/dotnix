@@ -9,11 +9,11 @@
   services.xserver = {
     enable = true;
     displayManager.lightdm = {
-        enable = true;
-        greeters.gtk = {
-          theme.package = pkgs.zuki-themes;
-          theme.name = "Zukitre";
-        };
+      enable = true;
+      greeters.gtk = {
+        theme.package = pkgs.zuki-themes;
+        theme.name = "Zukitre";
+      };
     };
     desktopManager = {
       xterm.enable = false;

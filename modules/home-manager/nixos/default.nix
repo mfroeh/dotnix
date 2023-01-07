@@ -4,7 +4,7 @@
   lib,
   ...
 }: {
-  imports = [./i3.nix ./rofi.nix ./gtk.nix ];
+  imports = [./i3.nix ./rofi.nix ./gtk.nix ./gnome.nix];
 
   home.packages = with pkgs;
     [

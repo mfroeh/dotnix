@@ -1,23 +1,23 @@
-{ config
-, pkgs
-, lib
-, ...
-}:
-let
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}: let
   # installs a vim plugin from git with a given tag / branch
-  pluginGit = ref: repo: pkgs.vimUtils.buildVimPluginFrom2Nix {
-    pname = "${lib.strings.sanitizeDerivationName repo}";
-    version = ref;
-    src = builtins.fetchGit {
-      url = "https://github.com/${repo}.git";
-      ref = ref;
+  pluginGit = ref: repo:
+    pkgs.vimUtils.buildVimPluginFrom2Nix {
+      pname = "${lib.strings.sanitizeDerivationName repo}";
+      version = ref;
+      src = builtins.fetchGit {
+        url = "https://github.com/${repo}.git";
+        ref = ref;
+      };
     };
-  };
 
   plugin = pluginGit "HEAD";
-in
-{
-  home.packages = lib.mkIf pkgs.stdenv.isLinux (with pkgs; [ xclip ]);
+in {
+  home.packages = lib.mkIf pkgs.stdenv.isLinux (with pkgs; [xclip]);
   programs.neovim = {
     enable = true;
     viAlias = true;
@@ -36,7 +36,7 @@ in
       friendly-snippets
 
       # Treesitter and more text-objects
-      (nvim-treesitter.withPlugins (p: [ p.c p.cpp p.nix p.lua p.rust ]))
+      (nvim-treesitter.withPlugins (p: [p.c p.cpp p.nix p.lua p.rust]))
       nvim-treesitter-textobjects
 
       # Just an example on how to install using pluginGit

@@ -64,7 +64,8 @@ in {
                 "C-Leftbrace" = "Esc";
               };
             }
-          ] ++ optionals cfg.macosTabControl [
+          ]
+          ++ optionals cfg.macosTabControl [
             {
               name = "Cmd-Shift+] and Cmd-Shift+[ -> Ctrl-Tab and C-Shift-Tab";
               remap = {
@@ -75,7 +76,7 @@ in {
             {
               name = "macOS tab creation and deletion except chrome, chromium";
               application = {
-                not = [ "Google-chrome" "Chromium-browser" ];
+                not = ["Google-chrome" "Chromium-browser"];
               };
               remap = {
                 "Win_L-t" = "Ctrl_L-Shift-t";
@@ -85,7 +86,7 @@ in {
             {
               name = "macOS tab creation and deletion only in chrome, chromium";
               application = {
-                only = [ "Google-chrome" "Chromium-browser" ];
+                only = ["Google-chrome" "Chromium-browser"];
               };
               remap = {
                 "Win_L-t" = "Ctrl_L-t";

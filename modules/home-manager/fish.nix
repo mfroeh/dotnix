@@ -1,9 +1,10 @@
-{ config
-, pkgs
-, lib
-, ...
+{
+  config,
+  pkgs,
+  lib,
+  ...
 }: {
-  home.packages = with pkgs; [ lsd bat fzf xclip ];
+  home.packages = with pkgs; [lsd bat fzf xclip];
   programs.fish = {
     enable = true;
     shellInit = ''
@@ -14,13 +15,15 @@
       bind -M insert \ca beginning-of-line
       bind -M insert \ce end-of-line
     '';
-    shellAbbrs = { };
+    shellAbbrs = {};
     shellAliases = {
       l = "ls -la";
       cat = "bat";
       clip = "xclip -sel clip";
+
       errhs = "systemctl status home-manager-$USER";
       errjournal = "journalctl -u home-manager-$USER.service";
+      gnomeChange = "dconf watch /";
     };
     functions = {
       mkcd = "mkdir $argv; cd $argv";
