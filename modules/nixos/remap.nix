@@ -2,6 +2,7 @@
   config,
   pkgs,
   lib,
+  username,
   ...
 }:
 with lib; let
@@ -29,10 +30,10 @@ in {
 
   config = mkIf cfg.enable {
     services.xremap = {
-      serviceMode = "system";
+      serviceMode = "user";
+      userName = username;
       # withSway = true;
-      # withGnome = true;
-      withX11 = true;
+      withGnome = true;
       watch = true;
       config = {
         modmap =

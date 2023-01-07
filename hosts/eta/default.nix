@@ -12,7 +12,9 @@
   ];
 
   boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.efi.canTouchEfiVariables = false;
+
+  networking.hostName = "eta";
 
   hardware.asahi.peripheralFirmwareDirectory = ./firmware;
 
@@ -36,7 +38,6 @@
   hardware.opengl.enable = true;
 
   time.timeZone = "Europe/Stockholm";
-  networking.hostName = "eta";
 
   services.remap = {
     enable = true;

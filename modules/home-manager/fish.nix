@@ -19,6 +19,8 @@
       l = "ls -la";
       cat = "bat";
       clip = "xclip -sel clip";
+      errhs = "systemctl status home-manager-$USER";
+      errjournal = "journalctl -u home-manager-$USER.service";
     };
     functions = {
       mkcd = "mkdir $argv; cd $argv";

@@ -3,7 +3,6 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    nixos-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     stable.url = "github:nixos/nixpkgs/nixos-22.11";
 
     darwin.url = "github:lnl7/nix-darwin";
@@ -15,7 +14,7 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    hyprland.url = "github:hyprwm/Hyprland";
+    # hyprland.url = "github:hyprwm/Hyprland";
 
     xremap-flake.url = "github:xremap/nix-flake";
     xremap-flake.inputs.nixpkgs.follows = "nixpkgs";
@@ -24,10 +23,10 @@
   outputs = inputs @ {
     self,
     nixpkgs,
+    stable,
     darwin,
     home-manager,
     xremap-flake,
-    hyprland,
     ...
   }: let
     isDarwin = system: (builtins.elem system inputs.nixpkgs.lib.platforms.darwin);
@@ -37,7 +36,7 @@
       else "/home";
 
     mkPkgs = system:
-      import nixpkgs {
+      import nixpkgs { 
         inherit system;
         config.allowUnfree = true;
       };
@@ -45,23 +44,23 @@
     mkNixosConfig = {
       system,
       host,
-      user,
+      username,
       extraModules ? [],
     }:
-      nixpkgs.lib.nixosSystem {
+      nixpkgs.lib.nixosSystem rec {
         inherit system;
         pkgs = mkPkgs system;
         modules =
-          [./modules/nixos-base.nix ./users/${user}.nix ./hosts/${host}]
-          ++ [xremap-flake.nixosModules.default hyprland.nixosModules.default] # Flake modules
+          [./modules/nixos-base.nix ./users/${username}.nix ./hosts/${host}]
+          # ++ [hyprland.nixosModules.default] # Flake modules xremap-flake.nixosModules.default 
           ++ extraModules;
-        specialArgs = {inherit self system inputs;};
+        specialArgs = {inherit self system username inputs;};
       };
 
     mkDarwinConfig = {
       system,
       host,
-      user,
+      username,
       extraModules ? [],
     }:
       darwin.lib.darwinSystem rec {
@@ -71,14 +70,14 @@
           [
             ./modules/darwin-base.nix
             ./hosts/${host}
-            ./users/${user}.nix
+            ./users/${username}.nix
           ]
           ++ extraModules;
-        specialArgs = {inherit self system inputs;};
+        specialArgs = {inherit self system username inputs;};
       };
 
     mkHomeConfig = {
-      user,
+      username,
       system,
       extraModules ? [],
       extraPkgs ? pkgs: [],
@@ -90,21 +89,21 @@
             ./modules/home-manager
             {
               home = {
-                username = user;
-                homeDirectory = "${homePrefix system}/${user}";
+                inherit username;
+                homeDirectory = "${homePrefix system}/${username}";
                 packages = extraPkgs pkgs;
               };
             }
           ]
           ++ extraModules;
-        extraSpecialArgs = {inherit self system inputs;};
+        extraSpecialArgs = {inherit self system username inputs;};
       };
   in {
     darwinConfigurations = {
       gus = mkDarwinConfig {
         system = "aarch64-darwin";
         host = "gus";
-        user = "mo";
+        username = "mo";
         extraModules = [
           ./modules/darwin/brew.nix
           ./modules/darwin/yabai.nix
@@ -117,7 +116,7 @@
       herc = mkNixosConfig {
         system = "x86_64-linux";
         host = "herc";
-        user = "mo";
+        username = "mo";
         extraModules = [
           ./modules/nixos/xfce-i3.nix
           ./modules/nixos/picom.nix
@@ -127,7 +126,7 @@
       eta = mkNixosConfig {
         system = "aarch64-linux";
         host = "eta";
-        user = "mo";
+        username = "mo";
         extraModules = [
           ./modules/nixos/xfce-i3.nix
           ./modules/nixos/picom.nix
@@ -135,24 +134,40 @@
           ./modules/nixos/wallpaper.nix
         ];
       };
+    lambda = mkNixosConfig {
+      system = "x86_64-linux";
+      host = "lambda";
+      username = "mo";
+      extraModules = [
+        ./modules/nixos/gnome.nix
+        # ./modules/nixos/xfce-i3.nix
+        # ./modules/nixos/remap.nix
+      ];
+    };
     };
 
     homeConfigurations = {
       "mo@gus" = mkHomeConfig {
-        user = "mo";
+        username = "mo";
         system = "aarch64-darwin";
         extraModules = [];
       };
       "mo@herc" = mkHomeConfig {
-        user = "mo";
+        username = "mo";
         system = "x86_64-linux";
         extraModules = [];
       };
-      "mo@eta" = mkHomeConfig rec {
-        user = "mo";
+      "mo@eta" = mkHomeConfig {
+        username = "mo";
         system = "aarch64-linux";
         extraModules = [];
         extraPkgs = pkgs: with pkgs; [alacritty];
+      };
+      "mo@lambda" = mkHomeConfig {
+        username = "mo";
+        system = "x86_64-linux";
+        extraModules = [];
+        extraPkgs = pkgs: with pkgs; [ ];
       };
     };
   };
