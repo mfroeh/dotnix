@@ -6,6 +6,10 @@
 }: {
   services.xserver.enable = true;
   services.xserver.displayManager.gdm.enable = true;
+  services.xserver.displayManager.gdm.settings = {
+    debug.enable = true;
+  };
+  services.xserver.displayManager.gdm.wayland = false;
   services.xserver.desktopManager.gnome.enable = true;
   environment.gnome.excludePackages = with pkgs;
     [gnome.gnome-maps]
@@ -27,5 +31,6 @@
   programs.dconf.enable = true;
   environment.systemPackages = with pkgs; [
     gnome.gnome-tweaks
+    gnome.dconf-editor
   ];
 }

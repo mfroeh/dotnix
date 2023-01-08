@@ -28,13 +28,14 @@
     # dpi = 200;
   };
 
-  # set wallpaper
-  fetchBackground = {
-    enable = true;
-    url = "${self}/config/wallpaper.png";
-  };
+  # # set wallpaper
+  # fetchBackground = {
+  #   enable = true;
+  #   url = "${self}/config/wallpaper.png";
+  # };
 
   hardware.asahi.useExperimentalGPUDriver = true;
+  hardware.asahi.addEdgeKernelConfig = true;
   hardware.opengl.enable = true;
 
   time.timeZone = "Europe/Stockholm";

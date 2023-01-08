@@ -3,11 +3,16 @@
     pkgs,
     lib,
     ...
-}: {
+}: 
+let
+  extension = "org/gnome/shell/extension";
+in {
 # Gnome extensions
   home.packages = with pkgs.gnomeExtensions; [
     pop-shell
     space-bar
+    system-monitor
+    appindicator
   ];
 
   dconf.settings = {
@@ -23,7 +28,33 @@
 
       enabled-extensions = [
         "pop-shell@system76.com"
-          "space-bar@luchrioh"
+        "space-bar@luchrioh"
+        "system-monitor@paradoxxx.zero.gmail.com"
+        "auto-move-windows@gnome-shell-extensions.gcampax.github.com"
+        "appindicatorsupport@rgcjonas.gmail.com"
+      ];
+    };
+
+    "${extension}/system-monitor" = {
+      cpu-display = true;
+      cpu-style = "digit";
+      cpu-show-text = true;
+      memory-display = true;
+      memory-style = "digit";
+      memory-show-text = true;
+      net-display = true;
+      net-style = "digit";
+      net-show-text = true;
+      thermal-display = true;
+      thermal-style = "digit";
+      thermal-show-text = true;
+    };
+
+    "org/gnome/shell/extensions/auto-move-windows" = {
+      application-list = [
+        "chromium-browser.desktop:3"
+        "org.gnome.Nautilus.desktop:2"
+        "neovide.desktop:1"
       ];
     };
 
@@ -52,15 +83,19 @@
     };
 
     "org/gnome/desktop/wm/preferences" = {
-      num-workspaces = 6;
       dynamic-workspaces = false;
+      num-workspaces = 6;
       workspace-names = [ "0::dev" "1::" "2::web" "3::" "4::" "5::social" ] ;
     };
 
-    # "org/gnome/mutter" = {
-    #   edge-tiling = true;
-    # };
-    
+# "org/gnome/mutter" = {
+#   edge-tiling = true;
+# };
+
+    "org/gnome/mutter" = {
+      overlay-key = "Super_R";
+    };
+
 
 # Configure according to https://github.com/pop-os/shell/blob/master_jammy/scripts/configure.sh
     "org/gnome/desktop/wm/keybindings" = {
