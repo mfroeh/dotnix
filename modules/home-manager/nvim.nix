@@ -1,9 +1,9 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}: let
+{ config
+, pkgs
+, lib
+, ...
+}:
+let
   # installs a vim plugin from git with a given tag / branch
   pluginGit = ref: repo:
     pkgs.vimUtils.buildVimPluginFrom2Nix {
@@ -16,8 +16,9 @@
     };
 
   plugin = pluginGit "HEAD";
-in {
-  home.packages = lib.mkIf pkgs.stdenv.isLinux (with pkgs; [xclip]);
+in
+{
+  home.packages = lib.mkIf pkgs.stdenv.isLinux (with pkgs; [ xclip ]);
   programs.neovim = {
     enable = true;
     viAlias = true;
@@ -32,13 +33,15 @@ in {
       nvim-cmp
       cmp-nvim-lsp
       cmp-path
+      cmp-buffer
       luasnip
       cmp_luasnip
       friendly-snippets
 
-      # Treesitter and more text-objects
-      (nvim-treesitter.withPlugins (p: [p.c p.cpp p.nix p.lua p.rust]))
+      # Treesitter and plugins
+      (nvim-treesitter.withPlugins (p: [ p.c p.cpp p.nix p.lua p.rust ]))
       nvim-treesitter-textobjects
+      nvim-ts-rainbow
 
       # Just an example on how to install using pluginGit
       # You have to pass the --impure flag to home-manager in order for this to work
@@ -58,14 +61,13 @@ in {
       # Indention guides for blank lines
       indent-blankline-nvim
 
-      # vim-commentary
+      # Neccessary plugins
       comment-nvim
-
       vim-surround
       nvim-autopairs
 
-      # Project manager
-      project-nvim
+      # Quickfix
+      # nvim-bqf
 
       # Detect tabstop and shiftwidth automatically
       vim-sleuth
@@ -73,10 +75,15 @@ in {
       # Floating terminal
       toggleterm-nvim
 
-      # Fuzzy finder
-      plenary-nvim
+      # Telescope and plugins
+      # plenary-nvim
       telescope-nvim
+      telescope-zoxide
       telescope-fzf-native-nvim
+
+      # Plugins with telescope extensions
+      project-nvim
+      nvim-neoclip-lua
     ];
     extraPackages = with pkgs; [
       # LSP servers
@@ -89,10 +96,13 @@ in {
       # Treesitter
       tree-sitter
 
-      # Tools used by plugins
+      # Tools used by telescope
       ripgrep
+      bat
       fd
+      fzf
     ];
+    extraLuaPackages = with pkgs.lua53Packages; [ plenary-nvim sqlite ];
   };
 
   xdg.configFile.nvim = {

@@ -22,7 +22,6 @@
       copy = "xclip -sel clip";
       paste = "xclip -sel clip -o ";
 
-
       errhs = "systemctl status home-manager-$USER";
       errjournal = "journalctl -u home-manager-$USER.service";
       gnomeCtrlCenter = "WEBKIT_DISABLE_COMPOSITING_MODE=1 MESA_LOADER_DRIVER_OVERRIDE=zink gnome-control-center online-accounts";

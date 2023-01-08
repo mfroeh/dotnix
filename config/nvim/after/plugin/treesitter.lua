@@ -1,6 +1,9 @@
-require ('nvim-treesitter.configs').setup {
+require("nvim-treesitter.configs").setup {
   highlight = { enable = true },
-  indent = { enable = true },
+  indent = { 
+    enable = true,
+    disable = {},
+  },
   incremental_selection = {
     enable = true,
     keymaps = {
@@ -9,6 +12,9 @@ require ('nvim-treesitter.configs').setup {
       scope_incremental = '<c-s>',
       node_decremental = '<c-backspace>',
     },
+  },
+  rainbow = {
+    enable = true,
   },
   textobjects = {
     select = {
@@ -22,8 +28,8 @@ require ('nvim-treesitter.configs').setup {
         ['if'] = '@function.inner',
         ['ac'] = '@class.outer',
         ['ic'] = '@class.inner',
-        ['il'] = '@loop.inner',
-        ['al'] = '@loop.inner',
+        -- ['il'] = '@loop.inner',
+        -- ['al'] = '@loop.inner',
       },
     },
     move = {

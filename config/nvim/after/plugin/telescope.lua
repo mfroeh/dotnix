@@ -1,4 +1,14 @@
-require('telescope').setup {
+local tele = require("telescope")
+local builtin = require("telescope.builtin")
+
+-- Enable telescope fzf native
+tele.load_extension("fzf")
+-- Projectc management integration
+tele.load_extension("projects")
+-- Zoxide for telescope
+tele.load_extension("zoxide")
+
+tele.setup {
   defaults = {
     mappings = {
       i = {
@@ -10,48 +20,45 @@ require('telescope').setup {
   },
 }
 
-local builtin = require("telescope.builtin")
-
--- Enable telescope fzf native, if installed
-pcall(require('telescope').load_extension, 'fzf')
-
--- Projectc management integration
-require('telescope').load_extension("projects")
-
--- See `:help telescope.builtin`
-vim.keymap.set('n', '<leader>?', builtin.oldfiles, { desc = '[?] Find recently opened files' })
-vim.keymap.set('n', '<leader><space>', builtin.buffers, { desc = '[ ] Find existing buffers' })
-vim.keymap.set('n', '<leader>/', function()
-  -- You can pass additional configuration to telescope to change theme, layout, etc.
-  builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-    winblend = 10,
-    previewer = false,
-  })
-end, { desc = '[/] Fuzzily search in current buffer]' })
-
-
 local nnmap = function(from, to)
   vim.keymap.set("n", from, to)
 end
-
-vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
-
 
 -- 'l' for list or live
 local telemap = function(key, to)
   vim.keymap.set("n", "<leader>l" .. key, to)
 end
 
+-- Fuzzy in file
+nnmap("<leader>/", function()
+  builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown {
+    winblend = 10,
+    previewer = false,
+  })
+end)
+
+-- Buffers
+telemap("b", builtin.buffers)
+nnmap("<leader><leader>", builtin.buffers)
+
 -- Commands
 telemap("c", builtin.commands)
 nnmap("<leader>:", builtin.commands)
 
 -- Files
-telemap("f", builtin.find_files)
+telemap("l", builtin.find_files)
 nnmap("<leader>.", builtin.find_files)
 
+-- Old files
+telemap("o", builtin.oldfiles)
+nnmap("<leader>?", builtin.oldfiles)
+
 -- Git files
-nnmap("<C-p>", builtin.git_files)
+nnmap("<C-p>", function ()
+  if not pcall(builtin.git_files) then
+    tele.extensions.projects.projects({})
+  end
+end)
 
 -- Grep
 telemap("g", builtin.live_grep)
@@ -66,7 +73,14 @@ telemap("d", builtin.diagnostics)
 telemap("h", builtin.help_tags)
 
 -- Resume last telescope picker
-telemap("l", builtin.resume)
+telemap("r", builtin.resume)
+
+-- Man pages
+telemap("m", builtin.man_pages)
 
 -- Project picker
-telemap("p", require("telescope").extensions.projects.projects)
+telemap("p", tele.extensions.projects.projects)
+
+-- Change dir
+telemap("cd", tele.extensions.zoxide.list)
+nnmap("<leader>cd", tele.extensions.zoxide.list)

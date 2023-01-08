@@ -1,13 +1,12 @@
 {
   config,
-    pkgs,
-    lib,
-    ...
-}: 
-let
+  pkgs,
+  lib,
+  ...
+}: let
   extension = "org/gnome/shell/extensions";
 in {
-# Gnome extensions
+  # Gnome extensions
   home.packages = with pkgs.gnomeExtensions; [
     pop-shell
     space-bar
@@ -68,9 +67,9 @@ in {
     "org/gnome/shell/extensions/space-bar/shortcuts" = {
       enable-activate-workspace-shortcuts = false;
       enable-move-to-workspace-shortcuts = false;
-      activate-empty-key = [ ];
-      open-menu = [ ];
-      activate-previous-key = [ ];
+      activate-empty-key = [];
+      open-menu = [];
+      activate-previous-key = [];
     };
 
     "org/gnome/shell/extensions/pop-shell" = {
@@ -79,26 +78,25 @@ in {
       show-title = true;
       active-hint-border-radius = 5;
       smart-gaps = false;
-# gap-inner = "uint32 4";
-# gap-outer = "uint32 4";
+      # gap-inner = "uint32 4";
+      # gap-outer = "uint32 4";
     };
 
     "org/gnome/desktop/wm/preferences" = {
       dynamic-workspaces = false;
       num-workspaces = 6;
-      workspace-names = [ "0::dev" "1::" "2::web" "3::" "4::" "5::social" ] ;
+      workspace-names = ["0::dev" "1::" "2::web" "3::" "4::" "5::social"];
     };
 
-# "org/gnome/mutter" = {
-#   edge-tiling = true;
-# };
+    # "org/gnome/mutter" = {
+    #   edge-tiling = true;
+    # };
 
     "org/gnome/mutter" = {
       overlay-key = "Super_R";
     };
 
-
-# Configure according to https://github.com/pop-os/shell/blob/master_jammy/scripts/configure.sh
+    # Configure according to https://github.com/pop-os/shell/blob/master_jammy/scripts/configure.sh
     "org/gnome/desktop/wm/keybindings" = {
       minimize = ["<Super>period"];
       maximize = [];
@@ -114,6 +112,7 @@ in {
       switch-to-workspace-down = ["<Primary><Super>Down" "<Primary><Super>j"];
       switch-to-workspace-up = ["<Primary><Super>Up" "<Primary><Super>k"];
       toggle-maximized = ["<Super>f"];
+      toggle-fullscreen = ["<Super><Control>f"];
       close = ["<Super>q"];
       switch-to-workspace-1 = ["<Super>0"];
       switch-to-workspace-2 = ["<Super>1"];
@@ -152,7 +151,7 @@ in {
     "org/gnome/settings-daemon/plugins/media-keys" = {
       custom-keybindings = [
         "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
-          "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
       ];
       screensaver = ["<Super>Escape"];
       rotate-video-lock-static = [];

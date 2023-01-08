@@ -33,7 +33,8 @@ cmp.setup {
     ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         local entries = cmp.get_entries()
-        if #entries > 0 and (#entries == 1 or entries[1].exact or cmp.get_selected_entry()) then
+        -- if #entries > 0 and (#entries == 1 or entries[1].exact or cmp.get_selected_entry()) then
+        if #entries > 0 and (entries[1].exact or cmp.get_selected_entry()) then
           cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true})
         end
       elseif luasnip.expand_or_jumpable() then
@@ -55,6 +56,7 @@ cmp.setup {
   sources = {
     { name = 'luasnip' },
     { name = 'nvim_lsp' },
+    { name = "buffer" },
     { name = "path" },
   },
 }
