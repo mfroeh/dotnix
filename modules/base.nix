@@ -15,7 +15,7 @@
     experimental-features = ["nix-command" "flakes"];
   };
 
-  environment.systemPackages = with pkgs; [neovim git];
+  environment.systemPackages = with pkgs; [vim neovim git];
 
   programs.zsh.enable = true;
   programs.fish.enable = true;

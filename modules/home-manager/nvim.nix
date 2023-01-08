@@ -21,7 +21,7 @@ in {
   programs.neovim = {
     enable = true;
     viAlias = true;
-    vimAlias = true;
+    vimAlias = false;
     plugins = with pkgs.vimPlugins; [
       # LSP and plugins
       nvim-lspconfig

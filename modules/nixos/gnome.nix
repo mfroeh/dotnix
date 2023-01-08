@@ -32,5 +32,6 @@
   environment.systemPackages = with pkgs; [
     gnome.gnome-tweaks
     gnome.dconf-editor
+    gnome.gnome-screenshot
   ];
 }

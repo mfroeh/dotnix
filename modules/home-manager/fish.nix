@@ -19,11 +19,13 @@
     shellAliases = {
       l = "ls -la";
       cat = "bat";
-      clip = "xclip -sel clip";
+      copy = "xclip -sel clip";
+      paste = "xclip -sel clip -o ";
+
 
       errhs = "systemctl status home-manager-$USER";
       errjournal = "journalctl -u home-manager-$USER.service";
-      gnomeChange = "dconf watch /";
+      gnomeCtrlCenter = "WEBKIT_DISABLE_COMPOSITING_MODE=1 MESA_LOADER_DRIVER_OVERRIDE=zink gnome-control-center online-accounts";
     };
     functions = {
       mkcd = "mkdir $argv; cd $argv";

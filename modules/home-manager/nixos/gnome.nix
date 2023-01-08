@@ -5,7 +5,7 @@
     ...
 }: 
 let
-  extension = "org/gnome/shell/extension";
+  extension = "org/gnome/shell/extensions";
 in {
 # Gnome extensions
   home.packages = with pkgs.gnomeExtensions; [
@@ -36,6 +36,7 @@ in {
     };
 
     "${extension}/system-monitor" = {
+      icon-display = false;
       cpu-display = true;
       cpu-style = "digit";
       cpu-show-text = true;
@@ -44,10 +45,10 @@ in {
       memory-show-text = true;
       net-display = true;
       net-style = "digit";
-      net-show-text = true;
+      net-show-text = false;
       thermal-display = true;
       thermal-style = "digit";
-      thermal-show-text = true;
+      thermal-show-text = false;
     };
 
     "org/gnome/shell/extensions/auto-move-windows" = {
@@ -77,7 +78,7 @@ in {
       active-hint = true;
       show-title = true;
       active-hint-border-radius = 5;
-      smart-gaps = true;
+      smart-gaps = false;
 # gap-inner = "uint32 4";
 # gap-outer = "uint32 4";
     };

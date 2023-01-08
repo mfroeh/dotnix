@@ -8,6 +8,7 @@
   imports = [
     ./cli.nix
     ./gui.nix
+    ./languages.nix
     ./kitty.nix
     ./alacritty.nix
     ./fish.nix
