@@ -1,10 +1,9 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
+{ config
+, pkgs
+, lib
+, ...
 }: {
-  home.packages = with pkgs; [lsd bat fzf xclip];
+  home.packages = with pkgs; [ lsd bat fzf xclip ];
   programs.fish = {
     enable = true;
     shellInit = ''
@@ -15,7 +14,7 @@
       bind -M insert \ca beginning-of-line
       bind -M insert \ce end-of-line
     '';
-    shellAbbrs = {};
+    shellAbbrs = { };
     shellAliases = {
       l = "ls -la";
       cat = "bat";
@@ -35,16 +34,20 @@
         src = pure.src;
       }
       {
+        name = "fzf-fish";
+        src = fzf-fish.src;
+      }
+      {
+        name = "colored-man-pages";
+        src = colored-man-pages.src;
+      }
+      {
         name = "sponge";
         src = sponge.src;
       }
       {
         name = "forgit";
         src = forgit.src;
-      }
-      {
-        name = "fzf-fish";
-        src = fzf-fish.src;
       }
     ];
   };

@@ -28,7 +28,7 @@ cmp.setup {
     ['<C-Space>'] = cmp.mapping.complete(),
     ['<CR>'] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Replace,
-      select = true, -- If this is true, will select the first item even if none is selected.
+      select = false, -- If this is true, will select the first item even if none is selected.
     },
     ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then

@@ -159,6 +159,7 @@ in {
       email = [];
       www = [];
       terminal = [];
+      logout = [ "<Shift><Super>e" ];
     };
     "org/gnome/mutter/wayland/keybindings" = {
       restore-shortcuts = [];
