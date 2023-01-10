@@ -11,6 +11,7 @@
     ./languages.nix
     ./kitty.nix
     ./alacritty.nix
+    ./helix.nix
     ./tmux.nix
     ./fish.nix
     ./nvim.nix

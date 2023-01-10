@@ -15,5 +15,8 @@
     rustc
     cargo
     rust-analyzer
+
+    # nix
+    nil
   ];
 }

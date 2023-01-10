@@ -35,6 +35,12 @@
     # man pages
     man.enable = true;
 
+    # git
+    lazygit = {
+      enable = true;
+      settings = {};
+    };
+       
     # tldr
     tealdeer = {
       enable = true;
