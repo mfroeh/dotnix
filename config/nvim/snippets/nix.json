@@ -1,0 +1,14 @@
+{
+    "module-params": {
+        "prefix": "mod",
+        "body": [
+            "{",
+            "\tconfig,"
+            "\tpkgs,"
+            "\tlib,"
+            "..."
+            "} : {$0}"
+        ],
+        "description": "",
+    }
+}

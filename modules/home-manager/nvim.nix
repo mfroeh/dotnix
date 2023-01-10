@@ -1,9 +1,9 @@
-{ config
-, pkgs
-, lib
-, ...
-}:
-let
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}: let
   # installs a vim plugin from git with a given tag / branch
   pluginGit = ref: repo:
     pkgs.vimUtils.buildVimPluginFrom2Nix {
@@ -16,9 +16,8 @@ let
     };
 
   plugin = pluginGit "HEAD";
-in
-{
-  home.packages = lib.mkIf pkgs.stdenv.isLinux (with pkgs; [ xclip ]);
+in {
+  home.packages = lib.mkIf pkgs.stdenv.isLinux (with pkgs; [xclip]);
   programs.neovim = {
     enable = true;
     viAlias = true;
@@ -39,7 +38,7 @@ in
       friendly-snippets
 
       # Treesitter and plugins
-      (nvim-treesitter.withPlugins (p: [ p.c p.cpp p.nix p.lua p.rust ]))
+      (nvim-treesitter.withPlugins (p: [p.c p.cpp p.nix p.lua p.rust]))
       nvim-treesitter-textobjects
       nvim-ts-rainbow
 
@@ -102,7 +101,7 @@ in
       fd
       fzf
     ];
-    extraLuaPackages = with pkgs.lua53Packages; [ plenary-nvim sqlite ];
+    extraLuaPackages = with pkgs.lua53Packages; [plenary-nvim sqlite];
   };
 
   xdg.configFile.nvim = {

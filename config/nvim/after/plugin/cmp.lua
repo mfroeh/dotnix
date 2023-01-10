@@ -1,7 +1,15 @@
 local cmp = require 'cmp'
 local luasnip = require 'luasnip'
+
+require("luasnip").config.set_config({
+  enable_autosnippets = false,
+
+  -- Use Tab to trigger visual selections
+  store_selection_keys = "<Tab>",
+})
+
 -- Load snippets
-require("luasnip.loaders.from_vscode").lazy_load()
+require("luasnip.loaders.from_vscode").lazy_load({paths = { "~/dotnix/config/nvim/snippets" }})
 
 -- If you want insert `(` after select function or method item
 cmp.event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done({}))
@@ -30,6 +38,7 @@ cmp.setup {
       behavior = cmp.ConfirmBehavior.Replace,
       select = false, -- If this is true, will select the first item even if none is selected.
     },
+    -- TODO: What is expandable what is jumpable?
     ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         local entries = cmp.get_entries()
