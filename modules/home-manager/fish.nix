@@ -21,9 +21,11 @@
       cat = "bat";
       copy = "xclip -sel clip";
       paste = "xclip -sel clip -o ";
+      gg = "lazygit";
 
-      errhs = "systemctl status home-manager-$USER";
-      errjournal = "journalctl -u home-manager-$USER.service";
+      nn = "sudo nixos-rebuild switch --flake $HOME/dotnix#$hostname";
+      hh = "home-manager switch --flake $HOME/dotnix#$USER@$hostname";
+
       gnomeCtrlCenter = "WEBKIT_DISABLE_COMPOSITING_MODE=1 MESA_LOADER_DRIVER_OVERRIDE=zink gnome-control-center online-accounts";
     };
     functions = {
