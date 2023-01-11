@@ -160,7 +160,7 @@
       "mo@eta" = mkHomeConfig {
         username = "mo";
         system = "aarch64-linux";
-        extraModules = [];
+        extraModules = [ ./modules/home-manager/languages/python.nix ];
         extraPkgs = pkgs: with pkgs; [alacritty];
       };
       "mo@lambda" = mkHomeConfig {

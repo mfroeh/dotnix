@@ -4,12 +4,7 @@
   lib,
   ...
 }: let
-  pythonPkgs = p:
-    with pkgs; [
-    ];
+  pythonPkgs = p: with p; [ numpy ];
 in {
-  home.packages = with pkgs; [
-    python3.withPackages
-    pythonPkgs
-  ];
+  home.packages = [ (pkgs.python3.withPackages pythonPkgs) ];
 }
