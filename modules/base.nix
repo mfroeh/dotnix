@@ -1,5 +1,11 @@
 { config, lib, pkgs, system, ... }: {
-  nix.settings = { experimental-features = [ "nix-command" "flakes" ]; };
+  nix = {
+    settings.experimental-features = [ "nix-command" "flakes" ];
+    gc = {
+      automatic = true;
+      options = "--delete-older-than 14d";
+    };
+  };
 
   environment.systemPackages = with pkgs; [ vim neovim git coreutils-full ];
 
