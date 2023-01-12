@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, self, ... }:
 let extension = "org/gnome/shell/extensions";
 in {
   # Gnome extensions
@@ -15,7 +15,18 @@ in {
       enable-animations = false;
     };
 
-    "org/gnome/desktop/background" = { };
+    "org/gnome/desktop/background" = {
+      picture-uri = "file:///${self}/config/wallpapers/light.png";
+      picture-uri-dark = "file:///${self}/config/wallpapers/night.png";
+      primary-color = "#000000000000";
+      secondary-color = "#000000000000";
+    };
+
+    "org/gnome/desktop/screensaver" = {
+      picture-uri = "file:///${self}/config/wallpapers/night.png";
+      primary-color = "#000000000000";
+      secondary-color = "#000000000000";
+    };
 
     "org/gnome/shell" = {
       disable-user-extensions = false;
