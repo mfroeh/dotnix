@@ -128,11 +128,9 @@
         host = "eta";
         username = "mo";
         extraModules = [
+          ./modules/nixos/xorg.nix
           ./modules/nixos/gnome.nix
-          # ./modules/nixos/xfce-i3.nix
-          # ./modules/nixos/picom.nix
           ./modules/nixos/remap.nix
-          # ./modules/nixos/wallpaper.nix
         ];
       };
       lambda = mkNixosConfig {
@@ -140,6 +138,7 @@
         host = "lambda";
         username = "mo";
         extraModules = [
+          ./modules/nixos/xorg.nix
           ./modules/nixos/gnome.nix
           ./modules/nixos/remap.nix
         ];

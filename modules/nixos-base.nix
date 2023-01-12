@@ -25,11 +25,5 @@
     LC_TIME = "sv_SE.UTF-8";
   };
 
-  services.xserver.enable = true;
-  services.xserver.layout = "us";
-  services.xserver.xkbVariant = "";
-  services.xserver.autoRepeatDelay = 200;
-  services.xserver.autoRepeatInterval = 25;
-
   hardware.pulseaudio.enable = true;
 }

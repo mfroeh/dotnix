@@ -1,11 +1,9 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}: let
-in {
-  imports = [./base.nix];
+{ config
+, pkgs
+, lib
+, ...
+}: {
+  imports = [ ./base.nix ];
 
   system.stateVersion = 4;
 

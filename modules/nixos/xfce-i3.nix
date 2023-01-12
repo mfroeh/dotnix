@@ -4,8 +4,6 @@
   lib,
   ...
 }: {
-  imports = [./thunar.nix];
-
   services.xserver = {
     enable = true;
     displayManager.lightdm = {
