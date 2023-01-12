@@ -1,10 +1,5 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}: {
-  home.packages = with pkgs; [lsd bat fzf xclip];
+{ config, pkgs, lib, ... }: {
+  home.packages = with pkgs; [ lsd bat fzf xclip ];
   programs.fish = {
     enable = true;
     shellInit = ''
@@ -15,7 +10,7 @@
       bind -M insert \ca beginning-of-line
       bind -M insert \ce end-of-line
     '';
-    shellAbbrs = {};
+    shellAbbrs = { };
     shellAliases = {
       l = "ls -la";
       cat = "bat";
@@ -26,11 +21,10 @@
       nn = "sudo nixos-rebuild switch --flake $HOME/dotnix#$hostname";
       hh = "home-manager switch --flake $HOME/dotnix#$USER@$hostname";
 
-      gnomeCtrlCenter = "WEBKIT_DISABLE_COMPOSITING_MODE=1 MESA_LOADER_DRIVER_OVERRIDE=zink gnome-control-center online-accounts";
+      gnomeCtrlCenter =
+        "WEBKIT_DISABLE_COMPOSITING_MODE=1 MESA_LOADER_DRIVER_OVERRIDE=zink gnome-control-center online-accounts";
     };
-    functions = {
-      mkcd = "mkdir $argv; cd $argv";
-    };
+    functions = { mkcd = "mkdir $argv; cd $argv"; };
     plugins = with pkgs.fishPlugins; [
       {
         name = "pure";

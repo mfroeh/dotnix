@@ -1,9 +1,4 @@
-{ config
-, pkgs
-, lib
-, self
-, ...
-}: {
+{ config, pkgs, lib, self, ... }: {
   imports = [
     ./hardware-configuration.nix
     "${self}/modules/nixos/xfce-i3.nix"
@@ -28,7 +23,5 @@
     ${pkgs.xorg.xrandr}/bin/xrandr --output DVI-D-0 --primary --mode 1920x1080 --rotate normal --rate 144
   '';
 
-  services.remap = {
-    enable = true;
-  };
+  services.remap = { enable = true; };
 }

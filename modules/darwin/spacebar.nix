@@ -1,9 +1,4 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}: {
+{ config, pkgs, lib, ... }: {
   services.spacebar = {
     enable = false;
     package = pkgs.spacebar;
@@ -12,6 +7,6 @@
       background_color = "0xff202020";
       foreground_color = "0xffa8a8a8";
     };
-    extraConfig = '''';
+    extraConfig = "";
   };
 }

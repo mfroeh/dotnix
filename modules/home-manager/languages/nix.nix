@@ -1,9 +1,2 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}: {
-  home.packages = with pkgs; [ rnix-lsp nixfmt ];
-}
+{ config, pkgs, lib, ... }: { home.packages = with pkgs; [ rnix-lsp nixfmt ]; }
 

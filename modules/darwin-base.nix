@@ -1,8 +1,4 @@
-{ config
-, pkgs
-, lib
-, ...
-}: {
+{ config, pkgs, lib, ... }: {
   imports = [ ./base.nix ];
 
   system.stateVersion = 4;
@@ -52,9 +48,7 @@
       type = "jpg";
     };
 
-    spaces = {
-      spans-displays = false;
-    };
+    spaces = { spans-displays = false; };
 
     trackpad = {
       # Tap to click
@@ -74,7 +68,7 @@
       NSAutomaticWindowAnimationsEnabled = false;
 
       NSScrollAnimationEnabled = false;
-      NSWindowResizeTime = 0.001;
+      NSWindowResizeTime = 1.0e-3;
 
       # Size of the symbols on the left menu in Finder
       NSTableViewDefaultSizeMode = 1;

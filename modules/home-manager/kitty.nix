@@ -1,9 +1,4 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}: {
+{ config, pkgs, lib, ... }: {
   programs.kitty = {
     enable = true;
     theme = "Rosé Pine";

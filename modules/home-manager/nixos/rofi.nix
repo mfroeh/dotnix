@@ -1,10 +1,5 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}: let
-  themeDir = "${pkgs.rofi}/share/rofi/themes/";
+{ config, pkgs, lib, ... }:
+let themeDir = "${pkgs.rofi}/share/rofi/themes/";
 in {
   programs.rofi = {
     enable = true;

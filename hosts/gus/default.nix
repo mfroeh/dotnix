@@ -1,9 +1,4 @@
-{ config
-, pkgs
-, lib
-, self
-, ...
-}: {
+{ config, pkgs, lib, self, ... }: {
   imports = [
     "${self}/modules/darwin/brew.nix"
     "${self}/modules/darwin/yabai.nix"

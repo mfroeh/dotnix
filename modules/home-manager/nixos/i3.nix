@@ -1,9 +1,5 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}: let
+{ config, pkgs, lib, ... }:
+let
   alt = "Mod1";
   cmd = "Mod4";
   #
@@ -47,28 +43,29 @@ in {
         }
       ];
 
-      bars = [
-        {
-          position = "top";
-          fonts.size = 11.0;
-          statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/i3status-rust/config-top.toml";
-        }
-      ];
+      bars = [{
+        position = "top";
+        fonts.size = 11.0;
+        statusCommand =
+          "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/i3status-rust/config-top.toml";
+      }];
 
       assigns = {
-        "workspace ${ws0}" = [{class = "Code";}];
-        "${ws1}" = [];
-        "workspace ${ws2}" = [{class = "Google-chrome";} {class = "Chromium";}];
-        "${ws3}" = [];
-        "${ws4}" = [];
-        "workspace ${ws5}" = [{class = ".spotify-wrapped";}];
+        "workspace ${ws0}" = [{ class = "Code"; }];
+        "${ws1}" = [ ];
+        "workspace ${ws2}" =
+          [ { class = "Google-chrome"; } { class = "Chromium"; } ];
+        "${ws3}" = [ ];
+        "${ws4}" = [ ];
+        "workspace ${ws5}" = [{ class = ".spotify-wrapped"; }];
       };
       keybindings = {
         "${cmd}+Shift+r" = "restart";
         "${cmd}+Shift+e" = "exec xfce4-session-logout";
 
         "${cmd}+Return" = "exec kitty";
-        "${cmd}+space" = "exec \"rofi -show combi -combi-modes 'window,drun' -modes combi -show-icons\"";
+        "${cmd}+space" = ''
+          exec "rofi -show combi -combi-modes 'window,drun' -modes combi -show-icons"'';
 
         "${cmd}+q" = "kill";
 
@@ -94,16 +91,26 @@ in {
         "${cmd}+Control+8" = "move container to workspace ${ws8}";
         "${cmd}+Control+9" = "move container to workspace ${ws9}";
 
-        "${cmd}+Shift+0" = "move container to workspace ${ws0}, workspace ${ws0}";
-        "${cmd}+Shift+1" = "move container to workspace ${ws1}, workspace ${ws1}";
-        "${cmd}+Shift+2" = "move container to workspace ${ws2}, workspace ${ws2}";
-        "${cmd}+Shift+3" = "move container to workspace ${ws2}, workspace ${ws3}";
-        "${cmd}+Shift+4" = "move container to workspace ${ws4}, workspace ${ws4}";
-        "${cmd}+Shift+5" = "move container to workspace ${ws5}, workspace ${ws5}";
-        "${cmd}+Shift+6" = "move container to workspace ${ws6}, workspace ${ws6}";
-        "${cmd}+Shift+7" = "move container to workspace ${ws7}, workspace ${ws7}";
-        "${cmd}+Shift+8" = "move container to workspace ${ws8}, workspace ${ws8}";
-        "${cmd}+Shift+9" = "move container to workspace ${ws9}, workspace ${ws9}";
+        "${cmd}+Shift+0" =
+          "move container to workspace ${ws0}, workspace ${ws0}";
+        "${cmd}+Shift+1" =
+          "move container to workspace ${ws1}, workspace ${ws1}";
+        "${cmd}+Shift+2" =
+          "move container to workspace ${ws2}, workspace ${ws2}";
+        "${cmd}+Shift+3" =
+          "move container to workspace ${ws2}, workspace ${ws3}";
+        "${cmd}+Shift+4" =
+          "move container to workspace ${ws4}, workspace ${ws4}";
+        "${cmd}+Shift+5" =
+          "move container to workspace ${ws5}, workspace ${ws5}";
+        "${cmd}+Shift+6" =
+          "move container to workspace ${ws6}, workspace ${ws6}";
+        "${cmd}+Shift+7" =
+          "move container to workspace ${ws7}, workspace ${ws7}";
+        "${cmd}+Shift+8" =
+          "move container to workspace ${ws8}, workspace ${ws8}";
+        "${cmd}+Shift+9" =
+          "move container to workspace ${ws9}, workspace ${ws9}";
 
         "${cmd}+h" = "focus left";
         "${cmd}+j" = "focus down";
@@ -160,23 +167,17 @@ in {
           {
             block = "music";
             player = "spotify";
-            buttons = ["prev" "play" "next"];
+            buttons = [ "prev" "play" "next" ];
             hide_when_empty = true;
           }
-          {
-            block = "net";
-          }
-          {
-            block = "backlight";
-          }
+          { block = "net"; }
+          { block = "backlight"; }
           {
             block = "battery";
             interval = 10;
             format = "{percentage}";
           }
-          {
-            block = "sound";
-          }
+          { block = "sound"; }
           {
             block = "time";
             interval = 60;

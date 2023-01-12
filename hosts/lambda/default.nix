@@ -1,9 +1,4 @@
-{ config
-, pkgs
-, lib
-, self
-, ...
-}: {
+{ config, pkgs, lib, self, ... }: {
   imports = [
     ./hardware-configuration.nix
     "${self}/modules/nixos/xorg.nix"
@@ -26,7 +21,5 @@
   # Virtualbox
   virtualisation.virtualbox.host.enable = true;
 
-  services.remap = {
-    enable = true;
-  };
+  services.remap = { enable = true; };
 }

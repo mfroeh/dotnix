@@ -21,20 +21,11 @@
   };
 
   outputs =
-    inputs @ { self
-    , nixpkgs
-    , stable
-    , darwin
-    , home-manager
-    , xremap-flake
-    , ...
-    }:
+    inputs@{ self, nixpkgs, stable, darwin, home-manager, xremap-flake, ... }:
     let
-      isDarwin = system: (builtins.elem system inputs.nixpkgs.lib.platforms.darwin);
-      homePrefix = system:
-        if isDarwin system
-        then "/Users"
-        else "/home";
+      isDarwin = system:
+        (builtins.elem system inputs.nixpkgs.lib.platforms.darwin);
+      homePrefix = system: if isDarwin system then "/Users" else "/home";
 
       mkPkgs = system:
         import nixpkgs {
@@ -42,13 +33,7 @@
           config.allowUnfree = true;
         };
 
-      mkNixosConfig =
-        { system
-        , host
-        , username
-        , extraModules ? [ ]
-        ,
-        }:
+      mkNixosConfig = { system, host, username, extraModules ? [ ], }:
         nixpkgs.lib.nixosSystem rec {
           inherit system;
           pkgs = mkPkgs system;
@@ -59,51 +44,37 @@
           specialArgs = { inherit self system username inputs; };
         };
 
-      mkDarwinConfig =
-        { system
-        , host
-        , username
-        , extraModules ? [ ]
-        ,
-        }:
+      mkDarwinConfig = { system, host, username, extraModules ? [ ], }:
         darwin.lib.darwinSystem rec {
           inherit system;
           pkgs = mkPkgs system;
-          modules =
-            [
-              ./modules/darwin-base.nix
-              ./hosts/${host}
-              ./users/${username}.nix
-            ]
-            ++ extraModules;
+          modules = [
+            ./modules/darwin-base.nix
+            ./hosts/${host}
+            ./users/${username}.nix
+          ] ++ extraModules;
           specialArgs = { inherit self system username inputs; };
         };
 
       mkHomeConfig =
-        { username
-        , system
-        , extraModules ? [ ]
-        , extraPkgs ? pkgs: [ ]
-        ,
-        }:
+        { username, system, extraModules ? [ ], extraPkgs ? pkgs: [ ], }:
         home-manager.lib.homeManagerConfiguration rec {
           pkgs = mkPkgs system;
-          modules =
-            [
-              ./modules/home-manager/${if isDarwin system then "darwin" else "nixos"}-base.nix
-              {
-                home = {
-                  inherit username;
-                  homeDirectory = "${homePrefix system}/${username}";
-                  packages = extraPkgs pkgs;
-                };
-              }
-            ]
-            ++ extraModules;
+          modules = [
+            ./modules/home-manager/${
+              if isDarwin system then "darwin" else "nixos"
+            }-base.nix
+            {
+              home = {
+                inherit username;
+                homeDirectory = "${homePrefix system}/${username}";
+                packages = extraPkgs pkgs;
+              };
+            }
+          ] ++ extraModules;
           extraSpecialArgs = { inherit self system username inputs; };
         };
-    in
-    {
+    in {
       darwinConfigurations = {
         gus = mkDarwinConfig {
           system = "aarch64-darwin";

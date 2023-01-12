@@ -1,11 +1,4 @@
-{
-  config,
-  pkgs,
-  lib,
-  inputs,
-  self,
-  ...
-}: {
+{ config, pkgs, lib, inputs, self, ... }: {
   imports = [
     ./hardware-configuration.nix
     "${inputs.nixos-m1}/nix/m1-support"

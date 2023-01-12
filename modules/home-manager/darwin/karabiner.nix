@@ -1,9 +1,4 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}: {
+{ config, pkgs, lib, ... }: {
   home.file.".config/karabiner/karabiner.json".text = ''
     {
         "global": {

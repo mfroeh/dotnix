@@ -1,9 +1,4 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}: {
+{ config, pkgs, lib, ... }: {
   homebrew = {
     enable = true;
     onActivation.cleanup = "uninstall";

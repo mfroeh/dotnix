@@ -1,10 +1,4 @@
-{
-  config,
-  pkgs,
-  lib,
-  self,
-  ...
-}: {
+{ config, pkgs, lib, self, ... }: {
   gtk = {
     enable = true;
 

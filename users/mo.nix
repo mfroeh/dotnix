@@ -1,10 +1,6 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}:
-with lib; let
+{ config, pkgs, lib, ... }:
+with lib;
+let
   isLinux = pkgs.stdenv.isLinux;
   isDarwin = pkgs.stdenv.isDarwin;
 in {
@@ -16,11 +12,9 @@ in {
     (mkIf isLinux {
       home = "/home/mo";
       isNormalUser = true;
-      extraGroups = ["networkmanager" "wheel" "audio" "video"];
+      extraGroups = [ "networkmanager" "wheel" "audio" "video" ];
       initialPassword = "";
     })
-    (mkIf isDarwin {
-      home = "/Users/mo";
-    })
+    (mkIf isDarwin { home = "/Users/mo"; })
   ];
 }

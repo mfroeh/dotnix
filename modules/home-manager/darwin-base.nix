@@ -1,7 +1,1 @@
-{ config
-, pkgs
-, lib
-, ...
-}: { 
-  imports = [ ./base.nix ];
-}
+{ config, pkgs, lib, ... }: { imports = [ ./base.nix ]; }

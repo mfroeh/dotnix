@@ -1,12 +1,5 @@
-{
-  config,
-  pkgs,
-  lib,
-  self,
-  inputs,
-  ...
-}: {
-  imports = [./base.nix];
+{ config, pkgs, lib, self, inputs, ... }: {
+  imports = [ ./base.nix ];
 
   system.stateVersion = "22.11";
 

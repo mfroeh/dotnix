@@ -1,8 +1,4 @@
-{ config
-, pkgs
-, lib
-, ...
-}: {
+{ config, pkgs, lib, ... }: {
   imports = [
     ./cli.nix
     ./kitty.nix
