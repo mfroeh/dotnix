@@ -8,33 +8,33 @@ tele.load_extension("projects")
 -- Zoxide for telescope
 tele.load_extension("zoxide")
 
-tele.setup {
-  defaults = {
-    mappings = {
-      i = {
-        ["<C-u>"] = false,
-        ["<C-j>"] = "move_selection_next",
-        ["<C-k>"] = "move_selection_previous",
-      },
-    },
-  },
-}
+tele.setup({
+	defaults = {
+		mappings = {
+			i = {
+				["<C-u>"] = false,
+				["<C-j>"] = "move_selection_next",
+				["<C-k>"] = "move_selection_previous",
+			},
+		},
+	},
+})
 
 local nnmap = function(from, to)
-  vim.keymap.set("n", from, to)
+	vim.keymap.set("n", from, to)
 end
 
 -- 'l' for list or live
 local telemap = function(key, to)
-  vim.keymap.set("n", "<leader>l" .. key, to)
+	vim.keymap.set("n", "<leader>l" .. key, to)
 end
 
 -- Fuzzy in file
 nnmap("<leader>/", function()
-  builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown {
-    winblend = 10,
-    previewer = false,
-  })
+	builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
+		winblend = 10,
+		previewer = false,
+	}))
 end)
 
 -- Buffers
@@ -54,10 +54,10 @@ telemap("o", builtin.oldfiles)
 nnmap("<leader>?", builtin.oldfiles)
 
 -- Git files
-nnmap("<C-p>", function ()
-  if not pcall(builtin.git_files) then
-    tele.extensions.projects.projects({})
-  end
+nnmap("<C-p>", function()
+	if not pcall(builtin.git_files) then
+		tele.extensions.projects.projects({})
+	end
 end)
 
 -- Grep

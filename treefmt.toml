@@ -8,3 +8,7 @@ options = [ ]
 includes = [ "*.nix" ]
 # Glob patterns of files to exclude
 excludes = [ ]
+
+[formatter.lua]
+command = "stylua"
+includes = [ "*.lua" ]

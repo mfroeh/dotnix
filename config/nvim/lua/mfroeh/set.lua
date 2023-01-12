@@ -35,10 +35,10 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 
 -- Enable mouse mode
-vim.o.mouse = 'a'
+vim.o.mouse = "a"
 
 -- Set completeopt to have a better completion experience
-vim.o.completeopt = 'menuone,noselect'
+vim.o.completeopt = "menuone,noselect"
 
 -- Consistent splitting
 vim.opt.splitright = true

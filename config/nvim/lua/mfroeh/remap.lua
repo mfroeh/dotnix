@@ -6,8 +6,8 @@ vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
 -- Stay in visual mode after indenting
-vim.keymap.set("v", "<", "<gv");
-vim.keymap.set("v", ">", ">gv");
+vim.keymap.set("v", "<", "<gv")
+vim.keymap.set("v", ">", ">gv")
 
 -- Don't move cursor on J
 vim.keymap.set("n", "J", "mzJ`z")
@@ -19,11 +19,11 @@ vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
 -- Yank to and paste from " register (system clipboard)
-vim.keymap.set("n", "<leader>y", "\"+y")
-vim.keymap.set("v", "<leader>y", "\"+y")
-vim.keymap.set("v", "<leader>Y", "\"+Y")
-vim.keymap.set("n", "<leader>p", "\"+p");
-vim.keymap.set("n", "<leader>P", "\"+P");
+vim.keymap.set("n", "<leader>y", '"+y')
+vim.keymap.set("v", "<leader>y", '"+y')
+vim.keymap.set("v", "<leader>Y", '"+Y')
+vim.keymap.set("n", "<leader>p", '"+p')
+vim.keymap.set("n", "<leader>P", '"+P')
 
 -- Testing these :)
 -- Something quick fix, not sure yet

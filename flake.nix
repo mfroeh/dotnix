@@ -119,6 +119,7 @@
             ./modules/home-manager/languages/nix.nix
             ./modules/home-manager/languages/cpp.nix
             ./modules/home-manager/languages/python.nix
+            ./modules/home-manager/languages/lua.nix
 
             ./modules/home-manager/nixos/gtk.nix
             ./modules/home-manager/nixos/gnome.nix
@@ -137,6 +138,7 @@
             ./modules/home-manager/languages/nix.nix
             ./modules/home-manager/languages/cpp.nix
             ./modules/home-manager/languages/python.nix
+            ./modules/home-manager/languages/lua.nix
 
             ./modules/home-manager/nixos/gtk.nix
             ./modules/home-manager/nixos/gnome.nix
