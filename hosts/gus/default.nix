@@ -2,7 +2,7 @@
   imports = [
     "${self}/modules/darwin/brew.nix"
     "${self}/modules/darwin/yabai.nix"
-    "${self}/modules/darwin/shkd.nix"
+    "${self}/modules/darwin/skhd.nix"
   ];
 
   networking.hostName = "gus";
