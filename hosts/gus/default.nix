@@ -1,14 +1,14 @@
-# hosts/YourHostName/default.nix
-{
-  pkgs,
-  home-manager,
-  self,
-  ...
+{ config
+, pkgs
+, lib
+, self
+, ...
 }: {
-  networking.hostName = "gus";
+  imports = [
+    "${self}/modules/darwin/brew.nix"
+    "${self}/modules/darwin/yabai.nix"
+    "${self}/modules/darwin/shkd.nix"
+  ];
 
-  # users.users.mo = {
-  #   home = "/Users/mo";
-  #   shell = pkgs.fish; # TODO: Doesn't work
-  # };
+  networking.hostName = "gus";
 }

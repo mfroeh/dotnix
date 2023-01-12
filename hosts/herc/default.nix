@@ -1,11 +1,15 @@
-{
-  config,
-  pkgs,
-  lib,
-  self,
-  ...
+{ config
+, pkgs
+, lib
+, self
+, ...
 }: {
-  imports = [./hardware-configuration.nix];
+  imports = [
+    ./hardware-configuration.nix
+    "${self}/modules/nixos/xfce-i3.nix"
+    "${self}/modules/nixos/picom.nix"
+    "${self}/modules/nixos/remap.nix"
+  ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -17,7 +21,7 @@
 
   virtualisation.virtualbox.host.enable = true;
 
-  services.xserver.videoDrivers = ["nvidia"];
+  services.xserver.videoDrivers = [ "nvidia" ];
   hardware.opengl.enable = true;
 
   services.xserver.displayManager.setupCommands = ''

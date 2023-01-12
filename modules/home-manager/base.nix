@@ -1,26 +1,17 @@
-{
-  config,
-  pkgs,
-  lib,
-  system,
-  ...
+{ config
+, pkgs
+, lib
+, ...
 }: {
   imports = [
     ./cli.nix
-    ./gui.nix
-    ./languages.nix
     ./kitty.nix
-    ./alacritty.nix
-    ./helix.nix
-    ./tmux.nix
     ./fish.nix
+
     ./nvim.nix
     ./vscode.nix
-    (
-      if (lib.hasSuffix "darwin" system)
-      then ./darwin
-      else ./nixos
-    )
+
+    ./bitwarden.nix
   ];
 
   # Let home-manager install and mange itself

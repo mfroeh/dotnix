@@ -1,10 +1,9 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}: {
-  imports = [./i3.nix ./rofi.nix ./gtk.nix ./gnome.nix];
+{ config
+, pkgs
+, lib
+, ...
+}: { 
+  imports = [ ./base.nix ];
 
   home.packages = with pkgs;
     [
@@ -13,7 +12,8 @@
       screenkey
       obsidian
     ]
-    ++ lib.optionals (pkgs.system == "x86_64-linux") [spotify obsidian google-chrome bitwarden];
+    ++ lib.optionals (pkgs.system == "x86_64-linux") [spotify google-chrome]
+    ++ lib.optionals (pkgs.system == "aarch64-linux") [];
 
   programs = {
     chromium = {

@@ -55,9 +55,6 @@
       package = pkgs.htop-vim;
     };
 
-    # Document viewer
-    zathura.enable = true;
-
     # Fuzzy finding is great
     fzf = rec {
       enable = true;

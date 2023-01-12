@@ -1,10 +1,15 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
+{ config
+, pkgs
+, lib
+, self
+, ...
 }: {
-  imports = [./hardware-configuration.nix];
+  imports = [
+    ./hardware-configuration.nix
+    "${self}/modules/nixos/xorg.nix"
+    "${self}/modules/nixos/gnome.nix"
+    "${self}/modules/nixos/remap.nix"
+  ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -15,7 +20,7 @@
   time.timeZone = "Europe/Stockholm";
   time.hardwareClockInLocalTime = true;
 
-  services.xserver.videoDrivers = ["nvidia"];
+  services.xserver.videoDrivers = [ "nvidia" ];
   hardware.opengl.enable = true;
 
   # Virtualbox

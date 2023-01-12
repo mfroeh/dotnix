@@ -5,6 +5,7 @@
   ...
 }: let
   # installs a vim plugin from git with a given tag / branch
+# Needs --impure flag 
   pluginGit = ref: repo:
     pkgs.vimUtils.buildVimPluginFrom2Nix {
       pname = "${lib.strings.sanitizeDerivationName repo}";
@@ -17,7 +18,7 @@
 
   plugin = pluginGit "HEAD";
 in {
-  home.packages = lib.mkIf pkgs.stdenv.isLinux (with pkgs; [xclip]);
+  home.packages = [ pkgs.neovide ] ++ lib.optionals pkgs.stdenv.isLinux (with pkgs; [xclip]);
   programs.neovim = {
     enable = true;
     viAlias = true;
@@ -101,7 +102,7 @@ in {
       fd
       fzf
     ];
-    extraLuaPackages = with pkgs.lua53Packages; [plenary-nvim sqlite];
+    extraLuaPackages = with pkgs.lua53Packages; [plenary-nvim];
   };
 
   xdg.configFile.nvim = {

@@ -9,12 +9,17 @@
   imports = [
     ./hardware-configuration.nix
     "${inputs.nixos-m1}/nix/m1-support"
+    "${self}/modules/nixos/xorg.nix"
+    "${self}/modules/nixos/gnome.nix"
+    "${self}/modules/nixos/remap.nix"
   ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = false;
 
   networking.hostName = "eta";
+
+  time.timeZone = "Europe/Stockholm";
 
   hardware.asahi.peripheralFirmwareDirectory = ./firmware;
 
@@ -25,20 +30,11 @@
   services.xserver = {
     libinput.enable = true;
     libinput.touchpad.naturalScrolling = true;
-    # dpi = 200;
   };
-
-  # # set wallpaper
-  # fetchBackground = {
-  #   enable = true;
-  #   url = "${self}/config/wallpaper.png";
-  # };
 
   hardware.asahi.useExperimentalGPUDriver = true;
   hardware.asahi.addEdgeKernelConfig = true;
   hardware.opengl.enable = true;
-
-  time.timeZone = "Europe/Stockholm";
 
   services.remap = {
     enable = true;
