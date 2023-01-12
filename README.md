@@ -4,7 +4,7 @@ The configuration is split into NixOS/Nix-darwin and standalone Home-manager
 ### NixOS/Nix-darwin
 - The base system configuration is found in `./modules/{nixos,darwin}-base.nix`
 - Optional system-level modules are found in `./modules/{nixos,darwin}/`
-- Optional system-level modules can be added on a per system basis as imports in `hosts/${system-name}/default.nix`
+- Optional system-level modules can be added on a per system basis as imports in `./hosts/${system-name}/default.nix`
 
 ### Home-manager
 - Most of the configuration is done using Home-manager
