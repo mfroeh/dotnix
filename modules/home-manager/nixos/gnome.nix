@@ -13,6 +13,7 @@ in {
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
       enable-animations = false;
+      enable-hot-corners = false;
     };
 
     "org/gnome/desktop/background" = {
