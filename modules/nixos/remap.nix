@@ -1,8 +1,9 @@
 { config, pkgs, lib, username, inputs, ... }:
 with lib;
 let cfg = config.services.remap;
-in {
-  imports = [ inputs.xremap-flake.nixosModules.default  ];
+in
+{
+  imports = [ inputs.xremap-flake.nixosModules.default ];
 
   options.services.remap = {
     enable = mkEnableOption "remap service";
@@ -21,6 +22,12 @@ in {
     macosTabControl = mkOption {
       type = types.bool;
       default = true;
+    };
+    # https://whynothugo.nl/journal/2022/11/04/copying-with-super-c/
+    # Doesn't work most of the time on aarch64-linux
+    super-c = mkOption {
+      type = types.bool;
+      default = false;
     };
   };
 
@@ -67,6 +74,15 @@ in {
             remap = {
               "Win_L-t" = "Ctrl_L-t";
               "Win-w" = "Ctrl_L-w";
+            };
+          }
+        ] ++ optionals cfg.super-c [
+          {
+            name = "Super-c";
+            remap = {
+              "Win_L-c" = "Copy";
+              "Win_L-v" = "Paste";
+              "Win_L-x" = "Cut";
             };
           }
         ];

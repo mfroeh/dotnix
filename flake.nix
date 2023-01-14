@@ -3,7 +3,8 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    stable.url = "github:nixos/nixpkgs/nixos-22.11";
+    nixos-stable.url = "github:nixos/nixpkgs/nixos-22.11";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
     darwin.url = "github:lnl7/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
@@ -21,44 +22,50 @@
   };
 
   outputs =
-    inputs@{ self, nixpkgs, stable, darwin, home-manager, xremap-flake, ... }:
+    inputs@{ self, nixpkgs, nixos-stable, nixpkgs-unstable, darwin, home-manager, xremap-flake, ... }:
     let
       isDarwin = system:
         (builtins.elem system inputs.nixpkgs.lib.platforms.darwin);
       homePrefix = system: if isDarwin system then "/Users" else "/home";
 
-      mkPkgs = system:
+      mkPkgs = { system, nixpkgs }:
         import nixpkgs {
-          inherit system;
-          config.allowUnfree = true;
+            inherit system;
+            config.allowUnfree = true;
         };
 
       mkNixosConfig = { system, host, username, extraModules ? [ ], }:
         nixpkgs.lib.nixosSystem rec {
           inherit system;
-          pkgs = mkPkgs system;
+          pkgs = mkPkgs { inherit system nixpkgs; };
           modules =
             [ ./modules/nixos-base.nix ./users/${username}.nix ./hosts/${host} ]
             ++ extraModules;
-          specialArgs = { inherit self system username inputs; };
+          specialArgs = { inherit self system username inputs;
+            pkgsUnstable = mkPkgs { inherit system; nixpkgs=nixpkgs-unstable; };
+            pkgsStable = mkPkgs { inherit system; nixpkgs=nixos-stable;};
+          };
         };
 
       mkDarwinConfig = { system, host, username, extraModules ? [ ], }:
         darwin.lib.darwinSystem rec {
           inherit system;
-          pkgs = mkPkgs system;
+          pkgs = mkPkgs { inherit system nixpkgs; };
           modules = [
             ./modules/darwin-base.nix
             ./hosts/${host}
             ./users/${username}.nix
           ] ++ extraModules;
-          specialArgs = { inherit self system username inputs; };
+          specialArgs = { inherit self system username inputs;
+            pkgsUnstable = mkPkgs { inherit system; nixpkgs=nixpkgs-unstable; };
+            pkgsStable = mkPkgs { inherit system; nixpkgs=nixos-stable;};
+          };
         };
 
       mkHomeConfig =
         { username, system, extraModules ? [ ], extraPkgs ? pkgs: [ ], }:
         home-manager.lib.homeManagerConfiguration rec {
-          pkgs = mkPkgs system;
+          pkgs = mkPkgs { inherit system nixpkgs; };
           modules = [
             ./modules/home-manager/${
               if isDarwin system then "darwin" else "nixos"
@@ -72,7 +79,10 @@
             }
           ] 
           ++ extraModules;
-          extraSpecialArgs = { inherit self system username inputs; };
+          extraSpecialArgs = { inherit self system username inputs;
+            pkgsUnstable = mkPkgs { inherit system; nixpkgs=nixpkgs-unstable; };
+            pkgsStable = mkPkgs { inherit system; nixpkgs=nixos-stable;};
+          };
         };
     in {
       darwinConfigurations = {
@@ -130,6 +140,7 @@
             ./modules/home-manager/common/helix.nix
 
             ./modules/home-manager/common/rclone.nix
+            ./modules/home-manager/common/jetbrains.nix
           ];
           extraPkgs = pkgs: with pkgs; [ ];
         };
