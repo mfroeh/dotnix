@@ -4,15 +4,15 @@ require("nvim-treesitter.configs").setup({
 		enable = true,
 		disable = {},
 	},
-	incremental_selection = {
-		enable = true,
-		keymaps = {
-			init_selection = "<c-space>",
-			node_incremental = "<c-space>",
-			scope_incremental = "<c-s>",
-			node_decremental = "<c-backspace>",
-		},
-	},
+	-- incremental_selection = {
+	-- 	enable = true,
+	-- 	keymaps = {
+	-- 		init_selection = "<c-space>",
+	-- 		node_incremental = "<c-space>",
+	-- 		scope_incremental = "<c-s>",
+	-- 		node_decremental = "<c-backspace>",
+	-- 	},
+	-- },
 	rainbow = {
 		enable = true,
 	},

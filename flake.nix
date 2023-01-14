@@ -128,6 +128,8 @@
             # Until https://github.com/kovidgoyal/kitty/pull/5795 merged
             ./modules/home-manager/common/alacritty.nix
             ./modules/home-manager/common/helix.nix
+
+            ./modules/home-manager/common/rclone.nix
           ];
           extraPkgs = pkgs: with pkgs; [ ];
         };
@@ -145,6 +147,8 @@
             ./modules/home-manager/nixos/rofi.nix
 
             ./modules/home-manager/common/helix.nix
+
+            ./modules/home-manager/common/rclone.nix
           ];
           extraPkgs = pkgs: with pkgs; [ ];
         };
