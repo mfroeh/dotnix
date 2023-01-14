@@ -39,7 +39,6 @@
           pkgs = mkPkgs system;
           modules =
             [ ./modules/nixos-base.nix ./users/${username}.nix ./hosts/${host} ]
-            ++ [ xremap-flake.nixosModules.default ] # Flake modules
             ++ extraModules;
           specialArgs = { inherit self system username inputs; };
         };
@@ -71,7 +70,8 @@
                 packages = extraPkgs pkgs;
               };
             }
-          ] ++ extraModules;
+          ] 
+          ++ extraModules;
           extraSpecialArgs = { inherit self system username inputs; };
         };
     in {

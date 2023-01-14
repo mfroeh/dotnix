@@ -1,7 +1,9 @@
-{ config, pkgs, lib, username, ... }:
+{ config, pkgs, lib, username, inputs, ... }:
 with lib;
 let cfg = config.services.remap;
 in {
+  imports = [ inputs.xremap-flake.nixosModules.default  ];
+
   options.services.remap = {
     enable = mkEnableOption "remap service";
     capsToCtrl = mkOption {
