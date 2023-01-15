@@ -33,6 +33,8 @@ in {
       cmp-buffer
       luasnip
       cmp_luasnip
+      # vim-vsnip
+
       friendly-snippets
 
       # Treesitter and plugins
@@ -43,6 +45,7 @@ in {
       # Just an example on how to install using pluginGit
       # You have to pass the --impure flag to home-manager in order for this to work
       # (plugin "RRethy/nvim-treesitter-endwise")
+      (plugin "Eandrju/cellular-automaton.nvim")
 
       # Git
       vim-fugitive

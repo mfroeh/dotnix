@@ -19,10 +19,12 @@
 
     xremap-flake.url = "github:xremap/nix-flake";
     xremap-flake.inputs.nixpkgs.follows = "nixpkgs";
+
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
 
-  outputs =
-    inputs@{ self, nixpkgs, nixos-stable, nixpkgs-unstable, darwin, home-manager, xremap-flake, ... }:
+  outputs = inputs@{ self, nixpkgs, nixos-stable, nixpkgs-unstable, darwin
+    , home-manager, xremap-flake, neovim-nightly-overlay, ... }:
     let
       isDarwin = system:
         (builtins.elem system inputs.nixpkgs.lib.platforms.darwin);
@@ -30,8 +32,12 @@
 
       mkPkgs = { system, nixpkgs }:
         import nixpkgs {
-            inherit system;
-            config.allowUnfree = true;
+          inherit system;
+          config.allowUnfree = true;
+          overlays = [
+            # https://github.com/nix-community/neovim-nightly-overlay/issues/164
+            # neovim-nightly-overlay.overlay
+          ];
         };
 
       mkNixosConfig = { system, host, username, extraModules ? [ ], }:
@@ -41,9 +47,16 @@
           modules =
             [ ./modules/nixos-base.nix ./users/${username}.nix ./hosts/${host} ]
             ++ extraModules;
-          specialArgs = { inherit self system username inputs;
-            pkgsUnstable = mkPkgs { inherit system; nixpkgs=nixpkgs-unstable; };
-            pkgsStable = mkPkgs { inherit system; nixpkgs=nixos-stable;};
+          specialArgs = {
+            inherit self system username inputs;
+            pkgsUnstable = mkPkgs {
+              inherit system;
+              nixpkgs = nixpkgs-unstable;
+            };
+            pkgsStable = mkPkgs {
+              inherit system;
+              nixpkgs = nixos-stable;
+            };
           };
         };
 
@@ -56,9 +69,16 @@
             ./hosts/${host}
             ./users/${username}.nix
           ] ++ extraModules;
-          specialArgs = { inherit self system username inputs;
-            pkgsUnstable = mkPkgs { inherit system; nixpkgs=nixpkgs-unstable; };
-            pkgsStable = mkPkgs { inherit system; nixpkgs=nixos-stable;};
+          specialArgs = {
+            inherit self system username inputs;
+            pkgsUnstable = mkPkgs {
+              inherit system;
+              nixpkgs = nixpkgs-unstable;
+            };
+            pkgsStable = mkPkgs {
+              inherit system;
+              nixpkgs = nixos-stable;
+            };
           };
         };
 
@@ -77,11 +97,17 @@
                 packages = extraPkgs pkgs;
               };
             }
-          ] 
-          ++ extraModules;
-          extraSpecialArgs = { inherit self system username inputs;
-            pkgsUnstable = mkPkgs { inherit system; nixpkgs=nixpkgs-unstable; };
-            pkgsStable = mkPkgs { inherit system; nixpkgs=nixos-stable;};
+          ] ++ extraModules;
+          extraSpecialArgs = {
+            inherit self system username inputs;
+            pkgsUnstable = mkPkgs {
+              inherit system;
+              nixpkgs = nixpkgs-unstable;
+            };
+            pkgsStable = mkPkgs {
+              inherit system;
+              nixpkgs = nixos-stable;
+            };
           };
         };
     in {
@@ -140,7 +166,6 @@
             ./modules/home-manager/common/helix.nix
 
             ./modules/home-manager/common/rclone.nix
-            ./modules/home-manager/common/jetbrains.nix
           ];
           extraPkgs = pkgs: with pkgs; [ ];
         };
