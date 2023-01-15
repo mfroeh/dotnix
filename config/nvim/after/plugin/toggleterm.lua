@@ -9,10 +9,10 @@ require("toggleterm").setup({
 
 	open_mapping = "<C-'>",
 	insert_mappings = true,
-	direction = "horizontal",
+	direction = "float",
 	-- Only used if direction == "float"
-	float_opts = {
-		width = 20,
-		height = 20,
-	},
+	-- float_opts = {
+	-- 	width = 20,
+	-- 	height = 20,
+	-- },
 })

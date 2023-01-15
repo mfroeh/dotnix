@@ -1,8 +1,7 @@
 { config, pkgs, lib, username, inputs, ... }:
 with lib;
 let cfg = config.services.remap;
-in
-{
+in {
   imports = [ inputs.xremap-flake.nixosModules.default ];
 
   options.services.remap = {
@@ -76,16 +75,14 @@ in
               "Win-w" = "Ctrl_L-w";
             };
           }
-        ] ++ optionals cfg.super-c [
-          {
-            name = "Super-c";
-            remap = {
-              "Win_L-c" = "Copy";
-              "Win_L-v" = "Paste";
-              "Win_L-x" = "Cut";
-            };
-          }
-        ];
+        ] ++ optionals cfg.super-c [{
+          name = "Super-c";
+          remap = {
+            "Win_L-c" = "Copy";
+            "Win_L-v" = "Paste";
+            "Win_L-x" = "Cut";
+          };
+        }];
       };
     };
   };

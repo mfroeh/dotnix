@@ -1,8 +1,6 @@
 { config, pkgs, lib, ... }:
-let
-  mountdir = "${config.home.homeDirectory}/google-drive";
-in
-{
+let mountdir = "${config.home.homeDirectory}/google-drive";
+in {
   home.packages = [ pkgs.rclone ];
 
   systemd.user.services.google-drive-mount = {

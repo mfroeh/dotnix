@@ -1,5 +1,7 @@
 vim.g.mapleader = " "
 -- vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+--
+vim.keymap.set("n", "<leader>sv", "<cmd>source $MYVIMRC<CR>")
 
 -- Move highlighted lines with J and K in visual mode
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")

@@ -47,6 +47,8 @@ in {
       # (plugin "RRethy/nvim-treesitter-endwise")
       (plugin "Eandrju/cellular-automaton.nvim")
 
+      markdown-preview-nvim
+
       # Git
       vim-fugitive
       vim-rhubarb
