@@ -167,6 +167,8 @@
             ./modules/home-manager/nixos/gnome.nix
             ./modules/home-manager/nixos/rofi.nix
 
+            ./modules/home-manager/nixos/chromium.nix
+
             # Until https://github.com/kovidgoyal/kitty/pull/5795 merged
             ./modules/home-manager/common/alacritty.nix
             ./modules/home-manager/common/helix.nix
