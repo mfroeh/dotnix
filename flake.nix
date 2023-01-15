@@ -165,7 +165,7 @@
             ./modules/home-manager/common/alacritty.nix
             ./modules/home-manager/common/helix.nix
 
-            ./modules/home-manager/common/rclone.nix
+            ./modules/home-manager/nixos/rclone.nix
           ];
           extraPkgs = pkgs: with pkgs; [ ];
         };
@@ -184,7 +184,7 @@
 
             ./modules/home-manager/common/helix.nix
 
-            ./modules/home-manager/common/rclone.nix
+            ./modules/home-manager/nixos/rclone.nix
           ];
           extraPkgs = pkgs: with pkgs; [ ];
         };
