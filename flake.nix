@@ -11,6 +11,8 @@
 
     nixos-m1.url = "github:tpwrules/nixos-m1";
     nixos-m1.flake = false;
+    
+	nixos-hardware.url = "github:nixos/nixos-hardware";
 
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -23,8 +25,7 @@
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
 
-  outputs = inputs@{ self, nixpkgs, nixos-stable, nixpkgs-unstable, darwin
-    , home-manager, xremap-flake, neovim-nightly-overlay, ... }:
+  outputs = inputs@{ self, nixpkgs, nixos-stable, nixpkgs-unstable, darwin, nixos-hardware, home-manager, xremap-flake, neovim-nightly-overlay, ... }:
     let
       isDarwin = system:
         (builtins.elem system inputs.nixpkgs.lib.platforms.darwin);
@@ -135,6 +136,11 @@
           host = "lambda";
           username = "mo";
         };
+        pi = mkNixosConfig {
+          system = "aarch64-linux";
+          host = "pi";
+          username = "mo";
+        };
       };
 
       homeConfigurations = {
@@ -188,6 +194,11 @@
           ];
           extraPkgs = pkgs: with pkgs; [ ];
         };
+	"mo@pi" = mkHomeConfig {
+	username = "mo";
+	system = "aarch64-linux";
+	extraModules = [ ];
+};
       };
     };
 }

@@ -1,2 +1,2 @@
 #!/bin/sh
-nix build .#homeConfigurations.$1.activationPackage && ./result/activate && rm -rf ./result
+nix build .#homeConfigurations."$USER@$(hostname)".activationPackage --impure && ./result/activate && rm -rf ./result
