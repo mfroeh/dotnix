@@ -13,7 +13,14 @@
     };
   };
 
-  environment.systemPackages = with pkgs; [ vim neovim git coreutils-full ];
+  environment.systemPackages = with pkgs; [
+    vim
+    neovim
+    git
+    coreutils-full
+    man-pages
+    man-pages-posix
+  ];
 
   programs.zsh.enable = true;
   programs.fish.enable = true;

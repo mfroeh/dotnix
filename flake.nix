@@ -175,6 +175,9 @@
             ./modules/home-manager/common/helix.nix
 
             ./modules/home-manager/nixos/rclone.nix
+            ./modules/home-manager/nixos/vlc.nix
+
+            ./modules/home-manager/nixos/uni.nix
           ];
           extraPkgs = pkgs: with pkgs; [ ];
         };
@@ -194,6 +197,9 @@
             ./modules/home-manager/common/helix.nix
 
             ./modules/home-manager/nixos/rclone.nix
+            ./modules/home-manager/nixos/vlc.nix
+
+            ./modules/home-manager/nixos/uni.nix
           ];
           extraPkgs = pkgs: with pkgs; [ ];
         };

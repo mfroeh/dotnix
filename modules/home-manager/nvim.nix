@@ -48,6 +48,7 @@ in {
       (plugin "Eandrju/cellular-automaton.nvim")
 
       markdown-preview-nvim
+      (plugin "ekickx/clipboard-image.nvim")
 
       # Git
       vim-fugitive
