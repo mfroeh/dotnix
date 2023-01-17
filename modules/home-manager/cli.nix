@@ -6,8 +6,6 @@
     zip
     unzip
     treefmt
-    ltrace
-    grive2
   ];
 
   programs = {

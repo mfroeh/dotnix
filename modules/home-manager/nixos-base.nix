@@ -2,7 +2,7 @@
   imports = [ ./base.nix ];
 
   home.packages = with pkgs;
-    [ xorg.xwininfo wmctrl screenkey obsidian ]
+    [ xorg.xwininfo wmctrl screenkey obsidian ltrace gdrive2 ]
     ++ lib.optionals (pkgs.system == "x86_64-linux") [ spotify google-chrome ]
     ++ lib.optionals (pkgs.system == "aarch64-linux") [ ];
 }

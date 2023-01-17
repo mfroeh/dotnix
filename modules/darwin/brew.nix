@@ -10,6 +10,7 @@
       "spotify"
       "balenaetcher"
       "bitwarden"
+      "skype"
     ];
   };
 }
