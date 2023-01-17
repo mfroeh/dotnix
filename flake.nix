@@ -195,6 +195,7 @@
             ./modules/home-manager/nixos/rofi.nix
 
             ./modules/home-manager/common/helix.nix
+            ./modules/home-manager/common/jetbrains.nix
 
             ./modules/home-manager/nixos/rclone.nix
             ./modules/home-manager/nixos/vlc.nix

@@ -67,6 +67,10 @@
       historyWidgetOptions = [ ];
     };
 
+    zathura = {
+        enable = true;
+    };
+
     git = {
       enable = true;
       userName = "mfroeh";
