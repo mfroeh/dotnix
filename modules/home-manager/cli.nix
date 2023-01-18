@@ -1,12 +1,5 @@
 { config, pkgs, lib, ... }: {
-  home.packages = with pkgs; [
-    ripgrep
-    fd
-    neofetch
-    zip
-    unzip
-    treefmt
-  ];
+  home.packages = with pkgs; [ ripgrep fd neofetch zip unzip treefmt ];
 
   programs = {
     # cat replacement
@@ -65,9 +58,7 @@
       historyWidgetOptions = [ ];
     };
 
-    zathura = {
-        enable = true;
-    };
+    zathura = { enable = true; };
 
     git = {
       enable = true;

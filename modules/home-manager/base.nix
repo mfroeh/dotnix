@@ -8,6 +8,7 @@
     ./vscode.nix
 
     ./bitwarden.nix
+    ./zathura.nix
   ];
 
   # Let home-manager install and mange itself
