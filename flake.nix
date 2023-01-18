@@ -42,6 +42,25 @@
           ];
         };
 
+      # Available for nixos, darwin and home-manager configuration
+      mkSpecialArgs = { self, system, username, inputs, ... }: {
+        inherit self system username inputs;
+        platform = {
+          aarch64-linux = system == "aarch64-linux";
+          aarch64-darwin = system == "aarch64-darwin";
+          x86_64-linux = system == "x86_64-linux";
+          x86_64-darwin = system == "x86_64-darwin";
+        };
+        pkgsUnstable = mkPkgs {
+          inherit system;
+          nixpkgs = nixpkgs-unstable;
+        };
+        pkgsStable = mkPkgs {
+          inherit system;
+          nixpkgs = nixos-stable;
+        };
+      };
+
       mkNixosConfig = { system, host, username, extraModules ? [ ], }:
         nixpkgs.lib.nixosSystem rec {
           inherit system;
@@ -49,17 +68,7 @@
           modules =
             [ ./modules/nixos-base.nix ./users/${username}.nix ./hosts/${host} ]
             ++ extraModules;
-          specialArgs = {
-            inherit self system username inputs;
-            pkgsUnstable = mkPkgs {
-              inherit system;
-              nixpkgs = nixpkgs-unstable;
-            };
-            pkgsStable = mkPkgs {
-              inherit system;
-              nixpkgs = nixos-stable;
-            };
-          };
+          specialArgs = mkSpecialArgs { inherit self system username inputs; };
         };
 
       mkDarwinConfig = { system, host, username, extraModules ? [ ], }:
@@ -71,17 +80,7 @@
             ./hosts/${host}
             ./users/${username}.nix
           ] ++ extraModules;
-          specialArgs = {
-            inherit self system username inputs;
-            pkgsUnstable = mkPkgs {
-              inherit system;
-              nixpkgs = nixpkgs-unstable;
-            };
-            pkgsStable = mkPkgs {
-              inherit system;
-              nixpkgs = nixos-stable;
-            };
-          };
+          specialArgs = mkSpecialArgs { inherit self system username inputs; };
         };
 
       mkHomeConfig =
@@ -100,17 +99,8 @@
               };
             }
           ] ++ extraModules;
-          extraSpecialArgs = {
-            inherit self system username inputs;
-            pkgsUnstable = mkPkgs {
-              inherit system;
-              nixpkgs = nixpkgs-unstable;
-            };
-            pkgsStable = mkPkgs {
-              inherit system;
-              nixpkgs = nixos-stable;
-            };
-          };
+          extraSpecialArgs =
+            mkSpecialArgs { inherit self system username inputs; };
         };
     in {
       darwinConfigurations = {

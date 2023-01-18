@@ -1,4 +1,4 @@
-{ config, pkgs, lib, self, ... }:
+{ config, pkgs, lib, self, platform, ... }:
 let extension = "org/gnome/shell/extensions";
 in {
   # Gnome extensions
@@ -170,9 +170,10 @@ in {
 
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" =
       {
-        binding = "<Super>N";
-        command = "${lib.meta.getExe pkgs.kitty}";
-        name = "Open Kitty";
+        binding = "<Super>apostrophe";
+        command = "${lib.meta.getExe
+          (if platform.x86_64-linux then pkgs.kitty else pkgs.alacritty)}";
+        name = "Open terminal";
       };
 
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" =
