@@ -1,20 +1,10 @@
-{ config, pkgs, lib, pkgsUnstable, ... }: {
+{ config, pkgs, lib, ... }: {
   programs.vscode = {
     enable = true;
-    # mutableExtensionsDir = false;
-    enableExtensionUpdateCheck = false;
-    enableUpdateCheck = false;
+    package = pkgs.vscode.fhsWithPackages (ps: with ps; []);
     userSettings = {
       "files.autoSave" = "off";
       "[nix]"."editor.tabSize" = 2;
-      "[python]"."editor.tabSize" = 2;
     };
-
-    extensions = with pkgsUnstable.vscode-extensions; [
-      vscodevim.vim
-      ms-toolsai.jupyter
-      # ms-python.python
-      # ms-vscode.cpptools
-    ];
   };
 }
