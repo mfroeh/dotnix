@@ -167,7 +167,7 @@
             ./modules/home-manager/nixos/rclone.nix
             ./modules/home-manager/nixos/vlc.nix
 
-            # ./modules/home-manager/nixos/uni.nix
+            ./modules/home-manager/common/emacs.nix
           ];
           extraPkgs = pkgs: with pkgs; [ ];
         };

@@ -25,7 +25,7 @@
     libinput.touchpad.naturalScrolling = true;
   };
 
-  hardware.asahi.useExperimentalGPUDriver = true;
+  # hardware.asahi.useExperimentalGPUDriver = true;
   hardware.asahi.addEdgeKernelConfig = true;
   hardware.opengl.enable = true;
 

@@ -74,7 +74,7 @@ in {
       toggleterm-nvim
 
       # Telescope and plugins
-      # plenary-nvim
+      plenary-nvim
       telescope-nvim
       telescope-fzf-native-nvim
 
@@ -105,7 +105,7 @@ in {
       fd
       fzf
     ];
-    extraLuaPackages = ps: [ ps.plenary-nvim ];
+    # extraLuaPackages = ps: [ ps.plenary-nvim ];
   };
 
   xdg.configFile.nvim = {
