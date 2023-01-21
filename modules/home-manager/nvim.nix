@@ -105,7 +105,7 @@ in {
       fd
       fzf
     ];
-    extraLuaPackages = with pkgs.lua53Packages; [ plenary-nvim ];
+    extraLuaPackages = ps: [ ps.plenary-nvim ];
   };
 
   xdg.configFile.nvim = {
