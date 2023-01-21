@@ -4,6 +4,7 @@
     "${self}/modules/nixos/xorg.nix"
     "${self}/modules/nixos/gnome.nix"
     "${self}/modules/nixos/remap.nix"
+    "${self}/modules/nixos/virtualization.nix"
   ];
 
   boot.loader.systemd-boot.enable = true;

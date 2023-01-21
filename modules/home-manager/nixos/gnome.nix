@@ -59,9 +59,13 @@ in {
 
     "org/gnome/shell/extensions/auto-move-windows" = {
       application-list = [
-        "chromium-browser.desktop:3"
-        "org.gnome.Nautilus.desktop:2"
         "neovide.desktop:1"
+        "code.desktop:1"
+        "org.gnome.Nautilus.desktop:2"
+        "chromium-browser.desktop:3"
+        "google-chrome.desktop:3"
+        "virtualbox.desktop:5"
+        "spotify.desktop:6"
       ];
     };
 
@@ -92,7 +96,7 @@ in {
     "org/gnome/desktop/wm/preferences" = {
       dynamic-workspaces = false;
       num-workspaces = 6;
-      workspace-names = [ "0::dev" "1::" "2::web" "3::" "4::" "5::social" ];
+      workspace-names = [ "0::dev" "1::" "2::web" "3::fun" "4::" "5::social" ];
     };
 
     # "org/gnome/mutter" = {
