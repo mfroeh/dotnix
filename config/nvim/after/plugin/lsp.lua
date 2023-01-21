@@ -1,13 +1,10 @@
--- Setup neovim lua configuration
 require("neodev").setup()
-
 require("fidget").setup()
 
 local servers = {
 	clangd = {},
 	rnix = {},
-	-- pyright = {},
-	-- rust_analyzer = {},
+	rust_analyzer = {},
 
 	sumneko_lua = {
 		Lua = {
@@ -21,12 +18,6 @@ local servers = {
 -- LSP settings.
 --  This function gets run when an LSP connects to a particular buffer.
 local on_attach = function(_, bufnr)
-	-- NOTE: Remember that lua is a real programming language, and as such it is possible
-	-- to define small helper and utility functions so you don't have to repeat yourself
-	-- many times.
-	--
-	-- In this case, we create a function that lets us more easily define mappings specific
-	-- for LSP related items. It sets the mode, buffer and description for us each time.
 	local nmap = function(keys, func, desc)
 		if desc then
 			desc = "LSP: " .. desc
@@ -83,5 +74,3 @@ vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float)
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist)
-
--- vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)

@@ -1,5 +1,6 @@
 local tele = require("telescope")
 local builtin = require("telescope.builtin")
+local actions = require("telescope.actions")
 
 -- Enable telescope fzf native
 tele.load_extension("fzf")
@@ -13,8 +14,10 @@ tele.setup({
 		mappings = {
 			i = {
 				["<C-u>"] = false,
-				["<C-j>"] = "move_selection_next",
-				["<C-k>"] = "move_selection_previous",
+				["<C-j>"] = actions.move_selection_next,
+				["<C-k>"] = actions.move_selection_previous,
+				["<esc>"] = actions.close,
+				["<C-esc>"] = actions.close,
 			},
 		},
 	},
@@ -66,8 +69,8 @@ nnmap("<C-g>", builtin.live_grep)
 telemap("*", builtin.grep_string)
 nnmap("<C-8>", builtin.live_grep)
 
--- Diagnostics
-telemap("d", builtin.diagnostics)
+-- Errors
+telemap("e", builtin.diagnostics)
 
 -- Help
 telemap("h", builtin.help_tags)
@@ -82,5 +85,5 @@ telemap("m", builtin.man_pages)
 telemap("p", tele.extensions.projects.projects)
 
 -- Change dir
-telemap("cd", tele.extensions.zoxide.list)
+telemap("d", tele.extensions.zoxide.list)
 nnmap("<leader>cd", tele.extensions.zoxide.list)

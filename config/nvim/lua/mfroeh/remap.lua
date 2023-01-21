@@ -1,7 +1,7 @@
 vim.g.mapleader = " "
 -- vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 --
-vim.keymap.set("n", "<leader>sv", "<cmd>source $MYVIMRC<CR>")
+vim.keymap.set("n", "<leader>sv", "<cmd>source $MYVIMRC<cr>")
 
 -- Move highlighted lines with J and K in visual mode
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
@@ -23,9 +23,13 @@ vim.keymap.set("n", "N", "Nzzzv")
 -- Yank to and paste from " register (system clipboard)
 vim.keymap.set("n", "<leader>y", '"+y')
 vim.keymap.set("v", "<leader>y", '"+y')
+vim.keymap.set("n", "<leader>Y", '"+Y')
 vim.keymap.set("v", "<leader>Y", '"+Y')
+
 vim.keymap.set("n", "<leader>p", '"+p')
+vim.keymap.set("v", "<leader>p", '"+p')
 vim.keymap.set("n", "<leader>P", '"+P')
+vim.keymap.set("v", "<leader>P", '"+P')
 
 -- Testing these :)
 -- Something quick fix, not sure yet

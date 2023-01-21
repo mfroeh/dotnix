@@ -25,6 +25,7 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
 vim.opt.termguicolors = true
+vim.opt.background = "dark"
 
 vim.opt.scrolloff = 8
 vim.opt.signcolumn = "yes"
@@ -45,11 +46,11 @@ vim.opt.splitright = true
 vim.opt.splitbelow = true
 
 -- Enable break indent
--- vim.o.breakindent = true
+vim.o.breakindent = true
 
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
--- vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
+vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 
 -- Remap for dealing with word wrap
 -- vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })

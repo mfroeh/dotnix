@@ -19,7 +19,7 @@ in {
   programs.neovim = {
     enable = true;
     viAlias = true;
-    vimAlias = false;
+    vimAlias = true;
     plugins = with pkgs.vimPlugins; [
       # LSP and plugins
       nvim-lspconfig
@@ -33,22 +33,18 @@ in {
       cmp-buffer
       luasnip
       cmp_luasnip
-      # vim-vsnip
 
       friendly-snippets
 
       # Treesitter and plugins
-      (nvim-treesitter.withPlugins (p: [ p.c p.cpp p.nix p.lua p.rust ]))
+      (nvim-treesitter.withPlugins
+        (p: [ p.c p.cpp p.nix p.lua p.rust p.python ]))
       nvim-treesitter-textobjects
       nvim-ts-rainbow
 
       # Just an example on how to install using pluginGit
       # You have to pass the --impure flag to home-manager in order for this to work
-      # (plugin "RRethy/nvim-treesitter-endwise")
       (plugin "Eandrju/cellular-automaton.nvim")
-
-      markdown-preview-nvim
-      (plugin "ekickx/clipboard-image.nvim")
 
       # Git
       vim-fugitive
@@ -57,6 +53,8 @@ in {
 
       # Themes
       rose-pine
+      gruvbox-nvim
+      (plugin "savq/melange-nvim")
 
       # Status line
       lualine-nvim
@@ -69,9 +67,6 @@ in {
       vim-surround
       nvim-autopairs
 
-      # Quickfix
-      # nvim-bqf
-
       # Detect tabstop and shiftwidth automatically
       vim-sleuth
 
@@ -81,19 +76,24 @@ in {
       # Telescope and plugins
       # plenary-nvim
       telescope-nvim
-      telescope-zoxide
       telescope-fzf-native-nvim
 
       # Plugins with telescope extensions
       project-nvim
-      nvim-neoclip-lua
+      telescope-zoxide
+
+      markdown-preview-nvim
+      (plugin "ekickx/clipboard-image.nvim")
     ];
     extraPackages = with pkgs; [
       # LSP servers
       rnix-lsp
+
       sumneko-lua-language-server
+
       clang_14
       clang-tools_14
+
       rust-analyzer
 
       # Treesitter
