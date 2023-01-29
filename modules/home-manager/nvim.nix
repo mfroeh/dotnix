@@ -100,6 +100,8 @@ in {
 
       rust-analyzer
 
+      haskell-language-server
+
       # Treesitter
       tree-sitter
 

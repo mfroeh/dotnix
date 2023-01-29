@@ -154,6 +154,7 @@
             ./modules/home-manager/languages/python.nix
             ./modules/home-manager/languages/lua.nix
             ./modules/home-manager/languages/latex.nix
+            ./modules/home-manager/languages/haskell.nix
 
             ./modules/home-manager/nixos/gtk.nix
             ./modules/home-manager/nixos/gnome.nix
@@ -167,8 +168,6 @@
 
             ./modules/home-manager/nixos/rclone.nix
             ./modules/home-manager/nixos/vlc.nix
-
-            ./modules/home-manager/common/emacs.nix
           ];
           extraPkgs = pkgs: with pkgs; [ ];
         };

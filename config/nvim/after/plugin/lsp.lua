@@ -5,6 +5,7 @@ local servers = {
 	clangd = {},
 	rnix = {},
 	rust_analyzer = {},
+	hls = {},
 
 	sumneko_lua = {
 		Lua = {
