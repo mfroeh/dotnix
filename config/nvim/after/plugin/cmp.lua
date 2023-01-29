@@ -12,7 +12,7 @@ require("luasnip").config.set_config({
 })
 
 -- Load snippets
-require("luasnip.loaders.from_vscode").lazy_load({})
+require("luasnip.loaders.from_snipmate").lazy_load({})
 
 -- If you want insert `(` after selecting function or method item
 cmp.event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done({}))

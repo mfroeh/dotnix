@@ -35,6 +35,8 @@ in {
       cmp_luasnip
 
       friendly-snippets
+      vim-snippets
+
 
       # Treesitter and plugins
       (nvim-treesitter.withPlugins
@@ -84,6 +86,8 @@ in {
 
       markdown-preview-nvim
       (plugin "ekickx/clipboard-image.nvim")
+
+      vimtex
     ];
     extraPackages = with pkgs; [
       # LSP servers
