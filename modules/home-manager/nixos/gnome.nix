@@ -45,11 +45,11 @@ in {
       icon-display = false;
       cpu-display = true;
       cpu-style = "digit";
-      cpu-show-text = true;
+      cpu-show-text = false;
       memory-display = true;
       memory-style = "digit";
-      memory-show-text = true;
-      net-display = true;
+      memory-show-text = false;
+      net-display = false;
       net-style = "digit";
       net-show-text = false;
       thermal-display = true;

@@ -17,6 +17,8 @@
       copy = "xclip -sel clip";
       paste = "xclip -sel clip -o ";
       gg = "lazygit";
+      ns = "nix-shell --command 'fish'";
+      comp = "cd builddir && meson compile; cd ..";
 
       nn = "sudo nixos-rebuild switch --flake $HOME/dotnix#$hostname";
       hh = "home-manager switch --flake $HOME/dotnix#$USER@$hostname";

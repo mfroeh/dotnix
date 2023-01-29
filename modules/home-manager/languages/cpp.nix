@@ -4,9 +4,11 @@
     cmake
     # clang_14
     # clang-tools_14
-    gcc
+    gcc12
     gnumake
     gdb
     ddd
+    meson
+    ninja
   ];
 }
