@@ -1,6 +1,7 @@
 { config, pkgs, lib, self, platform, ... }:
 let extension = "org/gnome/shell/extensions";
-in {
+in
+{
   # Gnome extensions
   home.packages = with pkgs.gnomeExtensions; [
     pop-shell
@@ -140,7 +141,7 @@ in {
     };
     "org/gnome/shell/keybindings" = {
       open-application-menu = [ ];
-      toggle-message-tray = [ "<Super>v" ];
+      toggle-message-tray = [ ];
       focus-active-notification = [ ];
       toggle-overview = [ ];
       switch-to-application-1 = [ ];
@@ -161,6 +162,7 @@ in {
       custom-keybindings = [
         "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
         "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/"
       ];
       screensaver = [ "<Super>Escape" ];
       rotate-video-lock-static = [ ];
@@ -187,6 +189,15 @@ in {
             lib.meta.getExe pkgs.rofi
           } -show combi -combi-modes 'window,drun' -modes combi -show-icons";
         name = "Open Rofi";
+      };
+
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2" =
+      {
+        binding = "<Super>V";
+        command = "${
+            lib.meta.getExe pkgs.rofi
+          } -modi 'clipboard:greenclip print' -show clipboard";
+        name = "Open greenclip";
       };
   };
 }

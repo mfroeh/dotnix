@@ -1,6 +1,7 @@
 { config, pkgs, lib, ... }:
 let themeDir = "${pkgs.rofi}/share/rofi/themes/";
-in {
+in
+{
   programs.rofi = {
     enable = true;
     theme = "${themeDir}/gruvbox-light-soft.rasi";
@@ -16,6 +17,16 @@ in {
       kb-row-down = "Down,Control+j";
       kb-mode-next = "Shift+Right,Control+Tab,Control+l";
       kb-mode-previous = "Shift+Left,Control+Shift+Tab,Control+h";
+    };
+  };
+
+  home.packages = with pkgs; [ haskellPackages.greenclip ];
+  systemd.user.services.greenclip = {
+    Unit = { Desription = "Greenclip clipboard manager"; };
+    Install.WantedBy = [ "default.target" ];
+    Service = {
+      Type = "Simple";
+      ExecStart = "${pkgs.haskellPackages.greenclip}/bin/greenclip daemon";
     };
   };
 }
