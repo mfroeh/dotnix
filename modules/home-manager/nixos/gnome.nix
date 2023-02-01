@@ -199,8 +199,8 @@ in {
 
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3" =
       {
-        binding = "<Super>comma";
-        command = "${config.programs.rofi.finalPackage}/bin/rofi -show emoji";
+        binding = "<Super>m";
+        command = "${config.programs.rofi.finalPackage}/bin/rofi -show emoji -emoji-mode copy";
         name = "Open emoji-picker";
       };
   };

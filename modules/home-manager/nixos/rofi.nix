@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 let themeDir = "${pkgs.rofi}/share/rofi/themes/";
 in {
-  home.packages = with pkgs; [ xdotool fzf ];
+  home.packages = with pkgs; [ fzf ];
   programs.rofi = {
     enable = true;
     theme = "${themeDir}/gruvbox-light-soft.rasi";
