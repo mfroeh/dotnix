@@ -1,7 +1,6 @@
 { config, pkgs, lib, self, platform, ... }:
 let extension = "org/gnome/shell/extensions";
-in
-{
+in {
   # Gnome extensions
   home.packages = with pkgs.gnomeExtensions; [
     pop-shell
@@ -163,6 +162,7 @@ in
         "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
         "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
         "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/"
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/"
       ];
       screensaver = [ "<Super>Escape" ];
       rotate-video-lock-static = [ ];
@@ -185,19 +185,24 @@ in
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" =
       {
         binding = "<Super>space";
-        command = "${
-            lib.meta.getExe pkgs.rofi
-          } -show combi -combi-modes 'window,drun' -modes combi -show-icons";
+        command = "${config.programs.rofi.finalPackage}/bin/rofi -show combi";
         name = "Open Rofi";
       };
 
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2" =
       {
         binding = "<Super>V";
-        command = "${
-            lib.meta.getExe pkgs.rofi
-          } -modi 'clipboard:greenclip print' -show clipboard";
+        command =
+          "${config.programs.rofi.finalPackage}/bin/rofi -show clipboard";
         name = "Open greenclip";
+      };
+
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3" =
+      {
+        binding = "<Super>comma";
+        command = "${config.programs.rofi.finalPackage}/bin/rofi -show emoji";
+        name = "Open emoji-picker";
       };
   };
 }
+
