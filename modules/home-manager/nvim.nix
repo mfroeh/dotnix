@@ -37,7 +37,6 @@ in {
       friendly-snippets
       vim-snippets
 
-
       # Treesitter and plugins
       (nvim-treesitter.withPlugins
         (p: [ p.c p.cpp p.nix p.lua p.rust p.python ]))

@@ -7,6 +7,5 @@
     };
     recursive = true;
   };
-  home.file.".spacemacs".text = ''
-  '';
+  home.file.".spacemacs".text = "";
 }
