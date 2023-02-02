@@ -13,6 +13,7 @@ let
     };
 
   plugin = pluginGit "HEAD";
+  lang = config.languages;
 in {
   home.packages = [ pkgs.neovide ]
     ++ lib.optionals pkgs.stdenv.isLinux (with pkgs; [ xclip ]);
@@ -34,12 +35,13 @@ in {
       luasnip
       cmp_luasnip
 
+      # Snippet collections
       friendly-snippets
       vim-snippets
 
       # Treesitter and plugins
       (nvim-treesitter.withPlugins
-        (p: [ p.c p.cpp p.nix p.lua p.rust p.python ]))
+        (p: [ p.nix p.c p.cpp p.cmake p.python p.lua p.latex p.haskell p.rust ]))
       nvim-treesitter-textobjects
       nvim-ts-rainbow
 
@@ -56,6 +58,7 @@ in {
       rose-pine
       gruvbox-nvim
       (plugin "savq/melange-nvim")
+      nightfox-nvim
 
       # Status line
       lualine-nvim
@@ -89,18 +92,6 @@ in {
       vimtex
     ];
     extraPackages = with pkgs; [
-      # LSP servers
-      rnix-lsp
-
-      sumneko-lua-language-server
-
-      clang_14
-      clang-tools_14
-
-      rust-analyzer
-
-      haskell-language-server
-
       # Treesitter
       tree-sitter
 

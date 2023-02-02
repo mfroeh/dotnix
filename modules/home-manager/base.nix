@@ -4,6 +4,8 @@
     ./kitty.nix
     ./fish.nix
 
+    ./languages.nix
+
     ./nvim.nix
     ./vscode.nix
 

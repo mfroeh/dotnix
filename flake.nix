@@ -149,12 +149,16 @@
           username = "mo";
           system = "aarch64-linux";
           extraModules = [
-            ./modules/home-manager/languages/nix.nix
-            ./modules/home-manager/languages/cpp.nix
-            ./modules/home-manager/languages/python.nix
-            ./modules/home-manager/languages/lua.nix
-            ./modules/home-manager/languages/latex.nix
-            ./modules/home-manager/languages/haskell.nix
+            {
+              languages = {
+                nix = true;
+                lua = true;
+                cpp = true;
+                latex = true;
+                haskell = true;
+                python = true;
+              };
+            }
 
             ./modules/home-manager/nixos/gtk.nix
             ./modules/home-manager/nixos/gnome.nix
@@ -175,11 +179,15 @@
           username = "mo";
           system = "x86_64-linux";
           extraModules = [
-            ./modules/home-manager/languages/nix.nix
-            ./modules/home-manager/languages/cpp.nix
-            ./modules/home-manager/languages/python.nix
-            ./modules/home-manager/languages/lua.nix
-            ./modules/home-manager/languages/latex.nix
+            {
+              languages = {
+                nix = true;
+                lua = true;
+                cpp = true;
+                latex = true;
+                python = true;
+              };
+            }
 
             ./modules/home-manager/nixos/gtk.nix
             ./modules/home-manager/nixos/gnome.nix

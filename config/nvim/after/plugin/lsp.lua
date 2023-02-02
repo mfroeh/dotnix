@@ -2,11 +2,10 @@ require("neodev").setup()
 require("fidget").setup()
 
 local servers = {
-	clangd = {},
 	rnix = {},
-	rust_analyzer = {},
-	hls = {},
-
+	clangd = {},
+	cmake = {},
+	pyright = {},
 	sumneko_lua = {
 		Lua = {
 			diagnostics = {
@@ -14,6 +13,9 @@ local servers = {
 			},
 		},
 	},
+	texlab = {},
+	hls = {},
+	rust_analyzer = {},
 }
 
 -- LSP settings.
