@@ -157,6 +157,7 @@
                 latex = true;
                 haskell = true;
                 python = true;
+                rust = true;
               };
             }
 
