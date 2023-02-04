@@ -7,7 +7,8 @@ vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
-vim.opt.smartindent = true
+-- Is terrible with nix and is redundant if treesitter grammar includes indent
+-- vim.opt.smartindent = true
 
 -- Line wrapping
 vim.opt.wrap = false
