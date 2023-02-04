@@ -59,7 +59,7 @@ in {
 
     "org/gnome/shell/extensions/auto-move-windows" = {
       application-list = [
-        "neovide.desktop:1"
+        # "neovide.desktop:1"
         "code.desktop:1"
         "org.gnome.Nautilus.desktop:2"
         "chromium-browser.desktop:3"
@@ -163,6 +163,7 @@ in {
         "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
         "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/"
         "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/"
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/"
       ];
       screensaver = [ "<Super>Escape" ];
       rotate-video-lock-static = [ ];
@@ -202,6 +203,13 @@ in {
         binding = "<Super>m";
         command = "${config.programs.rofi.finalPackage}/bin/rofi -show emoji -emoji-mode copy";
         name = "Open emoji-picker";
+      };
+
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4" =
+      {
+        binding = "<Super>n";
+        command = "${pkgs.neovide}/bin/neovide --frame=none";
+        name = "Open neovide";
       };
   };
 }
