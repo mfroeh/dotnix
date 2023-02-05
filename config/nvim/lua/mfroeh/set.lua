@@ -42,6 +42,9 @@ vim.o.mouse = "a"
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = "menuone,noselect"
 
+-- pwd is always the directory of the file
+vim.o.autochdir = true
+
 -- Consistent splitting
 vim.opt.splitright = true
 vim.opt.splitbelow = true

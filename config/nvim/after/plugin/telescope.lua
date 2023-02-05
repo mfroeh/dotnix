@@ -20,8 +20,6 @@ tele.setup({
 				["<C-esc>"] = actions.close,
 			},
 		},
-		color_devicons = true,
-		border = true,
 	},
 })
 
