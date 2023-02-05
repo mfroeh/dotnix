@@ -62,7 +62,7 @@ in {
     luaPkgs = with pkgs; [ sumneko-lua-language-server stylua ];
     latexPkgs = with pkgs; [ texlive.combined.scheme-full latexrun texlab ];
     haskellPkgs = with pkgs; [ ghc haskell-language-server ];
-    rustPkgs = with pkgs; [ rustc cargo rust-analyzer ];
+    rustPkgs = with pkgs; [ rustc cargo rust-analyzer rustfmt ];
   in {
     home.packages = [ ] ++ optionals cfg.nix nixPkgs
       ++ optionals cfg.cpp cppPkgs ++ optionals cfg.python pythonPkgs

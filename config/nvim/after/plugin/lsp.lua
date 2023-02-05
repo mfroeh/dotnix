@@ -31,7 +31,7 @@ local on_attach = function(_, bufnr)
 
 	nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
 	nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
-	nmap("<C-.>", vim.lsp.buf.code_action)
+	nmap("<C-;>", vim.lsp.buf.code_action)
 
 	nmap("gd", vim.lsp.buf.definition, "[G]oto [D]efinition")
 	nmap("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
@@ -57,7 +57,7 @@ local on_attach = function(_, bufnr)
 		vim.lsp.buf.format()
 	end, { desc = "Format current buffer with LSP" })
 
-	nmap("<leader>;", vim.lsp.buf.format, "Format current buffer with LSP")
+	nmap("<leader>ff", vim.lsp.buf.format, "Format current buffer with LSP")
 end
 
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers

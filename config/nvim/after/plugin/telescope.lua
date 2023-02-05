@@ -27,35 +27,18 @@ local nnmap = function(from, to)
 	vim.keymap.set("n", from, to)
 end
 
--- 'l' for list or live
+-- 'f' for find
 local telemap = function(key, to)
 	vim.keymap.set("n", "<leader>f" .. key, to)
 end
 
--- Fuzzy in file
-nnmap("<leader>/", function()
-	builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
-		winblend = 10,
-		previewer = false,
-	}))
-end)
-
 -- Buffers
-telemap("b", builtin.buffers)
 nnmap("<leader>,", builtin.buffers)
 nnmap("<C-,>", builtin.buffers)
 
--- Commands
-telemap("c", builtin.commands)
-nnmap("<leader>:", builtin.commands)
-
 -- Files
-telemap("f", builtin.find_files)
 nnmap("<leader>.", builtin.find_files)
-
--- Old files
-telemap("o", builtin.oldfiles)
-nnmap("<leader>?", builtin.oldfiles)
+nnmap("<C-.>", builtin.find_files)
 
 -- Git files
 nnmap("<C-p>", function()
@@ -68,6 +51,13 @@ end)
 telemap("g", builtin.live_grep)
 nnmap("<C-g>", builtin.live_grep)
 
+-- Project picker
+telemap("p", tele.extensions.projects.projects)
+
+-- Old files
+telemap("o", builtin.oldfiles)
+nnmap("<leader>?", builtin.oldfiles)
+
 -- Errors
 telemap("e", builtin.diagnostics)
 
@@ -78,11 +68,20 @@ telemap("h", builtin.help_tags)
 telemap("m", builtin.man_pages)
 nnmap("<leader>mm", builtin.man_pages)
 
--- Project picker
-telemap("p", tele.extensions.projects.projects)
-
 -- Change dir
 telemap("d", tele.extensions.zoxide.list)
 
+-- Commands
+telemap(":", builtin.commands)
+nnmap("<leader>:", builtin.commands)
+
 -- Resume last telescope picker
 telemap("r", builtin.resume)
+
+-- Fuzzy in file
+nnmap("<leader>/", function()
+	builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
+		winblend = 10,
+		previewer = false,
+	}))
+end)
