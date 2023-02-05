@@ -89,6 +89,7 @@ in {
       # Telescope and plugins
       plenary-nvim
       telescope-nvim
+      nvim-web-devicons
       telescope-fzf-native-nvim
 
       # Plugins with telescope extensions

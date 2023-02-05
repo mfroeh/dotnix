@@ -20,6 +20,8 @@ tele.setup({
 				["<C-esc>"] = actions.close,
 			},
 		},
+		color_devicons = true,
+		border = true,
 	},
 })
 
@@ -33,8 +35,8 @@ local telemap = function(key, to)
 end
 
 -- Buffers
-nnmap("<leader>,", builtin.buffers)
-nnmap("<C-,>", builtin.buffers)
+nnmap("<leader><space>", builtin.buffers)
+nnmap("<C-space>", builtin.buffers)
 
 -- Files
 nnmap("<leader>.", builtin.find_files)
