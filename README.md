@@ -11,8 +11,8 @@ The configuration is split into NixOS/Nix-darwin and standalone Home-manager
 - The base Home-manager configuration is found in `./modules/home-manager/{nixos,darwin}-base.nix`
 - Optional modules for darwin and nix are found in `./modules/home-manager/{nixos,darwin}/`
 - Optional modules for both systems are found in `./modules/home-manager/common/`
-- Language modules are found in `./modules/home-manager/languages/`
-- Optionals and language modules can be added in `flake.nix`
+- Languages can be configured using `./modules/home-manager/languages.nix`
+- Optional modules and languages can be enabled in `flake.nix`
 
 ## Systems
 | Name      | Platform       | OS       | Specs          |
