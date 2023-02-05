@@ -29,7 +29,7 @@ end
 
 -- 'l' for list or live
 local telemap = function(key, to)
-	vim.keymap.set("n", "<leader>l" .. key, to)
+	vim.keymap.set("n", "<leader>f" .. key, to)
 end
 
 -- Fuzzy in file
@@ -42,14 +42,15 @@ end)
 
 -- Buffers
 telemap("b", builtin.buffers)
-nnmap("<leader><leader>", builtin.buffers)
+nnmap("<leader>,", builtin.buffers)
+nnmap("<C-,>", builtin.buffers)
 
 -- Commands
 telemap("c", builtin.commands)
 nnmap("<leader>:", builtin.commands)
 
 -- Files
-telemap("l", builtin.find_files)
+telemap("f", builtin.find_files)
 nnmap("<leader>.", builtin.find_files)
 
 -- Old files
@@ -66,8 +67,6 @@ end)
 -- Grep
 telemap("g", builtin.live_grep)
 nnmap("<C-g>", builtin.live_grep)
-telemap("*", builtin.grep_string)
-nnmap("<C-8>", builtin.live_grep)
 
 -- Errors
 telemap("e", builtin.diagnostics)
@@ -75,15 +74,15 @@ telemap("e", builtin.diagnostics)
 -- Help
 telemap("h", builtin.help_tags)
 
--- Resume last telescope picker
-telemap("r", builtin.resume)
-
 -- Man pages
 telemap("m", builtin.man_pages)
+nnmap("<leader>mm", builtin.man_pages)
 
 -- Project picker
 telemap("p", tele.extensions.projects.projects)
 
 -- Change dir
 telemap("d", tele.extensions.zoxide.list)
-nnmap("<leader>cd", tele.extensions.zoxide.list)
+
+-- Resume last telescope picker
+telemap("r", builtin.resume)

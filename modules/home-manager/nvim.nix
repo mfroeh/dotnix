@@ -40,8 +40,17 @@ in {
       vim-snippets
 
       # Treesitter and plugins
-      (nvim-treesitter.withPlugins
-        (p: [ p.nix p.c p.cpp p.cmake p.python p.lua p.latex p.haskell p.rust ]))
+      (nvim-treesitter.withPlugins (p: [
+        p.nix
+        p.c
+        p.cpp
+        p.cmake
+        p.python
+        p.lua
+        p.latex
+        p.haskell
+        p.rust
+      ]))
       nvim-treesitter-textobjects
       nvim-ts-rainbow
 

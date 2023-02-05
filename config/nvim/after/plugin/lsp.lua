@@ -57,7 +57,7 @@ local on_attach = function(_, bufnr)
 		vim.lsp.buf.format()
 	end, { desc = "Format current buffer with LSP" })
 
-	nmap("<leader>ff", vim.lsp.buf.format, "Format current buffer with LSP")
+	nmap("<leader>;", vim.lsp.buf.format, "Format current buffer with LSP")
 end
 
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers

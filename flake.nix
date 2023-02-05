@@ -187,6 +187,7 @@
                 cpp = true;
                 latex = true;
                 python = true;
+                rust = true;
               };
             }
 
