@@ -2,13 +2,6 @@ local tele = require("telescope")
 local builtin = require("telescope.builtin")
 local actions = require("telescope.actions")
 
--- Enable telescope fzf native
-tele.load_extension("fzf")
--- Projectc management integration
-tele.load_extension("projects")
--- Zoxide for telescope
-tele.load_extension("zoxide")
-
 tele.setup({
 	defaults = {
 		mappings = {
@@ -22,6 +15,13 @@ tele.setup({
 		},
 	},
 })
+
+-- Enable telescope fzf native
+tele.load_extension("fzf")
+-- Projectc management integration
+tele.load_extension("projects")
+-- Zoxide for telescope
+tele.load_extension("zoxide")
 
 local nnmap = function(from, to)
 	vim.keymap.set("n", from, to)
