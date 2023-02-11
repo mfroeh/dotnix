@@ -2,6 +2,7 @@
   imports = [
     ./hardware-configuration.nix
     "${inputs.nixos-m1}/nix/m1-support"
+    # inputs.nixos-apple-silicon.nixosModules.default
     "${self}/modules/nixos/xorg.nix"
     "${self}/modules/nixos/gnome.nix"
     "${self}/modules/nixos/remap.nix"
@@ -14,20 +15,19 @@
 
   time.timeZone = "Europe/Stockholm";
 
-  hardware.asahi.peripheralFirmwareDirectory = ./firmware;
-
-  # Doesn't build currently
-  # hardware.asahi.use4KPages = true;
+  hardware.asahi = {
+    # use4KPages = true; # doesn't build currently
+    peripheralFirmwareDirectory = ./firmware;
+    addEdgeKernelConfig = true;
+    useExperimentalGPUDriver = true;
+  };
+  hardware.opengl.enable = true;
 
   # Needed for trackpad
   services.xserver = {
     libinput.enable = true;
     libinput.touchpad.naturalScrolling = true;
   };
-
-  hardware.asahi.useExperimentalGPUDriver = true;
-  hardware.asahi.addEdgeKernelConfig = true;
-  hardware.opengl.enable = true;
 
   services.remap = {
     enable = true;
