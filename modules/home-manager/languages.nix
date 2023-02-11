@@ -62,11 +62,14 @@ in {
     luaPkgs = with pkgs; [ sumneko-lua-language-server stylua ];
     latexPkgs = with pkgs; [ texlive.combined.scheme-full latexrun texlab ];
     haskellPkgs = with pkgs; [ ghc haskell-language-server ];
-    rustPkgs = with pkgs; [ rust-bin.stable.latest.default rust-analyzer ]; /* rustc cargo rust-analyzer rustfmt ]; */
+    rustPkgs = with pkgs; [
+      rust-bin.stable.latest.default
+      rust-analyzer
+    ]; # rustc cargo rust-analyzer rustfmt ];
   in {
     home.packages = [ ] ++ optionals cfg.nix nixPkgs
       ++ optionals cfg.cpp cppPkgs ++ optionals cfg.python pythonPkgs
       ++ optionals cfg.lua luaPkgs ++ optionals cfg.latex latexPkgs
       ++ optionals cfg.haskell haskellPkgs ++ optionals cfg.rust rustPkgs;
   };
-u
+}

@@ -29,24 +29,14 @@
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
 
     rust-overlay = {
-      url = github:oxalica/rust-overlay;
+      url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs =
-    inputs@{ self
-    , nixpkgs
-    , nixos-stable
-    , nixpkgs-unstable
-    , darwin
-    , nixos-hardware
-    , home-manager
-    , xremap-flake
-    , neovim-nightly-overlay
-    , rust-overlay
-    , ...
-    }:
+  outputs = inputs@{ self, nixpkgs, nixos-stable, nixpkgs-unstable, darwin,
+    nixos-m1, nixos-hardware, home-manager, xremap-flake, neovim-nightly-overlay
+    , rust-overlay, ... }:
     let
       isDarwin = system:
         (builtins.elem system inputs.nixpkgs.lib.platforms.darwin);
@@ -123,8 +113,7 @@
           extraSpecialArgs =
             mkSpecialArgs { inherit self system username inputs; };
         };
-    in
-    {
+    in {
       darwinConfigurations = {
         gus = mkDarwinConfig {
           system = "aarch64-darwin";
