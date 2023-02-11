@@ -12,6 +12,10 @@
     nixos-m1.url = "github:tpwrules/nixos-m1";
     nixos-m1.flake = false;
 
+    # nixos-apple-silicon.url = "github:tpwrules/nixos-apple-silicon/main";
+    # nixos-apple-silicon.inputs.nixpkgs.follows = "nixpkgs";
+    # nixos-apple-silicon.inputs.rust-overlay.follows = "rust-overlay";
+
     nixos-hardware.url = "github:nixos/nixos-hardware";
 
     home-manager.url = "github:nix-community/home-manager";
@@ -23,10 +27,26 @@
     xremap-flake.inputs.nixpkgs.follows = "nixpkgs";
 
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+
+    rust-overlay = {
+      url = github:oxalica/rust-overlay;
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs@{ self, nixpkgs, nixos-stable, nixpkgs-unstable, darwin
-    , nixos-hardware, home-manager, xremap-flake, neovim-nightly-overlay, ... }:
+  outputs =
+    inputs@{ self
+    , nixpkgs
+    , nixos-stable
+    , nixpkgs-unstable
+    , darwin
+    , nixos-hardware
+    , home-manager
+    , xremap-flake
+    , neovim-nightly-overlay
+    , rust-overlay
+    , ...
+    }:
     let
       isDarwin = system:
         (builtins.elem system inputs.nixpkgs.lib.platforms.darwin);
@@ -37,6 +57,7 @@
           inherit system;
           config.allowUnfree = true;
           overlays = [
+            rust-overlay.overlays.default
             # https://github.com/nix-community/neovim-nightly-overlay/issues/164
             # neovim-nightly-overlay.overlay
           ];
@@ -102,7 +123,8 @@
           extraSpecialArgs =
             mkSpecialArgs { inherit self system username inputs; };
         };
-    in {
+    in
+    {
       darwinConfigurations = {
         gus = mkDarwinConfig {
           system = "aarch64-darwin";
