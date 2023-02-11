@@ -80,6 +80,9 @@ in {
       vim-surround
       nvim-autopairs
 
+      # Leap?
+      leap-nvim
+
       # Detect tabstop and shiftwidth automatically
       vim-sleuth
 
