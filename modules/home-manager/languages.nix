@@ -5,7 +5,7 @@ in {
   options.languages = {
     nix = mkOption {
       type = types.bool;
-      default = false;
+      default = true;
     };
 
     cpp = mkOption {

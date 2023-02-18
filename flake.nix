@@ -162,7 +162,6 @@
           extraModules = [
             {
               languages = {
-                nix = true;
                 lua = true;
                 cpp = true;
                 latex = true;
@@ -193,7 +192,6 @@
           extraModules = [
             {
               languages = {
-                nix = true;
                 lua = true;
                 cpp = true;
                 latex = true;
@@ -220,6 +218,11 @@
           system = "aarch64-linux";
           extraModules = [ ];
         };
+	"mo@wsl" = mkHomeConfig {
+	  username = "mo";
+	  system = "x86_64-linux";
+	  extraModules = [ ];
+	};
       };
     };
 }
