@@ -22,3 +22,4 @@ The configuration is split into NixOS/Nix-darwin and standalone Home-manager
 | $\eta$    | aarch64-linux  | NixOS    | MacBook Pro 14 |
 | $\lambda$ | x86_64-linux   | NixOS    | 9700k, 1080 Ti |
 | $\pi$     | aarch64-linux  | NixOS    | Raspberry Pi 4 |
+| wsl       | x86_64-linux   | NixOS (wsl) | 7700k, 1080 Ti |
