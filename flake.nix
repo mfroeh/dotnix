@@ -16,6 +16,9 @@
     # nixos-apple-silicon.inputs.nixpkgs.follows = "nixpkgs";
     # nixos-apple-silicon.inputs.rust-overlay.follows = "rust-overlay";
 
+    nixos-wsl.url = "github:nix-community/nixos-wsl";
+    nixos-wsl.inputs.nixpkgs.follows = "nixpkgs";
+
     nixos-hardware.url = "github:nixos/nixos-hardware";
 
     home-manager.url = "github:nix-community/home-manager";
@@ -35,7 +38,7 @@
   };
 
   outputs = inputs@{ self, nixpkgs, nixos-stable, nixpkgs-unstable, darwin,
-    nixos-m1, nixos-hardware, home-manager, xremap-flake, neovim-nightly-overlay
+    nixos-m1, nixos-wsl, nixos-hardware, home-manager, xremap-flake, neovim-nightly-overlay
     , rust-overlay, ... }:
     let
       isDarwin = system:
@@ -141,6 +144,11 @@
         pi = mkNixosConfig {
           system = "aarch64-linux";
           host = "pi";
+          username = "mo";
+        };
+        wsl = mkNixosConfig {
+          system = "x86_64-linux";
+          host = "wsl";
           username = "mo";
         };
       };
