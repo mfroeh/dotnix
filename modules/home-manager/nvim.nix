@@ -68,6 +68,7 @@ in {
       gruvbox-nvim
       (plugin "savq/melange-nvim")
       nightfox-nvim
+      kanagawa-nvim
 
       # Status line
       lualine-nvim

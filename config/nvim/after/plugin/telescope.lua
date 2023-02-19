@@ -47,6 +47,9 @@ nnmap("<C-p>", function()
 	end
 end)
 
+-- Symbols
+nnmap("<C-s>", builtin.lsp_document_symbols)
+
 -- Grep
 telemap("g", builtin.live_grep)
 nnmap("<C-g>", builtin.live_grep)
