@@ -1,5 +1,5 @@
 { config, pkgs, lib, ... }: {
-  home.packages = with pkgs; [ ripgrep fd neofetch zip unzip treefmt ];
+  home.packages = with pkgs; [ ripgrep fd tree neofetch zip unzip treefmt ];
 
   programs = {
     # cat replacement
