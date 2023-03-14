@@ -63,9 +63,11 @@ in {
     latexPkgs = with pkgs; [ texlive.combined.scheme-full latexrun texlab ];
     haskellPkgs = with pkgs; [ ghc haskell-language-server ];
     rustPkgs = with pkgs; [
-      rust-bin.stable.latest.default
-      rust-analyzer
-    ]; # rustc cargo rust-analyzer rustfmt ];
+      (rust-bin.stable.latest.default.override {
+        extensions = [ "rust-src" ];
+      })
+      # rust-analyzer
+    ];
   in {
     home.packages = [ ] ++ optionals cfg.nix nixPkgs
       ++ optionals cfg.cpp cppPkgs ++ optionals cfg.python pythonPkgs

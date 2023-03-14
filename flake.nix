@@ -35,11 +35,16 @@
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    mtree = {
+      url = "github:mfroeh/tree";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs@{ self, nixpkgs, nixos-stable, nixpkgs-unstable, darwin,
     nixos-m1, nixos-wsl, nixos-hardware, home-manager, xremap-flake, neovim-nightly-overlay
-    , rust-overlay, ... }:
+    , rust-overlay, mtree, ... }:
     let
       isDarwin = system:
         (builtins.elem system inputs.nixpkgs.lib.platforms.darwin);

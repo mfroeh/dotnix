@@ -84,6 +84,8 @@ in {
       # Leap?
       leap-nvim
 
+      zen-mode-nvim
+
       # Detect tabstop and shiftwidth automatically
       vim-sleuth
 

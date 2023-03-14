@@ -1,5 +1,5 @@
-{ config, pkgs, lib, ... }: {
-  home.packages = with pkgs; [ ripgrep fd tree neofetch zip unzip treefmt ];
+{ config, pkgs, lib, system, inputs, ... }: {
+  home.packages = with pkgs; [ ripgrep fd tree bottom neofetch zip unzip treefmt inputs.mtree.defaultPackage.${system} ];
 
   programs = {
     # cat replacement
