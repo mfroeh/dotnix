@@ -9,12 +9,9 @@
     darwin.url = "github:lnl7/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
 
-    nixos-m1.url = "github:tpwrules/nixos-m1";
-    nixos-m1.flake = false;
-
-    # nixos-apple-silicon.url = "github:tpwrules/nixos-apple-silicon/main";
-    # nixos-apple-silicon.inputs.nixpkgs.follows = "nixpkgs";
-    # nixos-apple-silicon.inputs.rust-overlay.follows = "rust-overlay";
+    nixos-apple-silicon.url = "github:tpwrules/nixos-apple-silicon/main";
+    nixos-apple-silicon.inputs.nixpkgs.follows = "nixpkgs";
+    nixos-apple-silicon.inputs.rust-overlay.follows = "rust-overlay";
 
     nixos-wsl.url = "github:nix-community/nixos-wsl";
     nixos-wsl.inputs.nixpkgs.follows = "nixpkgs";
@@ -23,8 +20,6 @@
 
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-
-    # hyprland.url = "github:hyprwm/Hyprland";
 
     xremap-flake.url = "github:xremap/nix-flake";
     xremap-flake.inputs.nixpkgs.follows = "nixpkgs";
@@ -42,9 +37,22 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, nixos-stable, nixpkgs-unstable, darwin,
-    nixos-m1, nixos-wsl, nixos-hardware, home-manager, xremap-flake, neovim-nightly-overlay
-    , rust-overlay, mtree, ... }:
+  outputs =
+    inputs@{ self
+    , nixpkgs
+    , nixos-stable
+    , nixpkgs-unstable
+    , darwin
+    , nixos-apple-silicon
+    , nixos-wsl
+    , nixos-hardware
+    , home-manager
+    , xremap-flake
+    , neovim-nightly-overlay
+    , rust-overlay
+    , mtree
+    , ...
+    }:
     let
       isDarwin = system:
         (builtins.elem system inputs.nixpkgs.lib.platforms.darwin);
@@ -56,8 +64,8 @@
           config.allowUnfree = true;
           overlays = [
             rust-overlay.overlays.default
-            # https://github.com/nix-community/neovim-nightly-overlay/issues/164
-            # neovim-nightly-overlay.overlay
+            nixos-apple-silicon.overlays.default
+            neovim-nightly-overlay.overlay
           ];
         };
 
@@ -121,7 +129,8 @@
           extraSpecialArgs =
             mkSpecialArgs { inherit self system username inputs; };
         };
-    in {
+    in
+    {
       darwinConfigurations = {
         gus = mkDarwinConfig {
           system = "aarch64-darwin";
@@ -231,11 +240,11 @@
           system = "aarch64-linux";
           extraModules = [ ];
         };
-	"mo@wsl" = mkHomeConfig {
-	  username = "mo";
-	  system = "x86_64-linux";
-	  extraModules = [ ];
-	};
+        "mo@wsl" = mkHomeConfig {
+          username = "mo";
+          system = "x86_64-linux";
+          extraModules = [ ];
+        };
       };
     };
 }

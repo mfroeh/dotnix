@@ -1,8 +1,7 @@
 { config, pkgs, lib, inputs, self, ... }: {
   imports = [
     ./hardware-configuration.nix
-    "${inputs.nixos-m1}/nix/m1-support"
-    # inputs.nixos-apple-silicon.nixosModules.default
+    inputs.nixos-apple-silicon.nixosModules.default
     "${self}/modules/nixos/xorg.nix"
     "${self}/modules/nixos/gnome.nix"
     "${self}/modules/nixos/remap.nix"

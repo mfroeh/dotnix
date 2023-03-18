@@ -1,12 +1,6 @@
-{ config, pkgs, lib, ... }: {
+{ config, pkgs, lib, platform, ... }: {
   programs.vscode = {
     enable = true;
-    # Doesn't work on aarch64 :/
-    package = pkgs.vscode.fhsWithPackages (ps: with ps; []);
-    # package = pkgs.vscode;
-    # userSettings = {
-    #   "files.autoSave" = "off";
-    #   "[nix]"."editor.tabSize" = 2;
-    # };
+    package = if platform.aarch64-linux then pkgs.vscode else pkgs.vscode.fhsWithPackages (ps: with ps; []);
   };
 }
