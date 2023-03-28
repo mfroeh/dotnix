@@ -30,6 +30,7 @@
 
   services.remap = {
     enable = true;
+    wm = "gnome";
     capsToCtrl = true;
     swpBackslashBackspace = true;
   };
