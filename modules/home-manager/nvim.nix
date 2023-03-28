@@ -19,6 +19,7 @@ in {
     ++ lib.optionals pkgs.stdenv.isLinux (with pkgs; [ xclip ]);
   programs.neovim = {
     enable = true;
+    package = pkgs.neovim-nightly;
     viAlias = true;
     vimAlias = true;
     plugins = with pkgs.vimPlugins; [
@@ -103,7 +104,6 @@ in {
       telescope-zoxide
 
       markdown-preview-nvim
-      (plugin "ekickx/clipboard-image.nvim")
 
       vimtex
     ];
