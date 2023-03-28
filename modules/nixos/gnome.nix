@@ -1,8 +1,13 @@
 { config, pkgs, lib, ... }: {
   services.xserver.enable = true;
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.displayManager.gdm.settings = { debug.enable = true; };
-  services.xserver.displayManager.gdm.wayland = false;
+  programs.xwayland.enable = true;
+
+  services.xserver.displayManager.gdm = {
+    enable = true;
+    settings = { debug.enable = true; };
+    wayland = false;
+  };
+
   services.xserver.desktopManager.gnome.enable = true;
   environment.gnome.excludePackages = with pkgs;
     [ gnome.gnome-maps ] ++ (with pkgs.gnome; [
