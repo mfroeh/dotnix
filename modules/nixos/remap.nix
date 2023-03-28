@@ -1,10 +1,15 @@
 { config, pkgs, lib, username, inputs, ... }:
 with lib;
+with types;
 let cfg = config.services.remap;
-in {
+in
+{
   imports = [ inputs.xremap-flake.nixosModules.default ];
 
   options.services.remap = {
+    wm = mkOption {
+      type = types.enum [ "none" "sway" "gnome" "x11" "hyprland" ];
+    };
     enable = mkEnableOption "remap service";
     capsToCtrl = mkOption {
       type = types.bool;
@@ -34,8 +39,10 @@ in {
     services.xremap = {
       serviceMode = "user";
       userName = username;
-      # withSway = true;
-      withGnome = true;
+      withX11 = (cfg.wm == "x11");
+      withSway = (cfg.wm == "sway");
+      withGnome = (cfg.wm == "gnome");
+      withHypr = (cfg.wm == "hyprland");
       watch = true;
       config = {
         modmap = [ ] ++ optionals cfg.capsToCtrl [{
