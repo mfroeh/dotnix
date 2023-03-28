@@ -26,6 +26,8 @@
 
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
 
+    hyprland.url = "github:hyprwm/Hyprland";
+
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -49,6 +51,7 @@
     , home-manager
     , xremap-flake
     , neovim-nightly-overlay
+    , hyprland
     , rust-overlay
     , mtree
     , ...
