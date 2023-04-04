@@ -24,9 +24,6 @@
 
       ns = "nix-shell --command 'fish'";
       comp = "cd builddir && meson compile; cd ..";
-
-      gnomeCtrlCenter =
-        "WEBKIT_DISABLE_COMPOSITING_MODE=1 MESA_LOADER_DRIVER_OVERRIDE=zink gnome-control-center online-accounts";
     };
     functions = { mkcd = "mkdir $argv; cd $argv"; };
     plugins = with pkgs.fishPlugins; [
@@ -49,6 +46,10 @@
       {
         name = "forgit";
         src = forgit.src;
+      }
+      {
+        name = "plugin-git";
+        src = plugin-git.src;
       }
     ];
   };

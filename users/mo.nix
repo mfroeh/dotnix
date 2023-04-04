@@ -3,7 +3,8 @@ with lib;
 let
   isLinux = pkgs.stdenv.isLinux;
   isDarwin = pkgs.stdenv.isDarwin;
-in {
+in
+{
   users.users.mo = mkMerge [
     {
       description = "mfroeh";
@@ -12,7 +13,7 @@ in {
     (mkIf isLinux {
       home = "/home/mo";
       isNormalUser = true;
-      extraGroups = [ "networkmanager" "wheel" "audio" "video" ];
+      extraGroups = [ "networkmanager" "wheel" "audio" "video" "vboxusers" ];
       initialPassword = "";
     })
     (mkIf isDarwin { home = "/Users/mo"; })
