@@ -40,23 +40,9 @@
     };
   };
 
-  outputs =
-    inputs@{ self
-    , nixpkgs
-    , nixos-stable
-    , nixpkgs-unstable
-    , darwin
-    , nixos-apple-silicon
-    , nixos-wsl
-    , nixos-hardware
-    , home-manager
-    , xremap-flake
-    , neovim-nightly-overlay
-    , hyprland
-    , rust-overlay
-    , mtree
-    , ...
-    }:
+  outputs = inputs@{ self, nixpkgs, nixos-stable, nixpkgs-unstable, darwin
+    , nixos-apple-silicon, nixos-wsl, nixos-hardware, home-manager, xremap-flake
+    , neovim-nightly-overlay, hyprland, rust-overlay, mtree, ... }:
     let
       isDarwin = system:
         (builtins.elem system inputs.nixpkgs.lib.platforms.darwin);
@@ -133,8 +119,16 @@
           extraSpecialArgs =
             mkSpecialArgs { inherit self system username inputs; };
         };
-    in
-    {
+
+      mkHomeConfig2 = { username, system, modules }:
+        home-manager.lib.homeManagerConfiguration rec {
+          pkgs = mkPkgs { inherit system nixpkgs; };
+          inherit modules;
+          extraSpecialArgs =
+            mkSpecialArgs { inherit self system username inputs; };
+        };
+
+    in {
       darwinConfigurations = {
         gus = mkDarwinConfig {
           system = "aarch64-darwin";
@@ -238,6 +232,11 @@
             ./modules/home-manager/nixos/vlc.nix
           ];
           extraPkgs = pkgs: with pkgs; [ ];
+        };
+        "mo@lambda2" = mkHomeConfig2 {
+          username = "mo";
+          system = "x86_64-linux";
+          modules = [ ./hosts/lambda/home.nix ];
         };
         "mo@pi" = mkHomeConfig {
           username = "mo";
