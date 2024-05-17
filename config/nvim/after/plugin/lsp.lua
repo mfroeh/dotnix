@@ -2,7 +2,7 @@ require("neodev").setup()
 require("fidget").setup()
 
 local servers = {
-	rnix = {},
+	nil_ls = {},
 	clangd = {},
 	cmake = {},
 	pyright = {},
