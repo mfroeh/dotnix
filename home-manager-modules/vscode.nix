@@ -8,6 +8,7 @@
     extensions = (with pkgs.vscode-extensions; [
       vscodevim.vim
       github.copilot
+      mkhl.direnv
 
       # C++
       llvm-vs-code-extensions.vscode-clangd
@@ -18,11 +19,16 @@
       # Python
       ms-python.vscode-pylance
       ms-python.python
+      ms-toolsai.jupyter
       ms-python.isort
       ms-python.black-formatter
 
       # nix
       jnoortheen.nix-ide
+      arrterian.nix-env-selector
+
+      # rust
+      rust-lang.rust-analyzer
     ]) ++
     pkgs.vscode-utils.extensionsFromVscodeMarketplace
       [
@@ -43,14 +49,18 @@
     userSettings = {
       "window.titleBarStyle" = "custom";
       "explorer.confirmDelete" = false;
+      "explorer.confirmDragAndDrop" = false;
 
       "editor.lineNumbers" = "relative";
+      "editor.bracketPairColorization.enabled" = true;
 
       "editor.fontFamily" = "Hack Nerd Font Mono";
       "editor.fontLigatures" = true;
       "editor.fontSize" = 14;
       "terminal.integrated.fontSize" = 14;
       "terminal.integrated.fontFamily" = "Hack Nerd Font Mono";
+
+      "files.autoSave" = "onFocusChange";
 
       "terminal.integrated.commandsToSkipShell" = [
         "-workbench.action.quickOpen" # capture C-P

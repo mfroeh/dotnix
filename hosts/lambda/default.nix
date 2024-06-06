@@ -98,6 +98,7 @@ with inputs;
     vlc
     zotero
     gimp
+    blender
   ] ++ [
 
     # create an FHS environment using the command `fhs`, enabling the execution of non-NixOS packages in NixOS!

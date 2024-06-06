@@ -98,4 +98,6 @@
     citrix_workspace
     teams-for-linux
   ];
+
+  programs.zathura.enable = true;
 }
