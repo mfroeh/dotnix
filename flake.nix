@@ -18,8 +18,14 @@
     hyprland.url = "github:hyprwm/Hyprland";
     hyprland-plugins.url = "github:hyprwm/hyprland-plugins";
     hyprland-plugins.inputs.hyprland.follows = "hyprland";
-
     hyprswitch.url = "github:h3rmt/hyprswitch/release";
+
+    plasma-manager =
+      {
+        url = "github:pjones/plasma-manager";
+        inputs.nixpkgs.follows = "nixpkgs";
+        inputs.home-manager.follows = "home-manager";
+      };
 
     launch.url = "github:mfroeh/launch";
   };
@@ -41,9 +47,7 @@
         import nixpkgs {
           inherit system;
           config.allowUnfree = true;
-          overlays = [
-            neovim-nightly-overlay.overlay
-          ];
+          overlays = [ ];
         };
 
       mkSpecialArgs = { system }: {

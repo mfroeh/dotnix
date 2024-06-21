@@ -29,6 +29,9 @@
 
       # rust
       rust-lang.rust-analyzer
+
+      # LaTeX
+      james-yu.latex-workshop
     ]) ++
     pkgs.vscode-utils.extensionsFromVscodeMarketplace
       [
@@ -166,7 +169,7 @@
   };
 
   fonts.fontconfig.enable = true;
-  home.packages = with pkgs; [ nil nixpkgs-fmt clang-tools cmake-language-server cmake-format jre_minimal ] ++ [ (nerdfonts.override { fonts = [ "Hack" ]; }) ];
+  home.packages = with pkgs; [ nil nixpkgs-fmt clang-tools cmake-language-server cmake-format jre_minimal texliveFull ] ++ [ (nerdfonts.override { fonts = [ "Hack" ]; }) ];
 }
 
 # TODO= impure for now bcuz lazy

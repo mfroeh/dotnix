@@ -6,7 +6,8 @@
     "${self}/home-manager-modules/zsh.nix"
     "${self}/home-manager-modules/nvim.nix"
     "${self}/home-manager-modules/fzf.nix"
-    "${self}/home-manager-modules/hyperwm.nix"
+    "${self}/home-manager-modules/kde.nix"
+    # "${self}/home-manager-modules/hyperwm.nix"
     "${self}/home-manager-modules/vscode.nix"
   ];
 

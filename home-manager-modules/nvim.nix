@@ -1,4 +1,4 @@
-{ config, pkgs, lib, self, ... }:
+{ inputs, pkgs, lib, self, ... }:
 let
   # installs a vim plugin from git with a given tag / branch
   # needs --impure flag 
@@ -13,12 +13,13 @@ let
     };
 
   plugin = pluginGit "HEAD";
-in {
+in
+{
   home.packages = [ pkgs.neovide ]
     ++ lib.optionals pkgs.stdenv.isLinux (with pkgs; [ xclip ]);
   programs.neovim = {
     enable = true;
-    package = pkgs.neovim-nightly;
+    package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
     viAlias = true;
     vimAlias = true;
     plugins = with pkgs.vimPlugins; [

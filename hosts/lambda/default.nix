@@ -4,7 +4,8 @@ with inputs;
   imports = [
     ./hardware-configuration.nix
     "${self}/nixos-modules/xorg.nix"
-    "${self}/nixos-modules/hyperwm.nix"
+    "${self}/nixos-modules/kde.nix"
+    # "${self}/nixos-modules/hyperwm.nix"
     # "${self}/nixos-modules/kde.nix"
     "${self}/nixos-modules/virtualization.nix"
     # users
@@ -21,7 +22,7 @@ with inputs;
     }
     "${self}/nixos-modules/remap.nix"
   ];
-  system.stateVersion = "23.11";
+  system.stateVersion = "24.05";
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -45,11 +46,7 @@ with inputs;
   };
 
   # enable OpenGL
-  hardware.opengl = {
-    enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
-  };
+  hardware.graphics.enable = true;
 
   # load nvidia driver for both Xorg and Wayland
   services.xserver.videoDrivers = [ "nvidia" ];
