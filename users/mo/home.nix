@@ -95,9 +95,12 @@
     ethtool
     pciutils # lspci
     usbutils # lsusb
+
+    factorio-demo
   ] ++ [
     citrix_workspace
     teams-for-linux
+    skypeforlinux
   ];
 
   programs.zathura.enable = true;

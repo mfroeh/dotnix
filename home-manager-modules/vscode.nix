@@ -3,7 +3,8 @@
     enable = true;
     enableUpdateCheck = false;
     enableExtensionUpdateCheck = false;
-    mutableExtensionsDir = false;
+    # somehow completely breaks extensions if true
+    mutableExtensionsDir = true;
 
     extensions = (with pkgs.vscode-extensions; [
       vscodevim.vim
@@ -46,6 +47,18 @@
           publisher = "cheshirekow";
           version = "0.6.11";
           sha256 = "sha256-NdU8J0rkrH5dFcLs8p4n/j2VpSP/X7eSz2j4CMDiYJM=";
+        }
+        {
+          name = "shader";
+          publisher = "slevesque";
+          version = "1.1.5";
+          sha256 = "sha256-Pf37FeQMNlv74f7LMz9+CKscF6UjTZ7ZpcaZFKtX2ZM=";
+        }
+        {
+          name = "wgsl";
+          publisher = "PolyMeilex";
+          version = "0.1.17";
+          sha256 = "sha256-vGqvVrr3wNG6HOJxOnJEohdrzlBYspysTLQvWuP0QIw=";
         }
       ];
 
@@ -113,8 +126,17 @@
             "editor.action.rename"
           ];
         }
-      ];
-      "vim.visualModeKeyBindingsNonRecursive" = [
+        {
+          "before"= ["]" "d"];
+          "commands"= ["editor.action.marker.nextInFiles"];
+          "silent"= true;
+        }
+        {
+          "before"= ["[" "d"];
+          "commands"= ["editor.action.marker.prevInFiles"];
+          "silent"= true;
+        }];
+        "vim.visualModeKeyBindingsNonRecursive" = [
         {
           "before" = [
             ">"
@@ -131,46 +153,50 @@
             "editor.action.outdentLines"
           ];
         }
-      ];
+        ];
 
-      "[cpp]" = {
-        "editor.formatOnSave" = true;
-        "editor.formatOnType" = true;
-        "editor.tabSize" = 2;
-      };
+        "[cpp]" = {
+          "editor.formatOnSave" = true;
+          "editor.formatOnType" = true;
+          "editor.tabSize" = 2;
+        };
 
-      "nix.enableLanguageServer" = true;
-      "nix.serverPath" = "nil";
-      "nix.formatterPath" = "nixpkgs-fmt";
-      "nix.serverSettings" = {
-        "nil" = {
-          "formatting" = {
-            "command" = [ "nixpkgs-fmt" ];
+        "nix.enableLanguageServer" = true;
+        "nix.serverPath" = "nil";
+        "nix.formatterPath" = "nixpkgs-fmt";
+        "nix.serverSettings" = {
+          "nil" = {
+            "formatting" = {
+              "command" = [ "nixpkgs-fmt" ];
+            };
           };
         };
-      };
-      "[nix]" = {
-        "editor.formatOnSave" = true;
-      };
+        "[nix]" = {
+          "editor.formatOnSave" = true;
+        };
+
+        "[rust]" = {
+          "editor.formatOnSave" = true;
+        };
     };
 
     keybindings = [
-      {
-        key = "ctrl+n";
-        command = "workbench.action.quickOpenSelectNext";
-        when = "inQuickOpen";
-      }
-      {
-        key = "ctrl+p";
-        command = "workbench.action.quickOpenSelectPrevious";
-        when = "inQuickOpen";
-      }
+    {
+      key = "ctrl+n";
+      command = "workbench.action.quickOpenSelectNext";
+      when = "inQuickOpen";
+    }
+    {
+      key = "ctrl+p";
+      command = "workbench.action.quickOpenSelectPrevious";
+      when = "inQuickOpen";
+    }
     ];
   };
 
   fonts.fontconfig.enable = true;
   home.packages = with pkgs; [ nil nixpkgs-fmt clang-tools cmake-language-server cmake-format jre_minimal texliveFull ] ++ [ (nerdfonts.override { fonts = [ "Hack" ]; }) ];
-}
+                                      }
 
 # TODO= impure for now bcuz lazy
 # programs.vscode = {

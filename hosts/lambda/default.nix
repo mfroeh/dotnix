@@ -5,10 +5,7 @@ with inputs;
     ./hardware-configuration.nix
     "${self}/nixos-modules/xorg.nix"
     "${self}/nixos-modules/kde.nix"
-    # "${self}/nixos-modules/hyperwm.nix"
-    # "${self}/nixos-modules/kde.nix"
     "${self}/nixos-modules/virtualization.nix"
-    # users
     "${self}/users/mo"
     "${self}/users/work"
     home-manager.nixosModules.home-manager
@@ -52,7 +49,6 @@ with inputs;
   services.xserver.videoDrivers = [ "nvidia" ];
 
   hardware.nvidia = {
-    # modesetting is required
     modesetting.enable = true;
 
     # powerManagement is experimental
@@ -88,6 +84,7 @@ with inputs;
     git
     coreutils-full
     man-pages
+    config.boot.kernelPackages.perf
 
     google-chrome
     spotify

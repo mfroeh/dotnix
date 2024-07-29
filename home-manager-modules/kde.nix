@@ -85,15 +85,6 @@ in
       "services/org.kde.dolphin.desktop"."_launch" = "Alt+E";
       "services/kitty.desktop"."_launch" = "Alt+Y";
 
-      # kxkbrc = {
-      #   Layout = {
-      #     LayoutList = "us,ru";
-      #     Options = "grp:caps_toggle,grp_led:caps";
-      #     SwitchMode = "Global";
-      #     Use = true;
-      #   };
-      # };
-
       kwin = {
         "Window Maximize" = "Alt+F";
         "Window Close" = "Alt+C";
@@ -138,6 +129,17 @@ in
       "krunnerrc"."General"."FreeFloating" = true;
 
       kwinrc."Effect-overview".BorderActivate = 9;
+
+
+      kxkbrc.Layout = {
+        DisplayNames = "us,ru";
+        LayoutList = "us,us";
+        VariantList = ",rus";
+        Options = "grp:alt_space_toggle";
+        ResetOldOptions = true;
+        Use = true;
+        SwitchMode = "Global";
+      };
 
       kwinrc.Desktops.Number = {
         value = 10;
