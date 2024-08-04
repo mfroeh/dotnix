@@ -6,6 +6,9 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.11";
 
+nix-darwin.url = "github:lnl7/nix-darwin";
+nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -35,6 +38,7 @@
     { self
     , nixpkgs
     , nixpkgs-stable
+	, nix-darwin
     , home-manager
     , xremap-flake
     , neovim-nightly-overlay
@@ -64,6 +68,18 @@
           modules = [
             ./modules/nix.nix
             "${self}/hosts/lambda"
+          ];
+          specialArgs = mkSpecialArgs { inherit system; };
+        };
+      };
+
+      darwinConfigurations = {
+        xya = nix-darwin.lib.darwinSystem rec {
+          system = "aarch64-darwin";
+          pkgs = mkPkgs { inherit system nixpkgs; };
+          modules = [
+            ./modules/nix.nix
+            "${self}/hosts/xya"
           ];
           specialArgs = mkSpecialArgs { inherit system; };
         };

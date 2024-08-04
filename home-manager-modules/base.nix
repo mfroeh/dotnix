@@ -1,16 +1,16 @@
 { config, pkgs, lib, ... }: {
   imports = [
-    ./cli.nix
-    ./kitty.nix
-    ./fish.nix
+    # ./cli.nix
+    # ./kitty.nix
+    # ./fish.nix
 
-    ./languages.nix
+    # ./languages.nix
 
-    ./nvim.nix
-    ./vscode.nix
+    # ./nvim.nix
+    # ./vscode.nix
 
-    ./bitwarden.nix
-    ./zathura.nix
+    # ./bitwarden.nix
+    # ./zathura.nix
   ];
 
   # Let home-manager install and mange itself

@@ -25,7 +25,7 @@
     # perform garbage collection weekly to maintain low disk usage
     gc = {
       automatic = true;
-      dates = "weekly";
+      interval = { Weekday = 7; };
       options = "--delete-older-than 1w";
     };
   };
