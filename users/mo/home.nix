@@ -6,15 +6,14 @@
     "${self}/home-manager-modules/zsh.nix"
     "${self}/home-manager-modules/nvim.nix"
     "${self}/home-manager-modules/fzf.nix"
-    "${self}/home-manager-modules/kde.nix"
-    # "${self}/home-manager-modules/hyperwm.nix"
     "${self}/home-manager-modules/vscode.nix"
-  ];
+ "${self}/home-manager-modules/darwin/karabiner.nix"
+];
 
-  # https://home-manager-options.extranix.com/?query=services.activitywatch.&release=master
-  services.activitywatch = {
-    enable = true;
-  };
+  # ] ++ lib.optionals pkgs.stdenv.isLinux [ 
+    # "${self}/home-manager-modules/kde.nix"
+    #"${self}/home-manager-modules/hyperwm.nix"
+# ]
 
   programs.git = {
     enable = true;
@@ -27,13 +26,12 @@
     diff-so-fancy.enable = true;
   };
 
-  home.stateVersion = "24.05";
+  home.stateVersion = "24.11";
   fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
     (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" "RobotoMono" "Hack" ]; })
   ] ++ [
     discord
-
 
     neofetch
 
@@ -81,27 +79,24 @@
 
     # system monitors
     btop # replacement of htop/nmon
-    iotop # io monitoring
     iftop # network monitoring
 
     # system call monitoring
-    strace # system call monitoring
-    ltrace # library call monitoring
     lsof # list open files
 
-    # system tools
+  ] ++ lib.optionals pkgs.stdenv.isLinux [
+    iotop # io monitoring
+    strace # system call monitoring
+    ltrace # library call monitoring
     sysstat
     lm_sensors # for `sensors` command
     ethtool
     pciutils # lspci
     usbutils # lsusb
 
-    factorio-demo
-  ] ++ [
-    citrix_workspace
     teams-for-linux
     skypeforlinux
-  ];
+];
 
   programs.zathura.enable = true;
 }

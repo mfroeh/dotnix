@@ -22,10 +22,9 @@
       # https://nixos.org/manual/nix/stable/command-ref/conf-file.html#conf-auto-optimise-store
       auto-optimise-store = true;
     };
-    # perform garbage collection weekly to maintain low disk usage
+    # perform garbage collection to maintain low disk usage
     gc = {
       automatic = true;
-      interval = { Weekday = 7; };
       options = "--delete-older-than 1w";
     };
   };

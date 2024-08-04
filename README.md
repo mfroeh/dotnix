@@ -23,3 +23,6 @@ The configuration is split into NixOS/Nix-darwin and standalone Home-manager
 | $\lambda$ | x86_64-linux   | NixOS    | 9700k, 1080 Ti |
 | $\pi$     | aarch64-linux  | NixOS    | Raspberry Pi 4 |
 | wsl       | x86_64-linux   | NixOS (wsl) | 7700k, 1080 Ti |
+
+## Nix-darwin bootstrap
+`nix run --extra-experimental-features "nix-command flakes" nix-darwin -- switch --flake .#xya`

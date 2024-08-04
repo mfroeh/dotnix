@@ -6,8 +6,10 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.11";
 
-nix-darwin.url = "github:lnl7/nix-darwin";
-nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+    nix-darwin.url = "github:lnl7/nix-darwin";
+    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+    # fix nix installed .app not appearing in spotlight
+    mac-app-util.url = "github:hraban/mac-app-util";
 
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -38,7 +40,7 @@ nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     { self
     , nixpkgs
     , nixpkgs-stable
-	, nix-darwin
+    , nix-darwin
     , home-manager
     , xremap-flake
     , neovim-nightly-overlay
