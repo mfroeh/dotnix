@@ -1,6 +1,7 @@
 { pkgs, ... }: {
   programs.zsh = {
     enable = true;
+    
     syntaxHighlighting.enable = true;
     autosuggestion.enable = true;
     autosuggestion.highlight = "fg=white,underline";
@@ -24,6 +25,7 @@
       "ls" = "exa --icons";
       "ed" = "fd | fzf | xargs -r nvim";
       "nre" = "sudo nixos-rebuild switch --flake ~/dotnix";
+      "dre" = "darwin-rebuild switch --flake ~/dotnix";
       "dev" = "nix develop --command zsh";
       "split:" = "tr ':' '\n'";
     };
@@ -78,6 +80,13 @@
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
+    config = {
+      hide_env_diff = true;
+    };
   };
 
+  programs.zoxide = {
+    enable = true;
+    options = [];
+  };
 }

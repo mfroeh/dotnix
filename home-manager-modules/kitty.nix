@@ -1,7 +1,7 @@
 { ... }: {
   programs.kitty = {
     enable = true;
-    theme = "Gruvbox Dark";
+    theme = "Spacedust";
     settings = {
       font_size = 14;
       enable_audio_bell = false;

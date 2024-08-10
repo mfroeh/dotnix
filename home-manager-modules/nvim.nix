@@ -19,6 +19,7 @@ in
     ++ lib.optionals pkgs.stdenv.isLinux (with pkgs; [ xclip ]);
   programs.neovim = {
     enable = true;
+    defaultEditor = true;
     package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
     viAlias = true;
     vimAlias = true;

@@ -26,4 +26,34 @@ with inputs;
 
   services.nix-daemon.enable = true;
   services.karabiner-elements.enable = true;
+
+  homebrew = {
+    enable = true;
+    onActivation.cleanup = "uninstall";
+    casks = [
+      "google-chrome"
+      "bitwarden"
+      "linearmouse"
+      "zed"
+      "appcleaner"
+      "rectangle"
+    ];
+  };
+
+  system.defaults = {
+    dock = {
+        autohide = true;
+        autohide-delay = 0.0;
+    };
+
+    NSGlobalDomain = {
+         # Use key repeat over press and hold
+         ApplePressAndHoldEnabled = false;
+         KeyRepeat = 1;
+         InitialKeyRepeat = 15;
+
+         # Hide the menu bar
+         _HIHideMenuBar = true;
+    };
+};
 }

@@ -30,9 +30,13 @@
 
       # rust
       rust-lang.rust-analyzer
+      tamasfe.even-better-toml
 
       # LaTeX
       james-yu.latex-workshop
+
+      # other
+      zxh404.vscode-proto3
     ]) ++
     pkgs.vscode-utils.extensionsFromVscodeMarketplace
       [
@@ -69,6 +73,8 @@
 
       "editor.lineNumbers" = "relative";
       "editor.bracketPairColorization.enabled" = true;
+      "editor.wordWrap"= "on";
+      "editor.minimap.enabled" = false;
 
       "editor.fontFamily" = "Hack Nerd Font Mono";
       "editor.fontLigatures" = true;
@@ -127,16 +133,17 @@
           ];
         }
         {
-          "before"= ["]" "d"];
-          "commands"= ["editor.action.marker.nextInFiles"];
-          "silent"= true;
+          "before" = [ "]" "d" ];
+          "commands" = [ "editor.action.marker.nextInFiles" ];
+          "silent" = true;
         }
         {
-          "before"= ["[" "d"];
-          "commands"= ["editor.action.marker.prevInFiles"];
-          "silent"= true;
-        }];
-        "vim.visualModeKeyBindingsNonRecursive" = [
+          "before" = [ "[" "d" ];
+          "commands" = [ "editor.action.marker.prevInFiles" ];
+          "silent" = true;
+        }
+      ];
+      "vim.visualModeKeyBindingsNonRecursive" = [
         {
           "before" = [
             ">"
@@ -153,50 +160,51 @@
             "editor.action.outdentLines"
           ];
         }
-        ];
+      ];
 
-        "[cpp]" = {
-          "editor.formatOnSave" = true;
-          "editor.formatOnType" = true;
-          "editor.tabSize" = 2;
-        };
+      "[cpp]" = {
+        "editor.formatOnSave" = true;
+        "editor.formatOnType" = true;
+        "editor.tabSize" = 2;
+      };
 
-        "nix.enableLanguageServer" = true;
-        "nix.serverPath" = "nil";
-        "nix.formatterPath" = "nixpkgs-fmt";
-        "nix.serverSettings" = {
-          "nil" = {
-            "formatting" = {
-              "command" = [ "nixpkgs-fmt" ];
-            };
+      "nix.enableLanguageServer" = true;
+      "nix.serverPath" = "nil";
+      "nix.formatterPath" = "nixpkgs-fmt";
+      "nix.serverSettings" = {
+        "nil" = {
+          "formatting" = {
+            "command" = [ "nixpkgs-fmt" ];
           };
         };
-        "[nix]" = {
-          "editor.formatOnSave" = true;
-        };
+      };
+      "[nix]" = {
+        "editor.formatOnSave" = true;
+      };
 
-        "[rust]" = {
-          "editor.formatOnSave" = true;
-        };
+      "[rust]" = {
+        "editor.formatOnSave" = true;
+      };
+      "rust-analyzer.cargo.buildScripts.enable" = true;
     };
 
     keybindings = [
-    {
-      key = "ctrl+n";
-      command = "workbench.action.quickOpenSelectNext";
-      when = "inQuickOpen";
-    }
-    {
-      key = "ctrl+p";
-      command = "workbench.action.quickOpenSelectPrevious";
-      when = "inQuickOpen";
-    }
+      {
+        key = "ctrl+n";
+        command = "workbench.action.quickOpenSelectNext";
+        when = "inQuickOpen";
+      }
+      {
+        key = "ctrl+p";
+        command = "workbench.action.quickOpenSelectPrevious";
+        when = "inQuickOpen";
+      }
     ];
   };
 
   fonts.fontconfig.enable = true;
   home.packages = with pkgs; [ nil nixpkgs-fmt clang-tools cmake-language-server cmake-format jre_minimal texliveFull ] ++ [ (nerdfonts.override { fonts = [ "Hack" ]; }) ];
-                                      }
+}
 
 # TODO= impure for now bcuz lazy
 # programs.vscode = {
