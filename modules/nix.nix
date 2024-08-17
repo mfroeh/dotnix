@@ -10,6 +10,7 @@
         "https://cuda-maintainers.cachix.org"
         "https://ai.cachix.org"
         "https://ploop.cachix.org" # jaxlib
+        "https://devenv.cachix.org"
       ];
       # public keys for the caches
       trusted-public-keys = [
@@ -18,7 +19,9 @@
         "cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E="
         "ai.cachix.org-1:N9dzRK+alWwoKXQlnn0H6aUx0lU/mspIoz8hMvGvbbc="
         "ploop.cachix.org-1:i6+Fqarsbf5swqH09RXOEDvxy7Wm7vbiIXu4A9HCg1g="
+        "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw="
       ];
+      trusted-users = ["root mo"];
       # https://nixos.org/manual/nix/stable/command-ref/conf-file.html#conf-auto-optimise-store
       auto-optimise-store = true;
     };

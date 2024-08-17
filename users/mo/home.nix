@@ -33,6 +33,7 @@
   ] ++ [
     discord
 
+    devenv
     neofetch
 
     # archivers

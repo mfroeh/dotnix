@@ -37,6 +37,8 @@ with inputs;
       "zed"
       "appcleaner"
       "rectangle"
+      "wine-stable"
+      "pgadmin4"
     ];
   };
 

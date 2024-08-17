@@ -23,7 +23,7 @@
 
     shellAliases = {
       "ls" = "exa --icons";
-      "ed" = "fd | fzf | xargs -r nvim";
+      "ed" = "fd . --type f | fzf --preview='bat {} --color always --plain' | xargs -r nvim";
       "nre" = "sudo nixos-rebuild switch --flake ~/dotnix";
       "dre" = "darwin-rebuild switch --flake ~/dotnix";
       "dev" = "nix develop --command zsh";
@@ -87,6 +87,6 @@
 
   programs.zoxide = {
     enable = true;
-    options = [];
+    options = [ "--cmd j" ];
   };
 }
