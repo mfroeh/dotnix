@@ -1,4 +1,4 @@
-{ lib, pkgs, config, self, inputs, specialArgs, ... }:
+{ self, inputs, specialArgs, ... }:
 with inputs;
 {
   imports = [
@@ -16,7 +16,7 @@ with inputs;
     }
   ];
 
-  # otherwise nix-darwin wont chsh for users
+  # otherwise nix-darwin wont chsh for users (actually, it still doesn't somehow =D, but we want this for nix command completion)
   programs.zsh.enable = true;
 
   system.stateVersion = 4;
@@ -44,18 +44,18 @@ with inputs;
 
   system.defaults = {
     dock = {
-        autohide = true;
-        autohide-delay = 0.0;
+      autohide = true;
+      autohide-delay = 0.0;
     };
 
     NSGlobalDomain = {
-         # Use key repeat over press and hold
-         ApplePressAndHoldEnabled = false;
-         KeyRepeat = 1;
-         InitialKeyRepeat = 15;
+      # Use key repeat over press and hold
+      ApplePressAndHoldEnabled = false;
+      KeyRepeat = 1;
+      InitialKeyRepeat = 15;
 
-         # Hide the menu bar
-         _HIHideMenuBar = true;
+      # Hide the menu bar
+      _HIHideMenuBar = true;
     };
-};
+  };
 }

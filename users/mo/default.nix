@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ pkgs, lib, ... }:
 with lib;
 {
   users.users.mo = mkMerge [

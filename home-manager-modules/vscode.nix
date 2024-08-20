@@ -1,4 +1,4 @@
-{ config, pkgs, lib, platform, ... }: {
+{ pkgs, ... }: {
   programs.vscode = {
     enable = true;
     enableUpdateCheck = false;
@@ -73,8 +73,10 @@
 
       "editor.lineNumbers" = "relative";
       "editor.bracketPairColorization.enabled" = true;
-      "editor.wordWrap"= "on";
+      "editor.wordWrap" = "on";
+
       "editor.minimap.enabled" = false;
+      "workbench.editor.showTabs" = "single";
 
       "editor.fontFamily" = "Hack Nerd Font Mono";
       "editor.fontLigatures" = true;
@@ -162,12 +164,18 @@
         }
       ];
 
+      "git.autofetch" = true;
+      "git.confirmSync" = false;
+
       "[cpp]" = {
         "editor.formatOnSave" = true;
         "editor.formatOnType" = true;
         "editor.tabSize" = 2;
       };
 
+      "[nix]" = {
+        "editor.formatOnSave" = true;
+      };
       "nix.enableLanguageServer" = true;
       "nix.serverPath" = "nil";
       "nix.formatterPath" = "nixpkgs-fmt";
@@ -178,14 +186,14 @@
           };
         };
       };
-      "[nix]" = {
-        "editor.formatOnSave" = true;
-      };
 
       "[rust]" = {
         "editor.formatOnSave" = true;
       };
       "rust-analyzer.cargo.buildScripts.enable" = true;
+      "rust-analyzer.check.command" = "clippy";
+
+      "latex-workshop.latex.autoBuild.run" = "onSave";
     };
 
     keybindings = [
@@ -202,12 +210,5 @@
     ];
   };
 
-  fonts.fontconfig.enable = true;
   home.packages = with pkgs; [ nil nixpkgs-fmt clang-tools cmake-language-server cmake-format jre_minimal texliveFull ] ++ [ (nerdfonts.override { fonts = [ "Hack" ]; }) ];
 }
-
-# TODO= impure for now bcuz lazy
-# programs.vscode = {
-#   enable = true;
-#   package = pkgs.vscode.fhsWithPackages (ps= with ps; [ ]);
-# };

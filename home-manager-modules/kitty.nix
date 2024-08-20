@@ -1,4 +1,4 @@
-{ ... }: {
+{ pkgs, ... }: {
   programs.kitty = {
     enable = true;
     theme = "Spacedust";
@@ -11,4 +11,8 @@
     };
     font.name = "Hack Nerd Font";
   };
+
+  home.packages = [
+    (pkgs.nerdfonts.override { fonts = [ "Hack" ]; })
+  ];
 }

@@ -4,5 +4,6 @@
 
     # https://github.com/sainnhe/tmux-fzf
     tmux.enableShellIntegration = true;
+    tmux.shellIntegrationOptions = [ ];
   };
 }

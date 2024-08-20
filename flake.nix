@@ -8,6 +8,7 @@
 
     nix-darwin.url = "github:lnl7/nix-darwin";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+
     # fix nix installed .app not appearing in spotlight
     mac-app-util.url = "github:hraban/mac-app-util";
 
@@ -41,15 +42,9 @@
     , nixpkgs
     , nixpkgs-stable
     , nix-darwin
-    , home-manager
-    , xremap-flake
-    , neovim-nightly-overlay
-    , hyprland
     , ...
     } @ inputs:
     let
-      homeDir = system: if nixpkgs.stdenv.isDarwin system then "/Users" else "/home";
-
       mkPkgs = { system, nixpkgs }:
         import nixpkgs {
           inherit system;

@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }: {
+{ pkgs, ... }: {
   home.packages = with pkgs; [ lsd bat fzf xclip ];
   programs.fish = {
     enable = true;

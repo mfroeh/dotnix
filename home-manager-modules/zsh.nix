@@ -1,7 +1,8 @@
 { pkgs, ... }: {
   programs.zsh = {
     enable = true;
-    
+    enableCompletion = true;
+
     syntaxHighlighting.enable = true;
     autosuggestion.enable = true;
     autosuggestion.highlight = "fg=white,underline";
@@ -22,7 +23,6 @@
     '';
 
     shellAliases = {
-      "ls" = "exa --icons";
       "ed" = "fd . --type f | fzf --preview='bat {} --color always --plain' | xargs -r nvim";
       "nre" = "sudo nixos-rebuild switch --flake ~/dotnix";
       "dre" = "darwin-rebuild switch --flake ~/dotnix";
