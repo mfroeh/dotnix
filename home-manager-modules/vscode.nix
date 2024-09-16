@@ -37,6 +37,9 @@
 
       # other
       zxh404.vscode-proto3
+
+      # Elixir
+      elixir-lsp.vscode-elixir-ls
     ]) ++
     pkgs.vscode-utils.extensionsFromVscodeMarketplace
       [
@@ -63,6 +66,12 @@
           publisher = "PolyMeilex";
           version = "0.1.17";
           sha256 = "sha256-vGqvVrr3wNG6HOJxOnJEohdrzlBYspysTLQvWuP0QIw=";
+        }
+        {
+          name = "zmk-tools";
+          publisher = "spadin";
+          version = "1.4.0";
+          sha256 = "sha256-f67uOdfZTGdIGNVQuLuF6SeFZqKqBv455GILj36bZy8=";
         }
       ];
 

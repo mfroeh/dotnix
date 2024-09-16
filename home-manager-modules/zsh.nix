@@ -27,6 +27,7 @@
       "nre" = "sudo nixos-rebuild switch --flake ~/dotnix";
       "dre" = "darwin-rebuild switch --flake ~/dotnix";
       "dev" = "nix develop --command zsh";
+      "gg" = "lazygit";
       "split:" = "tr ':' '\n'";
     };
 

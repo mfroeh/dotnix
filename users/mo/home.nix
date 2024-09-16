@@ -26,6 +26,7 @@
       co = "checkout";
       b = "branch";
       aa = "add -A";
+      p = "push";
     };
     extraConfig = {
       init.defaultBranch = "master";
@@ -41,10 +42,16 @@
   fonts.fontconfig.enable = true;
 
   home.packages = with pkgs; [
+    coreutils-full
+    devenv
+
+    rustup
+
     discord
 
-    devenv
+    # fun
     neofetch
+    tt
 
     # archivers
     zip

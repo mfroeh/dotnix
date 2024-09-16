@@ -34,11 +34,15 @@ with inputs;
       "google-chrome"
       "bitwarden"
       "linearmouse"
-      "zed"
       "appcleaner"
       "rectangle"
       "wine-stable"
       "pgadmin4"
+      "whatsapp"
+      "chatgpt"
+      "obs"
+    ];
+    brews = [
     ];
   };
 
