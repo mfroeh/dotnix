@@ -26,7 +26,6 @@
 
       # nix
       jnoortheen.nix-ide
-      arrterian.nix-env-selector
 
       # rust
       rust-lang.rust-analyzer
@@ -40,6 +39,9 @@
 
       # Elixir
       elixir-lsp.vscode-elixir-ls
+
+      # Go
+      golang.go
     ]) ++
     pkgs.vscode-utils.extensionsFromVscodeMarketplace
       [
@@ -203,6 +205,20 @@
       "rust-analyzer.check.command" = "clippy";
 
       "latex-workshop.latex.autoBuild.run" = "onSave";
+
+      "go.inlayHints.assignVariableTypes"= false;
+      "go.inlayHints.functionTypeParameters"= false;
+      "go.inlayHints.parameterNames"= false;
+      "go.inlayHints.compositeLiteralFields"= false;
+      "go.inlayHints.compositeLiteralTypes"= false;
+      "go.inlayHints.constantValues"= false;
+      "go.inlayHints.rangeVariableTypes"= false;
+
+      "go.useLanguageServer"= true;
+      "gopls" = {
+        "ui.semanticTokens" = true;
+    };
+
     };
 
     keybindings = [
@@ -219,5 +235,5 @@
     ];
   };
 
-  home.packages = with pkgs; [ nil nixpkgs-fmt clang-tools cmake-language-server cmake-format jre_minimal texliveFull ] ++ [ (nerdfonts.override { fonts = [ "Hack" ]; }) ];
+  home.packages = with pkgs; [ nil nixpkgs-fmt clang-tools cmake-language-server cmake-format jre_minimal texliveFull ] ++ [ (nerdfonts.override { fonts = [ "Hack" ]; }) ] ++ [ code-cursor ];
 }

@@ -21,14 +21,13 @@
         "ploop.cachix.org-1:i6+Fqarsbf5swqH09RXOEDvxy7Wm7vbiIXu4A9HCg1g="
         "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw="
       ];
-      trusted-users = ["root mo"];
+      trusted-users = [ "root mo" ];
       # https://nixos.org/manual/nix/stable/command-ref/conf-file.html#conf-auto-optimise-store
       auto-optimise-store = true;
     };
     # perform garbage collection to maintain low disk usage
     gc = {
       automatic = true;
-      options = "--delete-older-than 1w";
     };
   };
 }

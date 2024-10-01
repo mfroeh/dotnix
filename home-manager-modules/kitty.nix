@@ -1,18 +1,17 @@
 { pkgs, ... }: {
   programs.kitty = {
     enable = true;
-    theme = "Spacedust";
     settings = {
-      font_size = 14;
+      font_size = 10;
       enable_audio_bell = false;
       cursor_blink_interval = 0;
       confirm_os_window_close = 0;
       # hide_window_decorations = true; # removes border (only works with some window managers)
     };
-    font.name = "Hack Nerd Font";
+    font.name = "FiraCode Nerd Font Mono";
   };
 
   home.packages = [
-    (pkgs.nerdfonts.override { fonts = [ "Hack" ]; })
+    (pkgs.nerdfonts.override { fonts = [ "FiraCode" ]; })
   ];
 }

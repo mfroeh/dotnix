@@ -56,6 +56,7 @@
     # archivers
     zip
     unzip
+    rar
 
     # utils
     ripgrep
@@ -68,7 +69,6 @@
     nix-output-monitor # `nom` is an alias for `nix` with detailled log output
 
     which
-    tree
     glow
   ] ++ lib.optionals pkgs.stdenv.isLinux [
     teams-for-linux
@@ -78,12 +78,10 @@
   programs.zathura.enable = true;
   programs.bat.enable = true;
 
-  programs.eza = {
-    enable = true;
-    enableZshIntegration = true;
-    icons = true;
-  };
-
   programs.btop.enable = true;
 
+  programs.obs-studio = {
+    enable = pkgs.stdenv.isLinux;
+    plugins = [ pkgs.obs-studio-plugins.obs-backgroundremoval ];
+  };
 }

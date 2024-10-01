@@ -1,35 +1,34 @@
-{ pkgs, ... }: {
+{ pkgs, ... }: rec {
   programs.zsh = {
     enable = true;
     enableCompletion = true;
 
     syntaxHighlighting.enable = true;
     autosuggestion.enable = true;
-    autosuggestion.highlight = "fg=white,underline";
+    autosuggestion.highlight = "fg=yellow";
 
     historySubstringSearch.enable = true;
 
-    zsh-abbr.enable = true;
-    zsh-abbr.abbreviations = {
-      "gco" = "git checkout";
-    };
-
-    autocd = true; # cd /some/dir == /some/dir
-
-    initExtra = ''
-      export KEYTIMEOUT=1 # make vi mode transitions faster (KEYTIMEOUT is in hundredths of a second)
-      bindkey '^F' autosuggest-accept # accept autosuggestions with ^F
-      ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=white,underline" # programs.zsh.autosuggestion.highlight sets wrong env variable
-    '';
-
     shellAliases = {
+      "gco" = "git checkout";
       "ed" = "fd . --type f | fzf --preview='bat {} --color always --plain' | xargs -r nvim";
       "nre" = "sudo nixos-rebuild switch --flake ~/dotnix";
       "dre" = "darwin-rebuild switch --flake ~/dotnix";
       "dev" = "nix develop --command zsh";
       "gg" = "lazygit";
       "split:" = "tr ':' '\n'";
+      "tree" = "eza --tree";
     };
+
+    autocd = true; # cd /some/dir == /some/dir, cd ../.. == ...
+
+    initExtra = ''
+      export KEYTIMEOUT=1 # make vi mode transitions faster (KEYTIMEOUT is in hundredths of a second)
+      bindkey '^F' autosuggest-accept # accept autosuggestions with ^F
+    '';
+
+    zsh-abbr.enable = true;
+    zsh-abbr.abbreviations = programs.zsh.shellAliases;
 
     oh-my-zsh = {
       enable = true;
@@ -53,6 +52,7 @@
     };
 
     plugins = [
+      # sets IN_NIX_SHELL which is used by prompt
       {
         name = "zsh-nix-shell";
         file = "nix-shell.plugin.zsh";
@@ -66,14 +66,19 @@
     ];
   };
 
+  programs.eza = {
+    enable = true;
+    enableZshIntegration = true;
+    icons = true;
+  };
+
   # starship - an customizable prompt for any shell
   programs.starship = {
     enable = true;
     settings = {
-      add_newline = false;
-      aws.disabled = true;
-      gcloud.disabled = true;
+      add_newline = true;
       line_break.disabled = true;
+      nix_shell.format = "in 󰜗 ";
     };
   };
 

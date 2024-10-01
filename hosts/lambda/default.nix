@@ -3,11 +3,9 @@ with inputs;
 {
   imports = [
     ./hardware-configuration.nix
-    "${self}/nixos-modules/xorg.nix"
-    "${self}/nixos-modules/kde.nix"
-    "${self}/nixos-modules/virtualization.nix"
+    "${self}/modules/xorg.nix"
+    "${self}/modules/kde.nix"
     "${self}/users/mo"
-    "${self}/users/work"
     home-manager.nixosModules.home-manager
     {
       home-manager.useGlobalPkgs = true;
@@ -15,11 +13,10 @@ with inputs;
       home-manager.extraSpecialArgs = specialArgs;
       home-manager.backupFileExtension = ".backup";
       home-manager.users.mo = import "${self}/users/mo/home.nix";
-      home-manager.users.work = import "${self}/users/work/home.nix";
     }
-    "${self}/nixos-modules/remap.nix"
+    "${self}/modules/remap.nix"
   ];
-  system.stateVersion = "24.05";
+  system.stateVersion = "24.11";
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -31,15 +28,15 @@ with inputs;
 
   i18n.defaultLocale = "en_US.UTF-8";
   i18n.extraLocaleSettings = {
-    LC_ADDRESS = "sv_SE.UTF-8";
-    LC_IDENTIFICATION = "sv_SE.UTF-8";
-    LC_MEASUREMENT = "sv_SE.UTF-8";
-    LC_MONETARY = "sv_SE.UTF-8";
-    LC_NAME = "sv_SE.UTF-8";
-    LC_NUMERIC = "sv_SE.UTF-8";
-    LC_PAPER = "sv_SE.UTF-8";
-    LC_TELEPHONE = "sv_SE.UTF-8";
-    LC_TIME = "sv_SE.UTF-8";
+    LC_ADDRESS = "de_DE.UTF-8";
+    LC_IDENTIFICATION = "de_DE.UTF-8";
+    LC_MEASUREMENT = "de_DE.UTF-8";
+    LC_MONETARY = "de_DE.UTF-8";
+    LC_NAME = "de_DE.UTF-8";
+    LC_NUMERIC = "de_DE.UTF-8";
+    LC_PAPER = "de_DE.UTF-8";
+    LC_TELEPHONE = "de_DE.UTF-8";
+    LC_TIME = "de_DE.UTF-8";
   };
 
   # enable OpenGL
@@ -68,8 +65,6 @@ with inputs;
   networking.networkmanager.enable = true;
   programs.nm-applet.enable = true;
 
-  hardware.pulseaudio.enable = true;
-
   # required for screen sharing on wayland
   services.pipewire.enable = true;
 
@@ -88,7 +83,6 @@ with inputs;
 
     google-chrome
     spotify
-    obs-studio
     vlc
     zotero
     gimp
