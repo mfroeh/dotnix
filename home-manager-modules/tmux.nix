@@ -22,6 +22,7 @@
       }
       {
         plugin = resurrect;
+        # this only does something if you actually use (n)vims session system
         extraConfig = ''
         set -g @resurrect-strategy-vim 'session' # restore from `Session.vim` file
         set -g @resurrect-strategy-nvim 'session' # restore from `Session.vim` file
@@ -60,15 +61,15 @@
       set-option -g status-left-length 35
       set-option -g status-right-length 35
 
-      set -g status-bg 'blue'  # Background color for the status bar
-      set -g status-fg 'white'  # Foreground color for the status bar
+      set -g status-bg '#191919' # Background color for the status bar
+      set -g status-fg '#ffc150' # Foreground color for the status bar
 
       # Left side status bar
-      set-option -g status-left "#[bg=default,fg=default]#{?client_prefix,λ, }"
+      set-option -g status-left "#[bg=#b975e6,fg=default]#{?client_prefix,λ,}#[bg=default,fg=default]#{?client_prefix,,λ}"
 
       # Window status formatting
       set-option -g window-status-format " #I:#W "
-      set-option -g window-status-current-format "#[bg=orange,fg=default] #I:#W "
+      set-option -g window-status-current-format "#[bg=#b975e6,fg=default] #I:#W "
     '';
   };
 }

@@ -10,7 +10,6 @@
     historySubstringSearch.enable = true;
 
     shellAliases = {
-      "gco" = "git checkout";
       "ed" = "fd . --type f | fzf --preview='bat {} --color always --plain' | xargs -r nvim";
       "nre" = "sudo nixos-rebuild switch --flake ~/dotnix";
       "dre" = "darwin-rebuild switch --flake ~/dotnix";
@@ -33,8 +32,9 @@
     oh-my-zsh = {
       enable = true;
       plugins = [
-        "vi-mode"
-        "tmux"
+        "vi-mode" # adds better vi mode (e.g. change cursor style depending on mode)
+        "tmux" # adds aliases and ZSH_TMUX_AUTOSTART functionality
+        "git" # adds aliases and some functions, https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git
       ];
       extraConfig = ''
         ZSH_TMUX_AUTOSTART=true # automatically start tmux
@@ -52,7 +52,7 @@
     };
 
     plugins = [
-      # sets IN_NIX_SHELL which is used by prompt
+      # sets IN_NIX_SHELL which is used by starship
       {
         name = "zsh-nix-shell";
         file = "nix-shell.plugin.zsh";
@@ -76,9 +76,9 @@
   programs.starship = {
     enable = true;
     settings = {
-      add_newline = true;
+      add_newline = false;
       line_break.disabled = true;
-      nix_shell.format = "in 󰜗 ";
+      nix_shell.format = "in 󰜗 "; # the default icon causes issues with zsh-autosuggestion
     };
   };
 
