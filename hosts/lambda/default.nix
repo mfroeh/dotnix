@@ -120,4 +120,8 @@ with inputs;
   # remap some keys and key combinations
   services.remap.enable = true;
   services.remap.ctrlLeftbraceToEsc = true;
+
+  # docker
+  virtualisation.docker.enable = true;
+  users.extraGroups.docker.members = [ "mo" ];
 }

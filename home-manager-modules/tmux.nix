@@ -68,8 +68,8 @@
       set-option -g status-left "#[bg=#b975e6,fg=default]#{?client_prefix,λ,}#[bg=default,fg=default]#{?client_prefix,,λ}"
 
       # Window status formatting
-      set-option -g window-status-format " #I:#W "
-      set-option -g window-status-current-format "#[bg=#b975e6,fg=default] #I:#W "
+      set-option -g window-status-format "#{window_index}::#{pane_current_command} (#(basename #{pane_current_path}))"
+      set-option -g window-status-current-format "#[bg=#b975e6,fg=default]#{window_index}::#{pane_current_command} (#(basename #{pane_current_path}))"
     '';
   };
 }

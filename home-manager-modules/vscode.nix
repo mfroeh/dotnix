@@ -100,6 +100,8 @@
       "terminal.integrated.commandsToSkipShell" = [
         "-workbench.action.quickOpen" # capture C-P
         "-workbench.action.terminal.focusFind" # capture C-F
+        # Cursor
+        "-aichat.newchataction"
       ];
 
       "extensions.ignoreRecommendations" = true;
@@ -118,6 +120,7 @@
       "vim.handleKeys" = {
         "<C-p>" = false;
       };
+      "vim.sneak" = true;
       "vim.normalModeKeyBindingsNonRecursive" = [
         {
           "before" = [

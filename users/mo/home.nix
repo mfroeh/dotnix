@@ -17,6 +17,8 @@
 
   home.stateVersion = "24.11";
 
+  services.ssh-agent.enable = true;
+
   programs.git = {
     enable = true;
     userName = "mfroeh";
