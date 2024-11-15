@@ -5,17 +5,21 @@ with inputs;
     ./hardware-configuration.nix
     "${self}/modules/xorg.nix"
     "${self}/modules/kde.nix"
+    "${self}/modules/hyprland.nix"
+    "${self}/modules/remap.nix"
+
+    # user specific
     "${self}/users/mo"
     home-manager.nixosModules.home-manager
     {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
       home-manager.extraSpecialArgs = specialArgs;
-      home-manager.backupFileExtension = ".backup";
+      home-manager.backupFileExtension = "backup";
       home-manager.users.mo = import "${self}/users/mo/home.nix";
     }
-    "${self}/modules/remap.nix"
   ];
+
   system.stateVersion = "24.11";
 
   boot.loader.systemd-boot.enable = true;
@@ -23,7 +27,7 @@ with inputs;
 
   networking.hostName = "lambda";
 
-  time.timeZone = "Europe/Stockholm";
+  time.timeZone = "Europe/Berlin";
   time.hardwareClockInLocalTime = true;
 
   i18n.defaultLocale = "en_US.UTF-8";
@@ -47,10 +51,10 @@ with inputs;
 
   hardware.nvidia = {
     modesetting.enable = true;
+    nvidiaPersistenced = true;
 
     # powerManagement is experimental
-    powerManagement.enable = false;
-    powerManagement.finegrained = false;
+    powerManagement.enable = true;
 
     # wether to use nouveau driver
     open = false;
@@ -70,7 +74,10 @@ with inputs;
 
   # Virtualbox
   virtualisation.virtualbox.host.enable = true;
+  virtualisation.docker.enable = true;
+  users.extraGroups.docker.members = [ "mo" ];
 
+  # root shell
   programs.zsh.enable = true;
   programs.fish.enable = true;
 
@@ -79,16 +86,21 @@ with inputs;
     git
     coreutils-full
     man-pages
+
+    # profiling
     config.boot.kernelPackages.perf
 
+    # gui
     google-chrome
     spotify
     vlc
     zotero
     gimp
     blender
+    teams-for-linux
+    skypeforlinux
+    ardour
   ] ++ [
-
     # create an FHS environment using the command `fhs`, enabling the execution of non-NixOS packages in NixOS!
     (
       let base = pkgs.appimageTools.defaultFhsEnvArgs; in
@@ -120,8 +132,4 @@ with inputs;
   # remap some keys and key combinations
   services.remap.enable = true;
   services.remap.ctrlLeftbraceToEsc = true;
-
-  # docker
-  virtualisation.docker.enable = true;
-  users.extraGroups.docker.members = [ "mo" ];
 }

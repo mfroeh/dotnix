@@ -9,7 +9,7 @@ with lib;
     (mkIf pkgs.stdenv.isLinux {
       home = "/home/mo";
       isNormalUser = true;
-      extraGroups = [ "networkmanager" "wheel" "audio" "video" "vboxusers" ];
+      extraGroups = [ "networkmanager" "wheel" "audio" "video" "vboxusers" "docker" ];
       initialPassword = "";
     })
     (mkIf pkgs.stdenv.isDarwin { home = "/Users/mo"; })

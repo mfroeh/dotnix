@@ -69,7 +69,7 @@
   programs.eza = {
     enable = true;
     enableZshIntegration = true;
-    icons = true;
+    icons = "always";
   };
 
   # starship - an customizable prompt for any shell

@@ -8,7 +8,7 @@
   wayland.windowManager.hyprland.systemd.variables = [ "--all" ];
 
   # wayland.windowManager.hyprland.settings = { ... };
-  wayland.windowManager.hyprland.plugins = with inputs.hyprland-plugins.packages.${pkgs.system}; [
+  wayland.windowManager.hyprland.plugins = with inputs.hyprland-plugins.packages.${system}; [
     hyprexpo
     hyprtrails
   ];

@@ -9,4 +9,6 @@
     # interval between automatically generated keypresses
     autoRepeatInterval = 50;
   };
+
+  services.displayManager.sddm.enable = true;
 }

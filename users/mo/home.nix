@@ -7,13 +7,11 @@
     "${self}/home-manager-modules/nvim.nix"
     "${self}/home-manager-modules/fzf.nix"
     "${self}/home-manager-modules/vscode.nix"
-    "${self}/home-manager-modules/karabiner.nix"
-  ];
+    "${self}/home-manager-modules/zed.nix"
 
-  # ] ++ lib.optionals pkgs.stdenv.isLinux [ 
-  # "${self}/home-manager-modules/kde.nix"
-  #"${self}/home-manager-modules/hyperwm.nix"
-  # ]
+    "${self}/home-manager-modules/karabiner.nix"
+    "${self}/home-manager-modules/hyprland.nix"
+  ];
 
   home.stateVersion = "24.11";
 
@@ -47,8 +45,11 @@
     coreutils-full
     devenv
 
+    zoom-us
+
     rustup
 
+    zed-editor.fhs
     discord
 
     # fun
@@ -72,10 +73,7 @@
 
     which
     glow
-  ] ++ lib.optionals pkgs.stdenv.isLinux [
-    teams-for-linux
-    skypeforlinux
-  ];
+  ] ++ lib.optionals pkgs.stdenv.isLinux [ ];
 
   programs.zathura.enable = true;
   programs.bat.enable = true;
