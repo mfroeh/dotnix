@@ -63,7 +63,6 @@
   programs.waybar =
     {
       enable = true;
-      # builtins.readFile "${pkgs.waybar}/etc/xdg/waybar/style.css"}
       style = ''
         * {
           font-size: 13px;
@@ -94,7 +93,7 @@
         height = 30;
         modules-center = [ "wlr/taskbar" ];
         modules-left = [ "hyprland/workspaces" ];
-        modules-right = [ "tray" "pulseaudio/slider" "pulseaudio" "clock" "custom/power" ];
+        modules-right = [ "tray" "hyprland/language" "pulseaudio/slider" "pulseaudio" "clock" "custom/power" ];
         "wlr/taskbar" = {
           format = "{icon} {name}";
           icon-size = 13;
@@ -118,6 +117,11 @@
           min = 0;
           max = 100;
         };
+        "hyprland/language" = {
+          format = " {}";
+          format-us = "us";
+          format-ru = "ru";
+        };
         # todo: won't work
         tray = {
           icon-size = 13;
@@ -131,28 +135,40 @@
     enable = true;
     layout = [
       {
-        label = "logout";
-        text = "Logout";
-        action = "hyprctl dispatch exit";
+        label = "lock";
+        text = "Lock (l)";
+        action = "hyprlock";
         keybind = "l";
       }
       {
-        label = "shutdown";
-        text = "Shutdown";
-        action = "systemctl poweroff";
-        keybind = "p";
-      }
-      {
         label = "hibernate";
-        text = "Save RAM to disk and shutdown";
+        text = "Suspend to disk (h)";
         action = "systemctl hibernate";
         keybind = "h";
       }
       {
-        label = "lock";
-        text = "Lock";
-        action = "hyprlock";
-        keybind = "k";
+        label = "logout";
+        text = "Logout (e)";
+        action = "hyprctl dispatch exit";
+        keybind = "e";
+      }
+      {
+        label = "shutdown";
+        text = "Shutdown (s)";
+        action = "systemctl poweroff";
+        keybind = "s";
+      }
+      {
+        label = "suspend";
+        action = "systemctl suspend";
+        text = "Suspend to RAM (u)";
+        keybind = "u";
+      }
+      {
+        label = "reboot";
+        action = "systemctl reboot";
+        text = "Reboot (r)";
+        keybind = "r";
       }
     ];
   };
