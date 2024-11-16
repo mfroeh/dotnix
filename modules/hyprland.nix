@@ -9,6 +9,6 @@
     xwayland.enable = true;
   };
 
-  # Optional, hint electron apps to use wayland (e.g. vscode)
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  # also enables hypridle
+  programs.hyprlock.enable = true;
 }

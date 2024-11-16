@@ -1,4 +1,4 @@
-{ lib, pkgs, self, ... }:
+{ lib, pkgs, self, config, ... }:
 {
   imports = [
     "${self}/home-manager-modules/kitty.nix"
@@ -83,5 +83,10 @@
   programs.obs-studio = {
     enable = pkgs.stdenv.isLinux;
     plugins = [ pkgs.obs-studio-plugins.obs-backgroundremoval ];
+  };
+
+  home.file."${config.xdg.configHome}/wallpapers" = {
+    source = "${self}/config/wallpapers";
+    recursive = true;
   };
 }

@@ -6,7 +6,4 @@
   };
   qt.platformTheme = "kde";
   programs.xwayland.enable = true;
-
-  # optional, hint electron apps to use wayland (e.g. vscode)
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
 }

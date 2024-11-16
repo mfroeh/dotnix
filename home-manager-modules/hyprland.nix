@@ -3,15 +3,17 @@
     inputs.hyprland.homeManagerModules.default
   ];
 
-  wayland.windowManager.hyprland.enable = true;
-  wayland.windowManager.hyprland.extraConfig = builtins.readFile ("${self}/config/hypr/hyprland.conf");
-  wayland.windowManager.hyprland.systemd.variables = [ "--all" ];
+  wayland.windowManager.hyprland = {
+    enable = true;
+    package = inputs.hyprland.packages.${system}.hyprland;
+    systemd.variables = [ "--all" ];
+    extraConfig = builtins.readFile ("${self}/config/hypr/hyprland.conf");
 
-  # wayland.windowManager.hyprland.settings = { ... };
-  wayland.windowManager.hyprland.plugins = with inputs.hyprland-plugins.packages.${system}; [
-    hyprexpo
-    hyprtrails
-  ];
+    plugins = with inputs.hyprland-plugins.packages.${system}; [
+      hyprexpo
+      hyprtrails
+    ];
+  };
 
   home.packages = with pkgs; [
     wofi
@@ -26,7 +28,6 @@
     imv
 
     pavucontrol
-    wlogout
   ];
 
   # notifications # todo: test this
@@ -103,7 +104,7 @@
         "custom/power" = {
           format = " ⏻ ";
           tooltip = false;
-          on-click = "wlogout --protocol layer-shell";
+          on-click = "wlogout";
         };
         clock = {
           interval = 1;
@@ -124,5 +125,58 @@
         };
       }];
     };
+
+  # configures wlogout
+  programs.wlogout = {
+    enable = true;
+    layout = [
+      {
+        label = "logout";
+        text = "Logout";
+        action = "hyprctl dispatch exit";
+        keybind = "l";
+      }
+      {
+        label = "shutdown";
+        text = "Shutdown";
+        action = "systemctl poweroff";
+        keybind = "p";
+      }
+      {
+        label = "hibernate";
+        text = "Save RAM to disk and shutdown";
+        action = "systemctl hibernate";
+        keybind = "h";
+      }
+      {
+        label = "lock";
+        text = "Lock";
+        action = "hyprlock";
+        keybind = "k";
+      }
+    ];
+  };
+
+  # configures hyprlock
+  programs.hyprlock = {
+    # the NixOS option `programs.hyprlock.enable` is required for hyprlock to work as it needs PAM access
+    enable = true;
+    extraConfig = builtins.readFile ("${self}/config/hypr/hyprlock.conf");
+  };
+
+  services.hyprpaper = {
+    enable = true;
+    settings = {
+      ipc = "on";
+
+      preload = [
+        "${self}/config/wallpapers/mirroring.png"
+      ];
+
+      wallpaper = [
+        ", ${self}/config/wallpapers/mirroring.png"
+      ];
+    };
+  };
 }
 
