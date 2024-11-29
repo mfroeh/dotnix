@@ -1,4 +1,4 @@
-{ pkgs, ... }: rec {
+{ pkgs, lib, ... }: rec {
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -95,4 +95,8 @@
     enable = true;
     options = [ "--cmd j" ];
   };
+
+  home.packages = with pkgs; [
+  ];
+
 }

@@ -1,7 +1,7 @@
 { pkgs, ... }: {
   programs.kitty = {
     enable = true;
-    themeFile = "Bright_Lights";
+    themeFile = "gruvbox-dark-soft";
     settings = {
       font_size = 10;
       enable_audio_bell = false;

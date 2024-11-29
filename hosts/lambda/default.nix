@@ -15,7 +15,7 @@ with inputs;
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
       home-manager.extraSpecialArgs = specialArgs;
-      home-manager.backupFileExtension = "backup";
+      home-manager.backupFileExtension = "backup-hm";
       home-manager.users.mo = import "${self}/users/mo/home.nix";
     }
   ];
@@ -87,6 +87,8 @@ with inputs;
     coreutils-full
     man-pages
 
+    ntfs3g
+
     # profiling
     config.boot.kernelPackages.perf
 
@@ -100,6 +102,8 @@ with inputs;
     teams-for-linux
     skypeforlinux
     ardour
+
+    lunar-client
   ] ++ [
     # create an FHS environment using the command `fhs`, enabling the execution of non-NixOS packages in NixOS!
     (

@@ -24,15 +24,45 @@
     slurp
     wl-clipboard
 
-    cinnamon.nemo
-    imv
-
     pavucontrol
-  ];
+  ] ++ (with pkgs.kdePackages; [
+    dolphin
+    gwenview
+    okular
+  ]);
 
   # notifications # todo: test this
   services.mako = {
     enable = true;
+    extraConfig = ''
+sort=-time
+layer=overlay
+background-color=#2e3440
+width=300
+height=60
+border-size=2
+border-color=#88c0d0
+border-radius=15
+icons=0
+max-icon-size=64
+default-timeout=5000
+ignore-timeout=1
+font=monospace 10
+
+[urgency=low]
+border-color=#cccccc
+
+[urgency=normal]
+border-color=#d08770
+
+[urgency=high]
+border-color=#bf616a
+default-timeout=0
+
+[category=mpd]
+default-timeout=2000
+group-by=category
+    '';
   };
 
   home.pointerCursor = {
@@ -50,8 +80,8 @@
     };
 
     iconTheme = {
-      package = pkgs.gnome.adwaita-icon-theme;
-      name = "Adwaita";
+      package = pkgs.tela-icon-theme;
+      name = "Tela";
     };
 
     font = {
@@ -118,9 +148,9 @@
           max = 100;
         };
         "hyprland/language" = {
-          format = " {}";
-          format-us = "us";
-          format-ru = "ru";
+          format = "{}";
+          format-en = "🇺🇸";
+          format-de = "🇩🇪";
         };
         # todo: won't work
         tray = {
