@@ -2,7 +2,6 @@
 {
   imports = [
     "${self}/home-manager-modules/kitty.nix"
-    "${self}/home-manager-modules/tmux.nix"
     "${self}/home-manager-modules/zellij.nix"
     "${self}/home-manager-modules/zsh.nix"
     "${self}/home-manager-modules/nvim.nix"
