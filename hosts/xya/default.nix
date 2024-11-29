@@ -1,4 +1,4 @@
-{ self, inputs, specialArgs, ... }:
+{ self, pkgs, inputs, specialArgs, ... }:
 with inputs;
 {
   imports = [
@@ -17,6 +17,7 @@ with inputs;
 
   # otherwise nix-darwin wont chsh for users (actually, it still doesn't somehow =D, but we want this for nix command completion)
   programs.zsh.enable = true;
+  environment.shells = [ pkgs.zsh ];
 
   system.stateVersion = 4;
 

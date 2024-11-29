@@ -1,6 +1,6 @@
-{ pkgs, inputs, system, ... }: {
+{ pkgs, inputs, lib, system, ... }: {
   programs.hyprland = {
-    enable = true;
+    enable = pkgs.stdenv.isLinux;
     # set the flake package
     package = inputs.hyprland.packages.${system}.hyprland;
     # make sure to also set the portal package, so that they are in sync
@@ -10,5 +10,5 @@
   };
 
   # also enables hypridle
-  programs.hyprlock.enable = true;
+  programs.hyprlock.enable = pkgs.stdenv.isLinux;
 }

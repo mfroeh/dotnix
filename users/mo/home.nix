@@ -3,6 +3,7 @@
   imports = [
     "${self}/home-manager-modules/kitty.nix"
     "${self}/home-manager-modules/tmux.nix"
+    "${self}/home-manager-modules/zellij.nix"
     "${self}/home-manager-modules/zsh.nix"
     "${self}/home-manager-modules/nvim.nix"
     # "${self}/home-manager-modules/nixvim.nix"
@@ -11,12 +12,12 @@
     "${self}/home-manager-modules/zed.nix"
 
     "${self}/home-manager-modules/karabiner.nix"
-    "${self}/home-manager-modules/hyprland.nix"
+    # "${self}/home-manager-modules/hyprland.nix"
   ];
 
   home.stateVersion = "24.11";
 
-  services.ssh-agent.enable = true;
+  services.ssh-agent.enable = pkgs.stdenv.isLinux;
 
   programs.git = {
     enable = true;
@@ -91,6 +92,7 @@
     plugins = [ pkgs.obs-studio-plugins.obs-backgroundremoval ];
   };
 
+
   home.file."${config.xdg.configHome}/wallpapers" = {
     source = "${self}/config/wallpapers";
     recursive = true;
@@ -109,9 +111,9 @@
   };
 
   # this doesn't work with Dolphin atlesat
-  xdg.enable = true;
+  xdg.enable = pkgs.stdenv.isLinux;
   xdg.mimeApps = rec {
-    enable = true;
+    enable = pkgs.stdenv.isLinux;
     defaultApplications = 
       {
         "application/pdf" = ["org.kde.okular.desktop"];

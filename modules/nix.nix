@@ -1,4 +1,4 @@
-{ ... }: {
+{ pkgs, ... }: {
   nix = {
     settings = {
       # enable new nix cli and flakes
@@ -23,8 +23,12 @@
       ];
       trusted-users = [ "root mo" ];
       # https://nixos.org/manual/nix/stable/command-ref/conf-file.html#conf-auto-optimise-store
-      auto-optimise-store = true;
+      auto-optimise-store = pkgs.stdenv.isLinux;
     };
+    
+    # darwin alternative for auto-optimise-store
+    optimise.automatic = pkgs.stdenv.isDarwin;
+
     # perform garbage collection to maintain low disk usage
     gc = {
       automatic = true;

@@ -1,13 +1,13 @@
-{ pkgs, ... }: {
+{ pkgs, lib, ... }: {
   programs.zed-editor = {
     enable = true;
     extensions = [ "nix" "toml" "glsl" ];
-    package = pkgs.zed-editor.fhs;
+    package = (lib.mkIf pkgs.stdenv.isLinux pkgs.zed-editor.fhs);
     userSettings = {
       theme = {
         mode = "system";
-        dark = "Atelier Sulphurpool Dark";
-        light = "Atelier Sulphurpool Light";
+        dark = "Gruvbox Dark Soft";
+        light = "Gruvbox Light Soft";
       };
 
       features = { inline_completion_provider = "copilot"; };
@@ -68,5 +68,5 @@
   };
 
   home.packages = with pkgs;
-    [ nixd nixfmt ] ++ [ (nerdfonts.override { fonts = [ "Hack" ]; }) ];
+    [ nixd nixfmt-classic ] ++ [ (nerdfonts.override { fonts = [ "Hack" ]; }) ];
 }
