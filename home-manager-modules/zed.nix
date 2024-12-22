@@ -1,7 +1,7 @@
 { pkgs, lib, ... }: {
   programs.zed-editor = {
     enable = true;
-    extensions = [ "nix" "toml" "glsl" ];
+    extensions = [ "nix" "toml" "glsl" "vue" ];
     package = (lib.mkIf pkgs.stdenv.isLinux pkgs.zed-editor.fhs);
     userSettings = {
       theme = {
@@ -47,6 +47,8 @@
       };
 
       terminal = { cursor_shape = "bar"; };
+
+      ensure_final_newline_on_save = false;
     };
     userKeymaps = [
       {
@@ -68,5 +70,5 @@
   };
 
   home.packages = with pkgs;
-    [ nixd nixfmt-classic ] ++ [ (nerdfonts.override { fonts = [ "Hack" ]; }) ];
+    [ nixd nixfmt-classic vue-language-server ] ++ [ (nerdfonts.override { fonts = [ "Hack" ]; }) ];
 }

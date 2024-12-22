@@ -42,12 +42,17 @@
 
   fonts.fontconfig.enable = true;
 
+  programs.k9s = {
+    enable = true;
+  };
+
   home.packages = with pkgs; [
     coreutils-full
     devenv
     zoom-us
     rustup
     discord
+    nodejs_23
 
     # fun
     neofetch
@@ -107,6 +112,10 @@
         }
       ];
     };
+  };
+
+  programs.gh = {
+    enable = true;
   };
 
   # this doesn't work with Dolphin atlesat

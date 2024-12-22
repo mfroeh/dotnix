@@ -43,6 +43,7 @@ with inputs;
       "obs"
     ];
     brews = [
+      "qemu"
     ];
   };
 
