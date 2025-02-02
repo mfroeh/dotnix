@@ -4,12 +4,29 @@
 }:
 {
   home.packages = with pkgs; [
-    neofetch
+    coreutils-full
+    which
+
+    # archivers
+    gnutar
     zip
     unzip
+    rar
 
     # bat for man pages
     bat-extras.batman
+
+    dust
+    just
+
+    # nix derivation dependency browser
+    nix-tree
+    # `nom` is an alias for `nix` with detailled log output
+    nix-output-monitor
+
+    devenv
+
+    neofetch
   ];
 
   programs = {
@@ -97,6 +114,22 @@
       nix-direnv.enable = true;
       config = {
         hide_env_diff = true;
+      };
+    };
+
+    # terminal file manager
+    yazi = {
+      enable = true;
+      keymap = {
+        manager.prepend_keymap = [
+          {
+            on = "y";
+            run = [
+              ''shell 'for path in "$@"; do echo "file://$path"; done | wl-copy -t text/uri-list' --confirm''
+              "yank"
+            ];
+          }
+        ];
       };
     };
   };

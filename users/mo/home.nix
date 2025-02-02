@@ -10,8 +10,10 @@
     # desktop environment
     "${self}/home-manager-modules/de/hyprland"
 
-    # gui
+    # gui apps
     "${self}/home-manager-modules/gui/bitwarden.nix"
+    "${self}/home-manager-modules/gui/obs.nix"
+    "${self}/home-manager-modules/gui/zathura.nix"
 
     # shell
     "${self}/home-manager-modules/shell"
@@ -41,32 +43,9 @@
   home.packages =
     with pkgs;
     [
-      coreutils-full
-      devenv
       zoom-us
       rustup
       discord
-
-      # fun
-      neofetch
-      tt
-
-      # archivers
-      zip
-      unzip
-      rar
-
-      # utils
-      ripgrep
-      fd
-      dust # du in rust
-      just
-
-      # nix
-      nix-tree
-      nix-output-monitor # `nom` is an alias for `nix` with detailled log output
-
-      which
 
       # gui
       google-chrome
@@ -82,38 +61,10 @@
       bitwarden-desktop
 
       lunar-client
-    ]
+    ] # todo
     ++ lib.optionals pkgs.stdenv.isLinux [ ];
 
-  programs.zathura.enable = true;
-  programs.bat.enable = true;
-
-  programs.obs-studio = {
-    enable = pkgs.stdenv.isLinux;
-    plugins = [ pkgs.obs-studio-plugins.obs-backgroundremoval ];
-  };
-
-  home.file."${config.xdg.configHome}/wallpapers" = {
-    source = "${self}/config/wallpapers";
-    recursive = true;
-  };
-
-  programs.yazi = {
-    enable = true;
-    keymap = {
-      manager.prepend_keymap = [
-        {
-          on = "y";
-          run = [
-            ''shell 'for path in "$@"; do echo "file://$path"; done | wl-copy -t text/uri-list' --confirm''
-            "yank"
-          ];
-        }
-      ];
-    };
-  };
-
-  # this doesn't work with Dolphin atlesat
+  # todo: this doesn't work with Dolphin atlesat
   xdg.enable = pkgs.stdenv.isLinux;
   xdg.mimeApps = rec {
     enable = pkgs.stdenv.isLinux;

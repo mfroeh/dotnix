@@ -26,9 +26,6 @@
   home.packages =
     with pkgs;
     [
-      wofi
-      inputs.launch.packages.${pkgs.system}.default
-
       # screenshot: grim -g "$(slurp)" - | wl-copy
       grim
       slurp
@@ -51,15 +48,17 @@
 
   services.hyprpaper = {
     enable = true;
-    settings = {
+    settings = rec {
       ipc = "on";
+
+      wallpaper = [
+        ",${self}/config/wallpapers/mirroring.png"
+        ",${self}/config/wallpapers/pink.png"
+      ];
 
       preload = [
         "${self}/config/wallpapers/mirroring.png"
-      ];
-
-      wallpaper = [
-        ", ${self}/config/wallpapers/mirroring.png"
+        "${self}/config/wallpapers/pink.png"
       ];
     };
   };

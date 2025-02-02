@@ -44,7 +44,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    launch.url = "github:mfroeh/launch";
+    walker.url = "github:abenz1267/walker";
   };
 
   outputs =
