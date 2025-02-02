@@ -8,3 +8,6 @@
 
 ## Nix-darwin bootstrap
 `nix run --extra-experimental-features "nix-command flakes" nix-darwin -- switch --flake .#xya`
+
+## Home-manager bootstrap
+`nix run github:nix-community/home-manager -- switch --flake .#$USERNAME@$(hostname)`

@@ -238,5 +238,5 @@
     ];
   };
 
-  home.packages = with pkgs; [ nil nixpkgs-fmt clang-tools cmake-language-server cmake-format jre_minimal texliveFull ] ++ [ (nerdfonts.override { fonts = [ "Hack" ]; }) ] ++ lib.optionals pkgs.stdenv.isLinux [ code-cursor ];
+  home.packages = with pkgs; [ nil nixpkgs-fmt clang-tools cmake-language-server cmake-format jre_minimal texliveFull ] ++ [ nerd-fonts.hack ] ++ lib.optionals pkgs.stdenv.isLinux [ code-cursor ];
 }

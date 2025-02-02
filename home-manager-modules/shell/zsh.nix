@@ -1,4 +1,5 @@
-{ pkgs, lib, ... }: rec {
+{ pkgs, ... }:
+{
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -11,12 +12,13 @@
 
     shellAliases = {
       "ed" = "fd . --type f | fzf --preview='bat {} --color always --plain' | xargs -r nvim";
-      "nre" = "sudo nixos-rebuild switch --flake ~/dotnix";
-      "dre" = "darwin-rebuild switch --flake ~/dotnix";
+      "so" = "rebuild-system";
+      "ho" = "home-manager switch --flake ~/dotnix#$USERNAME@$(hostname)";
       "dev" = "nix develop --command zsh";
       "gg" = "lazygit";
-      "split:" = "tr ':' '\n'";
       "tree" = "eza --tree";
+      "man" = "batman";
+      "lal" = "alias | fzf";
     };
 
     autocd = true; # cd /some/dir == /some/dir, cd ../.. == ...
@@ -24,20 +26,25 @@
     initExtra = ''
       export KEYTIMEOUT=1 # make vi mode transitions faster (KEYTIMEOUT is in hundredths of a second)
       bindkey '^F' autosuggest-accept # accept autosuggestions with ^F
-    '';
 
-    zsh-abbr.enable = true;
-    zsh-abbr.abbreviations = programs.zsh.shellAliases;
+      function rebuild-system() {
+          local os_name=$(uname -s)
+
+          if [ "$os_name" = "Linux" ]; then
+              sudo nixos-rebuild switch --flake ~/dotnix#"$(hostname)"
+          elif [ "$os_name" = "Darwin" ]; then
+              darwin-rebuild switch --flake ~/dotnix#"$(hostname)"
+          fi
+      }
+    '';
 
     oh-my-zsh = {
       enable = true;
       plugins = [
         "vi-mode" # adds better vi mode (e.g. change cursor style depending on mode)
         "git" # adds aliases and some functions, https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git
-        # "tmux" # adds aliases and ZSH_TMUX_AUTOSTART functionality
       ];
       extraConfig = ''
-        # ZSH_TMUX_AUTOSTART=true # automatically start tmux
         VI_MODE_SET_CURSOR=true # beam cursor in insert mode
       '';
     };
@@ -66,12 +73,6 @@
     ];
   };
 
-  programs.eza = {
-    enable = true;
-    enableZshIntegration = true;
-    icons = "always";
-  };
-
   # starship - an customizable prompt for any shell
   programs.starship = {
     enable = true;
@@ -82,21 +83,7 @@
     };
   };
 
-  # a nix environment switcher
-  programs.direnv = {
-    enable = true;
-    nix-direnv.enable = true;
-    config = {
-      hide_env_diff = true;
-    };
-  };
-
-  programs.zoxide = {
-    enable = true;
-    options = [ "--cmd j" ];
-  };
-
-  home.packages = with pkgs; [
-  ];
-
+  # expands aliases but is slow as hell, just use `lal`;
+  # zsh-abbr.enable = true;
+  # zsh-abbr.abbreviations = programs.zsh.shellAliases;
 }

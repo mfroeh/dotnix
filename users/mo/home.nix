@@ -1,20 +1,28 @@
-{ lib, pkgs, self, config, ... }:
+{
+  lib,
+  pkgs,
+  self,
+  config,
+  ...
+}:
 {
   imports = [
-    "${self}/home-manager-modules/kitty.nix"
-    "${self}/home-manager-modules/zellij.nix"
-    "${self}/home-manager-modules/zsh.nix"
-    "${self}/home-manager-modules/nvim.nix"
-    # "${self}/home-manager-modules/nixvim.nix"
-    "${self}/home-manager-modules/fzf.nix"
-    "${self}/home-manager-modules/vscode.nix"
-    "${self}/home-manager-modules/zed.nix"
+    # desktop environment
+    "${self}/home-manager-modules/de/hyprland"
 
+    # gui
+    "${self}/home-manager-modules/gui/bitwarden.nix"
+
+    # shell
+    "${self}/home-manager-modules/shell"
+
+    # editor
+    "${self}/home-manager-modules/editor/zed.nix"
+    "${self}/home-manager-modules/editor/nvim.nix"
+
+    # other
     "${self}/home-manager-modules/karabiner.nix"
-    # "${self}/home-manager-modules/hyprland.nix"
   ];
-
-  home.stateVersion = "24.11";
 
   services.ssh-agent.enable = pkgs.stdenv.isLinux;
 
@@ -22,75 +30,68 @@
     enable = true;
     userName = "mfroeh";
     userEmail = "mfroeh0@pm.me";
-    aliases = {
-      s = "status";
-      co = "checkout";
-      b = "branch";
-      aa = "add -A";
-      p = "push";
-    };
     extraConfig = {
       init.defaultBranch = "master";
     };
     diff-so-fancy.enable = true;
   };
 
-  programs.lazygit = {
-    enable = true;
-    settings = { };
-  };
-
   fonts.fontconfig.enable = true;
 
-  home.packages = with pkgs; [
-    coreutils-full
-    devenv
-    zoom-us
-    rustup
-    discord
+  home.packages =
+    with pkgs;
+    [
+      coreutils-full
+      devenv
+      zoom-us
+      rustup
+      discord
 
-    # fun
-    neofetch
-    tt
+      # fun
+      neofetch
+      tt
 
-    # archivers
-    zip
-    unzip
-    rar
+      # archivers
+      zip
+      unzip
+      rar
 
-    # utils
-    ripgrep
-    fd
-    dust # du in rust
-    just
+      # utils
+      ripgrep
+      fd
+      dust # du in rust
+      just
 
-    # nix
-    nix-tree
-    nix-output-monitor # `nom` is an alias for `nix` with detailled log output
+      # nix
+      nix-tree
+      nix-output-monitor # `nom` is an alias for `nix` with detailled log output
 
-    which
-    glow
-  ] ++ lib.optionals pkgs.stdenv.isLinux [ ];
+      which
+
+      # gui
+      google-chrome
+      spotify
+      vlc
+      zotero
+      gimp
+      blender
+      teams-for-linux
+      skypeforlinux
+      ardour
+      youtube-music
+      bitwarden-desktop
+
+      lunar-client
+    ]
+    ++ lib.optionals pkgs.stdenv.isLinux [ ];
 
   programs.zathura.enable = true;
   programs.bat.enable = true;
-
-  programs.btop = {
-    enable = true;
-    package = pkgs.btop.override { cudaSupport = true; };
-    settings = {
-      color_theme = "gruvbox_dark_v2";
-      theme_background = true;
-      vim_keys = true;
-      update_ms = 500;
-    };
-  };
 
   programs.obs-studio = {
     enable = pkgs.stdenv.isLinux;
     plugins = [ pkgs.obs-studio-plugins.obs-backgroundremoval ];
   };
-
 
   home.file."${config.xdg.configHome}/wallpapers" = {
     source = "${self}/config/wallpapers";
@@ -103,7 +104,10 @@
       manager.prepend_keymap = [
         {
           on = "y";
-          run = [ ''shell 'for path in "$@"; do echo "file://$path"; done | wl-copy -t text/uri-list' --confirm'' "yank" ];
+          run = [
+            ''shell 'for path in "$@"; do echo "file://$path"; done | wl-copy -t text/uri-list' --confirm''
+            "yank"
+          ];
         }
       ];
     };
@@ -113,12 +117,11 @@
   xdg.enable = pkgs.stdenv.isLinux;
   xdg.mimeApps = rec {
     enable = pkgs.stdenv.isLinux;
-    defaultApplications = 
-      {
-        "application/pdf" = ["org.kde.okular.desktop"];
-        "text/html" = ["google-chrome.desktop"];
-        "image/png" = ["org.kde.gwenview.desktop"];
-      };
+    defaultApplications = {
+      "application/pdf" = [ "org.kde.okular.desktop" ];
+      "text/html" = [ "google-chrome.desktop" ];
+      "image/png" = [ "org.kde.gwenview.desktop" ];
+    };
     associations.added = defaultApplications;
   };
 }

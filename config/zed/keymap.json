@@ -1,0 +1,16 @@
+// For information on binding keys, see the Zed
+// documentation: https://zed.dev/docs/key-bindings
+[
+  {
+    "context": "VimControl && !VimInsert",
+    "bindings": {
+      "space space": "file_finder::Toggle"
+    }
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      // "j k": ["workspace::SendKeystrokes", "escape"]
+    }
+  }
+]

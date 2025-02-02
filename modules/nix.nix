@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, lib, ... }: {
   nix = {
     settings = {
       # enable new nix cli and flakes
@@ -25,13 +25,16 @@
       # https://nixos.org/manual/nix/stable/command-ref/conf-file.html#conf-auto-optimise-store
       auto-optimise-store = pkgs.stdenv.isLinux;
     };
-    
-    # darwin alternative for auto-optimise-store
-    optimise.automatic = pkgs.stdenv.isDarwin;
 
-    # perform garbage collection to maintain low disk usage
-    gc = {
+    # automatically run the nix store optimiser at a specific time
+    optimise.automatic = true;
+
+    gc = lib.mkIf pkgs.stdenv.isLinux {
       automatic = true;
+    } // lib.optionalAttrs pkgs.stdenv.isLinux {
+      dates = "weekly";
+    } // lib.optionalAttrs pkgs.stdenv.isDarwin {
+      interval = [ { Hour = 0; Minute = 0; Weekday = 7; } ];
     };
   };
 }

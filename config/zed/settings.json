@@ -1,0 +1,57 @@
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+{
+  "theme": {
+    "mode": "dark",
+    "light": "One Light",
+    "dark": "Gruvbox Dark Hard"
+  },
+  "ui_font_size": 16,
+  "buffer_font_size": 14.0,
+  "buffer_font_weight": 400,
+  "pane_split_direction_horizontal": "down",
+  "pane_split_direction_vertical": "right",
+  "cursor_blink": false,
+  "relative_line_numbers": true,
+  "scrollbar": {
+    "show": "auto"
+  },
+  "ensure_final_newline_on_save": false,
+  "scroll_beyond_last_line": "off",
+  "soft_wrap": "editor_width",
+  "tabs": {
+    "git_status": true,
+    "file_icons": true
+  },
+
+  // dont show collaboration button
+  "collaboration_panel": { "button": false },
+
+  // vim
+  "vim_mode": true,
+  "vim": {
+    "use_system_clipboard": "always",
+    "toggle_relative_line_numbers": true
+  },
+
+  // languages
+  "languages": {
+    "Nix": {
+      "language_servers": ["nixd"],
+      "formatter": "language_server"
+    }
+  },
+
+  // LLM
+  "assistant": {
+    "default_model": {
+      "provider": "copilot_chat",
+      "model": "claude-3-5-sonnet"
+    },
+    "version": "2"
+  },
+  "features": {
+    "copilot": true,
+    "inline_completion_provider": "copilot"
+  }
+}

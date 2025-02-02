@@ -21,3 +21,5 @@ vim.api.nvim_create_user_command("NixosRebuildSwitch", NIXOS_REBUILD_SWITCH, {})
 
 vim.keymap.set("n", "<leader>nn", NIXOS_REBUILD_SWITCH)
 vim.keymap.set("n", "<leader>hh", HOME_MANAGER_SWITCH)
+
+vim.opt.clipboard = "unnamedplus"

@@ -1,17 +1,24 @@
 { pkgs, lib, ... }:
-with lib;
 {
-  users.users.mo = mkMerge [
+  users.users.mo =
     {
       description = "mfroeh";
       shell = pkgs.zsh;
     }
-    (mkIf pkgs.stdenv.isLinux {
+    // lib.optionalAttrs pkgs.stdenv.isLinux {
       home = "/home/mo";
       isNormalUser = true;
-      extraGroups = [ "networkmanager" "wheel" "audio" "video" "vboxusers" "docker" ];
+      extraGroups = [
+        "networkmanager"
+        "wheel"
+        "audio"
+        "video"
+        "vboxusers"
+        "docker"
+      ];
       initialPassword = "";
-    })
-    (mkIf pkgs.stdenv.isDarwin { home = "/Users/mo"; })
-  ];
+    }
+    // lib.optionalAttrs pkgs.stdenv.isDarwin {
+      home = "/Users/mo";
+    };
 }

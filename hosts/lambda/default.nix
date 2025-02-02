@@ -1,4 +1,11 @@
-{ lib, pkgs, config, self, inputs, specialArgs, ... }:
+{
+  lib,
+  pkgs,
+  config,
+  self,
+  inputs,
+  ...
+}:
 with inputs;
 {
   imports = [
@@ -8,16 +15,7 @@ with inputs;
     "${self}/modules/hyprland.nix"
     "${self}/modules/remap.nix"
 
-    # user specific
     "${self}/users/mo"
-    home-manager.nixosModules.home-manager
-    {
-      home-manager.useGlobalPkgs = true;
-      home-manager.useUserPackages = true;
-      home-manager.extraSpecialArgs = specialArgs;
-      home-manager.backupFileExtension = "backup-hm";
-      home-manager.users.mo = import "${self}/users/mo/home.nix";
-    }
   ];
 
   system.stateVersion = "24.11";
@@ -51,7 +49,6 @@ with inputs;
 
   hardware.nvidia = {
     modesetting.enable = true;
-    nvidiaPersistenced = true;
 
     # powerManagement is experimental
     powerManagement.enable = true;
@@ -63,7 +60,21 @@ with inputs;
     nvidiaSettings = true;
 
     # optionally select the appropriate driver for your GPU
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    package = config.boot.kernelPackages.nvidiaPackages.mkDriver {
+      version = "565.77";
+      sha256_64bit = "sha256-CnqnQsRrzzTXZpgkAtF7PbH9s7wbiTRNcM0SPByzFHw=";
+      sha256_aarch64 = lib.fakeHash;
+      openSha256 = "sha256-Fxo0t61KQDs71YA8u7arY+503wkAc1foaa51vi2Pl5I=";
+      settingsSha256 = "sha256-VUetj3LlOSz/LB+DDfMCN34uA4bNTTpjDrb6C6Iwukk=";
+      persistencedSha256 = lib.fakeHash;
+    };
+  };
+
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+    localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
   };
 
   networking.networkmanager.enable = true;
@@ -89,43 +100,7 @@ with inputs;
 
     ntfs3g
 
-    # profiling
     config.boot.kernelPackages.perf
-
-    # gui
-    google-chrome
-    spotify
-    vlc
-    zotero
-    gimp
-    blender
-    teams-for-linux
-    skypeforlinux
-    ardour
-
-    lunar-client
-  ] ++ [
-    # create an FHS environment using the command `fhs`, enabling the execution of non-NixOS packages in NixOS!
-    (
-      let base = pkgs.appimageTools.defaultFhsEnvArgs; in
-      pkgs.buildFHSUserEnv (base // {
-        name = "fhs";
-        targetPkgs = pkgs: (
-          # pkgs.buildFHSUserEnv provides only a minimal FHS environment, lacking many basic packages needed by most software.
-          # Therefore, we need to add them manually.
-          # pkgs.appimageTools provides basic packages required by most software.
-          (base.targetPkgs pkgs) ++ (with pkgs; [
-            pkg-config
-            ncurses
-            # add more packages here if needed.
-          ]
-          )
-        );
-        profile = "export FHS=1";
-        runScript = "bash";
-        extraOutputsToInstall = [ "dev" ];
-      })
-    )
   ];
 
   environment.variables = {
@@ -136,4 +111,12 @@ with inputs;
   # remap some keys and key combinations
   services.remap.enable = true;
   services.remap.ctrlLeftbraceToEsc = true;
+
+  # disable waking from USB (in particular because of logitech USB receiver)
+  # cat /proc/acpi/wakeup
+  # cat /sys/class/pci_bus/0000:04/device/0000:04:00.0/vendor
+  # cat /sys/class/pci_bus/0000:04/device/0000:04:00.0/device
+  services.udev.extraRules = ''
+    ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}="0x8086" ATTR{device}="0xa36d" ATTR{power/wakeup}="disabled"
+  '';
 }

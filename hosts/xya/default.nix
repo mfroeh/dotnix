@@ -1,13 +1,11 @@
 { self, pkgs, inputs, specialArgs, ... }:
-with inputs;
-{
+with inputs; {
   imports = [
     inputs.mac-app-util.darwinModules.default
     "${self}/users/mo"
     home-manager.darwinModules.home-manager
     {
-      home-manager.sharedModules =
-        [ mac-app-util.homeManagerModules.default ];
+      home-manager.sharedModules = [ mac-app-util.homeManagerModules.default ];
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
       home-manager.extraSpecialArgs = specialArgs;
@@ -42,8 +40,7 @@ with inputs;
       "chatgpt"
       "obs"
     ];
-    brews = [
-    ];
+    brews = [ ];
   };
 
   system.defaults = {
