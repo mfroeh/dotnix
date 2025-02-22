@@ -7,7 +7,7 @@
     "dark": "Gruvbox Dark Hard"
   },
   "ui_font_size": 16,
-  "buffer_font_size": 14.0,
+  "buffer_font_size": 13.0,
   "buffer_font_weight": 400,
   "pane_split_direction_horizontal": "down",
   "pane_split_direction_vertical": "right",
@@ -32,6 +32,12 @@
   "vim": {
     "use_system_clipboard": "always",
     "toggle_relative_line_numbers": true
+  },
+
+  "autosave": {
+    "after_delay": {
+      "milliseconds": 300
+    }
   },
 
   // languages

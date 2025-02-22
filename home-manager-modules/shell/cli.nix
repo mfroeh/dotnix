@@ -108,6 +108,13 @@
       settings = { };
     };
 
+    gh = {
+      enable = true;
+      settings = {
+        git_protocol = "ssh";
+      };
+    };
+
     # a nix environment switcher (acts on .envrc)
     direnv = {
       enable = true;
