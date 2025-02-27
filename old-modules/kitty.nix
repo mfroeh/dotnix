@@ -1,6 +1,8 @@
-{ pkgs, ... }: {
+{ pkgs, config, ... }:
+{
   programs.kitty = {
     enable = true;
+    package = config.lib.nixGL.wrap pkgs.kitty;
     themeFile = "gruvbox-dark-soft";
     settings = {
       font_size = 10;
@@ -12,7 +14,5 @@
     font.name = "FiraCode Nerd Font Mono";
   };
 
-  home.packages = [
-    (pkgs.nerdfonts.override { fonts = [ "FiraCode" ]; })
-  ];
+  home.packages = [ pkgs.nerd-fonts.fira-code ];
 }

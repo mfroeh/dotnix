@@ -1,8 +1,9 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 {
   programs.ghostty = {
     # until fixed on darwin
     enable = pkgs.stdenv.isLinux;
+    package = config.lib.nixGL.wrap pkgs.ghostty;
     enableZshIntegration = true;
     settings = {
       theme = "nightfox";

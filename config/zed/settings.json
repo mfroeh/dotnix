@@ -40,6 +40,12 @@
   "use_autoclose": true,
   "use_auto_surround": true,
 
+  "autosave": {
+    "after_delay": {
+      "milliseconds": 200
+    }
+  },
+
   // dont show collaboration button
   "collaboration_panel": { "button": false },
 

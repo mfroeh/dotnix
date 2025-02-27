@@ -3,6 +3,7 @@
   pkgs,
   self,
   config,
+  inputs,
   ...
 }:
 {
@@ -17,11 +18,18 @@
 
     # shell
     "${self}/home-manager-modules/shell"
+    # until we get nixGL to work :s
+    "${self}/old-modules/kitty.nix"
 
     # editor
     "${self}/home-manager-modules/editor/zed.nix"
     "${self}/home-manager-modules/editor/nvim.nix"
   ];
+
+  nixGL = {
+    packages = inputs.nixgl.packages;
+    defaultWrapper = "nvidiaPrime";
+  };
 
   services.ssh-agent.enable = pkgs.stdenv.isLinux;
 
@@ -32,7 +40,16 @@
     extraConfig = {
       init.defaultBranch = "master";
     };
-    diff-so-fancy.enable = true;
+    delta.enable = true;
+    delta.options = {
+      line-numbers = true;
+      decorations = {
+        commit-decoration-style = "bold yellow box ul";
+        file-decoration-style = "none";
+        file-style = "bold yellow ul";
+      };
+      features = "decorations";
+    };
   };
 
   fonts.fontconfig.enable = true;
@@ -40,6 +57,8 @@
   home.packages =
     with pkgs;
     [
+      inputs.nixglhost.defaultPackage.${pkgs.system}
+      # pkgs.nixgl.nixGLDefault
       # zoom-us
       # rustup
       # discord

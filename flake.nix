@@ -54,13 +54,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixvim.url = "github:nix-community/nixvim";
-    nixvim.inputs.nixpkgs.follows = "nixpkgs";
+    nixglhost.url = "github:numtide/nix-gl-host";
 
-		rust-overlay = {
-      url = "github:oxalica/rust-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
-		};
+    nixgl.url = "github:nix-community/nixgl";
+    nixgl.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -70,7 +67,7 @@
       nixpkgs-stable,
       nix-darwin,
       home-manager,
-			rust-overlay,
+      nixgl,
       ...
     }@inputs:
     let
@@ -82,8 +79,7 @@
           config.allowUnfreePredicate = _: true;
           # https://github.com/LnL7/nix-darwin/issues/1041
           overlays = [
-						# override this inside devshell where necessary
-						rust-overlay.overlays.default
+            nixgl.overlay
             (self: super: {
               karabiner-elements = super.karabiner-elements.overrideAttrs (old: {
                 version = "14.13.0";
@@ -168,6 +164,25 @@
                 };
               }
               "${self}/users/mo/home.nix"
+            ];
+            extraSpecialArgs = mkSpecialArgs { inherit system; };
+          };
+        "moritz.froehlich@lenovo-PW09JP9W" =
+          let
+            system = "x86_64-linux";
+          in
+          home-manager.lib.homeManagerConfiguration {
+            pkgs = mkPkgs { inherit nixpkgs system; };
+            modules = [
+              {
+                home.stateVersion = "24.11";
+                programs.home-manager.enable = true;
+                home = {
+                  username = "moritz.froehlich";
+                  homeDirectory = "/home/moritz.froehlich";
+                };
+              }
+              "${self}/users/work/home.nix"
             ];
             extraSpecialArgs = mkSpecialArgs { inherit system; };
           };
