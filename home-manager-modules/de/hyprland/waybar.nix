@@ -61,7 +61,7 @@ in
           "custom/power"
         ];
         "wlr/taskbar" = {
-          format = "{icon} {name}";
+          format = "{icon} {title:.20}";
           icon-size = 13;
           on-click = "activate";
           on-click-middle = "close";
