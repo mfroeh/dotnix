@@ -8,6 +8,15 @@
     }
   },
   {
+    "context": "VimControl && !menu",
+    "bindings": {
+      "ctrl-shift-u": "vim::ScrollUp",
+      "ctrl-shift-d": "vim::ScrollDown",
+      "pageup": ["workspace::SendKeystrokes", "ctrl-shift-u z z"],
+      "pagedown": ["workspace::SendKeystrokes", "ctrl-shift-d z z"]
+    }
+  },
+  {
     "context": "Editor",
     "bindings": {
       // "j k": ["workspace::SendKeystrokes", "escape"]
