@@ -2,7 +2,8 @@
   lib,
   pkgs,
   self,
-  config,
+  inputs,
+  system,
   ...
 }:
 {
@@ -61,6 +62,8 @@
       bitwarden-desktop
 
       lunar-client
+
+      inputs.ngrams.defaultPackage.${system}
     ] # todo
     ++ lib.optionals pkgs.stdenv.isLinux [ ];
 

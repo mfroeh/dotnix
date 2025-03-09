@@ -45,6 +45,9 @@
     };
 
     walker.url = "github:abenz1267/walker";
+
+    ngrams.url = "github:mfroeh/ngrams";
+    ngrams.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
