@@ -1,6 +1,6 @@
-{ ... }:
+{ pkgs, lib, ... }:
 {
-  programs.wlogout = {
+  programs.wlogout = lib.mkIf pkgs.stdenv.isLinux {
     enable = true;
     layout = [
       {

@@ -1,6 +1,6 @@
 { pkgs, inputs, lib, system, ... }: {
-  programs.hyprland = {
-    enable = pkgs.stdenv.isLinux;
+  programs.hyprland = lib.mkIf pkgs.stdenv.isLinux {
+    enable = true;
     # set the flake package
     package = inputs.hyprland.packages.${system}.hyprland;
     # make sure to also set the portal package, so that they are in sync

@@ -11,7 +11,7 @@
     inputs.hyprland.homeManagerModules.default
   ];
 
-  wayland.windowManager.hyprland = {
+  wayland.windowManager.hyprland = lib.mkIf pkgs.stdenv.isLinux {
     enable = true;
     package = inputs.hyprland.packages.${system}.hyprland;
     systemd.variables = [ "--all" ];
@@ -25,28 +25,27 @@
 
   home.packages =
     with pkgs;
-    [
+    lib.optionals pkgs.stdenv.isLinux [
       # screenshot: grim -g "$(slurp)" - | wl-copy
       grim
       slurp
       wl-clipboard
 
       pavucontrol
-    ]
-    ++ (with pkgs.kdePackages; [
-      dolphin
-      gwenview
-      okular
-    ]);
+
+      kdePackages.dolphin
+      kdePackages.gwenview
+      kdePackages.okular
+    ];
 
   # configures hyprlock
-  programs.hyprlock = {
+  programs.hyprlock = lib.mkIf pkgs.stdenv.isLinux {
     # the NixOS option `programs.hyprlock.enable` is required for hyprlock to work as it needs PAM access
     enable = true;
     extraConfig = builtins.readFile ("${self}/config/hypr/hyprlock.conf");
   };
 
-  services.hyprpaper = {
+  services.hyprpaper = lib.mkIf pkgs.stdenv.isLinux {
     enable = true;
     settings = rec {
       ipc = "on";

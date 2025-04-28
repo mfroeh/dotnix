@@ -1,7 +1,7 @@
-{ ... }:
+{ pkgs, lib, ... }:
 {
   # notifications # todo: test this
-  services.mako = {
+  services.mako = lib.mkIf pkgs.stdenv.isLinux {
     enable = true;
     extraConfig = ''
       sort=-time

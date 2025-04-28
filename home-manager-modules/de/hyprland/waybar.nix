@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, lib, ... }:
 let
   css = ''
     * {
@@ -34,7 +34,7 @@ let
   '';
 in
 {
-  programs.waybar = {
+  programs.waybar = lib.mkIf pkgs.stdenv.isLinux {
     enable = true;
     systemd.enable = true;
     systemd.target = "hyprland-session.target";

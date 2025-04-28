@@ -52,12 +52,12 @@
 
   outputs =
     {
-      self,
-      nixpkgs,
-      nixpkgs-stable,
-      nix-darwin,
-      home-manager,
-      ...
+    self,
+    nixpkgs,
+    nixpkgs-stable,
+    nix-darwin,
+    home-manager,
+    ...
     }@inputs:
     let
       mkPkgs =
@@ -91,7 +91,7 @@
           };
         };
     in
-    {
+      {
       nixosConfigurations = {
         lambda = nixpkgs.lib.nixosSystem rec {
           system = "x86_64-linux";
@@ -121,6 +121,25 @@
           let
             system = "x86_64-linux";
           in
+            home-manager.lib.homeManagerConfiguration {
+              pkgs = mkPkgs { inherit nixpkgs system; };
+              modules = [
+                {
+                  home.stateVersion = "24.11";
+                  programs.home-manager.enable = true;
+                  home = {
+                    username = "mo";
+                    homeDirectory = "/home/mo";
+                  };
+                }
+                "${self}/users/mo/home.nix"
+              ];
+              extraSpecialArgs = mkSpecialArgs { inherit system; };
+            };
+      "mo@xya" =
+        let
+          system = "aarch64-darwin";
+        in
           home-manager.lib.homeManagerConfiguration {
             pkgs = mkPkgs { inherit nixpkgs system; };
             modules = [
@@ -129,7 +148,7 @@
                 programs.home-manager.enable = true;
                 home = {
                   username = "mo";
-                  homeDirectory = "/home/mo";
+                  homeDirectory = "/Users/mo";
                 };
               }
               "${self}/users/mo/home.nix"

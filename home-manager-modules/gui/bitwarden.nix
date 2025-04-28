@@ -1,10 +1,10 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   # https://bitwarden.com/help/keyboard-shortcuts/
-  home.packages = with pkgs; [ bitwarden-desktop ];
+  home.packages = with pkgs; lib.optionals pkgs.stdenv.isLinux [ bitwarden-desktop ];
 
   # configure systemd user service
-  systemd.user.services.bitwarden = {
+  systemd.user.services.bitwarden = lib.mkIf pkgs.stdenv.isLinux {
     Unit = {
       Description = "Bitwarden Password Manager";
       After = [ "graphical-session-pre.target" ];

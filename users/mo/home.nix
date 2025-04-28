@@ -34,7 +34,7 @@
     userName = "mfroeh";
     userEmail = "mfroeh0@pm.me";
     extraConfig = {
-      init.defaultBranch = "master";
+      init.defaultBranch = "main";
     };
     diff-so-fancy.enable = true;
   };
@@ -44,12 +44,13 @@
   home.packages =
     with pkgs;
     [
-      zoom-us
       rustup
-      discord
-
+      inputs.ngrams.defaultPackage.${system}
+    ] ++ lib.optional pkgs.stdenv.isLinux [
       # gui
+      zoom-us
       google-chrome
+      discord
       spotify
       vlc
       zotero
@@ -60,22 +61,6 @@
       ardour
       youtube-music
       bitwarden-desktop
-
       lunar-client
-
-      inputs.ngrams.defaultPackage.${system}
-    ] # todo
-    ++ lib.optionals pkgs.stdenv.isLinux [ ];
-
-  # todo: this doesn't work with Dolphin atlesat
-  xdg.enable = pkgs.stdenv.isLinux;
-  xdg.mimeApps = rec {
-    enable = pkgs.stdenv.isLinux;
-    defaultApplications = {
-      "application/pdf" = [ "org.kde.okular.desktop" ];
-      "text/html" = [ "google-chrome.desktop" ];
-      "image/png" = [ "org.kde.gwenview.desktop" ];
-    };
-    associations.added = defaultApplications;
-  };
+    ];
 }

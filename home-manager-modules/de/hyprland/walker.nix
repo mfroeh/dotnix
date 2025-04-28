@@ -1,7 +1,7 @@
-{ pkgs, inputs, ... }:
+{ pkgs, lib, inputs, ... }:
 {
   imports = [ inputs.walker.homeManagerModules.default ];
-  programs.walker = {
+  programs.walker = lib.mkIf pkgs.stdenv.isLinux {
     enable = true;
     runAsService = true;
 
