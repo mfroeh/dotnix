@@ -43,6 +43,7 @@
       plugins = [
         "vi-mode" # adds better vi mode (e.g. change cursor style depending on mode)
         "git" # adds aliases and some functions, https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git
+        "gcloud"
       ];
       extraConfig = ''
         VI_MODE_SET_CURSOR=true # beam cursor in insert mode

@@ -14,8 +14,5 @@
     # nix
     nixd
     nixfmt-rfc-style
-
-    # zed installs language servers through node if it can
-    nodejs_23
   ];
 }
