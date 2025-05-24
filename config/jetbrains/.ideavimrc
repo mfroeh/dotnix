@@ -1,0 +1,47 @@
+let mapleader=" "
+sethandler n:vim i:ide
+
+" https://github.com/JetBrains/ideavim/blob/master/doc/IdeaVim%20Plugins.md
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'machakann/vim-highlightedyank'
+Plug 'vim-scripts/argtextobj.vim'
+
+set scrolloff=8
+set visualbell
+set incsearch hls
+set ignorecase smartcase
+set clipboard=unnamedplus
+set relativenumber
+set nolist
+
+set ideajoin
+
+" Config file shortcuts
+map <Leader>src <Action>(IdeaVim.ReloadVimRc.reload)
+map <Leader>erc :e ~/.ideavimrc<CR>
+
+" Clear search highlights
+nmap <ESC> :nohlsearch<CR>
+
+" Finding stuff
+map gs <Action>(FileStructurePopup)
+map gS <Action>(GotoSymbol)
+map gT <Action>(GotoClass)
+map <c-;> <Action>(GotoFile)
+map ga <Action>(GotoAction)
+map gb <Action>(RecentFiles)
+
+map cd <Action>(RenameElement)
+map <c-.> <Action>(ShowIntentionActions)
+
+map <Leader>rg <Action>(Find)
+map <Leader>rG <Action>(FindInPath)
+
+" jumps
+nmap [d <Action>(GotoPreviousError)
+nmap ]d <Action>(GotoNextError)
+map [[ <Action>(MethodUp)
+map ]] <Action>(MethodDown)
+nmap [c <Action>(VcsShowPrevChangeMarker)
+nmap ]c <Action>(VcsShowNextChangeMarker)
