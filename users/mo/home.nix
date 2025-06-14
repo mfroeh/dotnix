@@ -67,6 +67,8 @@ config,
       ardour
       youtube-music
       bitwarden-desktop
+      tidal-hifi
+
       lunar-client
     ];
 }
