@@ -18,25 +18,25 @@ set nolist
 set ideajoin
 
 " Config file shortcuts
-map <Leader>src <Action>(IdeaVim.ReloadVimRc.reload)
-map <Leader>erc :e ~/.ideavimrc<CR>
+nmap <Leader>src <Action>(IdeaVim.ReloadVimRc.reload)
+nmap <Leader>erc :e ~/.ideavimrc<CR>
 
 " Clear search highlights
 nmap <ESC> :nohlsearch<CR>
 
 " Finding stuff
-map gs <Action>(FileStructurePopup)
-map gS <Action>(GotoSymbol)
-map gT <Action>(GotoClass)
-map <c-;> <Action>(GotoFile)
-map ga <Action>(GotoAction)
-map gb <Action>(RecentFiles)
+nmap gs <Action>(FileStructurePopup)
+nmap gS <Action>(GotoSymbol)
+nmap gT <Action>(GotoClass)
+nmap <c-;> <Action>(GotoFile)
+nmap ga <Action>(GotoAction)
+nmap gb <Action>(RecentFiles)
 
-map cd <Action>(RenameElement)
-map <c-.> <Action>(ShowIntentionActions)
+nmap cd <Action>(RenameElement)
+nmap <c-.> <Action>(ShowIntentionActions)
 
-map <Leader>rg <Action>(Find)
-map <Leader>rG <Action>(FindInPath)
+nmap <Leader>rg <Action>(Find)
+nmap <Leader>rG <Action>(FindInPath)
 
 " jumps
 nmap [d <Action>(GotoPreviousError)
