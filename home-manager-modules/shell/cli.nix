@@ -115,6 +115,10 @@
       };
     };
 
+    jq = {
+      enable = true;
+    };
+
     # a nix environment switcher (acts on .envrc)
     direnv = {
       enable = true;

@@ -23,7 +23,7 @@
 
     autocd = true; # cd /some/dir == /some/dir, cd ../.. == ...
 
-    initExtra = ''
+    initContent = ''
       export KEYTIMEOUT=1 # make vi mode transitions faster (KEYTIMEOUT is in hundredths of a second)
       bindkey '^F' autosuggest-accept # accept autosuggestions with ^F
 
