@@ -10,7 +10,8 @@ config,
 {
   imports = [
     # desktop environment
-    "${self}/home-manager-modules/de/hyprland"
+    # "${self}/home-manager-modules/de/hyprland"
+    # "${self}/home-manager-modules/de/kde.nix"
 
     # gui apps
     "${self}/home-manager-modules/gui/bitwarden.nix"
@@ -26,6 +27,8 @@ config,
 
     # other
     "${self}/home-manager-modules/karabiner.nix"
+
+    inputs.zen-browser.homeModules.twilight
   ];
 
   services.ssh-agent.enable = pkgs.stdenv.isLinux;
@@ -40,6 +43,15 @@ config,
     diff-so-fancy.enable = true;
   };
 
+  programs.zen-browser = {
+    enable = true;
+    policies = {
+      DisableAppUpdate = true;
+      DisableTelemetry = true;
+      # find more options here: https://mozilla.github.io/policy-templates/
+    };
+  };
+
   fonts.fontconfig.enable = true;
 
   home.file.".ideavimrc".source =
@@ -50,24 +62,19 @@ config,
     [
       rustup
       inputs.ngrams.defaultPackage.${system}
-
       (google-cloud-sdk.withExtraComponents(with google-cloud-sdk.components; [ gke-gcloud-auth-plugin ]))
-    ] ++ lib.optional pkgs.stdenv.isLinux [
+    ] ++ lib.optionals pkgs.stdenv.isLinux [
       # gui
-      zoom-us
-      google-chrome
       discord
-      spotify
       vlc
-      zotero
       gimp
       blender
-      teams-for-linux
-      skypeforlinux
       ardour
       youtube-music
       bitwarden-desktop
       tidal-hifi
+      jetbrains.goland
+      jetbrains.rust-rover
 
       lunar-client
     ];

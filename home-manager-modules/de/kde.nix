@@ -65,6 +65,8 @@ in
     inputs.plasma-manager.homeManagerModules.plasma-manager
   ];
 
+  home.packages = with pkgs; [ layan-kde ];
+
   programs.plasma = {
     enable = true;
     overrideConfig = true;
@@ -72,7 +74,7 @@ in
     # high-level settings
     workspace = {
       lookAndFeel = "org.kde.breezedark.desktop";
-      wallpaper = "${pkgs.kdePackages.plasma-workspace-wallpapers}/share/wallpapers/Cluster/contents/images/3840x2160.png";
+      wallpaper = "${self}/config/wallpapers/mirroring.png";
     };
 
     panels = [
@@ -81,46 +83,45 @@ in
 
     # mid-level settings:
     shortcuts = {
-      "services/org.kde.krunner.desktop"."_launch" = "Alt+I";
-      "services/org.kde.dolphin.desktop"."_launch" = "Alt+E";
-      "services/kitty.desktop"."_launch" = "Alt+Y";
+      "services/org.kde.krunner.desktop"."_launch" = "Meta+Space";
+      "services/org.kde.dolphin.desktop"."_launch" = "Meta+E";
 
       kwin = {
-        "Window Maximize" = "Alt+F";
-        "Window Close" = "Alt+C";
-        "Grid View" = "Alt+W";
-        "ExposeAll" = "Alt+,";
-        "Switch Window Down" = "Alt+J";
-        "Switch Window Left" = "Alt+H";
-        "Switch Window Right" = "Alt+L";
-        "Switch Window Up" = "Alt+K";
-        "Window Quick Tile Bottom" = "Alt+Shift+J";
-        "Window Quick Tile Left" = "Alt+Shift+H";
-        "Window Quick Tile Right" = "Alt+Shift+L";
-        "Window Quick Tile Top" = "Alt+Shift+K";
+        "Window Maximize" = "Meta+F";
+        "Window Close" = "Meta+C";
+        "Grid View" = "Meta+W";
+        "ExposeAll" = "Meta+,";
+        "Switch Window Down" = "Meta+J";
+        "Switch Window Left" = "Meta+H";
+        "Switch Window Right" = "Meta+L";
+        "Switch Window Up" = "Meta+K";
+        "Window Quick Tile Bottom" = "Meta+Shift+J";
+        "Window Quick Tile Left" = "Meta+Shift+H";
+        "Window Quick Tile Right" = "Meta+Shift+L";
+        "Window Quick Tile Top" = "Meta+Shift+K";
       };
 
       kwin = {
-        "Switch to Desktop 1" = "Alt+1";
-        "Switch to Desktop 2" = "Alt+2";
-        "Switch to Desktop 3" = "Alt+3";
-        "Switch to Desktop 4" = "Alt+4";
-        "Switch to Desktop 5" = "Alt+5";
-        "Switch to Desktop 6" = "Alt+6";
-        "Switch to Desktop 7" = "Alt+7";
-        "Switch to Desktop 8" = "Alt+8";
-        "Switch to Desktop 9" = "Alt+9";
-        "Switch to Desktop 10" = "Alt+0";
-        "Window to Desktop 1" = "Alt+!";
-        "Window to Desktop 2" = "Alt+@";
-        "Window to Desktop 3" = "Alt+#";
-        "Window to Desktop 4" = "Alt+$";
-        "Window to Desktop 5" = "Alt+%";
-        "Window to Desktop 6" = "Alt+^";
-        "Window to Desktop 7" = "Alt+&";
-        "Window to Desktop 8" = "Alt+*";
-        "Window to Desktop 9" = "Alt+(";
-        "Window to Desktop 10" = "Alt+)";
+        "Switch to Desktop 1" = "Meta+1";
+        "Switch to Desktop 2" = "Meta+2";
+        "Switch to Desktop 3" = "Meta+3";
+        "Switch to Desktop 4" = "Meta+4";
+        "Switch to Desktop 5" = "Meta+5";
+        "Switch to Desktop 6" = "Meta+6";
+        "Switch to Desktop 7" = "Meta+7";
+        "Switch to Desktop 8" = "Meta+8";
+        "Switch to Desktop 9" = "Meta+9";
+        "Switch to Desktop 10" = "Meta+0";
+        "Window to Desktop 1" = "Meta+!";
+        "Window to Desktop 2" = "Meta+@";
+        "Window to Desktop 3" = "Meta+#";
+        "Window to Desktop 4" = "Meta+$";
+        "Window to Desktop 5" = "Meta+%";
+        "Window to Desktop 6" = "Meta+^";
+        "Window to Desktop 7" = "Meta+&";
+        "Window to Desktop 8" = "Meta+*";
+        "Window to Desktop 9" = "Meta+(";
+        "Window to Desktop 10" = "Meta+)";
       };
     };
 
@@ -130,16 +131,15 @@ in
 
       kwinrc."Effect-overview".BorderActivate = 9;
 
-
-      kxkbrc.Layout = {
-        DisplayNames = "us,ru";
-        LayoutList = "us,us";
-        VariantList = ",rus";
-        Options = "grp:alt_space_toggle";
-        ResetOldOptions = true;
-        Use = true;
-        SwitchMode = "Global";
-      };
+      # kxkbrc.Layout = {
+      #   DisplayNames = "us,ru";
+      #   LayoutList = "us,us";
+      #   VariantList = ",rus";
+      #   Options = "grp:alt_space_toggle";
+      #   ResetOldOptions = true;
+      #   Use = true;
+      #   SwitchMode = "Global";
+      # };
 
       kwinrc.Desktops.Number = {
         value = 10;

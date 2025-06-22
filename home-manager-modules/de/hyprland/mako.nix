@@ -3,34 +3,38 @@
   # notifications # todo: test this
   services.mako = lib.mkIf pkgs.stdenv.isLinux {
     enable = true;
-    extraConfig = ''
-      sort=-time
-      layer=overlay
-      background-color=#2e3440
-      width=300
-      height=60
-      border-size=2
-      border-color=#88c0d0
-      border-radius=15
-      icons=0
-      max-icon-size=64
-      default-timeout=5000
-      ignore-timeout=1
-      font=monospace 10
+    settings = {
+      sort="-time";
+      layer="overlay";
+      background-color="#2e3440";
+      width=300;
+      height=60;
+      border-size=2;
+      border-color="#88c0d0";
+      border-radius=15;
+      icons=0;
+      max-icon-size=64;
+      default-timeout=5000;
+      ignore-timeout=1;
+      font="monospace 10";
+    };
 
-      [urgency=low]
-      border-color=#cccccc
-
-      [urgency=normal]
-      border-color=#d08770
-
-      [urgency=high]
-      border-color=#bf616a
-      default-timeout=0
-
-      [category=mpd]
-      default-timeout=2000
-      group-by=category
-    '';
+    # "urgency=low" = {
+    #   border-color="#cccccc";
+    # };
+    #
+    # "urgency=normal" = {
+    #   border-color="#d08770";
+    # };
+    #
+    # "urgency=high" = {
+    #   border-color="#bf616a";
+    #   default-timeout=0;
+    # };
+    #
+    # "category=mpd" = {
+    #   default-timeout=2000;
+    #   group-by="category";
+    # };
   };
 }

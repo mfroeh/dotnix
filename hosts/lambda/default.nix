@@ -12,7 +12,6 @@ with inputs;
     ./hardware-configuration.nix
     "${self}/modules/xorg.nix"
     "${self}/modules/kde.nix"
-    "${self}/modules/hyprland.nix"
     "${self}/modules/remap.nix"
 
     "${self}/users/mo"

@@ -4,7 +4,7 @@
   home.packages = with pkgs; lib.optionals pkgs.stdenv.isLinux [ bitwarden-desktop ];
 
   # configure systemd user service
-  systemd.user.services.bitwarden = lib.mkIf pkgs.stdenv.isLinux {
+  systemd.user.services.bitwarden = lib.mkIf false {
     Unit = {
       Description = "Bitwarden Password Manager";
       After = [ "graphical-session-pre.target" ];
