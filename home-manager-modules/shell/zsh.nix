@@ -26,6 +26,8 @@
     initContent = ''
       export KEYTIMEOUT=1 # make vi mode transitions faster (KEYTIMEOUT is in hundredths of a second)
       bindkey '^F' autosuggest-accept # accept autosuggestions with ^F
+      bindkey -M main '^R' atuin-search
+      bindkey -M vicmd '^R' atuin-search
 
       function rebuild-system() {
           local os_name=$(uname -s)

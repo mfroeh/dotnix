@@ -96,11 +96,24 @@
     # fuzzy finding is great
     fzf = rec {
       enable = true;
+      enableZshIntegration = true;
       defaultCommand = fileWidgetCommand;
       fileWidgetCommand = "fd -H --type f";
       changeDirWidgetCommand = "fd -H --type d";
       fileWidgetOptions = [ "--preview 'bat --color=always --plain --line-range=:200 {}'" ];
       historyWidgetOptions = [ ];
+    };
+
+    atuin = {
+      enable = true;
+      enableZshIntegration = true;
+      # we bind this manually as otherwise the bindings don't work in vimode
+      flags = [ "--disable-up-arrow" "--disable-ctrl-r" ];
+      settings = {
+        # keymap is determined by zsh keymap
+        keymap_mode = "auto";
+        enter_accept = false;
+      };
     };
 
     lazygit = {
