@@ -9,7 +9,7 @@
 {
   imports = [
     # desktop environment
-    "${self}/home-manager-modules/de/hyprland"
+    # "${self}/home-manager-modules/de/hyprland"
 
     # gui apps
     "${self}/home-manager-modules/gui/bitwarden.nix"
@@ -53,6 +53,9 @@
   };
 
   fonts.fontconfig.enable = true;
+
+  home.file.".ideavimrc".source =
+    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotnix/config/jetbrains/.ideavimrc";
 
   home.packages =
     with pkgs;

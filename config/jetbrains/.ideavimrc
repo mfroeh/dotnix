@@ -33,6 +33,8 @@ nmap <c-;> <Action>(GotoFile)
 nmap ga <Action>(GotoAction)
 nmap gb <Action>(RecentFiles)
 
+nmap gt <Action>(GotoTest)
+
 nmap cd <Action>(RenameElement)
 nmap <c-.> <Action>(ShowIntentionActions)
 
