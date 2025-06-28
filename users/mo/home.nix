@@ -1,11 +1,11 @@
 {
-lib,
-pkgs,
-self,
-inputs,
-system,
-config,
-...
+  lib,
+  pkgs,
+  self,
+  inputs,
+  system,
+  config,
+  ...
 }:
 {
   imports = [
@@ -23,10 +23,11 @@ config,
 
     # editor
     "${self}/home-manager-modules/editor/zed.nix"
-    "${self}/home-manager-modules/editor/nvim.nix"
 
     # other
     "${self}/home-manager-modules/karabiner.nix"
+
+    "${self}/nixvim"
 
     inputs.zen-browser.homeModules.twilight
   ];
@@ -62,8 +63,11 @@ config,
     [
       rustup
       inputs.ngrams.defaultPackage.${system}
-      (google-cloud-sdk.withExtraComponents(with google-cloud-sdk.components; [ gke-gcloud-auth-plugin ]))
-    ] ++ lib.optionals pkgs.stdenv.isLinux [
+      (google-cloud-sdk.withExtraComponents (
+        with google-cloud-sdk.components; [ gke-gcloud-auth-plugin ]
+      ))
+    ]
+    ++ lib.optionals pkgs.stdenv.isLinux [
       # gui
       discord
       vlc
