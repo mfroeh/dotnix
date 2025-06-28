@@ -204,6 +204,7 @@
         gd = "definition";
         gi = "implementation";
         gt = "type_definition";
+        cd = "rename";
       };
     };
     plugins.lspsaga.enable = true;
