@@ -34,6 +34,21 @@
 
     plugins.mini-align.enable = true;
 
+    plugins.grug-far = {
+      enable = true;
+      settings = {
+        debounceMs = 200;
+        engine = "ripgrep";
+        settings = {
+          engines = {
+            ripgrep = {
+              path = "rg";
+            };
+          };
+        };
+      };
+    };
+
     extraPlugins = [
       # dont move on yank
       # (pkgs.vimUtils.buildVimPlugin {
@@ -82,12 +97,12 @@
       }
       {
         mode = "n";
-        key = "[h";
+        key = "[c";
         action = "<cmd>Gitsigns nav_hunk prev<cr>";
       }
       {
         mode = "n";
-        key = "]h";
+        key = "]c";
         action = "<cmd>Gitsigns nav_hunk next<cr>";
       }
     ];
@@ -138,6 +153,18 @@
       swapfile = false;
 
       virtualedit = "block";
+
+    };
+
+    globals = {
+      # disable all neovide animations
+      neovide_position_animation_length = 0;
+      neovide_cursor_animation_length = 0.00;
+      neovide_cursor_trail_size = 0;
+      neovide_cursor_animate_in_insert_mode = false;
+      neovide_cursor_animate_command_line = false;
+      neovide_scroll_animation_far_lines = 0;
+      neovide_scroll_animation_length = 0.00;
     };
 
     colorschemes = {
