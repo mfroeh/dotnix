@@ -19,6 +19,8 @@
     dust
     just
 
+    glow
+
     # nix derivation dependency browser
     nix-tree
     # `nom` is an alias for `nix` with detailled log output
@@ -34,7 +36,8 @@
     bat = {
       enable = true;
       config = {
-        theme = "gruvbox-dark";
+        # pick up colors from term
+        theme = "ansi";
       };
     };
 
@@ -108,7 +111,10 @@
       enable = true;
       enableZshIntegration = true;
       # we bind this manually as otherwise the bindings don't work in vimode
-      flags = [ "--disable-up-arrow" "--disable-ctrl-r" ];
+      flags = [
+        "--disable-up-arrow"
+        "--disable-ctrl-r"
+      ];
       settings = {
         # keymap is determined by zsh keymap
         keymap_mode = "auto";

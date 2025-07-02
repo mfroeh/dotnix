@@ -10,6 +10,7 @@
     ./keymaps.nix
     ./treesitter.nix
     ./telescope.nix
+    ./neotest.nix
   ];
 
   programs.neovide = {
@@ -22,17 +23,35 @@
   # clipbord providers
   home.packages = with pkgs; [
     xclip
-    wayclip
+    wl-clipboard
   ];
 
   programs.nixvim = {
     enable = true;
+
+    extraConfigLua = '''';
 
     clipboard.register = [ "unnamedplus" ];
 
     plugins.lualine.enable = true;
 
     plugins.mini-align.enable = true;
+
+    plugins.qmk = {
+      enable = true;
+      settings = {
+        variant = "zmk";
+        layout = [
+          "x x x x x _ _ _ _ _ _ _ _ x x x x x"
+          "x x x x x x _ _ _ _ _ _ x x x x x x"
+          "x x x x x x _ _ _ _ _ _ x x x x x x"
+          "x x x x x x _ _ _ _ _ _ x x x x x x"
+          "x x x x x x x x x x x x x x x x x x"
+          "x x x x x _ x x x x x x _ x x x x x"
+        ];
+        name = "unused_for_zmk";
+      };
+    };
 
     plugins.grug-far = {
       enable = true;
@@ -107,9 +126,53 @@
       }
     ];
 
+    plugins.zen-mode.enable = true;
+
     plugins.nvim-surround.enable = true;
 
-    plugins.blink-cmp.enable = true;
+    plugins.blink-cmp = {
+      enable = true;
+      settings = {
+        keymap = {
+          "<c-f>" = [
+            "select_and_accept"
+          ];
+          "<c-j>" = [
+            "select_next"
+            "fallback"
+          ];
+          "<c-n>" = [
+            "select_next"
+            "fallback"
+          ];
+          "<down>" = [
+            "select_next"
+            "fallback"
+          ];
+          "<c-k>" = [
+            "select_prev"
+            "fallback"
+          ];
+          "<c-p>" = [
+            "select_prev"
+            "fallback"
+          ];
+          "<c-u>" = [
+            "scroll_documentation_up"
+            "fallback"
+          ];
+          "<C-d>" = [
+            "scroll_documentation_down"
+            "fallback"
+          ];
+          "<c-space>" = [
+            "show"
+            "show_documentation"
+            "hide_documentation"
+          ];
+        };
+      };
+    };
 
     plugins.oil.enable = true;
 
@@ -138,7 +201,16 @@
       showbreak = "↳ ";
 
       list = true;
-      listchars = "tab:▸·,extends:»,precedes:«,nbsp:·,eol:↵,trail:␣";
+      listchars = {
+        # tab = "▸ ";
+        tab = "  ";
+        multispace = "·";
+        trail = "·";
+        extends = "»";
+        precedes = "«";
+        nbsp = "␣";
+        # eol = "↵";
+      };
 
       cursorline = true;
       scrolloff = 8;
@@ -170,7 +242,7 @@
     colorschemes = {
       nightfox.enable = true;
       # “carbonfox”, “dawnfox”, “dayfox”, “duskfox”, “nightfox”, “nordfox”, “terafox”
-      nightfox.flavor = "terafox";
+      nightfox.flavor = "nightfox";
     };
 
     plugins = {
@@ -190,14 +262,14 @@
       };
       # plugins.lsp.inlayHints = true;
       lsp.luaConfig.post = ''
-        vim.diagnostic.config({
-                virtual_text = true,
-                signs = true,
-                underline = true,
-                update_in_insert = false,
-                severity_sort = true,
-        })
-      '';
+        				vim.diagnostic.config({
+        					virtual_text = true,
+        					signs = true,
+        					underline = true,
+        					update_in_insert = false,
+        					severity_sort = true,
+        				})
+        				'';
       lsp.keymaps.lspBuf = {
         K = "hover";
         gD = "references";
@@ -205,9 +277,20 @@
         gi = "implementation";
         gt = "type_definition";
         cd = "rename";
+        "<c-.>" = "code_action";
       };
     };
-    plugins.lspsaga.enable = true;
+
+    plugins.lspsaga = {
+      enable = true;
+      lightbulb = {
+        enable = true;
+        # show in status column
+        sign = true;
+        # dont show inline
+        virtualText = false;
+      };
+    };
 
     plugins.lsp-format.enable = true;
     plugins.lsp-signature.enable = true;

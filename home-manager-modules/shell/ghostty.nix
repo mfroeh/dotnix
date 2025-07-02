@@ -5,7 +5,7 @@
     enable = pkgs.stdenv.isLinux;
     enableZshIntegration = true;
     settings = {
-      theme = "GruvboxDarkHard";
+      theme = "nightfox";
       font-size = 12;
       app-notifications = false;
     };

@@ -6,7 +6,25 @@
       extensions = {
         fzf-native.enable = true;
       };
+      settings = {
+        defaults = {
+          mappings = {
+            i = {
+              "<C-j>" = "move_selection_next";
+              "<C-k>" = "move_selection_previous";
+              "<C-u>" = false;
+              "<esc>" = "close";
+            };
+          };
+        };
+      };
       keymaps = {
+        "<c-j>" = {
+          action = "actions.move_selection_next";
+        };
+        "<c-k>" = {
+          action = "actions.move_selection_previous";
+        };
         "gr" = {
           action = "live_grep";
         };
