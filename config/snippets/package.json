@@ -1,0 +1,13 @@
+{
+	"contributes": {
+		"snippets": [
+			{
+				"language": [
+					"nix"
+				],
+				"path": "./nix.json"
+			}
+		]
+	},
+	"name": "snip-snap"
+}
