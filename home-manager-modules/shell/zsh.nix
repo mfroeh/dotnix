@@ -11,7 +11,7 @@
     historySubstringSearch.enable = true;
 
     shellAliases = {
-      "ed" = "fd . --type f | fzf --preview = 'bat {} --color always --plain' | xargs -r nvim";
+      "ed" = "fd . --type f | fzf --preview 'bat {} --color always --plain' | xargs -r nvim";
       "so" = "rebuild-system";
       "ho" = "home-manager switch --flake ~/dotnix#$USERNAME@$(hostname)";
       "dev" = "nix develop --command zsh";
