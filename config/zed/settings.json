@@ -1,6 +1,15 @@
 // For information on how to configure Zed, see the Zed
 // documentation: https://zed.dev/docs/configuring-zed
 {
+  "edit_predictions": {
+    "mode": "eager",
+    "copilot": {
+      "proxy": null,
+      "proxy_no_verify": null,
+      "enterprise_uri": null
+    },
+    "enabled_in_text_threads": false
+  },
   "telemetry": {
     "diagnostics": false,
     "metrics": false
@@ -9,7 +18,7 @@
   "theme": {
     "mode": "system",
     "light": "Dayfox",
-    "dark": "Nightfox"
+    "dark": "Nordfox"
   },
   "icon_theme": {
     "mode": "system",
@@ -54,14 +63,33 @@
   "auto_install_extensions": {
     "nix": true,
     "nvim-nightfox": true,
-    "material-icon-theme": true
+    "material-icon-theme": true,
+    "golangci-lint": true
   },
 
   // languages
   "languages": {
     "Nix": {
-      "language_servers": ["nixd"],
-      "formatter": "language_server"
+      "language_servers": ["nixd"]
+    },
+    "Go": {
+      "language_servers": ["gopls", "golangci-lint"]
+    }
+  },
+
+  // language servers
+  "lsp": {
+    "golangci-lint": {
+      "initialization_options": {
+        "command": [
+          "golangci-lint",
+          "run",
+          "--output.json.path",
+          "stdout",
+          "--show-stats=false",
+          "--issues-exit-code=1"
+        ]
+      }
     }
   }
 }
