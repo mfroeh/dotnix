@@ -64,16 +64,25 @@
     "nix": true,
     "nvim-nightfox": true,
     "material-icon-theme": true,
+    "toml": true,
     "golangci-lint": true
   },
 
   // languages
   "languages": {
     "Nix": {
-      "language_servers": ["nixd"]
+      "language_servers": ["nixd"],
+      "formatter": {
+        "external": {
+          "command": "nixpkgs-fmt"
+        }
+      }
     },
     "Go": {
       "language_servers": ["gopls", "golangci-lint"]
+    },
+    "C++": {
+      "language_servers": ["clangd"]
     }
   },
 

@@ -56,6 +56,11 @@
 
     nixvim.url = "github:nix-community/nixvim";
     nixvim.inputs.nixpkgs.follows = "nixpkgs";
+
+		rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+		};
   };
 
   outputs =
@@ -65,6 +70,7 @@
       nixpkgs-stable,
       nix-darwin,
       home-manager,
+			rust-overlay,
       ...
     }@inputs:
     let
@@ -76,6 +82,8 @@
           config.allowUnfreePredicate = _: true;
           # https://github.com/LnL7/nix-darwin/issues/1041
           overlays = [
+						# override this inside devshell where necessary
+						rust-overlay.overlays.default
             (self: super: {
               karabiner-elements = super.karabiner-elements.overrideAttrs (old: {
                 version = "14.13.0";

@@ -61,7 +61,6 @@
   home.packages =
     with pkgs;
     [
-      rustup
       inputs.ngrams.defaultPackage.${system}
       (google-cloud-sdk.withExtraComponents (
         with google-cloud-sdk.components; [ gke-gcloud-auth-plugin ]

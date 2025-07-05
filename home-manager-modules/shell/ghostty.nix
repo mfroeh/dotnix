@@ -9,6 +9,7 @@
       font-size = 12;
       font-family = "Hack Nerd Font Mono";
       app-notifications = false;
+			confirm-close-surface = false;
     };
   };
 
