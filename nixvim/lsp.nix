@@ -6,11 +6,14 @@
 
       servers = {
         nixd.enable = true;
-        gopls.enable = true;
+        gopls = {
+          enable = true;
+
+        };
         protols.enable = true;
 
         harper_ls = {
-          enable = true;
+          enable = false;
           # https://writewithharper.com/docs/integrations/neovim#Optional-Configuration
           settings.harper-ls = {
             userDictPath = "~/harper-user-dict.txt";
