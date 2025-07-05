@@ -1,25 +1,62 @@
 // For information on binding keys, see the Zed
-// documentation: https://zed.dev/docs/key-bindings
 [
   {
-    "context": "VimControl && !VimInsert",
+    "context": "VimControl && !menu"
+  },
+  {
+    "context": "vim_mode == normal",
     "bindings": {
-      "space space": "file_finder::Toggle"
+      // until we can combine workspace actions with with keyboard input, we use this
+      "ctrl-alt-shift-u": "vim::ScrollUp",
+      "ctrl-alt-shift-d": "vim::ScrollDown",
+      "ctrl-alt-n": "vim::MoveToNextMatch",
+      "ctrl-alt-shift-n": "vim::MoveToPreviousMatch",
+      // actual bindings
+      "ctrl-u": ["workspace::SendKeystrokes", "ctrl-alt-shift-u z z"],
+      "ctrl-d": ["workspace::SendKeystrokes", "ctrl-alt-shift-d z z"],
+      "pageup": ["workspace::SendKeystrokes", "ctrl-alt-shift-u z z"],
+      "pagedown": ["workspace::SendKeystrokes", "ctrl-alt-shift-d z z"],
+      "n": ["workspace::SendKeystrokes", "ctrl-alt-n z z"],
+      "N": ["workspace::SendKeystrokes", "ctrl-alt-shift-n z z"]
     }
   },
   {
-    "context": "VimControl && !menu",
+    "context": "vim_mode == visual",
     "bindings": {
-      "ctrl-shift-u": "vim::ScrollUp",
-      "ctrl-shift-d": "vim::ScrollDown",
-      "pageup": ["workspace::SendKeystrokes", "ctrl-shift-u z z"],
-      "pagedown": ["workspace::SendKeystrokes", "ctrl-shift-d z z"]
+      "J": "editor::MoveLineDown",
+      "K": "editor::MoveLineUp",
+      ">": ["workspace::SendKeystrokes", "> g v"],
+      "<": ["workspace::SendKeystrokes", "< g v"]
+    }
+  },
+  // disable some keybindings
+  {
+    "context": "Workspace",
+    "bindings": {
+      // terminal stuff
+      "ctrl-`": null,
+      "ctrl-~": null,
+      "ctrl-j": null
     }
   },
   {
-    "context": "Editor",
+    "context": "Editor && (showing_code_action || showing_completions)",
     "bindings": {
-      // "j k": ["workspace::SendKeystrokes", "escape"]
+      "ctrl-u": "editor::ContextMenuFirst",
+      "ctrl-j": "editor::ContextMenuNext",
+      "ctrl-k": "editor::ContextMenuPrevious",
+      "ctrl-d": "editor::ContextMenuLast"
+    }
+  },
+  // global bindings
+  {
+    "bindings": {
+      "ctrl-j": "menu::SelectNext",
+      "ctrl-k": "menu::SelectPrevious",
+      "ctrl-;": "file_finder::Toggle",
+      "ctrl-,": "tab_switcher::ToggleAll",
+      "ctrl-f": "workspace::ToggleRightDock",
+      "ctrl-b": "workspace::ToggleLeftDock"
     }
   }
 ]

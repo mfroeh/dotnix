@@ -1,20 +1,31 @@
 // For information on how to configure Zed, see the Zed
 // documentation: https://zed.dev/docs/configuring-zed
 {
-  "theme": {
-    "mode": "dark",
-    "light": "One Light",
-    "dark": "Gruvbox Dark Hard"
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false
   },
+  // theme
+  "theme": {
+    "mode": "system",
+    "light": "Dayfox",
+    "dark": "Nightfox"
+  },
+  "icon_theme": {
+    "mode": "system",
+    "dark": "Material Icon Theme",
+    "light": "Material Icon Theme"
+  },
+  // font
   "ui_font_size": 16,
-  "buffer_font_size": 13.0,
+  "buffer_font_size": 14.0,
   "buffer_font_weight": 400,
   "pane_split_direction_horizontal": "down",
   "pane_split_direction_vertical": "right",
   "cursor_blink": false,
   "relative_line_numbers": true,
   "scrollbar": {
-    "show": "auto"
+    "show": "never"
   },
   "ensure_final_newline_on_save": false,
   "scroll_beyond_last_line": "off",
@@ -40,24 +51,17 @@
     }
   },
 
+  "auto_install_extensions": {
+    "nix": true,
+    "nvim-nightfox": true,
+    "material-icon-theme": true
+  },
+
   // languages
   "languages": {
     "Nix": {
       "language_servers": ["nixd"],
       "formatter": "language_server"
     }
-  },
-
-  // LLM
-  "assistant": {
-    "default_model": {
-      "provider": "copilot_chat",
-      "model": "claude-3-5-sonnet"
-    },
-    "version": "2"
-  },
-  "features": {
-    "copilot": true,
-    "inline_completion_provider": "copilot"
   }
 }

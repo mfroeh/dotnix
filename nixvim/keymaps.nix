@@ -51,11 +51,11 @@
         action = "Nzzzv";
       }
       # dont move cursor when joining lines
-      {
-        key = "J";
-        mode = "n";
-        action = "mzJ'z";
-      }
+      # {
+      #   key = "J";
+      #   mode = "n";
+      #   action = "mzJ'z";
+      # }
       # <pageup>/<pagedown> should function as c-u and c-d
       {
         key = "<pagedown>";
