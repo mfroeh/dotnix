@@ -1,32 +1,34 @@
 { pkgs, config, ... }:
 {
-	programs.zed-editor = {
-		enable = true;
-	};
+  programs.zed-editor = {
+    enable = true;
+  };
 
-	xdg.configFile."zed/settings.json".source =
-		config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotnix/config/zed/settings.json";
-	xdg.configFile."zed/keymap.json".source =
-		config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotnix/config/zed/keymap.json";
+  xdg.configFile."zed/settings.json".source =
+    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotnix/config/zed/settings.json";
+  xdg.configFile."zed/keymap.json".source =
+    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotnix/config/zed/keymap.json";
 
-	home.packages  = with pkgs; [
-		nixd
-		nixpkgs-fmt
+  home.packages = with pkgs; [
+    nixd
+    nixfmt-rfc-style
 
-		vscode-json-languageserver
+    vscode-json-languageserver
 
-		(rust-bin.selectLatestNightlyWith (toolchain: toolchain.default.override {
-			extensions = [ "rust-analyzer" ];
-		}))
+    (rust-bin.selectLatestNightlyWith (
+      toolchain:
+      toolchain.default.override {
+        extensions = [ "rust-analyzer" ];
+      }
+    ))
 
+    gopls
+    golangci-lint
+    golangci-lint-langserver
 
-		gopls
-		golangci-lint
-		golangci-lint-langserver
+    clang-tools
 
-		clang-tools
-
-		# toml
-		taplo
-	];
+    # toml
+    taplo
+  ];
 }

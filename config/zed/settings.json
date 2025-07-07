@@ -60,6 +60,8 @@
     }
   },
 
+  "auto_update": false,
+
   "auto_install_extensions": {
     "nix": true,
     "nvim-nightfox": true,
@@ -74,7 +76,7 @@
       "language_servers": ["nixd"],
       "formatter": {
         "external": {
-          "command": "nixpkgs-fmt"
+          "command": "nixfmt"
         }
       }
     },

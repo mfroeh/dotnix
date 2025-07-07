@@ -71,16 +71,18 @@
               auto_insert = false;
             };
           };
-        };
-        menu = {
+					menu = {
           auto_show = true;
+					};
           documentation = {
             auto_show = true;
             auto_show_delay = 50;
-            ghost_text = {
-              enabled = true;
-            };
+						# disable if performance issues
+						treesitter_highlighting = true;
           };
+					ghost_text = {
+						enabled = true;
+					};
         };
         fuzzy = {
           implementation = "rust";

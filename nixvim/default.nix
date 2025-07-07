@@ -13,6 +13,8 @@
     ./lsp.nix
     ./cmp.nix
     ./zmk.nix
+		./typst.nix
+		./nix.nix
   ];
 
   programs.neovide = {
