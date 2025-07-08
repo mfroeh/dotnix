@@ -1,4 +1,5 @@
 {
+  self,
   pkgs,
   ...
 }:
@@ -32,6 +33,11 @@
   ];
 
   programs = {
+    nh = {
+      enable = true;
+      flake = "${self}";
+    };
+
     # cat replacement
     bat = {
       enable = true;

@@ -13,7 +13,8 @@
     shellAliases = {
       "ed" = "fd . --type f | fzf --preview 'bat {} --color always --plain' | xargs -r nvim";
       "so" = "rebuild-system";
-      "ho" = "home-manager switch --flake ~/dotnix#$USERNAME@$(hostname)";
+      # "ho" = "home-manager switch --flake ~/dotnix#$USERNAME@$(hostname)";
+      "ho" = "nh home switch ~/dotnix";
       "dev" = "nix develop --command zsh";
       "gg" = "lazygit";
       "tree" = "eza --tree";
@@ -31,20 +32,21 @@
     autocd = true; # cd /some/dir == /some/dir, cd ../.. == ...
 
     initContent = ''
-      export KEYTIMEOUT=1 # make vi mode transitions faster (KEYTIMEOUT is in hundredths of a second)
-      bindkey '^F' autosuggest-accept # accept autosuggestions with ^F
-      bindkey -M main '^R' atuin-search
-      bindkey -M vicmd '^R' atuin-search
+            export KEYTIMEOUT=1 # make vi mode transitions faster (KEYTIMEOUT is in hundredths of a second)
+            bindkey '^F' autosuggest-accept # accept autosuggestions with ^F
+            bindkey -M main '^R' atuin-search
+            bindkey -M vicmd '^R' atuin-search
 
-      function rebuild-system() {
-          local os_name=$(uname -s)
+            function rebuild-system() {
+                local os_name=$(uname -s)
 
-          if [ "$os_name" = "Linux" ]; then
-              sudo nixos-rebuild switch --flake ~/dotnix#"$(hostname)"
-          elif [ "$os_name" = "Darwin" ]; then
-              darwin-rebuild switch --flake ~/dotnix#"$(hostname)"
-          fi
-      }
+                if [ "$os_name" = "Linux" ]; then
+                    # sudo nixos-rebuild switch --flake ~/dotnix#"$(hostname)"
+      							nh os switch ~/dotnix
+                elif [ "$os_name" = "Darwin" ]; then
+                    darwin-rebuild switch --flake ~/dotnix#"$(hostname)"
+                fi
+            }
     '';
 
     oh-my-zsh = {
