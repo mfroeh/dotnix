@@ -30,6 +30,9 @@
     devenv
 
     neofetch
+
+		asciinema
+		asciinema-agg
   ];
 
   programs = {
