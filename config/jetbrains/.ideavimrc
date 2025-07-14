@@ -41,6 +41,8 @@ nmap <c-.> <Action>(ShowIntentionActions)
 nmap <Leader>rg <Action>(Find)
 nmap <Leader>rG <Action>(FindInPath)
 
+vmap <Enter> <Action>(Console.Jdbc.Execute)
+
 " jumps
 nmap [d <Action>(GotoPreviousError)
 nmap ]d <Action>(GotoNextError)
