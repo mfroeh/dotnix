@@ -9,12 +9,7 @@
 {
   imports = [
     # desktop environment
-    # "${self}/home-manager-modules/de/hyprland"
-
-    # gui apps
-    "${self}/home-manager-modules/gui/bitwarden.nix"
-    "${self}/home-manager-modules/gui/obs.nix"
-    "${self}/home-manager-modules/gui/zathura.nix"
+    # "${self}/home-manager-modules/de/kde.nix"
 
     # shell
     "${self}/home-manager-modules/shell"
@@ -23,7 +18,7 @@
 
     # editor
     "${self}/home-manager-modules/editor/zed.nix"
-    "${self}/home-manager-modules/editor/nvim.nix"
+    "${self}/nixvim"
   ];
 
   nixGL = {
@@ -57,44 +52,5 @@
   home.file.".ideavimrc".source =
     config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotnix/config/jetbrains/.ideavimrc";
 
-  home.packages =
-    with pkgs;
-    [
-      inputs.nixglhost.defaultPackage.${pkgs.system}
-      # pkgs.nixgl.nixGLDefault
-      # zoom-us
-      # rustup
-      # discord
-
-      # gui
-      # google-chrome
-      # spotify
-      # vlc
-      # zotero
-      # gimp
-      # blender
-      # teams-for-linux
-      # skypeforlinux
-      # ardour
-      # youtube-music
-      # bitwarden-desktop
-
-      # lunar-client
-      # pkgs.nixgl.auto.nixGLDefault
-      # pkgs.nixgl.auto.nixGLNvidia
-      # pkgs.mesa
-    ] # todo
-    ++ lib.optionals pkgs.stdenv.isLinux [ ];
-
-  # todo: this doesn't work with Dolphin atlesat
-  # xdg.enable = pkgs.stdenv.isLinux;
-  # xdg.mimeApps = rec {
-  #   enable = pkgs.stdenv.isLinux;
-  #   defaultApplications = {
-  #     "application/pdf" = [ "org.kde.okular.desktop" ];
-  #     "text/html" = [ "google-chrome.desktop" ];
-  #     "image/png" = [ "org.kde.gwenview.desktop" ];
-  #   };
-  #   associations.added = defaultApplications;
-  # };
+  home.packages = [ ] ++ lib.optionals pkgs.stdenv.isLinux [ ];
 }
