@@ -47,6 +47,10 @@
                     darwin-rebuild switch --flake ~/dotnix#"$(hostname)"
                 fi
             }
+
+						if [[ -f ~/.zshrc.local ]]; then
+							source ~/.zshrc.local
+						fi
     '';
 
     oh-my-zsh = {
