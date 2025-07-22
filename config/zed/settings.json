@@ -2,7 +2,7 @@
 // documentation: https://zed.dev/docs/configuring-zed
 {
   "features": {
-    "edit_prediction_provider": "none",
+    "edit_prediction_provider": "none"
   },
   "telemetry": {
     "diagnostics": false,
@@ -35,8 +35,18 @@
   "soft_wrap": "editor_width",
   "tabs": {
     "git_status": true,
-    "file_icons": true
+    "file_icons": true,
+    "show_close_button": "hidden",
+    "show_diagnostics": "all"
   },
+  "file_finder": {
+    "modal_max_width": "medium"
+  },
+  "project_panel": {
+    "entry_spacing": "standard",
+    "auto_reveal_entries": true
+  },
+
   "use_autoclose": true,
   "use_auto_surround": true,
 
@@ -69,7 +79,8 @@
     "nvim-nightfox": true,
     "material-icon-theme": true,
     "toml": true,
-    "golangci-lint": true
+    "golangci-lint": true,
+    "git-firefly": true
   },
 
   // languages
@@ -88,6 +99,9 @@
     },
     "C++": {
       "language_servers": ["clangd"]
+    },
+    "Rust": {
+      "language_servers": ["rust-analyzer"]
     }
   },
 
@@ -103,6 +117,13 @@
           "--show-stats=false",
           "--issues-exit-code=1"
         ]
+      }
+    },
+    "rust-analyzer": {
+      "initialization_options": {
+        "check": {
+          "command": "clippy"
+        }
       }
     }
   }

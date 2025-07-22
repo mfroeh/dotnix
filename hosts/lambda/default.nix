@@ -99,6 +99,8 @@ with inputs;
 
     ntfs3g
 
+    prismlauncher
+
     config.boot.kernelPackages.perf
   ];
 

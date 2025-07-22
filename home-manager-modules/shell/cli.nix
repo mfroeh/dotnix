@@ -31,8 +31,8 @@
 
     neofetch
 
-		asciinema
-		asciinema-agg
+    asciinema
+    asciinema-agg
   ];
 
   programs = {
@@ -69,12 +69,6 @@
       enable = true;
       enableZshIntegration = true; # sets a bunch of aliases
       icons = "always";
-    };
-
-    # [j]ump to directories (cd on a ton of roids)
-    zoxide = {
-      enable = true;
-      options = [ "--cmd j " ];
     };
 
     # pager

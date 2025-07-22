@@ -25,6 +25,10 @@
 
         jsonls.enable = true;
 
+        asm_lsp = {
+          enable = true;
+        };
+
         rust_analyzer.enable = true;
         # install this per project instead
         rust_analyzer.installRustc = false;

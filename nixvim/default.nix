@@ -13,8 +13,9 @@
     ./lsp.nix
     ./cmp.nix
     ./zmk.nix
-		./typst.nix
-		./nix.nix
+    ./typst.nix
+    ./nix.nix
+    ./flash.nix
   ];
 
   programs.neovide = {
@@ -72,6 +73,14 @@
       # 	};
       # })
     ];
+
+    plugins.harpoon = {
+      enable = true;
+    };
+
+    plugins.markdown-preview = {
+      enable = true;
+    };
 
     plugins.neorg.enable = true;
     plugins.neorg.settings.load = {

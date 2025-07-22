@@ -9,6 +9,9 @@
           "<c-f>" = [
             "select_and_accept"
           ];
+          "<c-e>" = [
+            "select_and_accept"
+          ];
           "<c-j>" = [
             "select_next"
             "fallback"
@@ -22,6 +25,10 @@
             "fallback"
           ];
           "<c-k>" = [
+            "select_prev"
+            "fallback"
+          ];
+          "<up>" = [
             "select_prev"
             "fallback"
           ];
