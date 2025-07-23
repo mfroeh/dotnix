@@ -31,6 +31,9 @@
         "<c-;>" = {
           action = "git_files";
         };
+        "<c-p>" = {
+          action = "find_files";
+        };
         "gb" = {
           action = "buffers";
         };
