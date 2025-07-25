@@ -1,0 +1,74 @@
+// ~/.config/zellij/config.kdl
+
+// Use the unlock-first preset to avoid keybinding conflicts.
+// This means you'll typically press Ctrl+g (or your chosen unlock-toggle)
+// to activate Zellij's keybindings.
+// More details: https://zellij.dev/tutorials/colliding-keybindings/
+ui {
+    pane_frames true
+    simplified_ui true
+    pane_frames_exist_when_solo false
+    // You can set your default theme here if you wish
+    // theme "default" 
+}
+
+keybinds {
+    // This section defines keybindings for various modes.
+    // The 'shared_except' block is useful for unbinding keys that you
+    // *don't* want Zellij to intercept unless it's in a specific mode.
+
+    // Using the 'clear-defaults=true' property in 'keybinds' will remove all default keybindings,
+    // requiring you to define everything yourself. This can be useful for
+    // complete control but requires more effort.
+    // Example: keybinds clear-defaults=true { ... }
+
+    // If you want to unbind specific keys that conflict with your applications (e.g., Neovim),
+    // you can do it here. For instance, to free up `Ctrl+o` for Neovim:
+    shared_except {
+        _args = ["locked"]; // These unbinds apply to all modes *except* 'locked' mode.
+        // unbind "Ctrl o"; // Uncomment if you want to completely unbind Ctrl+o from Zellij.
+                            // However, with 'Unlock-First' preset, this might not be strictly necessary
+                            // as Zellij keybinds are not active until unlocked.
+    }
+
+    // You can customize the unlock toggle if Ctrl+g conflicts with something else.
+    // For example, to change it to Ctrl+s:
+    // normal {
+    //     bind "Ctrl s" { SwitchToMode "locked"; }
+    // }
+    // locked {
+    //     bind "Ctrl s" { SwitchToMode "normal"; }
+    // }
+
+    // Other keybindings (examples - these are often the defaults)
+    normal {
+        // Standard Zellij actions
+        bind "Ctrl p" { SwitchToMode "pane"; }
+        bind "Ctrl t" { SwitchToMode "tab"; }
+        bind "Ctrl n" { SwitchToMode "resize"; }
+        bind "Ctrl h" { SwitchToMode "move"; }
+        bind "Ctrl s" { SwitchToMode "search"; }
+        bind "Ctrl o" { SwitchToMode "session"; }
+        bind "Ctrl q" { Quit; } // This is also a common conflict, you might want to rebind or unbind this if it conflicts with your terminal or other apps.
+    }
+
+    // You can add more specific keybindings for different modes if needed.
+    // For example, if you set the unlock toggle to Ctrl+g (the default for unlock-first),
+    // Zellij's commands would typically be `Ctrl+g` then another key.
+    // Example: To create a new pane after unlocking: `Ctrl+g` then `n`
+    pane {
+        bind "n" { NewPane; }
+        bind "h" { GoToPreviousPane; }
+        bind "l" { GoToNextPane; }
+        bind "j" { GoToPreviousTab; }
+        bind "k" { GoToNextTab; }
+        // ... more pane mode keybindings
+    }
+
+    // You can specify other modes (e.g., resize, tab, move, search, session)
+    // and define their keybindings here.
+    // Refer to `zellij --full-default-config` output for all default keybindings and modes.
+}
+
+// You can also specify other Zellij settings here, like default_shell
+// default_shell "zsh"
