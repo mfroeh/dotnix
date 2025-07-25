@@ -76,8 +76,8 @@
       youtube-music
       bitwarden-desktop
       tidal-hifi
-      jetbrains.goland
-      jetbrains.rust-rover
+      (jetbrains.goland.override { jdk = pkgs.openjdk21; })
+      (jetbrains.rust-rover.override { jdk = pkgs.openjdk21; })
 
       lunar-client
     ];

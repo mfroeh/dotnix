@@ -78,6 +78,11 @@
       enable = true;
     };
 
+    # https://github.com/swaits/zellij-nav.nvim/
+    plugins.zellij-nav = {
+      enable = true;
+    };
+
     plugins.markdown-preview = {
       enable = true;
     };

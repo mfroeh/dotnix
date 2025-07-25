@@ -1,13 +1,15 @@
-{ lib, pkgs, ... }:
+{
+  lib,
+  pkgs,
+  self,
+  ...
+}:
 {
   programs.zellij = {
     enable = true;
-    settings = {
-      theme = "nightfox";
-      simplified_ui = true;
-      show_startup_tips = false;
-    };
   };
+
+  xdg.configFile."zellij/config.kdl".source = ./zellij.kdl;
 
   programs.zsh.sessionVariables = {
     ZELLIJ_AUTO_ATTACH = "false";
