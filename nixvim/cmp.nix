@@ -9,7 +9,7 @@
           "<c-f>" = [
             "select_and_accept"
           ];
-          "<c-e>" = [
+          "<right>" = [
             "select_and_accept"
           ];
           "<c-j>" = [
@@ -40,7 +40,15 @@
             "scroll_documentation_up"
             "fallback"
           ];
+          "<PageUp>" = [
+            "scroll_documentation_up"
+            "fallback"
+          ];
           "<C-d>" = [
+            "scroll_documentation_down"
+            "fallback"
+          ];
+          "<PaguDown>" = [
             "scroll_documentation_down"
             "fallback"
           ];
@@ -78,18 +86,18 @@
               auto_insert = false;
             };
           };
-					menu = {
-          auto_show = true;
-					};
+          menu = {
+            auto_show = true;
+          };
           documentation = {
             auto_show = true;
-            auto_show_delay = 50;
-						# disable if performance issues
-						treesitter_highlighting = true;
+            auto_show_delay_ms = 50;
+            # disable if performance issues
+            treesitter_highlighting = true;
           };
-					ghost_text = {
-						enabled = true;
-					};
+          ghost_text = {
+            enabled = true;
+          };
         };
         fuzzy = {
           implementation = "rust";

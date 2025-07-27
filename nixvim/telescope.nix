@@ -62,6 +62,9 @@
         "<leader>m" = {
           action = "marks";
         };
+        "<leader>fr" = {
+          action = "oldfiles";
+        };
       };
       luaConfig.post = ''
                         local prompt_with_hidden_toggle
