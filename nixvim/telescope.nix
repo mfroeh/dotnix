@@ -65,7 +65,18 @@
         "<leader>fr" = {
           action = "oldfiles";
         };
+        "<leader>ji" = {
+          action = "zoxide list";
+        };
+        "<leader>ni" = {
+          action = "zoxide list";
+        };
       };
+
+      extensions.zoxide = {
+        enable = true;
+      };
+
       luaConfig.post = ''
                         local prompt_with_hidden_toggle
                         prompt_with_hidden_toggle = function(opts, no_ignore, picker, picker_title)
