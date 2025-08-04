@@ -1,9 +1,7 @@
 // For information on how to configure Zed, see the Zed
 // documentation: https://zed.dev/docs/configuring-zed
 {
-  "features": {
-    "edit_prediction_provider": "none"
-  },
+  "disable_ai": true,
   "telemetry": {
     "diagnostics": false,
     "metrics": false
@@ -11,8 +9,8 @@
   // theme
   "theme": {
     "mode": "system",
-    "light": "Dayfox",
-    "dark": "Nordfox"
+    "light": "Dayfox - blurred",
+    "dark": "Terafox - blurred"
   },
   "icon_theme": {
     "mode": "system",
@@ -21,8 +19,10 @@
   },
   // font
   "ui_font_size": 16,
+  "ui_font_family": "DejaVu Sans Mono",
   "buffer_font_size": 14.0,
   "buffer_font_weight": 400,
+  "buffer_font_family": "Hack Nerd Font Mono",
   "pane_split_direction_horizontal": "down",
   "pane_split_direction_vertical": "right",
   "cursor_blink": false,
@@ -66,12 +66,6 @@
     "toggle_relative_line_numbers": true
   },
 
-  "autosave": {
-    "after_delay": {
-      "milliseconds": 300
-    }
-  },
-
   "auto_update": false,
 
   "auto_install_extensions": {
@@ -94,7 +88,6 @@
       }
     },
     "Go": {
-      "show_edit_predictions": false,
       "language_servers": ["gopls", "golangci-lint"]
     },
     "C++": {

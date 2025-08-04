@@ -1,9 +1,6 @@
 // For information on binding keys, see the Zed
 [
   {
-    "context": "VimControl && !menu"
-  },
-  {
     "context": "vim_mode == normal",
     "bindings": {
       // until we can combine workspace actions with with keyboard input, we use this
