@@ -30,6 +30,7 @@
     "${self}/nixvim"
 
     inputs.zen-browser.homeModules.twilight
+    "${self}/home-manager-modules/gui/firefox.nix"
   ];
 
   services.ssh-agent.enable = pkgs.stdenv.isLinux;

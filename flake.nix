@@ -5,6 +5,11 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
 
+    nur = {
+      url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -77,6 +82,7 @@
       home-manager,
       nixgl,
       rust-overlay,
+		nur,
       ...
     }@inputs:
     let
@@ -88,6 +94,7 @@
           config.allowUnfreePredicate = _: true;
           # https://github.com/LnL7/nix-darwin/issues/1041
           overlays = [
+						nur.overlays.default
             nixgl.overlay
             # override this inside devshell where necessary
             rust-overlay.overlays.default
@@ -114,7 +121,7 @@
           };
         };
     in
-      {
+    {
       nixosConfigurations = {
         lambda = nixpkgs.lib.nixosSystem rec {
           system = "x86_64-linux";
@@ -144,59 +151,59 @@
           let
             system = "x86_64-linux";
           in
-            home-manager.lib.homeManagerConfiguration {
-              pkgs = mkPkgs { inherit nixpkgs system; };
-              modules = [
-                {
-                  home.stateVersion = "24.11";
-                  programs.home-manager.enable = true;
-                  home = {
-                    username = "mo";
-                    homeDirectory = "/home/mo";
-                  };
-                }
-                "${self}/users/mo/home.nix"
-              ];
-              extraSpecialArgs = mkSpecialArgs { inherit system; };
-            };
+          home-manager.lib.homeManagerConfiguration {
+            pkgs = mkPkgs { inherit nixpkgs system; };
+            modules = [
+              {
+                home.stateVersion = "24.11";
+                programs.home-manager.enable = true;
+                home = {
+                  username = "mo";
+                  homeDirectory = "/home/mo";
+                };
+              }
+              "${self}/users/mo/home.nix"
+            ];
+            extraSpecialArgs = mkSpecialArgs { inherit system; };
+          };
         "mo@xya" =
           let
             system = "aarch64-darwin";
           in
-            home-manager.lib.homeManagerConfiguration {
-              pkgs = mkPkgs { inherit nixpkgs system; };
-              modules = [
-                {
-                  home.stateVersion = "24.11";
-                  programs.home-manager.enable = true;
-                  home = {
-                    username = "mo";
-                    homeDirectory = "/Users/mo";
-                  };
-                }
-                "${self}/users/mo/home.nix"
-              ];
-              extraSpecialArgs = mkSpecialArgs { inherit system; };
-            };
+          home-manager.lib.homeManagerConfiguration {
+            pkgs = mkPkgs { inherit nixpkgs system; };
+            modules = [
+              {
+                home.stateVersion = "24.11";
+                programs.home-manager.enable = true;
+                home = {
+                  username = "mo";
+                  homeDirectory = "/Users/mo";
+                };
+              }
+              "${self}/users/mo/home.nix"
+            ];
+            extraSpecialArgs = mkSpecialArgs { inherit system; };
+          };
         "moritz.froehlich@lenovo-PW09JP9W" =
           let
             system = "x86_64-linux";
           in
-            home-manager.lib.homeManagerConfiguration {
-              pkgs = mkPkgs { inherit nixpkgs system; };
-              modules = [
-                {
-                  home.stateVersion = "24.11";
-                  programs.home-manager.enable = true;
-                  home = {
-                    username = "moritz.froehlich";
-                    homeDirectory = "/home/moritz.froehlich";
-                  };
-                }
-                "${self}/users/work/home.nix"
-              ];
-              extraSpecialArgs = mkSpecialArgs { inherit system; };
-            };
+          home-manager.lib.homeManagerConfiguration {
+            pkgs = mkPkgs { inherit nixpkgs system; };
+            modules = [
+              {
+                home.stateVersion = "24.11";
+                programs.home-manager.enable = true;
+                home = {
+                  username = "moritz.froehlich";
+                  homeDirectory = "/home/moritz.froehlich";
+                };
+              }
+              "${self}/users/work/home.nix"
+            ];
+            extraSpecialArgs = mkSpecialArgs { inherit system; };
+          };
       };
     };
 }

@@ -23,6 +23,8 @@
       "vim" = "nvim";
       "vi" = "nvim";
       "nv" = "neovide";
+      # e.g. nix path-info nixpkgs#firefox
+      "npi" = "nix path-info";
     };
 
     sessionVariables = {
