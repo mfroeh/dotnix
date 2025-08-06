@@ -213,9 +213,31 @@
 
     plugins.comment.enable = true;
 
-    # TODO
+    extraConfigLuaPost = ''
+      -- Somewhere in your Nixvim Lua config
+      vim.api.nvim_create_autocmd("BufEnter", {
+        pattern = "NvimConfig.lua",
+        callback = function()
+          -- Add a helpful header and map a key to source the buffer
+          vim.api.nvim_buf_set_lines(0, 0, 0, false, {
+            "-- This is a scratchpad for testing Neovim config.",
+            "-- Press <leader>s to source this buffer.",
+            "-- This will reload any functions or mappings you define here.",
+            "local M = {}",
+            "M.go_to_test_file = function()",
+            "  -- Your prototype function code here...",
+            "end",
+            "return M",
+          })
+          vim.keymap.set("n", "<leader>s", ":source %<CR>", { silent = true, desc = "Source current buffer" })
+          vim.cmd("setlocal filetype=lua")
+        end,
+        desc = "Setup scratchpad buffer for config testing",
+      })
+            		'';
+
     performance.byteCompileLua = {
-      enable = false;
+      enable = true;
       initLua = true;
       nvimRuntime = true;
       plugins = true;

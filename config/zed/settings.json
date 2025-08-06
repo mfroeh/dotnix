@@ -88,7 +88,9 @@
       }
     },
     "Go": {
-      "language_servers": ["gopls", "golangci-lint"]
+      "show_edit_predictions": false,
+      // "language_servers": ["gopls", "golangci-lint"]
+      "language_servers": ["gopls"]
     },
     "C++": {
       "language_servers": ["clangd"]
