@@ -17,7 +17,7 @@ with inputs;
     "${self}/users/mo"
   ];
 
-  system.stateVersion = "24.11";
+  system.stateVersion = "25.11";
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -60,8 +60,8 @@ with inputs;
 
     # optionally select the appropriate driver for your GPU
     package = config.boot.kernelPackages.nvidiaPackages.mkDriver {
-      version = "565.77";
-      sha256_64bit = "sha256-CnqnQsRrzzTXZpgkAtF7PbH9s7wbiTRNcM0SPByzFHw=";
+      version = "570.181";
+      sha256_64bit = "sha256-8G0lzj8YAupQetpLXcRrPCyLOFA9tvaPPvAWurjj3Pk=";
       sha256_aarch64 = lib.fakeHash;
       openSha256 = "sha256-Fxo0t61KQDs71YA8u7arY+503wkAc1foaa51vi2Pl5I=";
       settingsSha256 = "sha256-VUetj3LlOSz/LB+DDfMCN34uA4bNTTpjDrb6C6Iwukk=";
@@ -83,13 +83,12 @@ with inputs;
   services.pipewire.enable = true;
 
   # Virtualbox
-  virtualisation.virtualbox.host.enable = true;
+  virtualisation.virtualbox.host.enable = false;
   virtualisation.docker.enable = true;
   users.extraGroups.docker.members = [ "mo" ];
 
   # root shell
   programs.zsh.enable = true;
-  programs.fish.enable = true;
 
   environment.systemPackages = with pkgs; [
     neovim
@@ -101,7 +100,7 @@ with inputs;
 
     prismlauncher
 
-    config.boot.kernelPackages.perf
+    # config.boot.kernelPackages.perf
   ];
 
   environment.variables = {

@@ -1,4 +1,10 @@
-{ self, pkgs, inputs, system, ... }:
+{
+  self,
+  pkgs,
+  inputs,
+  system,
+  ...
+}:
 let
   createBottomPanel = screen: {
     height = 28;

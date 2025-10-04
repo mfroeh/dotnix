@@ -2,6 +2,7 @@
 // documentation: https://zed.dev/docs/configuring-zed
 {
   "disable_ai": true,
+  "show_edit_predictions": false,
   "telemetry": {
     "diagnostics": false,
     "metrics": false
@@ -19,7 +20,7 @@
   },
   // font
   "ui_font_size": 16,
-  "ui_font_family": "DejaVu Sans Mono",
+  "ui_font_family": "Helvetica",
   "buffer_font_size": 14.0,
   "buffer_font_weight": 400,
   "buffer_font_family": "Hack Nerd Font Mono",
@@ -74,7 +75,9 @@
     "material-icon-theme": true,
     "toml": true,
     "golangci-lint": true,
-    "git-firefly": true
+    "git-firefly": true,
+    "just": true,
+    "neocmake": true
   },
 
   // languages
