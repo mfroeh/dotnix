@@ -1,75 +1,45 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
+  # firefox can use the installed hunspellDicts from $DICPATH
+  home.packages = with pkgs; [
+    hunspell
+    hunspellDicts.en_US
+    hunspellDicts.de_DE
+  ];
+  home.sessionVariables = {
+    DICPATH = "${config.home.homeDirectory}/.nix-profile/share/hunspell";
+  };
+
+  home.file.".tridactylrc".source =
+    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotnix/config/.tridactylrc";
+
   programs.firefox = {
     enable = true;
+    package = pkgs.firefox.override {
+      nativeMessagingHosts = with pkgs; [
+        tridactyl-native
+      ];
+    };
     languagePacks = [
       "en-US"
       "de"
     ];
     profiles.default = {
-      settings = {
-        "extensions.autoDisableScopes" = 0;
-      };
-
+      # will have to restart firefox once for these to apply
       extraConfig = ''
-        																																// sidebar
-                                                                        user_pref("sidebar.revamp", true);
-                                                                        user_pref("sidebar.verticalTabs", true);
-                                                                        user_pref("sidebar.visibility", "expand-on-hover");
-                                																				// dark mode
-                                																				user_pref("browser.theme.content-theme", 2);
-                        																								// theme
-                                                        								user_pref("extensions.activeThemeID", "firefox-alpenglow@mozilla.org");
-                                                                        			'';
-
-      extensions = {
-        force = true;
-        packages = with pkgs.nur.repos.rycee.firefox-addons; [
-          ublock-origin
-          vimium-c
-          bitwarden
-          sponsorblock
-          dearrow
-          return-youtube-dislikes
-        ];
-      };
-
-      search = {
-        force = true;
-        default = "google";
-        engines = {
-          "Nix Packages" = {
-            url = [
-              {
-                template = "https://search.nixos.org/packages";
-                params = [
-                  {
-                    name = "query";
-                    value = "{searchTerms}";
-                  }
-                ];
-                icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-                definedAliases = [ "@np" ];
-              }
-            ];
-          };
-          "Home Manager options" = {
-            url = [
-              {
-                template = "https://home-manager-options.extranix.com";
-                params = [
-                  {
-                    name = "query";
-                    value = "{searchTerms}";
-                  }
-                ];
-                icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-                definedAliases = [ "@ho" ];
-              }
-            ];
-          };
-        };
-      };
+              // sidebar
+              user_pref("sidebar.revamp", true);
+              user_pref("sidebar.verticalTabs", true);
+              user_pref("sidebar.visibility", "always-show");
+        			// dark mode
+        			user_pref("browser.theme.content-theme", 2);
+              // newtabpage
+              user_pref("browser.newtabpage.activity-stream.newtabWallpapers.wallpaper", "abstract-orange");
+              user_pref("browser.newtabpage.activity-stream.feeds.topsites", true);
+              user_pref("browser.newtabpage.activity-stream.showSponsoredCheckboxes", false);
+              user_pref("browser.newtabpage.activity-stream.showSponsoredTopSites", false);
+              user_pref("browser.newtabpage.activity-stream.system.showSponsoredCheckboxes", false);
+      '';
     };
   };
 }

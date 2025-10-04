@@ -10,27 +10,23 @@
 {
   imports = [
     # desktop environment
-    # "${self}/home-manager-modules/de/hyprland"
-    # "${self}/home-manager-modules/de/kde.nix"
+    "${self}/home-manager-modules/de/kde-new.nix"
 
     # gui apps
     "${self}/home-manager-modules/gui/bitwarden.nix"
     "${self}/home-manager-modules/gui/obs.nix"
     "${self}/home-manager-modules/gui/zathura.nix"
+    "${self}/home-manager-modules/gui/firefox.nix"
 
     # shell
     "${self}/home-manager-modules/shell"
 
     # editor
     "${self}/home-manager-modules/editor/zed.nix"
+    "${self}/nixvim"
 
     # other
     "${self}/home-manager-modules/karabiner.nix"
-
-    "${self}/nixvim"
-
-    inputs.zen-browser.homeModules.twilight
-    "${self}/home-manager-modules/gui/firefox.nix"
   ];
 
   services.ssh-agent.enable = pkgs.stdenv.isLinux;
@@ -42,15 +38,15 @@
     extraConfig = {
       init.defaultBranch = "main";
     };
-    diff-so-fancy.enable = true;
-  };
-
-  programs.zen-browser = {
-    enable = true;
-    policies = {
-      DisableAppUpdate = true;
-      DisableTelemetry = true;
-      # find more options here: https://mozilla.github.io/policy-templates/
+    delta.enable = true;
+    delta.options = {
+      line-numbers = true;
+      decorations = {
+        commit-decoration-style = "bold yellow box ul";
+        file-decoration-style = "none";
+        file-style = "bold yellow ul";
+      };
+      features = "decorations";
     };
   };
 
@@ -59,6 +55,28 @@
   home.file.".ideavimrc".source =
     config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotnix/config/jetbrains/.ideavimrc";
 
+  # just sets some env variables
+  xdg = {
+    enable = true;
+    stateHome = "${config.home.homeDirectory}/.local/state";
+    dataHome = "${config.home.homeDirectory}/.local/share";
+    configHome = "${config.home.homeDirectory}/.config";
+    cacheHome = "${config.home.homeDirectory}/.cache";
+
+    # sets XDG_DESKTOP_DIR, ...
+    userDirs = {
+      enable = true;
+      desktop = "${config.home.homeDirectory}/Desktop";
+      documents = "${config.home.homeDirectory}/Documents";
+      download = "${config.home.homeDirectory}/Downloads";
+      music = "${config.home.homeDirectory}/Music";
+      pictures = "${config.home.homeDirectory}/Pictures";
+      publicShare = "${config.home.homeDirectory}/Public";
+      templates = "${config.home.homeDirectory}/Templates";
+      videos = "${config.home.homeDirectory}/Videos";
+    };
+  };
+
   home.packages =
     with pkgs;
     [
@@ -66,6 +84,7 @@
       (google-cloud-sdk.withExtraComponents (
         with google-cloud-sdk.components; [ gke-gcloud-auth-plugin ]
       ))
+      leetcode-cli
     ]
     ++ lib.optionals pkgs.stdenv.isLinux [
       # gui

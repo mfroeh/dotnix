@@ -15,6 +15,7 @@
         "video"
         "vboxusers"
         "docker"
+				"dialout"
       ];
       initialPassword = "";
     }

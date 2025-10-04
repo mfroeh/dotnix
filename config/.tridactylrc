@@ -1,0 +1,33 @@
+" clear the config
+sanitize tridactyllocal tridactylsync
+
+set editorcmd neovide %f --no-fork
+
+bind J tabnext
+bind K tabprev
+
+bind --mode=ex <C-j> ex.next_completion
+bind --mode=ex <C-k> ex.prev_completion
+
+bind <C-e> editor
+
+set incsearch true
+bind / fillcmdline find
+bind ? fillcmdline find -?
+bind n findnext 1
+bind N findnext -1
+bind gn findselect
+bind gN composite findnext --search-from-view --reverse; findselect
+bind ,<Space> nohlsearch
+
+set searchurls.no https://search.nixos.org/options?query=
+set searchurls.np https://search.nixos.org/packages?query=
+set searchurls.ho https://home-manager-options.extranix.com/?query=
+
+set searchurls.rs https://doc.rust-lang.org/beta/std/index.html?search=
+set searchurls.rss https://docs.rs/releases/search?query=
+set searchurls.crate https://crates.io/search?q=
+
+set searchurls.go https://pkg.go.dev/search?q=
+
+colourscheme --url https://raw.githubusercontent.com/srcery-colors/srcery-web/refs/heads/master/tridactyl/srcery.css srcery

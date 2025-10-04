@@ -54,11 +54,6 @@
     ngrams.url = "github:mfroeh/ngrams";
     ngrams.inputs.nixpkgs.follows = "nixpkgs";
 
-    zen-browser = {
-      url = "github:0xc000022070/zen-browser-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     nixglhost.url = "github:numtide/nix-gl-host";
 
     nixgl.url = "github:nix-community/nixgl";
@@ -82,7 +77,7 @@
       home-manager,
       nixgl,
       rust-overlay,
-		nur,
+      nur,
       ...
     }@inputs:
     let
@@ -94,7 +89,7 @@
           config.allowUnfreePredicate = _: true;
           # https://github.com/LnL7/nix-darwin/issues/1041
           overlays = [
-						nur.overlays.default
+            nur.overlays.default
             nixgl.overlay
             # override this inside devshell where necessary
             rust-overlay.overlays.default

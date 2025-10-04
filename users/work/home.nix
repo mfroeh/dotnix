@@ -33,7 +33,7 @@
     userName = "Moritz Froehlich";
     userEmail = "moritz.froehlich@freiheit.com";
     extraConfig = {
-      init.defaultBranch = "master";
+      init.defaultBranch = "main";
     };
     delta.enable = true;
     delta.options = {
