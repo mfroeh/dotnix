@@ -10,6 +10,7 @@
   };
 
   xdg.configFile."zellij/config.kdl".source = ./zellij.kdl;
+  xdg.configFile."zellij/themes/srcery.kdl".source = ./srcery.kdl;
 
   programs.zsh.sessionVariables = {
     ZELLIJ_AUTO_ATTACH = "false";

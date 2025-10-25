@@ -72,6 +72,15 @@
       # 		hash = "sha256-xuQ60dTv+GjU904SB+Nt3tclbNsOycZurdtYZWciD3A=";
       # 	};
       # })
+      (pkgs.vimUtils.buildVimPlugin {
+        name = "srcery-vim";
+        src = pkgs.fetchFromGitHub {
+          owner = "srcery-colors";
+          repo = "srcery-vim";
+          rev = "master";
+          hash = "sha256-lChTwlcJ69Cjvg7l7KsPn/3b16cInwxvYFriWT1BmqE=";
+        };
+      })
     ];
 
     plugins.harpoon = {
@@ -200,11 +209,13 @@
       neovide_scroll_animation_length = 0.00;
     };
 
-    colorschemes = {
-      nightfox.enable = true;
-      # “carbonfox”, “dawnfox”, “dayfox”, “duskfox”, “nightfox”, “nordfox”, “terafox”
-      nightfox.flavor = "nightfox";
-    };
+    colorscheme = "srcery";
+
+    # colorschemes = {
+    #   nightfox.enable = true;
+    #   # “carbonfox”, “dawnfox”, “dayfox”, “duskfox”, “nightfox”, “nordfox”, “terafox”
+    #   nightfox.flavor = "nightfox";
+    # };
 
     plugins.web-devicons.enable = true;
 

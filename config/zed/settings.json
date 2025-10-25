@@ -10,8 +10,8 @@
   // theme
   "theme": {
     "mode": "system",
-    "light": "Dayfox - blurred",
-    "dark": "Terafox - blurred"
+    "light": "Srcery",
+    "dark": "Gruvbox Dark Hard"
   },
   "icon_theme": {
     "mode": "system",
@@ -77,7 +77,8 @@
     "golangci-lint": true,
     "git-firefly": true,
     "just": true,
-    "neocmake": true
+    "neocmake": true,
+    "srcery": true
   },
 
   // languages

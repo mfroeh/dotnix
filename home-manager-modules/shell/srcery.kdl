@@ -1,0 +1,17 @@
+themes {
+    srcery {
+        bg "#1C1B19"    // Srcery Black
+        fg "#BAA67F"    // Srcery White (Default Text)
+        
+        red "#EF2F27"
+        green "#519F50"
+        blue "#2C78BF"
+        yellow "#FBB829"
+        magenta "#E02C6D"
+        orange "#FF5F00" // Srcery Orange
+        cyan "#0AAEB3"
+        
+        black "#1C1B19" // Repeat BG for black ANSI
+        white "#BAA67F" // Repeat FG for white ANSI
+    }
+}

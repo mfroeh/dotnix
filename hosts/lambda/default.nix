@@ -11,7 +11,6 @@ with inputs;
   imports = [
     ./hardware-configuration.nix
     "${self}/modules/xorg.nix"
-    "${self}/modules/kde.nix"
     "${self}/modules/remap.nix"
 
     "${self}/users/mo"
@@ -119,4 +118,7 @@ with inputs;
   services.udev.extraRules = ''
     ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}="0x8086" ATTR{device}="0xa36d" ATTR{power/wakeup}="disabled"
   '';
+
+  # DBus service that allows applications (in particular file managers) to query and manipulate storage devices
+  services.udisks2.enable = true;
 }

@@ -10,7 +10,7 @@
 {
   imports = [
     # desktop environment
-    "${self}/home-manager-modules/de/kde-new.nix"
+    "${self}/home-manager-modules/de/sway.nix"
 
     # gui apps
     "${self}/home-manager-modules/gui/bitwarden.nix"

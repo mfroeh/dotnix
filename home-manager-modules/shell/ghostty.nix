@@ -6,11 +6,11 @@
     package = config.lib.nixGL.wrap pkgs.ghostty;
     enableZshIntegration = true;
     settings = {
-      theme = "nightfox";
+      theme = "Srcery";
       font-size = 12;
       font-family = "Hack Nerd Font Mono";
       app-notifications = false;
-			confirm-close-surface = false;
+      confirm-close-surface = false;
     };
   };
 
