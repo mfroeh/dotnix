@@ -66,6 +66,11 @@
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    anyrun-swaywin = {
+      url = "github:mfroeh/anyrun-swaywin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =

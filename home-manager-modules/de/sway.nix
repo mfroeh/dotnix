@@ -1,8 +1,14 @@
-{ self, pkgs, ... }:
+{
+  self,
+  pkgs,
+  inputs,
+  system,
+  ...
+}:
 let
   mod = "Mod4";
-  anyrun-toggle = pkgs.writeShellScriptBin "anyrun-toggle" ''
-    if pgrep wofi > /dev/null; then
+  anyrun-toggle = pkgs.writeShellScriptBin "toggle" ''
+    if pgrep anyrun > /dev/null; then
       pkill anyrun
     else
       exec ${pkgs.anyrun}/bin/anyrun
@@ -35,6 +41,16 @@ in
         "0" = [ { app_id = "ghostty"; } ];
         "2" = [ { app_id = "firefox"; } ];
       };
+      workspaceOutputAssign = [
+        {
+          workspace = "0";
+          output = "DP-2";
+        }
+        {
+          workspace = "2";
+          output = "DP-2";
+        }
+      ];
       modifier = mod;
       keybindings = {
         "${mod}+Left" = "focus left";
@@ -71,15 +87,19 @@ in
         "${mod}+f" = "fullscreen toggle";
         "${mod}+v" = "floating toggle";
 
-        "${mod}+d" = "exec anyrun";
+        "${mod}+o" = "exec ${anyrun-toggle}/bin/toggle";
+        "${mod}+Print" = "exec ${pkgs.flameshot}/bin/flameshot gui";
 
         "${mod}+e" = "exec ${pkgs.kdePackages.dolphin}/bin/dolphin";
-        "${mod}+Mod1+l" = "exec swaylock";
-
         "${mod}+Shift+q" = "kill focused";
+
         "XF86AudioRaiseVolume" = "exec ${pkgs.pamixer}/bin/pamixer -i 5";
         "XF86AudioLowerVolume" = "exec ${pkgs.pamixer}/bin/pamixer -d 5";
         "XF86AudioMute" = "exec ${pkgs.pamixer}/bin/pamixer -t";
+
+        "${mod}+Mod1+l" = "exec swaylock";
+        "${mod}+Mod1+e" =
+          "exec swaynag -t warning -m 'What do you want to do?' -b 'Exit Sway' 'swaymsg exit'";
       };
       fonts = {
         names = [ "DejaVu Sans" ];
@@ -177,6 +197,8 @@ in
 
   gtk = {
     enable = true;
+    colorScheme = "dark";
+
     theme = {
       package = pkgs.gruvbox-gtk-theme;
       name = "Gruvbox-Dark";
@@ -242,6 +264,7 @@ in
       showResultsImmediately = true;
       maxEntries = null;
       plugins = [
+        "${inputs.anyrun-swaywin.packages.${system}.default}/lib/libswaywin.so"
         "${pkgs.anyrun}/lib/libapplications.so"
         "${pkgs.anyrun}/lib/libsymbols.so"
       ];
@@ -253,5 +276,6 @@ in
     pamixer
     kdePackages.dolphin
     geeqie
+    flameshot
   ];
 }
