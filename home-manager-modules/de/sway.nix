@@ -25,7 +25,7 @@ in
           always = true;
         }
         {
-          # force restart to ensure update
+          # force restart to ensure update (still does not work sometimes :/)
           command = "systemctl --user restart shikane.service";
           always = true;
         }
@@ -35,6 +35,11 @@ in
         }
         { command = "ghostty"; }
         { command = "firefox"; }
+      ];
+      bars = [
+        {
+          statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/i3status-rust/config-default.toml";
+        }
       ];
       terminal = "${pkgs.ghostty}/bin/ghostty";
       assigns = {
@@ -269,6 +274,70 @@ in
     enable = true;
   };
 
+  programs.i3status-rust = {
+    enable = true;
+    bars = {
+      default = {
+        blocks = [
+          {
+            block = "disk_space";
+            info_type = "available";
+            interval = 60;
+            path = "/";
+            warning = 10.0;
+          }
+          {
+            block = "memory";
+            format = " $icon $mem_used_percents ";
+          }
+          {
+            block = "cpu";
+            interval = 5;
+          }
+          {
+            block = "notify";
+            format = " $icon {($notification_count.eng(w:1))|0} ";
+            driver = "swaync";
+            click = [
+              {
+                button = "left";
+                action = "show";
+              }
+              {
+                button = "right";
+                action = "toggle_paused";
+              }
+            ];
+          }
+          {
+            block = "net";
+            format = " $icon $device {$ssid|}";
+            click = [
+              {
+                button = "left";
+                cmd = "nm-connection-editor";
+              }
+            ];
+          }
+          {
+            block = "sound";
+            click = [
+              {
+                button = "left";
+                cmd = "pavucontrol";
+              }
+            ];
+          }
+          {
+            block = "time";
+            format = " $timestamp.datetime(f:'%a %d.%m %R') ";
+            interval = 60;
+          }
+        ];
+      };
+    };
+  };
+
   home.packages = with pkgs; [
     wdisplays
     pamixer
@@ -277,5 +346,7 @@ in
     flameshot
     # allow firefox to properly display notifications
     libnotify
+    pavucontrol
+    networkmanagerapplet
   ];
 }
