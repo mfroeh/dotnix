@@ -120,12 +120,6 @@ in
         }
         {
           criteria = {
-            app_id = "wofi";
-          };
-          command = "floating enable, border none";
-        }
-        {
-          criteria = {
             window_role = "pop-up";
           };
           command = "floating enable";
@@ -271,11 +265,17 @@ in
     };
   };
 
+  services.swaync = {
+    enable = true;
+  };
+
   home.packages = with pkgs; [
     wdisplays
     pamixer
     kdePackages.dolphin
     geeqie
     flameshot
+    # allow firefox to properly display notifications
+    libnotify
   ];
 }
