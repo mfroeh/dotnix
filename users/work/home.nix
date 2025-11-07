@@ -21,10 +21,11 @@
     "${self}/nixvim"
   ];
 
-  nixGL = {
-    packages = inputs.nixgl.packages;
-    defaultWrapper = "nvidiaPrime";
-  };
+  # nixGL = {
+  #   packages = inputs.nixgl.packages;
+  #   defaultWrapper = "nvidiaPrime";
+  # };
+  #
 
   services.ssh-agent.enable = pkgs.stdenv.isLinux;
 
