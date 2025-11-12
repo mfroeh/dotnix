@@ -101,7 +101,7 @@
 
       lunar-client
 
-			# e.g. ld, readelf, 
+      # e.g. ld, readelf,
       binutils
     ];
 }

@@ -209,13 +209,11 @@
       neovide_scroll_animation_length = 0.00;
     };
 
-    colorscheme = "srcery";
-
-    # colorschemes = {
-    #   nightfox.enable = true;
-    #   # “carbonfox”, “dawnfox”, “dayfox”, “duskfox”, “nightfox”, “nordfox”, “terafox”
-    #   nightfox.flavor = "nightfox";
-    # };
+    colorschemes.gruvbox.enable = true;
+    colorschemes.gruvbox.settings = {
+      terminal_colors = true;
+      contrast = "hard";
+    };
 
     plugins.web-devicons.enable = true;
 

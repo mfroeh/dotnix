@@ -71,6 +71,11 @@
       url = "github:mfroeh/anyrun-swaywin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nixd-completion-in-attr-sets-fix = {
+      url = "github:oandrew/nixd/completion-fixes";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -134,14 +139,15 @@
         };
 
       mkSpecialArgs =
-        { system }:
+        args@{ system, ... }:
         {
           inherit self inputs system;
           pkgsStable = mkPkgs {
             inherit system;
             nixpkgs = nixpkgs-stable;
           };
-        };
+        }
+        // args;
     in
     {
       nixosConfigurations = {
@@ -186,7 +192,11 @@
               }
               "${self}/users/mo/home.nix"
             ];
-            extraSpecialArgs = mkSpecialArgs { inherit system; };
+            extraSpecialArgs = mkSpecialArgs {
+              inherit system;
+              home-config-name = "mo@lambda";
+              nixos-config-name = "lambda";
+            };
           };
         "mo@xya" =
           let
