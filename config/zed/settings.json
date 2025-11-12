@@ -10,8 +10,8 @@
   // theme
   "theme": {
     "mode": "system",
-    "light": "Srcery",
-    "dark": "Gruvbox Dark Hard"
+    "light": "Gruvbox Light",
+    "dark": "Gruvbox Dark"
   },
   "icon_theme": {
     "mode": "system",

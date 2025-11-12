@@ -100,5 +100,8 @@
       (jetbrains.rust-rover.override { jdk = pkgs.openjdk21; })
 
       lunar-client
+
+			# e.g. ld, readelf, 
+      binutils
     ];
 }

@@ -39,6 +39,10 @@ with inputs;
     LC_TIME = "de_DE.UTF-8";
   };
 
+  # enables https://wiki.archlinux.org/title/I2C (at the very least adds the kernel module and some udev rules)
+  # then just add users to the i2c group and you can use i2c
+  hardware.i2c.enable = true;
+
   # enable OpenGL
   hardware.graphics.enable = true;
 

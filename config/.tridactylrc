@@ -31,3 +31,6 @@ set searchurls.crate https://crates.io/search?q=
 set searchurls.go https://pkg.go.dev/search?q=
 
 colourscheme --url https://raw.githubusercontent.com/srcery-colors/srcery-web/refs/heads/master/tridactyl/srcery.css srcery
+
+blacklistadd monkeytype.com
+blacklistadd speedtyper.dev
