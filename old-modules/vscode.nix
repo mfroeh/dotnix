@@ -1,4 +1,5 @@
-{ pkgs, lib, ... }: {
+{ pkgs, lib, ... }:
+{
   programs.vscode = {
     enable = true;
     enableUpdateCheck = false;
@@ -6,45 +7,45 @@
     # somehow completely breaks extensions if true
     mutableExtensionsDir = true;
 
-    extensions = (with pkgs.vscode-extensions; [
-      vscodevim.vim
-      github.copilot
-      mkhl.direnv
+    extensions =
+      (with pkgs.vscode-extensions; [
+        vscodevim.vim
+        github.copilot
+        mkhl.direnv
 
-      # C++
-      llvm-vs-code-extensions.vscode-clangd
-      vadimcn.vscode-lldb
-      twxs.cmake
-      daohong-emilio.yash
+        # C++
+        llvm-vs-code-extensions.vscode-clangd
+        vadimcn.vscode-lldb
+        twxs.cmake
+        daohong-emilio.yash
 
-      # Python
-      ms-python.vscode-pylance
-      ms-python.python
-      ms-toolsai.jupyter
-      ms-python.isort
-      ms-python.black-formatter
+        # Python
+        ms-python.vscode-pylance
+        ms-python.python
+        ms-toolsai.jupyter
+        ms-python.isort
+        ms-python.black-formatter
 
-      # nix
-      jnoortheen.nix-ide
+        # nix
+        jnoortheen.nix-ide
 
-      # rust
-      rust-lang.rust-analyzer
-      tamasfe.even-better-toml
+        # rust
+        rust-lang.rust-analyzer
+        tamasfe.even-better-toml
 
-      # LaTeX
-      james-yu.latex-workshop
+        # LaTeX
+        james-yu.latex-workshop
 
-      # other
-      zxh404.vscode-proto3
+        # other
+        zxh404.vscode-proto3
 
-      # Elixir
-      elixir-lsp.vscode-elixir-ls
+        # Elixir
+        elixir-lsp.vscode-elixir-ls
 
-      # Go
-      golang.go
-    ]) ++
-    pkgs.vscode-utils.extensionsFromVscodeMarketplace
-      [
+        # Go
+        golang.go
+      ])
+      ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
         {
           name = "vscode-antlr4";
           publisher = "mike-lischke";
@@ -149,12 +150,18 @@
           ];
         }
         {
-          "before" = [ "]" "d" ];
+          "before" = [
+            "]"
+            "d"
+          ];
           "commands" = [ "editor.action.marker.nextInFiles" ];
           "silent" = true;
         }
         {
-          "before" = [ "[" "d" ];
+          "before" = [
+            "["
+            "d"
+          ];
           "commands" = [ "editor.action.marker.prevInFiles" ];
           "silent" = true;
         }
@@ -209,18 +216,18 @@
 
       "latex-workshop.latex.autoBuild.run" = "onSave";
 
-      "go.inlayHints.assignVariableTypes"= false;
-      "go.inlayHints.functionTypeParameters"= false;
-      "go.inlayHints.parameterNames"= false;
-      "go.inlayHints.compositeLiteralFields"= false;
-      "go.inlayHints.compositeLiteralTypes"= false;
-      "go.inlayHints.constantValues"= false;
-      "go.inlayHints.rangeVariableTypes"= false;
+      "go.inlayHints.assignVariableTypes" = false;
+      "go.inlayHints.functionTypeParameters" = false;
+      "go.inlayHints.parameterNames" = false;
+      "go.inlayHints.compositeLiteralFields" = false;
+      "go.inlayHints.compositeLiteralTypes" = false;
+      "go.inlayHints.constantValues" = false;
+      "go.inlayHints.rangeVariableTypes" = false;
 
-      "go.useLanguageServer"= true;
+      "go.useLanguageServer" = true;
       "gopls" = {
         "ui.semanticTokens" = true;
-    };
+      };
 
     };
 
@@ -238,5 +245,17 @@
     ];
   };
 
-  home.packages = with pkgs; [ nil nixpkgs-fmt clang-tools cmake-language-server cmake-format jre_minimal texliveFull ] ++ [ nerd-fonts.hack ] ++ lib.optionals pkgs.stdenv.isLinux [ code-cursor ];
+  home.packages =
+    with pkgs;
+    [
+      nil
+      nixpkgs-fmt
+      clang-tools
+      cmake-language-server
+      cmake-format
+      jre_minimal
+      texliveFull
+    ]
+    ++ [ nerd-fonts.hack ]
+    ++ lib.optionals pkgs.stdenv.isLinux [ code-cursor ];
 }

@@ -1,8 +1,15 @@
-{ inputs, pkgs, lib, self, ... }:
+{
+  inputs,
+  pkgs,
+  lib,
+  self,
+  ...
+}:
 let
   # installs a vim plugin from git with a given tag / branch
-  # needs --impure flag 
-  pluginGit = ref: repo:
+  # needs --impure flag
+  pluginGit =
+    ref: repo:
     pkgs.vimUtils.buildVimPlugin {
       pname = "${lib.strings.sanitizeDerivationName repo}";
       version = ref;
@@ -15,8 +22,7 @@ let
   plugin = pluginGit "HEAD";
 in
 {
-  home.packages = [ pkgs.neovide ]
-    ++ lib.optionals pkgs.stdenv.isLinux (with pkgs; [ xclip ]);
+  home.packages = [ pkgs.neovide ] ++ lib.optionals pkgs.stdenv.isLinux (with pkgs; [ xclip ]);
   programs.neovim = {
     enable = true;
     defaultEditor = true;

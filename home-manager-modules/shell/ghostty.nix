@@ -6,13 +6,15 @@
     package = config.lib.nixGL.wrap pkgs.ghostty;
     enableZshIntegration = true;
     settings = {
-      theme = "Srcery";
+      theme = "Gruvbox Dark Hard";
       font-size = 12;
-      font-family = "Hack Nerd Font Mono";
+      font-family = "Iosevka Nerd Font Mono";
       app-notifications = false;
       confirm-close-surface = false;
     };
   };
 
-  home.packages = [ pkgs.nerd-fonts.hack ];
+  home.packages = [
+    pkgs.nerd-fonts.iosevka
+  ];
 }

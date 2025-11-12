@@ -1,5 +1,12 @@
-{ self, pkgs, inputs, specialArgs, ... }:
-with inputs; {
+{
+  self,
+  pkgs,
+  inputs,
+  specialArgs,
+  ...
+}:
+with inputs;
+{
   imports = [
     inputs.mac-app-util.darwinModules.default
     "${self}/users/mo"

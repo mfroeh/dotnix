@@ -189,7 +189,8 @@ load_plugins {
 pane_frames false
 simplified_ui true
 pane_frames_exist_when_solo false
-theme "srcery" 
+// theme "srcery" 
+theme "gruvbox-dark" 
 show_startup_tips false
 default_shell "zsh"
 default_mode "normal"

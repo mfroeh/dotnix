@@ -1,4 +1,9 @@
-{ pkgs, lib, inputs, ... }:
+{
+  pkgs,
+  lib,
+  inputs,
+  ...
+}:
 {
   imports = [ inputs.walker.homeManagerModules.default ];
   programs.walker = lib.mkIf pkgs.stdenv.isLinux {

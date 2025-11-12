@@ -1,4 +1,10 @@
-{ config, pkgs, lib, inputs, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  inputs,
+  ...
+}:
 {
   programs.tmux = {
     enable = true;
@@ -15,7 +21,8 @@
 
     plugins = with pkgs.tmuxPlugins; [
       prefix-highlight # indicate if prefix pressed (prefix_highlight)
-      { plugin = cpu;
+      {
+        plugin = cpu;
         extraConfig = ''
           set -g status-right '#[bg=default,fg=default]GPU: #{gpu_percentage} CPU: #{cpu_percentage} | %H:%M %a %d'
         '';
@@ -24,15 +31,15 @@
         plugin = resurrect;
         # this only does something if you actually use (n)vims session system
         extraConfig = ''
-        set -g @resurrect-strategy-vim 'session' # restore from `Session.vim` file
-        set -g @resurrect-strategy-nvim 'session' # restore from `Session.vim` file
+          set -g @resurrect-strategy-vim 'session' # restore from `Session.vim` file
+          set -g @resurrect-strategy-nvim 'session' # restore from `Session.vim` file
         '';
       }
       {
         plugin = continuum;
         extraConfig = ''
-        set -g @continuum-restore 'on' # restore last saved environment when tmux is started
-        set -g @continuum-save-interval '15' # in minutes
+          set -g @continuum-restore 'on' # restore last saved environment when tmux is started
+          set -g @continuum-save-interval '15' # in minutes
         '';
       }
       yank
@@ -51,7 +58,7 @@
 
       # new windows default to the current windows dir
       bind c new-window -c "#{pane_current_path}"
-      
+
       set-option -s status-interval 1
 
       # theme

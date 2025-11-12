@@ -1,5 +1,11 @@
-{ pkgs, ... }: {
-  home.packages = with pkgs; [ lsd bat fzf xclip ];
+{ pkgs, ... }:
+{
+  home.packages = with pkgs; [
+    lsd
+    bat
+    fzf
+    xclip
+  ];
   programs.fish = {
     enable = true;
     shellInit = ''
@@ -25,7 +31,9 @@
       ns = "nix-shell --command 'fish'";
       comp = "cd builddir && meson compile; cd ..";
     };
-    functions = { mkcd = "mkdir $argv; cd $argv"; };
+    functions = {
+      mkcd = "mkdir $argv; cd $argv";
+    };
     plugins = with pkgs.fishPlugins; [
       {
         name = "pure";

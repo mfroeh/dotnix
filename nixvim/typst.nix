@@ -18,6 +18,6 @@
 
   home.packages = [
     pkgs.typst
-		pkgs.typstyle
+    pkgs.typstyle
   ];
 }

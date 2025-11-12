@@ -1,4 +1,11 @@
-{ pkgs, inputs, lib, system, ... }: {
+{
+  pkgs,
+  inputs,
+  lib,
+  system,
+  ...
+}:
+{
   programs.hyprland = lib.mkIf pkgs.stdenv.isLinux {
     enable = true;
     # set the flake package
