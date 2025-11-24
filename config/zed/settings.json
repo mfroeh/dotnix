@@ -83,6 +83,9 @@
 
   // languages
   "languages": {
+    "TypeScript": {
+      "format_on_save": "off"
+    },
     "Nix": {
       "language_servers": ["nixd"],
       "formatter": {
