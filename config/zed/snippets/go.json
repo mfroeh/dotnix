@@ -1,0 +1,37 @@
+{
+  // Each snippet must have a name and body, but the prefix and description are optional.
+  // The prefix is used to trigger the snippet, but when omitted then the name is used.
+  // Use placeholders like $1, $2 or ${1:defaultValue} to define tab stops.
+  // The $0 determines the final cursor position.
+  // Placeholders with the same value are linked.
+  "Diff": {
+    "prefix": "diff",
+    "body": [
+      "if d := cmp.Diff($1, $2, $3); d != \"\" {",
+      "\tt.Errorf(\"diff in $4 (-want +got):\\n%s\", d)",
+      "\t}$0"
+    ]
+  },
+  "Proto diff": {
+    "prefix": "pdiff",
+    "body": [
+      "if d := cmp.Diff($1, $2, protocmp.Transform()$3); d != \"\" {",
+      "\tt.Errorf(\"diff in $4 (-want +got):\\n%s\", d)",
+      "\t}$0"
+    ]
+  },
+  "Error not nil": {
+    "prefix": "ern",
+    "body": ["if err != nil {", "\treturn $1", "\t}$0"]
+  },
+  "Tests": {
+    "prefix": "trun",
+    "body": [
+      "for _, tt := range tests {",
+      "\tt.Run(tt.name, func(t *testing.T) {",
+      "\t$0",
+      "\t})",
+      "\t}"
+    ]
+  }
+}

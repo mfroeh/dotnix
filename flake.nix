@@ -234,7 +234,11 @@
               }
               "${self}/users/work/home.nix"
             ];
-            extraSpecialArgs = mkSpecialArgs { inherit system; };
+            extraSpecialArgs = mkSpecialArgs {
+              inherit system;
+              home-config-name = "moritz.froehlich@lenovo-PW09JP9W";
+              nixos-config-name = "none";
+            };
           };
       };
     };
