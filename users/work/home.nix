@@ -8,8 +8,13 @@
 }:
 {
   imports = [
+    # desktop environment
+    # "${self}/home-manager-modules/de/kde.nix"
+
     # shell
     "${self}/home-manager-modules/shell"
+    # until we get nixGL to work :s
+    "${self}/old-modules/kitty.nix"
 
     # editor
     "${self}/home-manager-modules/editor/zed.nix"

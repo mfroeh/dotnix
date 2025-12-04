@@ -5,6 +5,8 @@
     hunspell
     hunspellDicts.en_US
     hunspellDicts.de_DE
+    # allow firefox to properly display notifications
+    libnotify
   ];
   home.sessionVariables = {
     DICPATH = "${config.home.homeDirectory}/.nix-profile/share/hunspell";

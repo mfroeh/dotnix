@@ -1,8 +1,10 @@
 {
   self,
   pkgs,
+  lib,
   inputs,
   system,
+  config,
   ...
 }:
 let
@@ -16,6 +18,11 @@ let
   '';
 in
 {
+  home.file."${config.xdg.configHome}/wallpapers" = {
+    source = "${self}/config/wallpapers";
+    recursive = true;
+  };
+
   wayland.windowManager.sway = {
     enable = true;
     config = {
@@ -102,7 +109,7 @@ in
         "XF86AudioLowerVolume" = "exec ${pkgs.pamixer}/bin/pamixer -d 5";
         "XF86AudioMute" = "exec ${pkgs.pamixer}/bin/pamixer -t";
 
-        "${mod}+Mod1+l" = "exec swaylock";
+        "${mod}+Mod1+l" = "exec wlogout";
         "${mod}+Mod1+e" =
           "exec swaynag -t warning -m 'What do you want to do?' -b 'Exit Sway' 'swaymsg exit'";
       };
@@ -199,13 +206,18 @@ in
     colorScheme = "dark";
 
     theme = {
-      package = pkgs.gruvbox-gtk-theme;
-      name = "Gruvbox-Dark";
+      package = pkgs.adw-gtk3;
+      name = "Adw-gtk3-dark";
     };
 
     iconTheme = {
-      package = pkgs.gruvbox-dark-icons-gtk;
-      name = "oomox-gruvbox-dark";
+      package = pkgs.papirus-icon-theme;
+      name = "Papirus-Dark";
+    };
+
+    cursorTheme = {
+      package = pkgs.volantes-cursors;
+      name = "Volantes_light_cursors";
     };
 
     font = {
@@ -220,13 +232,25 @@ in
     enable = true;
 
     # Define your default applications for specific MIME types
+    # https://mimetype.io/all-types
     defaultApplications = {
-      "image/jpeg" = "org.geeqie.Geeqie.desktop";
-      "image/png" = "org.geeqie.Geeqie.desktop";
-      "image/gif" = "org.geeqie.Geeqie.desktop";
-      "image/tiff" = "org.geeqie.Geeqie.desktop";
-      "image/bmp" = "org.geeqie.Geeqie.desktop";
-      "image/webp" = "org.geeqie.Geeqie.desktop";
+      "image/jpeg" = "org.kde.gwenview.desktop";
+      "image/png" = "org.kde.gwenview.desktop";
+      "image/gif" = "org.kde.gwenview.desktop";
+      "image/tiff" = "org.kde.gwenview.desktop";
+      "image/bmp" = "org.kde.gwenview.desktop";
+      "image/webp" = "org.kde.gwenview.desktop";
+
+      "application/zip" = "org.kde.ark.desktop";
+      "application/gzip" = "org.kde.ark.desktop";
+      "application/7z" = "org.kde.ark.desktop";
+      "application/x-tar" = "org.kde.ark.desktop";
+      "application/x-rar-compressed" = "org.kde.ark.desktop";
+      "application/x-7z-compressed" = "org.kde.ark.desktop";
+      "application/x-xz" = "org.kde.ark.desktop";
+
+      "application/pdf" = "firefox.desktop";
+      "text/html" = "firefox.desktop";
     };
   };
 
@@ -309,16 +333,16 @@ in
               }
             ];
           }
-          {
-            block = "net";
-            format = " $icon $device {$ssid|}";
-            click = [
-              {
-                button = "left";
-                cmd = "nm-connection-editor";
-              }
-            ];
-          }
+          # {
+          #   block = "net";
+          #   format = " $icon $device {$ssid|}";
+          #   click = [
+          #     {
+          #       button = "left";
+          #       cmd = "nm-connection-editor";
+          #     }
+          #   ];
+          # }
           {
             block = "sound";
             click = [
@@ -333,19 +357,68 @@ in
             format = " $timestamp.datetime(f:'%a %d.%m %R') ";
             interval = 60;
           }
+          {
+            block = "custom";
+            command = "echo ' ⏻ '";
+            click = [
+              {
+                button = "left";
+                cmd = "${pkgs.wlogout}/bin/wlogout";
+              }
+            ];
+          }
         ];
       };
     };
   };
 
+  programs.wlogout = lib.mkIf pkgs.stdenv.isLinux {
+    enable = true;
+    layout = [
+      {
+        label = "lock";
+        text = "Lock (l)";
+        action = "swaylock";
+        keybind = "l";
+      }
+      {
+        label = "hibernate";
+        text = "Suspend to disk (h)";
+        action = "systemctl hibernate";
+        keybind = "h";
+      }
+      {
+        label = "logout";
+        text = "Logout (e)";
+        action = "swaymsg exit";
+        keybind = "e";
+      }
+      {
+        label = "shutdown";
+        text = "Shutdown (s)";
+        action = "systemctl poweroff";
+        keybind = "s";
+      }
+      {
+        label = "suspend";
+        action = "systemctl suspend";
+        text = "Suspend to RAM (u)";
+        keybind = "u";
+      }
+      {
+        label = "reboot";
+        action = "systemctl reboot";
+        text = "Reboot (r)";
+        keybind = "r";
+      }
+    ];
+  };
+
   home.packages = with pkgs; [
     wdisplays
     pamixer
-    kdePackages.dolphin
-    geeqie
     flameshot
-    # allow firefox to properly display notifications
-    libnotify
+
     pavucontrol
     networkmanagerapplet
   ];

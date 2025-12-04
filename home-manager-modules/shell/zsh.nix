@@ -23,7 +23,7 @@
       "vim" = "nvim";
       "vi" = "nvim";
       "nv" = "neovide";
-      # e.g. nix path-info nixpkgs#firefox
+      # e.g. nix path-info nixpkgs#firefox - also works with nix wrapped binaries (generally shell scripts): e.g. nix path-info $(which myBinary)
       "npi" = "nix path-info";
       "gfh" = "git-file-history";
     };

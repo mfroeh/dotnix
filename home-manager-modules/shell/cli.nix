@@ -6,6 +6,8 @@
 {
   home.packages = with pkgs; [
     coreutils-full
+    # e.g. ld, readelf,
+    binutils
     which
 
     # archivers
@@ -153,6 +155,19 @@
       config = {
         hide_env_diff = true;
       };
+    };
+
+    # [j]ump to directories (cd on a ton of roids)
+    zoxide = {
+      enable = true;
+      options = [ "--no-cmd" ];
+    };
+
+    zsh.shellAliases = {
+      "j" = "__zoxide_z";
+      "ji" = "__zoxide_zi";
+      "n" = "__zoxide_z";
+      "ni" = "__zoxide_zi";
     };
 
     # terminal file manager

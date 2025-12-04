@@ -21,7 +21,7 @@ in
       enable = true;
       settings = {
         variant = "zmk";
-        layout = glove80;
+        layout = corne;
         name = "unused_for_zmk";
       };
     };

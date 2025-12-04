@@ -1,42 +1,90 @@
-{ ... }:
+{
+  inputs,
+  lib,
+  pkgs,
+  nixos-config-name,
+  home-config-name,
+  system,
+  ...
+}:
 {
   programs.nixvim = {
     plugins.lsp = {
       enable = true;
 
       servers = {
-        gopls = {
+        # tombi = {
+        #   enable = true;
+        #   package = pkgs.tombi;
+        #   packageFallback = true;
+        # };
+
+        protols = {
           enable = true;
-
+          package = pkgs.protols;
+          packageFallback = true;
         };
-        protols.enable = true;
 
-        harper_ls = {
-          enable = false;
-          # https://writewithharper.com/docs/integrations/neovim#Optional-Configuration
-          settings.harper-ls = {
-            userDictPath = "~/harper-user-dict.txt";
-            linters = {
-              spell_check = false;
-              sentence_capitalization = false;
+        jsonls = {
+          enable = true;
+          package = pkgs.vscode-langservers-extracted;
+          packageFallback = true;
+        };
+
+        nixd = {
+          # until https://github.com/nix-community/nixd/issues/653 closed
+          package = inputs.nixd-completion-in-attr-sets-fix.packages.${system}.nixd;
+          enable = true;
+          settings = {
+            formatting.command = [ "${lib.getExe pkgs.nixfmt-rfc-style}" ];
+            nixpkgs.expr = "import <nixpkgs> {}";
+            options = {
+              nixos.expr = ''(builtins.getFlake (builtins.toString ~/dotnix)).nixosConfigurations."${nixos-config-name}".options'';
+              home-manager.expr = ''(builtins.getFlake (builtins.toString ~/dotnix)).homeConfigurations."${home-config-name}".options'';
+              nixvim.expr = ''(builtins.getFlake (builtins.toString ~/dotnix)).inputs.nixvim.nixvimConfigurations."${system}".default.options'';
             };
           };
         };
 
-        jsonls.enable = true;
+        gopls = {
+          enable = true;
+          package = pkgs.gopls;
+          packageFallback = true;
+        };
 
         asm_lsp = {
           enable = true;
+          package = pkgs.asm-lsp;
+          packageFallback = true;
         };
 
-        clangd.enable = true;
+        clangd = {
+          enable = true;
+          package = pkgs.clang-tools;
+          packageFallback = true;
+        };
 
-        rust_analyzer.enable = true;
-        # install this per project instead
-        rust_analyzer.installRustc = false;
-        rust_analyzer.installCargo = false;
+        rust_analyzer = {
+          enable = true;
+          package = pkgs.rust-analyzer;
+          packageFallback = true;
+          # rustc and cargo are required by rust_analyzer.
+          # we install them once in user scope, but generally will override them with a rust_analyzer from the devshell environment (this only works if packageFallback = true).
+          installRustc = true;
+          installCargo = true;
+        };
+
+        hls = {
+          enable = true;
+          package = pkgs.haskell-language-server;
+          packageFallback = true;
+          # same story as with rust_analyzer
+          installGhc = true;
+        };
       };
-      # plugins.lsp.inlayHints = true;
+
+      inlayHints = true;
+
       luaConfig.post = ''
         				vim.diagnostic.config({
         					virtual_text = true,
@@ -59,6 +107,8 @@
 
     plugins.lsp-format.enable = true;
 
+    plugins.fidget.enable = true;
+
     plugins.lsp-signature = {
       enable = true;
       settings = {
@@ -70,33 +120,5 @@
         doc_lines = 0;
       };
     };
-
-    # some options here https://github.com/elythh/nixvim/blob/old/modules/nixvim/plug/lspsaga/default.nix
-    plugins.lspsaga = {
-      enable = true;
-      codeAction = {
-
-      };
-      lightbulb = {
-        enable = true;
-        # show in status column
-        sign = true;
-        # dont show inline
-        virtualText = false;
-      };
-    };
-
-    keymaps = [
-      {
-        mode = [
-          "v"
-          "i"
-          "n"
-        ];
-        key = "<c-.>";
-        action = "<cmd>Lspsaga code_action<cr>";
-      }
-    ];
-
   };
 }

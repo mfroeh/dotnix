@@ -2,7 +2,7 @@
 {
   programs.nixvim = {
     plugins.telescope = {
-      enable = true;
+      enable = false;
       extensions = {
         fzf-native.enable = true;
       };

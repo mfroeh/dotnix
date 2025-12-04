@@ -9,23 +9,17 @@
 }:
 {
   imports = [
-    # desktop environment
-    "${self}/home-manager-modules/de/sway.nix"
-
-    # gui apps
-    "${self}/home-manager-modules/gui/bitwarden.nix"
-    "${self}/home-manager-modules/gui/obs.nix"
-    "${self}/home-manager-modules/gui/zathura.nix"
-    "${self}/home-manager-modules/gui/firefox.nix"
-
-    # shell
     "${self}/home-manager-modules/shell"
 
-    # editor
-    "${self}/home-manager-modules/editor/zed.nix"
+    "${self}/home-manager-modules/de/sway.nix"
+
+    "${self}/home-manager-modules/gui/kde-apps.nix"
+    "${self}/home-manager-modules/gui/bitwarden.nix"
+    "${self}/home-manager-modules/gui/firefox.nix"
+
+    "${self}/home-manager-modules/zed.nix"
     "${self}/nixvim"
 
-    # other
     "${self}/home-manager-modules/karabiner.nix"
   ];
 
@@ -77,6 +71,10 @@
     };
   };
 
+  programs.obs-studio = {
+    enable = pkgs.stdenv.isLinux;
+  };
+
   home.packages =
     with pkgs;
     [
@@ -100,8 +98,5 @@
       (jetbrains.rust-rover.override { jdk = pkgs.openjdk21; })
 
       lunar-client
-
-      # e.g. ld, readelf,
-      binutils
     ];
 }
