@@ -9,15 +9,15 @@
 }:
 {
   programs.nixvim = {
+    # not Neovim native LSP, but still using plugins.lsp since it comes with all the preconfigured server settings
     plugins.lsp = {
       enable = true;
-
       servers = {
-        # tombi = {
-        #   enable = true;
-        #   package = pkgs.tombi;
-        #   packageFallback = true;
-        # };
+        tombi = {
+          enable = true;
+          package = pkgs.tombi;
+          packageFallback = true;
+        };
 
         protols = {
           enable = true;
@@ -32,9 +32,9 @@
         };
 
         nixd = {
+          enable = true;
           # until https://github.com/nix-community/nixd/issues/653 closed
           package = inputs.nixd-completion-in-attr-sets-fix.packages.${system}.nixd;
-          enable = true;
           settings = {
             formatting.command = [ "${lib.getExe pkgs.nixfmt-rfc-style}" ];
             nixpkgs.expr = "import <nixpkgs> {}";
@@ -94,15 +94,6 @@
         					severity_sort = true,
         				})
         				'';
-
-      keymaps.lspBuf = {
-        K = "hover";
-        gD = "references";
-        gd = "definition";
-        gi = "implementation";
-        gt = "type_definition";
-        cd = "rename";
-      };
     };
 
     plugins.lsp-format.enable = true;
@@ -120,5 +111,45 @@
         doc_lines = 0;
       };
     };
+
+    # some more bindings are done with fzf-lua
+    keymaps = [
+      {
+        key = "K";
+        mode = [
+          "n"
+          "v"
+        ];
+        action = "<cmd>:lua vim.lsp.buf.hover()<cr>";
+      }
+      {
+        # go to definition of symbol under cursor: e.g. symbol is type, go to the type definition, symbol is variable, go to the variable definition
+        key = "gd";
+        mode = "n";
+        action = "<cmd>:lua vim.lsp.buf.definition()<cr>";
+      }
+      {
+        # go to declaration of symbol under cursor: e.g. from function definition jump to function declaration (gd seems to generally work for this too though, where if you are on the definition, gd will jump to the declaration and vice versa)
+        key = "gD";
+        mode = "n";
+        action = "<cmd>:lua vim.lsp.buf.declaration()<cr>";
+      }
+      {
+        # go the the type of the symbol under the cursor: e.g. variable
+        key = "gt";
+        mode = "n";
+        action = "<cmd>:lua vim.lsp.buf.type_definition()<cr>";
+      }
+      {
+        key = "cd";
+        mode = "n";
+        action = "<cmd>:lua vim.lsp.buf.rename()<cr>";
+      }
+      {
+        key = "<c-.>";
+        mode = "n";
+        action = "<cmd>:lua vim.lsp.buf.code_action()<cr>";
+      }
+    ];
   };
 }

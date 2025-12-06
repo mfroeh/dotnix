@@ -41,6 +41,11 @@
       }
       {
         mode = "n";
+        key = "<c-l>";
+        action = "<cmd>FzfLua oldfiles<cr>";
+      }
+      {
+        mode = "n";
         key = "<leader>?";
         action = "<cmd>FzfLua oldfiles<cr>";
       }
@@ -58,6 +63,18 @@
         mode = "n";
         key = "<leader>ld";
         action = "<cmd>FzfLua lsp_document_symbols<cr>";
+      }
+      {
+        # lists all the places the symbol under the cursor is referenced
+        key = "grr";
+        mode = "n";
+        action = "<cmd>FzfLua lsp_references<cr>";
+      }
+      {
+        # lists all the implementations of the symbol: e.g. use on interface/trait/abstract class
+        key = "gI";
+        mode = "n";
+        action = "<cmd>FzfLua lsp_implementations<cr>";
       }
       {
         mode = "n";

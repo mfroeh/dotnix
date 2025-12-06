@@ -145,6 +145,12 @@
       swapfile = false;
 
       virtualedit = "block";
+
+      # folding: use treesitter for folding, start out buffer with nothing folded
+      foldlevelstart = 99;
+      foldexpr = "v:lua.vim.treesitter.foldexpr()";
+      foldmethod = "expr";
+      foldtext = "";
     };
 
     colorschemes.gruvbox.enable = true;

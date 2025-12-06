@@ -80,9 +80,9 @@
     with pkgs;
     [
       inputs.ngrams.defaultPackage.${system}
-      (google-cloud-sdk.withExtraComponents (
-        with google-cloud-sdk.components; [ gke-gcloud-auth-plugin ]
-      ))
+      # (google-cloud-sdk.withExtraComponents (
+      #   with google-cloud-sdk.components; [ gke-gcloud-auth-plugin ]
+      # ))
       leetcode-cli
     ]
     ++ lib.optionals pkgs.stdenv.isLinux [
