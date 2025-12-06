@@ -94,6 +94,11 @@
         ];
         action = ":lua vim.g.neovide_scale_factor = 1<CR>";
       }
+      {
+        key = "<esc>";
+        mode = "n";
+        action = "<cmd>nohlsearch<cr>";
+      }
     ];
   };
 }

@@ -3,7 +3,20 @@
   programs.nixvim = {
     plugins.fzf-lua = {
       enable = true;
-      luaConfig.post = ''require("fzf-lua").setup({"ivy"})'';
+      luaConfig.post = ''
+        -- https://github.com/ibhagwan/fzf-lua/blob/main/lua/fzf-lua/profiles/max-perf.lua
+        local fzf = require('fzf-lua')
+        fzf.setup({
+          "ivy",
+            winopts = { preview = { default = "bat" } },
+            manpages = { previewer = "man_native" },
+            helptags = { previewer = "help_native" },
+            lsp = { code_actions = { previewer = "codeaction_native" } },
+            tags = { previewer = "bat" },
+            btags = { previewer = "bat" },
+          })
+          fzf.register_ui_select()
+      '';
     };
     keymaps = [
       {
@@ -28,7 +41,7 @@
       }
       {
         mode = "n";
-        key = "<leader>lo";
+        key = "<leader>?";
         action = "<cmd>FzfLua oldfiles<cr>";
       }
       {
