@@ -16,6 +16,7 @@
     "${self}/home-manager-modules/gui/kde-apps.nix"
     "${self}/home-manager-modules/gui/bitwarden.nix"
     "${self}/home-manager-modules/gui/firefox.nix"
+    "${self}/home-manager-modules/gui/neohtop.nix"
 
     "${self}/home-manager-modules/zed.nix"
     "${self}/nixvim"
