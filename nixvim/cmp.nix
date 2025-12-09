@@ -110,7 +110,6 @@
     };
 
     plugins.friendly-snippets.enable = true;
-
   };
 
   xdg.configFile."nvim/snippets" = {

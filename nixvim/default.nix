@@ -20,6 +20,7 @@
     ./fzf.nix
     ./git.nix
     ./zen.nix
+    ./org.nix
   ];
 
   # clipboard providers

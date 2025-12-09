@@ -1,8 +1,14 @@
-{ ... }:
+{ pkgs, config, ... }:
 {
   programs.nixvim = {
     plugins.treesitter = {
       enable = true;
+      grammarPackages =
+        pkgs.vimPlugins.nvim-treesitter.passthru.allGrammars
+        ++ (with pkgs.tree-sitter-grammars; [
+          tree-sitter-norg
+          tree-sitter-norg-meta
+        ]);
       settings = {
         highlight.enable = true;
         indent.enable = true;

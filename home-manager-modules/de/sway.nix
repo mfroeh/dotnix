@@ -37,6 +37,7 @@ in
           always = true;
         }
         {
+          # todo: cron job
           command = "${pkgs.swww}/bin/swww img ${self}/config/wallpapers/autumn-1.jpg";
           always = true;
         }
@@ -50,17 +51,29 @@ in
       ];
       terminal = "${pkgs.ghostty}/bin/ghostty";
       assigns = {
-        "0" = [ { app_id = "ghostty"; } ];
+        "1" = [ { app_id = "ghostty"; } ];
         "2" = [ { app_id = "firefox"; } ];
       };
       workspaceOutputAssign = [
         {
-          workspace = "0";
+          workspace = "1";
           output = "DP-2";
         }
         {
           workspace = "2";
           output = "DP-2";
+        }
+        {
+          workspace = "3";
+          output = "DP-2";
+        }
+        {
+          workspace = "4";
+          output = "HDMI-A-1";
+        }
+        {
+          workspace = "5";
+          output = "HDMI-A-1";
         }
       ];
       modifier = mod;
@@ -83,18 +96,18 @@ in
         "${mod}+Shift+k" = "move up";
         "${mod}+Shift+l" = "move right";
 
-        "${mod}+0" = "workspace number 0";
         "${mod}+1" = "workspace number 1";
         "${mod}+2" = "workspace number 2";
         "${mod}+3" = "workspace number 3";
-        "${mod}+4" = "workspace number 3";
-        "${mod}+Return" = "workspace number 0";
+        "${mod}+4" = "workspace number 4";
+        "${mod}+5" = "workspace number 5";
+        "${mod}+Return" = "workspace number 1";
 
-        "${mod}+Shift+0" = "move container to workspace number 0";
         "${mod}+Shift+1" = "move container to workspace number 1";
         "${mod}+Shift+2" = "move container to workspace number 2";
         "${mod}+Shift+3" = "move container to workspace number 3";
-        "${mod}+Shift+4" = "move container to workspace number 3";
+        "${mod}+Shift+4" = "move container to workspace number 4";
+        "${mod}+Shift+5" = "move container to workspace number 5";
 
         "${mod}+f" = "fullscreen toggle";
         "${mod}+v" = "floating toggle";
