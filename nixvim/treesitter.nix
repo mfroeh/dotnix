@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ pkgs, ... }:
 {
   programs.nixvim = {
     plugins.treesitter = {
@@ -15,35 +15,46 @@
       };
     };
 
-    plugins.treesitter-context.enable = true;
+    plugins.treesitter-context = {
+      enable = true;
+      settings = {
+        max_lines = 1;
+      };
+    };
 
     plugins.treesitter-textobjects = {
       enable = true;
-      select = {
-        enable = true;
-        lookahead = true;
-        includeSurroundingWhitespace = true;
-        keymaps = {
-          "aa" = "@parameter.outer";
-          "ia" = "@parameter.inner";
-          "af" = "@function.outer";
-          "if" = "@function.inner";
-          "ac" = "@class.outer";
-          "ic" = "@class.inner";
+      settings = {
+        select = {
+          enable = true;
+          lookahead = true;
+          include_surrounding_whitespace = true;
+          keymaps = {
+            "aa" = "@parameter.outer";
+            "ia" = "@parameter.inner";
+            "af" = "@function.outer";
+            "if" = "@function.inner";
+            "am" = "@function.outer";
+            "im" = "@function.inner";
+            "ac" = "@class.outer";
+            "ic" = "@class.inner";
+          };
         };
-      };
-      move = {
-        enable = true;
-        setJumps = true;
-        gotoPreviousStart = {
-          "[f" = "@function.outer";
-          "[[" = "@class.outer";
-          "[a" = "parameter.outer";
-        };
-        gotoNextStart = {
-          "]f" = "@function.outer";
-          "]]" = "@class.outer";
-          "]a" = "parameter.outer";
+        move = {
+          enable = true;
+          set_jumps = true;
+          goto_previous_start = {
+            "[f" = "@function.outer";
+            "[m" = "@function.outer";
+            "[[" = "@class.outer";
+            "[a" = "parameter.outer";
+          };
+          goto_next_start = {
+            "]f" = "@function.outer";
+            "]m" = "@function.outer";
+            "]]" = "@class.outer";
+            "]a" = "parameter.outer";
+          };
         };
       };
     };

@@ -67,33 +67,6 @@
         mode = "n";
         action = "<c-u>zz";
       }
-      # resize font in neovide
-      {
-        key = "<C-+>";
-        mode = "n";
-        action = ":lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor + 0.1<CR>";
-      }
-      {
-        key = "<C-=>";
-        mode = "n";
-        action = ":lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor + 0.1<CR>";
-      }
-      {
-        key = "<C-->";
-        mode = [
-          "n"
-          "v"
-        ];
-        action = ":lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor - 0.1<CR>";
-      }
-      {
-        key = "<C-0>";
-        mode = [
-          "n"
-          "v"
-        ];
-        action = ":lua vim.g.neovide_scale_factor = 1<CR>";
-      }
       {
         key = "<esc>";
         mode = "n";

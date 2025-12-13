@@ -4,6 +4,9 @@
     SO = {
       command = "source $MYVIMRC";
     };
+    NixExpand = {
+      command = '':exe ":normal! $F.cl={\<esc>A};"'';
+    };
   };
 
   programs.nixvim.autoCmd = [

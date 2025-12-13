@@ -10,8 +10,6 @@
     ./neovide.nix
     ./keymaps.nix
     ./treesitter.nix
-    ./telescope.nix
-    ./neotest.nix
     ./lsp.nix
     ./cmp.nix
     ./zmk.nix
@@ -46,6 +44,7 @@
     };
 
     plugins.grug-far = {
+
       enable = true;
       settings = {
         debounceMs = 200;

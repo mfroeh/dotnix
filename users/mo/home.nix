@@ -28,13 +28,18 @@
 
   programs.git = {
     enable = true;
-    userName = "mfroeh";
-    userEmail = "mfroeh0@pm.me";
-    extraConfig = {
+    settings = {
+      user.name = "mfroeh";
+      user.email = "mfroeh0@pm.me";
       init.defaultBranch = "main";
     };
-    delta.enable = true;
-    delta.options = {
+    lfs.enable = true;
+  };
+
+  programs.delta = {
+    enable = true;
+    enableGitIntegration = true;
+    options = {
       line-numbers = true;
       decorations = {
         commit-decoration-style = "bold yellow box ul";
