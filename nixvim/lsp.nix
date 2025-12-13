@@ -9,10 +9,31 @@
 }:
 {
   programs.nixvim = {
+    # starts lsps for embedded code blocks (e.g. lua in nix)
+    plugins.otter = {
+      enable = true;
+      settings.lsp.diagnostic_update_events = [
+        "BufWritePost"
+        "InsertLeave"
+        "TextChanged"
+      ];
+    };
+
     # not Neovim native LSP, but still using plugins.lsp since it comes with all the preconfigured server settings
     plugins.lsp = {
       enable = true;
       servers = {
+        lua_ls = {
+          enable = true;
+          settings = {
+            runtime.version = "LuaJIT";
+            workspace.library = [
+              "${pkgs.neovim}/share/nvim/runtime/lua"
+            ];
+            diagnostics.globals = [ "vim" ];
+          };
+        };
+
         tombi = {
           enable = true;
           package = pkgs.tombi;

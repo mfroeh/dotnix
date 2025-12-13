@@ -6,6 +6,7 @@
 {
   imports = [
     inputs.nixvim.homeModules.default
+    ./commands.nix
     ./neovide.nix
     ./keymaps.nix
     ./treesitter.nix
@@ -152,6 +153,9 @@
       foldexpr = "v:lua.vim.treesitter.foldexpr()";
       foldmethod = "expr";
       foldtext = "";
+
+      # neovim default shada
+      shada = "!,'100,<50,s10,h";
     };
 
     colorschemes.gruvbox.enable = true;
