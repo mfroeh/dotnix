@@ -41,5 +41,13 @@
         end
       '';
     }
+    {
+      desc = "enable list mode in visual mode";
+      event = [ "ModeChanged" ];
+      pattern = "*";
+      callback = {
+        __raw = ''function() vim.opt_local.list = (vim.api.nvim_get_mode().mode:lower():match 'v' ~= nil) end'';
+      };
+    }
   ];
 }
