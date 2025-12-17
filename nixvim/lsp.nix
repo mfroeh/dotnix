@@ -107,14 +107,15 @@
       inlayHints = true;
 
       luaConfig.post = ''
-        				vim.diagnostic.config({
-        					virtual_text = true,
-        					signs = true,
-        					underline = true,
-        					update_in_insert = false,
-        					severity_sort = true,
-        				})
-        				'';
+        vim.diagnostic.config({
+          virtual_text = false,
+          virtual_lines = { current_line = true },
+          signs = true,
+          underline = true,
+          update_in_insert = false,
+          severity_sort = true,
+        })
+      '';
     };
 
     plugins.lsp-format.enable = true;
