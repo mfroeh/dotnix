@@ -31,6 +31,11 @@
       }
       {
         mode = "n";
+        key = "<leader>fd";
+        action = ":lua require('fzf-lua').files({ cwd = vim.fn.expand('%:p:h') })<cr>";
+      }
+      {
+        mode = "n";
         key = "<leader>,";
         action = "<cmd>FzfLua buffers<cr>";
       }

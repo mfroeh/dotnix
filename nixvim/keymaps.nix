@@ -72,6 +72,21 @@
         mode = "n";
         action = "<cmd>nohlsearch<cr>";
       }
+      {
+        key = "<leader>yfn";
+        mode = "n";
+        action = ":lua vim.fn.setreg('+', vim.fn.expand('%:t'))<cr>";
+      }
+      {
+        key = "<leader>yfr";
+        mode = "n";
+        action = ":lua vim.fn.setreg('+', vim.fn.expand('%:.'))<cr>";
+      }
+      {
+        key = "<leader>yfa";
+        mode = "n";
+        action = ":lua vim.fn.setreg('+', vim.fn.expand('%:p'))<cr>";
+      }
     ];
   };
 }

@@ -19,6 +19,9 @@
             };
           };
         };
+        "core.export" = {
+          __empty = null;
+        };
       };
     };
   };
