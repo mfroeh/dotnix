@@ -20,6 +20,7 @@
     ./git.nix
     ./zen.nix
     ./org.nix
+    ./go.nix
   ];
 
   # clipboard providers
