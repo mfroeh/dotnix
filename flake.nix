@@ -76,6 +76,10 @@
       url = "github:oandrew/nixd/completion-fixes";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # weekly updated nix-index database for nixpkgs/nixos-unstable channel
+    nix-index-database.url = "github:nix-community/nix-index-database";
+    nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -88,6 +92,7 @@
       nixgl,
       rust-overlay,
       nur,
+      nix-index-database,
       ...
     }@inputs:
     let
@@ -190,6 +195,7 @@
                   homeDirectory = "/home/mo";
                 };
               }
+              nix-index-database.homeModules.default
               "${self}/users/mo/home.nix"
             ];
             extraSpecialArgs = mkSpecialArgs {
@@ -213,6 +219,7 @@
                   homeDirectory = "/Users/mo";
                 };
               }
+              nix-index-database.homeModules.default
               "${self}/users/mo/home.nix"
             ];
             extraSpecialArgs = mkSpecialArgs { inherit system; };
@@ -232,6 +239,7 @@
                   homeDirectory = "/home/moritz.froehlich";
                 };
               }
+              nix-index-database.homeModules.default
               "${self}/users/work/home.nix"
             ];
             extraSpecialArgs = mkSpecialArgs {

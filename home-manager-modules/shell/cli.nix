@@ -170,6 +170,14 @@
       "ni" = "__zoxide_zi";
     };
 
+    # if you try to run a command which does not exist, checks the command against all binaries in nixpkgs/nixos-unstable channel
+    nix-index.enable = true;
+    # nix-index-database allows us to use a weekly updated cache of the binaries, instead of generating the cache locally using `nix-index` (this takes a few minutes)
+    # the comma binary, which we activate here allows us to run `, some-nix-packaged-binary`
+    # this simply picks up the binary from `anyPackage/bin/some-nix-packaged-binary`. Install it in nix-profile using -i (don't use this), or open a shell containing the package which contains the binary using (, -s my-binary)
+    # this allows you to not have to worry about which package contains which binaries anymore!
+    nix-index-database.comma.enable = true;
+
     # terminal file manager
     yazi = {
       enable = true;
