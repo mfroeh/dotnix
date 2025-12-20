@@ -6,12 +6,11 @@
 
     syntaxHighlighting.enable = true;
     autosuggestion.enable = true;
-    autosuggestion.highlight = "fg=yellow";
+    autosuggestion.highlight = "fg=#FFA500,underline,bold";
 
     historySubstringSearch.enable = true;
 
     shellAliases = {
-      "ed" = "fd . --type f | fzf --preview 'bat {} --color always --plain' | xargs -r nvim";
       "so" = "rebuild-system";
       # "ho" = "home-manager switch --flake ~/dotnix#$USERNAME@$(hostname)";
       "ho" = "nh home switch ~/dotnix";
@@ -35,34 +34,35 @@
     autocd = true; # cd /some/dir == /some/dir, cd ../.. == ...
 
     initContent = ''
-                        export KEYTIMEOUT=1 # make vi mode transitions faster (KEYTIMEOUT is in hundredths of a second)
-                        bindkey '^F' autosuggest-accept # accept autosuggestions with ^F
-                        bindkey -M main '^R' atuin-search
-                        bindkey -M vicmd '^R' atuin-search
-            						export ZSH_AUTOSUGGEST_STRATEGY=(atuin completion)
+      export KEYTIMEOUT=1 # make vi mode transitions faster (KEYTIMEOUT is in hundredths of a second)
+      bindkey '^F' autosuggest-accept # accept autosuggestions with ^F
+      bindkey -M main '^R' atuin-search
+      bindkey -M vicmd '^R' atuin-search
+      export ZSH_AUTOSUGGEST_STRATEGY=(atuin completion)
+      export ZSH_AUTOSUGGEST_USE_ASYNC=1
 
-                        function rebuild-system() {
-                            local os_name=$(uname -s)
+      function rebuild-system() {
+          local os_name=$(uname -s)
 
-                            if [ "$os_name" = "Linux" ]; then
-                                # sudo nixos-rebuild switch --flake ~/dotnix#"$(hostname)"
-                  							nh os switch ~/dotnix
-                            elif [ "$os_name" = "Darwin" ]; then
-                                darwin-rebuild switch --flake ~/dotnix#"$(hostname)"
-                            fi
-                        }
+          if [ "$os_name" = "Linux" ]; then
+              # sudo nixos-rebuild switch --flake ~/dotnix#"$(hostname)"
+              nh os switch ~/dotnix
+          elif [ "$os_name" = "Darwin" ]; then
+              darwin-rebuild switch --flake ~/dotnix#"$(hostname)"
+          fi
+      }
 
-      									function git-file-history() {
-      										git rev-list HEAD -- "$1" | while read hash; do
-      											git --no-pager show --pretty="format:%H: %B" --no-patch $hash
-      											git --no-pager show "$hash:$1"
-      											echo "\n"
-      										done
-      									}
+      function git-file-history() {
+        git rev-list HEAD -- "$1" | while read hash; do
+          git --no-pager show --pretty="format:%H: %B" --no-patch $hash
+          git --no-pager show "$hash:$1"
+          echo "\n"
+        done
+      }
 
-            						if [[ -f ~/.zshrc.local ]]; then
-            							source ~/.zshrc.local
-            						fi
+      if [[ -f ~/.zshrc.local ]]; then
+        source ~/.zshrc.local
+      fi
     '';
 
     oh-my-zsh = {
@@ -78,16 +78,13 @@
       '';
     };
 
-    history = {
-      extended = true; # save timestamps
-      ignoreDups = true; # don't add duplicates to history
-      ignorePatterns = [ "rm" ];
-      ignoreSpace = true; # if command begins with space, don't save
-      share = true; # share history between zsh sessions
-      save = 10000;
-    };
-
     plugins = [
+      # replaces the zsh completion menu with fzf
+      # must be before plugins that wrap widgets, such as zsh-autosuggestions or fast-syntax-highlighting
+      {
+        name = "fzf-tab";
+        src = "${pkgs.zsh-fzf-tab}/share/fzf-tab";
+      }
       # sets IN_NIX_SHELL which is used by starship
       {
         name = "zsh-nix-shell";
