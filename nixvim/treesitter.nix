@@ -18,7 +18,7 @@
     plugins.treesitter-context = {
       enable = true;
       settings = {
-        max_lines = 1;
+        max_lines = 2;
       };
     };
 

@@ -3,7 +3,7 @@
   programs.nixvim = {
     globals = {
       mapleader = " ";
-      maplocalleader = ",";
+      maplocalleader = " ";
     };
 
     keymaps = [
@@ -50,12 +50,6 @@
         mode = "n";
         action = "Nzzzv";
       }
-      # dont move cursor when joining lines
-      # {
-      #   key = "J";
-      #   mode = "n";
-      #   action = "mzJ'z";
-      # }
       # <pageup>/<pagedown> should function as c-u and c-d
       {
         key = "<pagedown>";
@@ -72,6 +66,7 @@
         mode = "n";
         action = "<cmd>nohlsearch<cr>";
       }
+      # yank file names
       {
         key = "<leader>yfn";
         mode = "n";
@@ -87,6 +82,17 @@
         mode = "n";
         action = ":lua vim.fn.setreg('+', vim.fn.expand('%:p'))<cr>";
       }
+      {
+        key = "<leader>e.";
+        mode = "n";
+        action = "<cmd>e %:h<cr>";
+      }
+      # dont move cursor when joining lines
+      # {
+      #   key = "J";
+      #   mode = "n";
+      #   action = "mzJ'z";
+      # }
     ];
   };
 }

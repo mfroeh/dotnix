@@ -9,6 +9,9 @@
           "<c-f>" = [
             "select_and_accept"
           ];
+          "<c-t>" = [
+            "select_and_accept"
+          ];
           "<right>" = [
             "select_and_accept"
           ];

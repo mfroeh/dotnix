@@ -7,20 +7,24 @@
   imports = [
     inputs.nixvim.homeModules.default
     ./commands.nix
-    ./neovide.nix
     ./keymaps.nix
-    ./treesitter.nix
     ./lsp.nix
-    ./cmp.nix
+    ./treesitter.nix
     ./zmk.nix
-    ./typst.nix
-    ./nix.nix
-    ./flash.nix
     ./fzf.nix
     ./git.nix
-    ./zen.nix
     ./org.nix
+    ./neovide.nix
+    ./flash.nix
+    ./zen.nix
+
+    # TODO: check these again
+    ./cmp.nix
+    ./random.nix
+
     ./go.nix
+    ./nix.nix
+    ./typst.nix
   ];
 
   # clipboard providers
@@ -32,50 +36,6 @@
   programs.nixvim = {
     enable = true;
     clipboard.register = [ "unnamedplus" ];
-
-    plugins.mini-icons = {
-      enable = true;
-      mockDevIcons = true;
-    };
-
-    colorschemes.gruvbox.enable = true;
-    colorschemes.gruvbox.settings = {
-      terminal_colors = true;
-      contrast = "hard";
-    };
-
-    plugins.grug-far = {
-
-      enable = true;
-      settings = {
-        debounceMs = 200;
-        engine = "ripgrep";
-        settings = {
-          engines = {
-            ripgrep = {
-              path = "rg";
-            };
-          };
-        };
-      };
-    };
-
-    plugins.harpoon = {
-      enable = true;
-    };
-
-    plugins.mini-statusline = {
-      enable = true;
-    };
-
-    plugins.markdown-preview = {
-      enable = true;
-    };
-
-    plugins.comment.enable = true;
-    plugins.nvim-surround.enable = true;
-
-    plugins.oil.enable = true;
 
     opts = {
       number = true;
@@ -137,8 +97,39 @@
       shada = "!,'100,<50,s10,h";
     };
 
-    plugins.nvim-autopairs.enable = true;
-    plugins.rainbow-delimiters.enable = true;
+    colorschemes.gruvbox.enable = true;
+    colorschemes.gruvbox.settings = {
+      terminal_colors = true;
+      contrast = "hard";
+    };
+
+    # core plugins
+    plugins = {
+      mini-statusline = {
+        enable = true;
+      };
+
+      mini-icons = {
+        enable = true;
+        mockDevIcons = true;
+      };
+
+      nvim-autopairs.enable = true;
+      rainbow-delimiters.enable = true;
+
+      comment.enable = true;
+      nvim-surround.enable = true;
+
+      oil = {
+        enable = true;
+        settings = {
+          keymaps = {
+            # disabling them is case-sensitive, check https://github.com/stevearc/oil.nvim
+            "<C-p>" = false;
+          };
+        };
+      };
+    };
 
     performance.byteCompileLua = {
       enable = true;

@@ -210,6 +210,21 @@ in
             }
           ];
         }
+        {
+          name = "nulty";
+          output = [
+            {
+              search = [
+                "m=GN246HL"
+                "s=LW3EE0058533"
+                "v=Acer Technologies"
+              ];
+              enable = true;
+              mode = "1920x1080@144.001Hz";
+              position = "0,0";
+            }
+          ];
+        }
       ];
     };
   };

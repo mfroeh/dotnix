@@ -19,6 +19,13 @@
       '';
     };
     keymaps = [
+      # resume picker
+      {
+        mode = "n";
+        key = "<leader>rr";
+        action = "<cmd>FzfLua resume<cr>";
+      }
+      # files
       {
         mode = "n";
         key = "<c-p>";
@@ -31,8 +38,14 @@
       }
       {
         mode = "n";
-        key = "<leader>fd";
-        action = ":lua require('fzf-lua').files({ cwd = vim.fn.expand('%:p:h') })<cr>";
+        key = "<leader>of";
+        action = "<cmd>FzfLua files<cr>";
+      }
+      # buffers
+      {
+        mode = "n";
+        key = "<c-,>";
+        action = "<cmd>FzfLua buffers<cr>";
       }
       {
         mode = "n";
@@ -41,19 +54,28 @@
       }
       {
         mode = "n";
+        key = "<leader>ob";
+        action = "<cmd>FzfLua buffers<cr>";
+      }
+      # old files
+      {
+        mode = "n";
+        key = "<leader>oo";
+        action = "<cmd>FzfLua oldfiles<cr>";
+      }
+      # grep
+      {
+        mode = "n";
         key = "<leader>/";
         action = "<cmd>FzfLua live_grep<cr>";
       }
+      # files in directory
       {
         mode = "n";
-        key = "<c-l>";
-        action = "<cmd>FzfLua oldfiles<cr>";
+        key = "<leader>od";
+        action = ":lua require('fzf-lua').files({ cwd = vim.fn.expand('%:p:h') })<cr>";
       }
-      {
-        mode = "n";
-        key = "<leader>?";
-        action = "<cmd>FzfLua oldfiles<cr>";
-      }
+      # LSP
       {
         mode = "n";
         key = "gs";
@@ -63,11 +85,6 @@
         mode = "n";
         key = "gS";
         action = "<cmd>FzfLua lsp_workspace_symbols<cr>";
-      }
-      {
-        mode = "n";
-        key = "<leader>ld";
-        action = "<cmd>FzfLua lsp_document_symbols<cr>";
       }
       {
         # lists all the places the symbol under the cursor is referenced
@@ -90,6 +107,19 @@
         mode = "n";
         key = "<leader>lD";
         action = "<cmd>FzfLua lsp_workspace_diagnostics<cr>";
+      }
+      # zoxide
+      {
+        mode = "n";
+        key = "<leader>jd";
+        action = "<cmd>FzfLua zoxide<cr>";
+        options.desc = "[j]ump [d]irectory";
+      }
+      # keybindings
+      {
+        mode = "n";
+        key = "g?";
+        action = "<cmd>FzfLua keymaps<cr>";
       }
     ];
   };

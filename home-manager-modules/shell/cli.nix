@@ -40,6 +40,8 @@
     xxd
     # compress/decompress between different formats (in particular zlib): `pigz -dcz $YOUR_FILE` decompresses a zlib encoded file to STDOUT
     pigz
+
+    ffmpeg-full
   ];
 
   programs = {

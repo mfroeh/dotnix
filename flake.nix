@@ -165,6 +165,15 @@
           ];
           specialArgs = mkSpecialArgs { inherit system; };
         };
+        nulty = nixpkgs.lib.nixosSystem rec {
+          system = "x86_64-linux";
+          pkgs = mkPkgs { inherit system nixpkgs; };
+          modules = [
+            ./modules/nix.nix
+            "${self}/hosts/nulty"
+          ];
+          specialArgs = mkSpecialArgs { inherit system; };
+        };
       };
 
       darwinConfigurations = {
@@ -202,6 +211,30 @@
               inherit system;
               home-config-name = "mo@lambda";
               nixos-config-name = "lambda";
+            };
+          };
+        "mo@nulty" =
+          let
+            system = "x86_64-linux";
+          in
+          home-manager.lib.homeManagerConfiguration {
+            pkgs = mkPkgs { inherit nixpkgs system; };
+            modules = [
+              {
+                home.stateVersion = "24.11";
+                programs.home-manager.enable = true;
+                home = {
+                  username = "mo";
+                  homeDirectory = "/home/mo";
+                };
+              }
+              nix-index-database.homeModules.default
+              "${self}/users/mo/home.nix"
+            ];
+            extraSpecialArgs = mkSpecialArgs {
+              inherit system;
+              home-config-name = "mo@nulty";
+              nixos-config-name = "nulty";
             };
           };
         "mo@xya" =

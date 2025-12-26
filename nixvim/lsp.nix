@@ -1,10 +1,5 @@
 {
-  inputs,
-  lib,
   pkgs,
-  nixos-config-name,
-  home-config-name,
-  system,
   ...
 }:
 {
@@ -49,27 +44,6 @@
         jsonls = {
           enable = true;
           package = pkgs.vscode-langservers-extracted;
-          packageFallback = true;
-        };
-
-        nixd = {
-          enable = true;
-          # until https://github.com/nix-community/nixd/issues/653 closed
-          package = inputs.nixd-completion-in-attr-sets-fix.packages.${system}.nixd;
-          settings = {
-            formatting.command = [ "${lib.getExe pkgs.nixfmt-rfc-style}" ];
-            nixpkgs.expr = "import <nixpkgs> {}";
-            options = {
-              nixos.expr = ''(builtins.getFlake (builtins.toString ~/dotnix)).nixosConfigurations."${nixos-config-name}".options'';
-              home-manager.expr = ''(builtins.getFlake (builtins.toString ~/dotnix)).homeConfigurations."${home-config-name}".options'';
-              nixvim.expr = ''(builtins.getFlake (builtins.toString ~/dotnix)).inputs.nixvim.nixvimConfigurations."${system}".default.options'';
-            };
-          };
-        };
-
-        gopls = {
-          enable = true;
-          package = pkgs.gopls;
           packageFallback = true;
         };
 
@@ -125,8 +99,6 @@
     plugins.lsp-signature = {
       enable = true;
       settings = {
-        # also show when parameters are split across multiple lines
-        always_trigger = true;
         handler_opts = {
           border = "none";
         };
@@ -138,10 +110,7 @@
     keymaps = [
       {
         key = "K";
-        mode = [
-          "n"
-          "v"
-        ];
+        mode = "n";
         action = "<cmd>:lua vim.lsp.buf.hover()<cr>";
       }
       {

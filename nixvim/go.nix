@@ -1,5 +1,11 @@
 { pkgs, ... }:
 {
+  programs.nixvim.plugins.lsp.servers.gopls = {
+    enable = true;
+    package = pkgs.gopls;
+    packageFallback = true;
+  };
+
   programs.nixvim.extraPlugins = [
     (pkgs.vimUtils.buildVimPlugin {
       name = "gotests";
