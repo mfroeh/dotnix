@@ -96,16 +96,6 @@
 
     plugins.fidget.enable = true;
 
-    plugins.lsp-signature = {
-      enable = true;
-      settings = {
-        handler_opts = {
-          border = "none";
-        };
-        doc_lines = 0;
-      };
-    };
-
     # some more bindings are done with fzf-lua
     keymaps = [
       {

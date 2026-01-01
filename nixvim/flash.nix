@@ -4,6 +4,11 @@
     plugins.flash = {
       enable = true;
       settings = {
+        label = {
+          rainbow = {
+            enabled = true;
+          };
+        };
         modes = {
           char = {
             enabled = false;
@@ -25,7 +30,6 @@
       {
         mode = [
           "n"
-          "x"
           "o"
         ];
         key = "S";

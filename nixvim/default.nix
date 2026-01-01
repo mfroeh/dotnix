@@ -118,7 +118,25 @@
       rainbow-delimiters.enable = true;
 
       comment.enable = true;
-      nvim-surround.enable = true;
+      nvim-surround = {
+        enable = true;
+        settings.keymaps = {
+          insert = "<C-g>s";
+          normal = "ys";
+          normal_cur = "yss";
+          visual = "S";
+          delete = "ds";
+          change = "cs";
+        };
+        luaConfig.post = ''
+          -- Manually delete the mappings nvim-surround forces
+          vim.keymap.del("i", "<C-g>S")
+          vim.keymap.del("n", "yS")
+          vim.keymap.del("n", "ySS")
+          vim.keymap.del("n", "cS")
+          vim.keymap.del("x", "gS")
+        '';
+      };
 
       oil = {
         enable = true;

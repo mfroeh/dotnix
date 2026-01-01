@@ -4,45 +4,53 @@
   ...
 }:
 {
-  home.packages = with pkgs; [
-    coreutils-full
-    # e.g. ld, readelf,
-    binutils
-    which
+  home.packages =
+    with pkgs;
+    [
+      coreutils-full
+      # e.g. ld, readelf,
+      binutils
+      which
 
-    # archivers
-    gnutar
-    zip
-    unzip
-    rar
+      # archivers
+      gnutar
+      unrar
+      gzip
+      unzip
+      p7zip
+      ncompress
+      zstd
 
-    # bat for man pages
-    bat-extras.batman
+      # bat for man pages
+      bat-extras.batman
 
-    dust
-    just
+      dust
+      just
 
-    glow
+      glow
 
-    # nix derivation dependency browser
-    nix-tree
-    # `nom` is an alias for `nix` with detailled log output
-    nix-output-monitor
+      # nix derivation dependency browser
+      nix-tree
+      # `nom` is an alias for `nix` with detailled log output
+      nix-output-monitor
 
-    devenv
+      devenv
 
-    neofetch
+      neofetch
 
-    asciinema
-    asciinema-agg
+      asciinema
+      asciinema-agg
 
-    # hexdump
-    xxd
-    # compress/decompress between different formats (in particular zlib): `pigz -dcz $YOUR_FILE` decompresses a zlib encoded file to STDOUT
-    pigz
+      # hexdump
+      xxd
+      # compress/decompress between different formats (in particular zlib): `pigz -dcz $YOUR_FILE` decompresses a zlib encoded file to STDOUT
+      pigz
 
-    ffmpeg-full
-  ];
+      ffmpeg-full
+    ]
+    ++ [
+      (import "${self}/bin/ex.nix" { inherit pkgs; })
+    ];
 
   programs = {
     nh = {
@@ -179,21 +187,5 @@
     # this simply picks up the binary from `anyPackage/bin/some-nix-packaged-binary`. Install it in nix-profile using -i (don't use this), or open a shell containing the package which contains the binary using (, -s my-binary)
     # this allows you to not have to worry about which package contains which binaries anymore!
     nix-index-database.comma.enable = true;
-
-    # terminal file manager
-    yazi = {
-      enable = true;
-      keymap = {
-        manager.prepend_keymap = [
-          {
-            on = "y";
-            run = [
-              ''shell 'for path in "$@"; do echo "file://$path"; done | wl-copy -t text/uri-list' --confirm''
-              "yank"
-            ];
-          }
-        ];
-      };
-    };
   };
 }

@@ -3,75 +3,79 @@
   programs.nixvim = {
     plugins.blink-cmp = {
       enable = true;
+      setupLspCapabilities = true;
       settings = {
         keymap = {
           preset = "none";
+          "<c-space>" = [
+            "show"
+            "show_documentation"
+            "hide_documentation"
+          ];
+          "<c-e>" = [
+            "hide"
+            "fallback"
+          ];
+          "<Tab>" = [
+            {
+              __raw = ''
+                function(cmp)
+                  if cmp.snippet_active() then 
+                    return cmp.accept()
+                  else 
+                    return cmp.select_and_accept() 
+                  end
+                end
+              '';
+            }
+            "snippet_forward"
+            "fallback"
+          ];
           "<c-f>" = [
             "select_and_accept"
-          ];
-          "<c-t>" = [
-            "select_and_accept"
-          ];
-          "<right>" = [
-            "select_and_accept"
-          ];
-          "<c-j>" = [
-            "select_next"
             "fallback"
           ];
-          "<c-n>" = [
-            "select_next"
+          "<S-Tab>" = [
+            "snippet_backward"
             "fallback"
           ];
-          "<down>" = [
-            "select_next"
-            "fallback"
-          ];
-          "<c-k>" = [
+          "<Up>" = [
             "select_prev"
             "fallback"
           ];
-          "<up>" = [
-            "select_prev"
+          "<Down>" = [
+            "select_next"
             "fallback"
           ];
           "<c-p>" = [
             "select_prev"
             "fallback"
           ];
+          "<c-k>" = [
+            "select_prev"
+            "fallback"
+          ];
+          "<c-n>" = [
+            "select_next"
+            "fallback"
+          ];
+          "<c-j>" = [
+            "select_next"
+            "fallback"
+          ];
           "<c-u>" = [
             "scroll_documentation_up"
             "fallback"
           ];
-          "<PageUp>" = [
-            "scroll_documentation_up"
-            "fallback"
-          ];
-          "<C-d>" = [
+          "<c-d>" = [
             "scroll_documentation_down"
             "fallback"
           ];
-          "<PaguDown>" = [
-            "scroll_documentation_down"
+          "<c-s>" = [
+            "show_signature"
+            "hide_signature"
             "fallback"
           ];
-          "<c-space>" = [
-            "show"
-            "show_documentation"
-            "hide_documentation"
-          ];
-          "<S-Tab>" = [
-            "snippet_backward"
-            "fallback"
-          ];
-          "<Tab>" = [
-            "snippet_forward"
-            "fallback"
-          ];
-        };
-        # todo: doesn't seem to work
-        cmdline = {
-          enabled = true;
         };
         completion = {
           keyword = {
@@ -85,11 +89,16 @@
           };
           list = {
             selection = {
-              preselect = true;
+              preselect.__raw = ''
+                function(ctx)
+                  return not require('blink.cmp').snippet_active({ direction = 1 })
+                end
+              '';
               auto_insert = false;
             };
           };
           menu = {
+            enabled = true;
             auto_show = true;
           };
           documentation = {
@@ -103,15 +112,21 @@
           };
         };
         fuzzy = {
-          implementation = "rust";
+          prebuilt_binaries.download = true;
         };
         signature = {
-          # we show this through lsp-signature, it works way better
-          enabled = false;
+          enabled = true;
         };
+        sources.default = [
+          "lsp"
+          "path"
+          "snippets"
+          "buffer"
+        ];
       };
     };
 
+    # todo: switch snippet setup
     plugins.friendly-snippets.enable = true;
   };
 

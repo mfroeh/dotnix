@@ -343,6 +343,10 @@ in
             format = " $icon $mem_used_percents ";
           }
           {
+            block = "nvidia_gpu";
+            interval = 5;
+          }
+          {
             block = "cpu";
             interval = 5;
           }
