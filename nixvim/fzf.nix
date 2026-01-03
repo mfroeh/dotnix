@@ -142,7 +142,7 @@
           function()
             if vim.bo.buftype == "quickfix" then
               vim.cmd("wincmd p")
-            elseif vim.fn.getqflist({ winid = 0 }).winid > 0 then
+            elseif #vim.fn.getqflist() > 0 then
                 vim.cmd("copen")
             end
           end
@@ -153,7 +153,31 @@
           "n"
           "v"
         ];
-        key = "<leader>qc";
+        key = "qd";
+        action.__raw = ''
+          function()
+            local diagnostics = vim.diagnostic.get(0)
+            vim.fn.setqflist(vim.diagnostic.toqflist(diagnostics), 'r')
+            vim.cmd("copen")
+          end
+        '';
+        options.desc = "Populate the [q]uickfix list with [d]iagnostics from the current buffer";
+      }
+      {
+        mode = [
+          "n"
+          "v"
+        ];
+        key = "qD";
+        action.__raw = "function() vim.diagnostic.setqflist() end";
+        options.desc = "Populate the [q]uickfix list with [D]iagnostics from the workspace";
+      }
+      {
+        mode = [
+          "n"
+          "v"
+        ];
+        key = "qc";
         action = "<cmd>cclose<cr>";
       }
     ];

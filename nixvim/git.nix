@@ -4,6 +4,12 @@
     plugins.lazygit.enable = true;
     plugins.gitsigns.enable = true;
     plugins.gitsigns.settings.current_line_blame = true;
+    plugins.gitsigns.luaConfig.post = ''
+      require('gitsigns').setup({
+        -- always diff against HEAD, such that staged hunks are included in the diff (and available via [c and ]c)
+        base = "HEAD"
+      })
+    '';
 
     keymaps = [
       {
@@ -37,6 +43,16 @@
             vim.cmd('Gitsigns blame')
           end
         '';
+      }
+      {
+        mode = "n";
+        key = "<leader>gh";
+        action = "<cmd>FzfLua git_hunks<cr>";
+      }
+      {
+        mode = "n";
+        key = "<leader>gd";
+        action = "<cmd>FzfLua git_diff<cr>";
       }
     ];
   };

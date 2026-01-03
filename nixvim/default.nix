@@ -95,6 +95,9 @@
 
       # neovim default shada
       shada = "!,'100,<50,s10,h";
+
+      # out quickfix list bindings `q...` are ambiguous with the macro stop recording `q` binding (everything else is fine)
+      timeoutlen = 1000;
     };
 
     colorschemes.gruvbox.enable = true;
