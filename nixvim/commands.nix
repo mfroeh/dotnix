@@ -49,5 +49,16 @@
         __raw = ''function() vim.opt_local.list = (vim.api.nvim_get_mode().mode:lower():match 'v' ~= nil) end'';
       };
     }
+    {
+      desc = "quit if only remaining window is quickfix";
+      event = [ "BufEnter" ];
+      pattern = "*";
+      callback.__raw = ''
+        function()
+          if vim.fn.winnr("$") == 1 and vim.bo.buftype == "quickfix" then
+            vim.cmd("quit")
+          end
+        end'';
+    }
   ];
 }
