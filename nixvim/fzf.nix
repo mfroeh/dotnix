@@ -157,8 +157,10 @@
         action.__raw = ''
           function()
             local diagnostics = vim.diagnostic.get(0)
-            vim.fn.setqflist(vim.diagnostic.toqflist(diagnostics), 'r')
-            vim.cmd("copen")
+            if #diagnostics > 0 then
+              vim.fn.setqflist(vim.diagnostic.toqflist(diagnostics), 'r')
+              vim.cmd("copen")
+            end
           end
         '';
         options.desc = "Populate the [q]uickfix list with [d]iagnostics from the current buffer";
