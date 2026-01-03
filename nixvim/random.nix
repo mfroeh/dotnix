@@ -19,5 +19,19 @@
     plugins.harpoon = {
       enable = true;
     };
+
+    # todo replace with nvim variant
+    plugins.visual-multi = {
+      enable = true;
+      settings = {
+        default_mappings = 0;
+        maps = {
+          "Find Subword Under" = "gn";
+          "Skip Region" = "gN";
+          "Undo" = "u";
+          "Redo" = "<C-r>";
+        };
+      };
+    };
   };
 }

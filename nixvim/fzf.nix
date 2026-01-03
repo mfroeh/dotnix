@@ -14,10 +14,20 @@
             lsp = { code_actions = { previewer = "codeaction_native" } },
             tags = { previewer = "bat" },
             btags = { previewer = "bat" },
+            keymap = {
+              fzf = {
+                ["ctrl-q"] = "select-all+accept",
+              }
+            },
           })
           fzf.register_ui_select()
       '';
     };
+
+    plugins.quicker = {
+      enable = true;
+    };
+
     keymaps = [
       # resume picker
       {
@@ -120,6 +130,31 @@
         mode = "n";
         key = "g?";
         action = "<cmd>FzfLua keymaps<cr>";
+      }
+      # quickfix
+      {
+        mode = [
+          "n"
+          "v"
+        ];
+        key = "<c-q>";
+        action.__raw = ''
+          function()
+            if vim.bo.buftype == "quickfix" then
+              vim.cmd("wincmd p")
+            elseif vim.fn.getqflist({ winid = 0 }).winid > 0 then
+                vim.cmd("copen")
+            end
+          end
+        '';
+      }
+      {
+        mode = [
+          "n"
+          "v"
+        ];
+        key = "<leader>qc";
+        action = "<cmd>cclose<cr>";
       }
     ];
   };
