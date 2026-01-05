@@ -10,16 +10,14 @@
 {
   imports = [
     "${self}/home-manager-modules/shell"
+    "${self}/nixvim"
 
     "${self}/home-manager-modules/de/sway.nix"
-
     "${self}/home-manager-modules/gui/kde-apps.nix"
-    "${self}/home-manager-modules/gui/bitwarden.nix"
-    "${self}/home-manager-modules/gui/firefox.nix"
     "${self}/home-manager-modules/gui/neohtop.nix"
+    "${self}/home-manager-modules/gui/firefox.nix"
 
     "${self}/home-manager-modules/zed.nix"
-    "${self}/nixvim"
 
     "${self}/home-manager-modules/karabiner.nix"
   ];
@@ -65,7 +63,7 @@
 
     # sets XDG_DESKTOP_DIR, ...
     userDirs = {
-      enable = true;
+      enable = pkgs.stdenv.isLinux;
       desktop = "${config.home.homeDirectory}/Desktop";
       documents = "${config.home.homeDirectory}/Documents";
       download = "${config.home.homeDirectory}/Downloads";
@@ -84,13 +82,13 @@
   home.packages =
     with pkgs;
     [
+      inputs.ngrams.defaultPackage.${system}
       # for random computations, generally install per project
       ghc
-      inputs.ngrams.defaultPackage.${system}
+      leetcode-cli
       # (google-cloud-sdk.withExtraComponents (
       #   with google-cloud-sdk.components; [ gke-gcloud-auth-plugin ]
       # ))
-      leetcode-cli
     ]
     ++ lib.optionals pkgs.stdenv.isLinux [
       # gui
@@ -100,11 +98,9 @@
       blender
       ardour
       youtube-music
-      bitwarden-desktop
       tidal-hifi
       (jetbrains.goland.override { jdk = pkgs.openjdk21; })
       (jetbrains.rust-rover.override { jdk = pkgs.openjdk21; })
-
       lunar-client
     ];
 }

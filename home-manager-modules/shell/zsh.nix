@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ pkgs, ... }:
 {
   programs.zsh = {
     enable = true;
@@ -48,7 +48,8 @@
               # sudo nixos-rebuild switch --flake ~/dotnix#"$(hostname)"
               nh os switch ~/dotnix
           elif [ "$os_name" = "Darwin" ]; then
-              darwin-rebuild switch --flake ~/dotnix#"$(hostname)"
+              # darwin-rebuild switch --flake ~/dotnix#"$(hostname)"
+              nh darwin switch ~/dotnix
           fi
       }
 
@@ -108,8 +109,4 @@
       nix_shell.format = "in 󰜗 "; # the default icon causes issues with zsh-autosuggestion
     };
   };
-
-  # expands aliases but is slow as hell, just use `lal`;
-  # zsh-abbr.enable = true;
-  # zsh-abbr.abbreviations = programs.zsh.shellAliases;
 }

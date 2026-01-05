@@ -1,7 +1,7 @@
 {
   pkgs,
   lib,
-  nixos-config-name,
+  system-config-name,
   home-config-name,
   system,
   inputs,
@@ -23,9 +23,14 @@
         formatting.command = [ "${lib.getExe pkgs.nixfmt-rfc-style}" ];
         nixpkgs.expr = "import <nixpkgs> {}";
         options = {
-          nixos.expr = ''(builtins.getFlake (builtins.toString ~/dotnix)).nixosConfigurations."${nixos-config-name}".options'';
           home-manager.expr = ''(builtins.getFlake (builtins.toString ~/dotnix)).homeConfigurations."${home-config-name}".options'';
           nixvim.expr = ''(builtins.getFlake (builtins.toString ~/dotnix)).inputs.nixvim.nixvimConfigurations."${system}".default.options'';
+        }
+        // lib.optionalAttrs pkgs.stdenv.isLinux {
+          nixos.expr = ''(builtins.getFlake (builtins.toString ~/dotnix)).nixosConfigurations."${system-config-name}".options'';
+        }
+        // lib.optionalAttrs pkgs.stdenv.isDarwin {
+          darwin.expr = ''(builtins.getFlake (builtins.toString ~/dotnix)).darwinConfigurations."${system-config-name}".options'';
         };
       };
     };

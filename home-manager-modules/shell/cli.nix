@@ -187,5 +187,24 @@
     # this simply picks up the binary from `anyPackage/bin/some-nix-packaged-binary`. Install it in nix-profile using -i (don't use this), or open a shell containing the package which contains the binary using (, -s my-binary)
     # this allows you to not have to worry about which package contains which binaries anymore!
     nix-index-database.comma.enable = true;
+
+    zk = {
+      enable = true;
+      settings = {
+        note = {
+          language = "en";
+          default-title = "Untitled";
+          filename = "{{id}}-{{slug title}}";
+          extension = "md";
+          template = "default.md";
+          id-charset = "alphanum";
+          id-length = 4;
+          id-case = "lower";
+        };
+        extra = {
+          author = "Moritz";
+        };
+      };
+    };
   };
 }

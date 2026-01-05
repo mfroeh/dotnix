@@ -3,7 +3,6 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
 
     nur = {
       url = "github:nix-community/NUR";
@@ -20,44 +19,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # fix nix installed .app not appearing in spotlight
-    mac-app-util.url = "github:hraban/mac-app-util";
-
-    hyprland = {
-      url = "github:hyprwm/Hyprland?ref=v0.47.0";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    hyprland-plugins = {
-      url = "github:hyprwm/hyprland-plugins/014003b2bd3744dfabb8c2c20a80e89f721be238"; # 0.47.0
-      inputs.hyprland.follows = "hyprland";
-    };
-
-    plasma-manager = {
-      url = "github:pjones/plasma-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "home-manager";
-    };
-
-    neovim-nightly-overlay = {
-      url = "github:nix-community/neovim-nightly-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     xremap-flake = {
       url = "github:xremap/nix-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    walker.url = "github:abenz1267/walker";
-
     ngrams.url = "github:mfroeh/ngrams";
     ngrams.inputs.nixpkgs.follows = "nixpkgs";
-
-    nixglhost.url = "github:numtide/nix-gl-host";
-
-    nixgl.url = "github:nix-community/nixgl";
-    nixgl.inputs.nixpkgs.follows = "nixpkgs";
 
     nixvim.url = "github:nix-community/nixvim";
     nixvim.inputs.nixpkgs.follows = "nixpkgs";
@@ -86,10 +54,8 @@
     {
       self,
       nixpkgs,
-      nixpkgs-stable,
       nix-darwin,
       home-manager,
-      nixgl,
       rust-overlay,
       nur,
       nix-index-database,
@@ -125,7 +91,6 @@
           # https://github.com/LnL7/nix-darwin/issues/1041
           overlays = [
             nur.overlays.default
-            nixgl.overlay
             # override this inside devshell where necessary
             rust-overlay.overlays.default
             (self: super: {
@@ -147,10 +112,6 @@
         args@{ system, ... }:
         {
           inherit self inputs system;
-          pkgsStable = mkPkgs {
-            inherit system;
-            nixpkgs = nixpkgs-stable;
-          };
         }
         // args;
     in
@@ -210,7 +171,7 @@
             extraSpecialArgs = mkSpecialArgs {
               inherit system;
               home-config-name = "mo@lambda";
-              nixos-config-name = "lambda";
+              system-config-name = "lambda";
             };
           };
         "mo@nulty" =
@@ -234,7 +195,7 @@
             extraSpecialArgs = mkSpecialArgs {
               inherit system;
               home-config-name = "mo@nulty";
-              nixos-config-name = "nulty";
+              system-config-name = "nulty";
             };
           };
         "mo@xya" =
@@ -245,7 +206,7 @@
             pkgs = mkPkgs { inherit nixpkgs system; };
             modules = [
               {
-                home.stateVersion = "24.11";
+                home.stateVersion = "25.11";
                 programs.home-manager.enable = true;
                 home = {
                   username = "mo";
@@ -255,7 +216,12 @@
               nix-index-database.homeModules.default
               "${self}/users/mo/home.nix"
             ];
-            extraSpecialArgs = mkSpecialArgs { inherit system; };
+            extraSpecialArgs = mkSpecialArgs {
+              inherit system;
+              home-config-name = "mo@xya";
+              # TODO: make nixd work with nix-darwin
+              system-config-name = "xya";
+            };
           };
         "moritz.froehlich@lenovo-PW09JP9W" =
           let
@@ -278,7 +244,7 @@
             extraSpecialArgs = mkSpecialArgs {
               inherit system;
               home-config-name = "moritz.froehlich@lenovo-PW09JP9W";
-              nixos-config-name = "none";
+              system-config-name = "none";
             };
           };
       };

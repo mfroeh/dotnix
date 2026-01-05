@@ -18,12 +18,13 @@ let
   '';
 in
 {
+  config = lib.mkIf pkgs.stdenv.isLinux {
   home.file."${config.xdg.configHome}/wallpapers" = {
     source = "${self}/config/wallpapers";
     recursive = true;
   };
 
-  wayland.windowManager.sway = {
+   wayland.windowManager.sway = {
     enable = true;
     config = {
       startup = [
@@ -454,4 +455,5 @@ in
     pavucontrol
     networkmanagerapplet
   ];
+  };
 }

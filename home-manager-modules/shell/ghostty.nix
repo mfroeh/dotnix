@@ -1,9 +1,8 @@
 { pkgs, config, ... }:
 {
   programs.ghostty = {
-    # until fixed on darwin
-    enable = pkgs.stdenv.isLinux;
-    package = config.lib.nixGL.wrap pkgs.ghostty;
+    enable = true;
+    package = if pkgs.stdenv.isLinux then pkgs.ghostty else pkgs.ghostty-bin;
     enableZshIntegration = true;
     settings = {
       theme = "Gruvbox Dark Hard";

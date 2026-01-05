@@ -16,12 +16,6 @@
     "${self}/nixvim"
   ];
 
-  # nixGL = {
-  #   packages = inputs.nixgl.packages;
-  #   defaultWrapper = "nvidiaPrime";
-  # };
-  #
-
   services.ssh-agent.enable = pkgs.stdenv.isLinux;
 
   programs.git = {
@@ -47,6 +41,4 @@
 
   home.file.".ideavimrc".source =
     config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotnix/config/jetbrains/.ideavimrc";
-
-  home.packages = [ ] ++ lib.optionals pkgs.stdenv.isLinux [ ];
 }

@@ -1,6 +1,7 @@
 {
   pkgs,
   inputs,
+  lib,
   ...
 }:
 {
@@ -27,11 +28,11 @@
     ./typst.nix
   ];
 
-  # clipboard providers
-  home.packages = with pkgs; [
+  # clipboard providers on X11/Wayland
+  home.packages = lib.optionals pkgs.stdenv.isLinux (with pkgs; [
     xclip
     wl-clipboard
-  ];
+  ]);
 
   programs.nixvim = {
     enable = true;
