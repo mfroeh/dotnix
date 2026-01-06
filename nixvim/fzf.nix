@@ -79,6 +79,18 @@
         key = "<leader>/";
         action = "<cmd>FzfLua live_grep<cr>";
       }
+      {
+        mode = "v";
+        key = "<leader>/";
+        action.__raw = ''
+          function()
+            local visualStart = vim.fn.getpos("v")
+            local cursor = vim.fn.getpos(".")
+            local visualSelection = table.concat(vim.fn.getregion(visualStart, cursor, { type = vim.fn.mode() }))
+            require('fzf-lua').live_grep({ query = visualSelection })
+          end
+        '';
+      }
       # files in directory
       {
         mode = "n";
