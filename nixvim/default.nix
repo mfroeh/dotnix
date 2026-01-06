@@ -18,6 +18,7 @@
     ./neovide.nix
     ./flash.nix
     ./zen.nix
+    ./statusline.nix
 
     # TODO: check these again
     ./cmp.nix
@@ -29,10 +30,13 @@
   ];
 
   # clipboard providers on X11/Wayland
-  home.packages = lib.optionals pkgs.stdenv.isLinux (with pkgs; [
-    xclip
-    wl-clipboard
-  ]);
+  home.packages = lib.optionals pkgs.stdenv.isLinux (
+    with pkgs;
+    [
+      xclip
+      wl-clipboard
+    ]
+  );
 
   programs.nixvim = {
     enable = true;
@@ -54,7 +58,6 @@
       smartcase = true;
 
       showmode = false;
-      laststatus = 3;
 
       splitright = true;
       splitbelow = true;
@@ -109,10 +112,6 @@
 
     # core plugins
     plugins = {
-      mini-statusline = {
-        enable = true;
-      };
-
       mini-icons = {
         enable = true;
         mockDevIcons = true;
