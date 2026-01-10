@@ -14,9 +14,20 @@
         };
         "core.dirman" = {
           config = {
-            workspaces = {
-              default = "~/neorg-notes/";
+            workspaces = rec {
+              cloud = "~/Google Drive/My Drive";
+              notes = "${cloud}/Notes/";
             };
+            default_workspace = "notes";
+          };
+        };
+        "core.journal" = {
+          config = {
+            journal_folder = "Journal";
+            template_name = "template.norg";
+            use_template = true;
+            strategy = "flat";
+            workspace = "cloud";
           };
         };
         "core.export" = {
