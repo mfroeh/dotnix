@@ -29,7 +29,7 @@
 
       local firstBuffers = {}
       for _, buf in ipairs(buffers) do
-        if not vim.tbl_contains(visibleBuffers, buf.bufnr) then
+        if not vim.tbl_contains(visibleBuffers, buf.bufnr) and buf.name ~= "" then
           table.insert(firstBuffers, buf)
         end
         if #firstBuffers == n then

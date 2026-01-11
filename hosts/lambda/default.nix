@@ -93,6 +93,10 @@ with inputs;
   # root shell
   programs.zsh.enable = true;
 
+  programs.obs-studio = {
+    enable = pkgs.stdenv.isLinux;
+  };
+
   environment.systemPackages = with pkgs; [
     neovim
     git
@@ -102,8 +106,17 @@ with inputs;
     ntfs3g
 
     prismlauncher
+    rclone
 
-    # config.boot.kernelPackages.perf
+    config.boot.kernelPackages.perf
+
+    discord
+    vlc
+    gimp
+    blender
+    ardour
+    (jetbrains.goland.override { jdk = pkgs.openjdk21; })
+    (jetbrains.rust-rover.override { jdk = pkgs.openjdk21; })
   ];
 
   environment.variables = {

@@ -75,32 +75,13 @@
     };
   };
 
-  programs.obs-studio = {
-    enable = pkgs.stdenv.isLinux;
-  };
-
-  home.packages =
-    with pkgs;
-    [
-      inputs.ngrams.defaultPackage.${system}
-      # for random computations, generally install per project
-      ghc
-      leetcode-cli
-      # (google-cloud-sdk.withExtraComponents (
-      #   with google-cloud-sdk.components; [ gke-gcloud-auth-plugin ]
-      # ))
-    ]
-    ++ lib.optionals pkgs.stdenv.isLinux [
-      # gui
-      discord
-      vlc
-      gimp
-      blender
-      ardour
-      youtube-music
-      tidal-hifi
-      (jetbrains.goland.override { jdk = pkgs.openjdk21; })
-      (jetbrains.rust-rover.override { jdk = pkgs.openjdk21; })
-      lunar-client
-    ];
+  home.packages = with pkgs; [
+    inputs.ngrams.defaultPackage.${system}
+    # for random computations, generally install per project
+    ghc
+    leetcode-cli
+    # (google-cloud-sdk.withExtraComponents (
+    #   with google-cloud-sdk.components; [ gke-gcloud-auth-plugin ]
+    # ))
+  ];
 }

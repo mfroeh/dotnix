@@ -165,6 +165,22 @@
           "n"
           "v"
         ];
+        key = "qo";
+        action.__raw = ''
+          function()
+            if vim.bo.buftype == "quickfix" then
+              vim.cmd("wincmd p")
+            elseif #vim.fn.getqflist() > 0 then
+                vim.cmd("copen")
+            end
+          end
+        '';
+      }
+      {
+        mode = [
+          "n"
+          "v"
+        ];
         key = "qd";
         action.__raw = ''
           function()
