@@ -8,7 +8,7 @@
         local fzf = require('fzf-lua')
         fzf.setup({
           "ivy",
-            winopts = { preview = { default = "bat" } },
+            winopts = { preview = { default = "builtin", hidden = true } },
             manpages = { previewer = "man_native" },
             helptags = { previewer = "help_native" },
             lsp = { code_actions = { previewer = "codeaction_native" } },
@@ -16,7 +16,13 @@
             btags = { previewer = "bat" },
             keymap = {
               fzf = {
-                ["ctrl-q"] = "select-all+accept",
+                ["ctrl-u"]  =  "unix-line-discard",
+                ["ctrl-f"]  =  "half-page-down",
+                ["ctrl-b"]  =  "half-page-up",
+                ["ctrl-a"]  =  "beginning-of-line",
+                ["ctrl-e"]  =  "end-of-line",
+                ["ctrl-q"]  =  "select-all+accept",
+                ["ctrl-t"]  = "toggle-preview",
               }
             },
           })
