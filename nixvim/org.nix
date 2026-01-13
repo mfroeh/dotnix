@@ -15,7 +15,7 @@
         "core.dirman" = {
           config = {
             workspaces = rec {
-              cloud = "~/Google Drive/My Drive";
+              cloud = if pkgs.stdenv.isDarwin then "~/Google Drive/My Drive" else "~/Google Drive";
               notes = "${cloud}/Notes/";
             };
             default_workspace = "notes";
