@@ -92,6 +92,39 @@
       '';
     };
 
+    autoCmd = [
+      {
+        desc = "highlight lsp matches";
+        event = [ "LspAttach" ];
+        pattern = [ "*" ];
+        callback.__raw = ''
+          function(event)
+            local bufnr = event.buf
+            local client = vim.lsp.get_client_by_id(event.data.client_id)
+            -- Highlighting references.
+            -- Source: https://sbulav.github.io/til/til-neovim-highlight-references/
+            -- for the highlight trigger time see: `vim.opt.updatetime`
+            if client.server_capabilities.documentHighlightProvider then
+                vim.api.nvim_create_augroup("lsp_document_highlight", { clear = true })
+                vim.api.nvim_clear_autocmds { buffer = bufnr, group = "lsp_document_highlight" }
+                vim.api.nvim_create_autocmd("CursorHold", {
+                    callback = vim.lsp.buf.document_highlight,
+                    buffer = bufnr,
+                    group = "lsp_document_highlight",
+                    desc = "Document Highlight",
+                })
+                vim.api.nvim_create_autocmd("CursorMoved", {
+                    callback = vim.lsp.buf.clear_references,
+                    buffer = bufnr,
+                    group = "lsp_document_highlight",
+                    desc = "Clear All the References",
+                })
+              end
+            end
+        '';
+      }
+    ];
+
     plugins.lsp-format.enable = true;
 
     plugins.fidget.enable = true;

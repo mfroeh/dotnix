@@ -102,6 +102,8 @@
 
       # out quickfix list bindings `q...` are ambiguous with the macro stop recording `q` binding (everything else is fine)
       timeoutlen = 1000;
+      # time until `CursorHold` fires
+      updatetime = 300;
     };
 
     colorschemes.gruvbox.enable = true;
