@@ -8,7 +8,12 @@
         local fzf = require('fzf-lua')
         fzf.setup({
           "ivy",
-            winopts = { preview = { default = "builtin", hidden = true } },
+            winopts = { 
+              preview = { default = "bat", hidden = true },
+              on_create = function()
+                vim.keymap.set("t", "<C-r>", [['<C-\><C-N>"'.nr2char(getchar()).'pi']], { expr = true, buffer = true })
+              end
+            },
             manpages = { previewer = "man_native" },
             helptags = { previewer = "help_native" },
             lsp = { code_actions = { previewer = "codeaction_native" } },

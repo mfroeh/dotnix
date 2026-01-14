@@ -61,10 +61,5 @@
 
     # adds indentation textobjects `ii` and `ai` as well as move with `[i` and `]i`
     plugins.indent-tools.enable = true;
-
-    plugins.vim-matchup = {
-      enable = true;
-      treesitter.enable = true;
-    };
   };
 }
