@@ -18,6 +18,10 @@
     plugins.lsp = {
       enable = true;
       servers = {
+        typos_lsp = {
+          enable = true;
+        };
+
         lua_ls = {
           enable = true;
           settings = {

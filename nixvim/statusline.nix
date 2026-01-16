@@ -10,7 +10,8 @@
     end
 
     local function displayStrLen(str)
-      return #cleanStr(str)
+      local clean = cleanStr(str)
+      return vim.fn.strdisplaywidth(clean)
     end
 
     _G.LastBuffers = {}
@@ -52,7 +53,7 @@
         local expr = current_node
         while expr do
           -- Rust, Go, Haskell
-          if (expr:type() == "function_item" or expr:type() == "function_declaration" or expr:type() == "function") and (expr:field("name")[1]) then
+          if (expr:type() == "function_item" or expr:type() == "function_declaration" or expr:type() == "function") and (expr:field("stores")[1]) then
             break
           end
           expr = expr:parent()
@@ -138,13 +139,33 @@
     end
 
     local function getRight()
+      local function getBufferPosition()
+        local firstLine = vim.fn.line('w0')
+        local lastLine = vim.fn.line('w$')
+        local totalLines = vim.api.nvim_buf_line_count(0)
+        local topRel = (firstLine - 1) / totalLines
+        local viewRel = (lastLine - firstLine + 1) / totalLines
+
+        -- Due to rounding with the limited precision, there is always going to be a trade-off between accurately displaying the top/bot offset correctly and having a constant view size.
+        -- In this case we are favoring a constant view size, an alternative is to compute midWidth as total - left (ceil) - right (ceil), which accurately depicts the top/bot offset.
+        local totalWidth = math.floor(vim.o.columns / 10)
+        local leftWidth = math.floor(totalWidth * topRel)
+        local midWidth = math.max(1, math.ceil(totalWidth * viewRel))
+        local rightWidth = totalWidth - midWidth - leftWidth
+
+        local inactiveChar = "░"
+        local activeChar = "█"
+        local out = string.rep(inactiveChar, leftWidth) .. string.rep(activeChar, midWidth) .. string.rep(inactiveChar, rightWidth)
+        return out
+      end
+
       local clients = vim.lsp.get_clients({ bufnr = 0 })
       local lspStr = vim.iter(clients)
         :map(function(client) return client.name end)
         :join(" ")
       local lspInfo = string.format("%s [%s]", vim.bo.filetype or "no ft", lspStr)
-      local filePercentage = math.ceil(vim.api.nvim_win_get_cursor(0)[1] / (vim.api.nvim_buf_line_count(0) or 1) * 100)
-      local right = lspInfo .. sep .. filePercentage .. "%%"
+      local scroller = getBufferPosition()
+      local right = lspInfo .. sep .. scroller
       return right
     end
 

@@ -6,7 +6,11 @@
       {
         mode = "n";
         key = "<leader>zz";
-        action = "<cmd>ZenMode<cr>";
+        action.__raw = ''
+          function() 
+            require('zen-mode').toggle({ window = { width = 0.7 }}) 
+          end
+        '';
       }
     ];
   };
