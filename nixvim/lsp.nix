@@ -85,14 +85,7 @@
       inlayHints = true;
 
       luaConfig.post = ''
-        vim.diagnostic.config({
-          virtual_text = false,
-          virtual_lines = { current_line = true },
-          signs = true,
-          underline = true,
-          update_in_insert = false,
-          severity_sort = true,
-        })
+        vim.diagnostic.config({ severity_sort = true })
       '';
     };
 
@@ -169,5 +162,21 @@
         action = "<cmd>:lua vim.lsp.buf.code_action()<cr>";
       }
     ];
+
+    extraPlugins = [
+      (pkgs.vimUtils.buildVimPlugin {
+        name = "diagflow";
+        src = pkgs.fetchFromGitHub {
+          owner = "dgagn";
+          repo = "diagflow.nvim";
+          rev = "main";
+          hash = "sha256-gJlM0diDmyvmW5l/QIpUe2bDTZg8XekLBcFOoxeUW4E=";
+        };
+      })
+    ];
+
+    extraConfigLuaPost = ''
+      require('diagflow').setup({ enable = true, scope = 'line', text_align = 'left', show_borders = true })
+    '';
   };
 }
