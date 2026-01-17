@@ -61,5 +61,13 @@
 
     # adds indentation textobjects `ii` and `ai` as well as move with `[i` and `]i`
     plugins.indent-tools.enable = true;
+
+    keymaps = [
+      {
+        key = "[c";
+        mode = "n";
+        action = ":lua require('treesitter-context').go_to_context(vim.v.count1)<cr>";
+      }
+    ];
   };
 }

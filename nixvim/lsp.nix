@@ -176,7 +176,7 @@
     ];
 
     extraConfigLuaPost = ''
-      require('diagflow').setup({ enable = true, scope = 'line', text_align = 'left', show_borders = true })
+      require('diagflow').setup({ enable = true, scope = 'line', text_align = 'left' })
     '';
   };
 }

@@ -19,12 +19,12 @@
       }
       {
         mode = "n";
-        key = "[c";
+        key = "[h";
         action = "<cmd>Gitsigns nav_hunk prev<cr>";
       }
       {
         mode = "n";
-        key = "]c";
+        key = "]h";
         action = "<cmd>Gitsigns nav_hunk next<cr>";
       }
       {
@@ -53,6 +53,11 @@
         mode = "n";
         key = "<leader>gd";
         action = "<cmd>FzfLua git_diff<cr>";
+      }
+      {
+        mode = "n";
+        key = "ghd";
+        action = "<cmd>Gitsigns reset_hunk<cr>";
       }
     ];
   };
