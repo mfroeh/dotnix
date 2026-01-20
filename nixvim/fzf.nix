@@ -199,6 +199,8 @@
             if #diagnostics > 0 then
               vim.fn.setqflist(vim.diagnostic.toqflist(diagnostics), 'r')
               vim.cmd("copen")
+            else
+              vim.cmd("cclose")
             end
           end
         '';
