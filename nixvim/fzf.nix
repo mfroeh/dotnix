@@ -224,5 +224,26 @@
         action = "<cmd>cclose<cr>";
       }
     ];
+
+    autoCmd = [
+      {
+        desc = "highlight selection on yank";
+        event = [ "DiagnosticChanged" ];
+        pattern = [ "*" ];
+        callback.__raw = ''
+          function() 
+            if vim.iter(vim.fn.getwininfo()):any(function(wininf) return wininf.quickfix == 1 end) then
+              local diagnostics = vim.diagnostic.get(0)
+              if #diagnostics > 0 then
+                vim.fn.setqflist(vim.diagnostic.toqflist(diagnostics), 'r')
+              else
+                vim.fn.setqflist(vim.diagnostic.toqflist(diagnostics), 'r')
+                -- potentially close
+              end
+            end
+          end
+        '';
+      }
+    ];
   };
 }

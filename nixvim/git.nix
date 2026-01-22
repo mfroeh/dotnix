@@ -19,12 +19,12 @@
       }
       {
         mode = "n";
-        key = "[h";
+        key = "[c";
         action = "<cmd>Gitsigns nav_hunk prev<cr>";
       }
       {
         mode = "n";
-        key = "]h";
+        key = "]c";
         action = "<cmd>Gitsigns nav_hunk next<cr>";
       }
       {
