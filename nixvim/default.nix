@@ -146,6 +146,8 @@
       oil = {
         enable = true;
         settings = {
+          # :h oil-columns
+          columns = [ "icon" ];
           keymaps = {
             # disabling them is case-sensitive, check https://github.com/stevearc/oil.nvim
             "<C-p>" = false;

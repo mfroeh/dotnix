@@ -50,6 +50,7 @@
     ]
     ++ [
       (import "${self}/bin/ex.nix" { inherit pkgs; })
+      (import "${self}/bin/swatch.nix" { inherit pkgs; })
     ];
 
   programs = {
