@@ -87,6 +87,12 @@
         mode = "n";
         action = "<cmd>e %:h<cr>";
       }
+      # search within visual selection
+      {
+        key = "/";
+        mode = "v";
+        action = "<Esc>/\\%V";
+      }
       # dont move cursor when joining lines
       # {
       #   key = "J";

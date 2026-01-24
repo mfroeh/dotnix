@@ -19,6 +19,7 @@
     ./flash.nix
     ./zen.nix
     ./statusline.nix
+    ./marks.nix
 
     # TODO: check these again
     ./cmp.nix

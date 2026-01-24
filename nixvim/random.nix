@@ -16,10 +16,6 @@
       };
     };
 
-    plugins.harpoon = {
-      enable = true;
-    };
-
     # todo replace with nvim variant
     plugins.visual-multi = {
       enable = true;
