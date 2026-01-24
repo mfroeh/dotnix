@@ -16,6 +16,8 @@
       };
     };
 
+    # todo: will need targets or something since we cannot jump between quotes by default lol
+
     # todo replace with nvim variant
     plugins.visual-multi = {
       enable = true;

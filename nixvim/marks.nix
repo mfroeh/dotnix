@@ -9,8 +9,8 @@
           src = pkgs.fetchFromGitHub {
             owner = "mfroeh";
             repo = "mark-radar.nvim";
-            rev = "master";
-            hash = "sha256-mEZi4TB1BJqWEAjH/VYClfuUcDb57yPQdhR9b5PJez4=";
+            rev = "global-marks";
+            hash = "sha256-/kpODNZQFEpF/Klvaz3aSDQ0wKQmfJj7nMaLu6MIKKw=";
           };
         }
       );
@@ -27,8 +27,8 @@
       settings = {
         default_mappings = true;
         builtin_marks = [
-          "."
-          "^"
+          "." # position of the last change (e.g. insert, change, delete)
+          "^" # position where we last exited insert mode, use gi to jump there and begin inserting
           "'"
           "\""
           "["
@@ -38,6 +38,20 @@
         ];
       };
     };
+
+    autoCmd = [
+      {
+        desc = "set I mark when existing insert mode";
+        event = [ "InsertLeave" ];
+        pattern = [ "*" ];
+        callback.__raw = ''
+          function()
+            local pos = vim.api.nvim_win_get_cursor(0)
+            vim.api.nvim_buf_set_mark(0, "I", pos[1], pos[2], {})
+          end
+        '';
+      }
+    ];
 
     keymaps = [
       # map ' to ` since the default behavior of ` is more useful
@@ -65,7 +79,11 @@
         '';
         options.silent = true;
       }
-      # todo set a global mark whenever a . mark is set, super useful for doing a bunch of gd and then getting back to work
+      {
+        key = "gI";
+        mode = "n";
+        action = "`Ii";
+      }
     ];
   };
 }

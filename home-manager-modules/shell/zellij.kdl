@@ -12,12 +12,13 @@ keybinds clear-defaults=true {
 		bind "Alt [" { PreviousSwapLayout; }
 		bind "Alt ]" { NextSwapLayout; }
 		bind "Alt t" { SwitchToMode "tab"; }
-		bind "Alt p" {  SwitchToMode "pane";  }
+		bind "Alt p" {  SwitchToMode "pane"; }
 		bind "Alt r" { SwitchToMode "resize"; }
 		bind "Alt m" { SwitchToMode "move"; }
 		bind "Alt o" { SwitchToMode "session"; }
 		bind "Alt s" { SwitchToMode "scroll"; }
 		bind "Alt /" { SwitchToMode "EnterSearch"; SearchInput 0; }
+    bind "Alt e" { EditScrollback; SwitchToMode "Normal"; }
 	}
 
 	shared_except "normal" {
