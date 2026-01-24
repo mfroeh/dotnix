@@ -1,26 +1,6 @@
 { pkgs, ... }:
 {
   programs.nixvim = {
-    plugins.mark-radar = {
-      enable = true;
-      package = (
-        pkgs.vimUtils.buildVimPlugin {
-          name = "mark-radar";
-          src = pkgs.fetchFromGitHub {
-            owner = "mfroeh";
-            repo = "mark-radar.nvim";
-            rev = "global-marks";
-            hash = "sha256-/kpODNZQFEpF/Klvaz3aSDQ0wKQmfJj7nMaLu6MIKKw=";
-          };
-        }
-      );
-      settings = {
-        set_default_mappings = false;
-        show_off_screen_marks = true;
-        show_marks_at_jump_positions = true;
-      };
-    };
-
     # https://github.com/chentoast/marks.nvim/
     plugins.marks = {
       enable = true;
@@ -57,11 +37,14 @@
       # map ' to ` since the default behavior of ` is more useful
       {
         key = "'";
-        mode = "n";
+        mode = [
+          "n"
+          "v"
+        ];
         action.__raw = ''
           function()
             pcall(function() require('treesitter-context').disable() end)
-            require('mark-radar').scan(true)
+            JumpToMark(true)
             pcall(function() require('treesitter-context').enable() end)
           end
         '';
@@ -69,11 +52,14 @@
       }
       {
         key = "`";
-        mode = "n";
+        mode = [
+          "n"
+          "v"
+        ];
         action.__raw = ''
           function()
             pcall(function() require('treesitter-context').disable() end)
-            require('mark-radar').scan(false)
+            JumpToMark(false)
             pcall(function() require('treesitter-context').enable() end)
           end
         '';
@@ -85,5 +71,98 @@
         action = "`Ii";
       }
     ];
+
+    extraConfigLuaPost = ''
+      local ns = vim.api.nvim_create_namespace('mark-radar')
+      vim.api.nvim_command(
+        'highlight default RadarMark guifg=#ff007c gui=bold ctermfg=198 cterm=bold'
+      )
+      vim.api.nvim_command(
+        'highlight default RadarBackground guifg=#666666 ctermfg=242'
+      )
+
+      local function highlight_marks(mark_list, top_line, bottom_line, jump_to_column)
+        for _, mark in ipairs(mark_list) do
+          -- get mark position information
+          local line, col = mark.pos[2] - 1, mark.pos[3] - 1
+
+          if vim.fn.line(mark.mark) == 0 then
+            goto continue
+          end
+
+          -- indent column if necessary
+          if not jump_to_column then
+            col = vim.fn.indent(vim.fn.line(mark.mark))
+          end
+
+          -- adjust positions of off-screen marks to be barely on the screen
+          if line + 1 < top_line then
+            line = top_line - 1
+            col = 0
+          elseif line + 1 > bottom_line then
+            line = bottom_line - 1
+            col = 0
+          end
+
+          -- draw marks
+          if line + 1 >= top_line and line < bottom_line then
+            local extmark_id = vim.api.nvim_buf_set_extmark(0, ns, line, col, {
+              virt_text = { { mark.mark:sub(2), "RadarMark" } },
+              virt_text_pos = "overlay",
+              priority = 200,
+            })
+          end
+          ::continue::
+        end
+
+        vim.cmd('redraw')
+      end
+
+      local function clean_up(top_line, bottom_line)
+        vim.api.nvim_buf_clear_namespace(0, ns, 0, -1)
+      end
+
+      function JumpToMark(jump_to_column)
+        local win_info = vim.fn.getwininfo(vim.api.nvim_get_current_win())[1]
+        local top_line, bottom_line = win_info.topline, win_info.botline
+        local bottom_line_column_count = string.len(
+          vim.api.nvim_buf_get_lines(0, bottom_line - 1, bottom_line, false)[1]
+        )
+
+        local mark_list = vim.fn.getmarklist(vim.fn.bufnr('%'))
+
+        vim.highlight.range(
+          0,
+          ns,
+          "RadarBackground",
+          { top_line - 1, 0 },
+          { bottom_line, bottom_line_column_count },
+          'V',
+          false
+        )
+
+        highlight_marks(mark_list, top_line, bottom_line, jump_to_column)
+
+        while true do
+          local ok, key = pcall(vim.fn.getchar)
+          if not ok then
+            clean_up(top_line, bottom_line)
+            break
+          end
+
+          if type(key) == 'number' then
+            local mark = vim.fn.nr2char(key)
+            if jump_to_column then
+              vim.cmd("normal! `" .. mark)
+            else
+              vim.cmd("normal! '" .. mark)
+            end
+            break
+          end
+        end
+
+        clean_up(top_line, bottom_line)
+      end
+    '';
   };
 }
