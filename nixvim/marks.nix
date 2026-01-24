@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ ... }:
 {
   programs.nixvim = {
     # https://github.com/chentoast/marks.nvim/
@@ -68,7 +68,7 @@
       {
         key = "gI";
         mode = "n";
-        action = "`Ii";
+        action = "`Ia";
       }
     ];
 
@@ -86,7 +86,8 @@
           -- get mark position information
           local line, col = mark.pos[2] - 1, mark.pos[3] - 1
 
-          if vim.fn.line(mark.mark) == 0 then
+          -- filter out invalid marks
+          if vim.fn.line(mark.mark) == 0 or col >= #vim.fn.getline(mark.mark) then
             goto continue
           end
 
@@ -98,15 +99,13 @@
           -- adjust positions of off-screen marks to be barely on the screen
           if line + 1 < top_line then
             line = top_line - 1
-            col = 0
           elseif line + 1 > bottom_line then
             line = bottom_line - 1
-            col = 0
           end
 
           -- draw marks
           if line + 1 >= top_line and line < bottom_line then
-            local extmark_id = vim.api.nvim_buf_set_extmark(0, ns, line, col, {
+            vim.api.nvim_buf_set_extmark(0, ns, line, col, {
               virt_text = { { mark.mark:sub(2), "RadarMark" } },
               virt_text_pos = "overlay",
               priority = 200,

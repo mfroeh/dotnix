@@ -122,6 +122,7 @@
       }
     ];
 
+    # todo: setup https://github.com/stevearc/conform.nvim since LSPs like to destroy my marks
     plugins.lsp-format.enable = true;
 
     plugins.fidget.enable = true;
