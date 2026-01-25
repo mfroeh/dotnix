@@ -38,8 +38,7 @@ in
             always = true;
           }
           {
-            # todo: cron job
-            command = "${pkgs.swww}/bin/swww img ${self}/config/wallpapers/autumn-1.jpg";
+            command = "${pkgs.swww}/bin/swww img ${self}/config/wallpapers/aishot-3516.jpg";
             always = true;
           }
           { command = "ghostty"; }

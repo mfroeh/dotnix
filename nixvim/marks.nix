@@ -27,7 +27,9 @@
         callback.__raw = ''
           function()
             local pos = vim.api.nvim_win_get_cursor(0)
-            vim.api.nvim_buf_set_mark(0, "I", pos[1], pos[2], {})
+            local col = math.min(pos[2]+1, #vim.fn.getline(pos[1]))
+            vim.api.nvim_buf_set_mark(0, "I", pos[1], col, {})
+            vim.api.nvim_buf_set_mark(0, "i", pos[1], col, {})
           end
         '';
       }
@@ -68,7 +70,7 @@
       {
         key = "gI";
         mode = "n";
-        action = "`Ia";
+        action = "`Ii";
       }
     ];
 
@@ -82,12 +84,18 @@
       )
 
       local function highlight_marks(mark_list, top_line, bottom_line, jump_to_column)
+        local buffer_file = vim.fn.expand("%:p")
         for _, mark in ipairs(mark_list) do
+          if mark.file ~= nil and vim.fn.fnamemodify(mark.file, ':p') ~= buffer_file then
+            goto continue
+          end
+
           -- get mark position information
-          local line, col = mark.pos[2] - 1, mark.pos[3] - 1
+          local line, col = mark.pos[2], mark.pos[3] - 1
 
           -- filter out invalid marks
-          if vim.fn.line(mark.mark) == 0 or col >= #vim.fn.getline(mark.mark) then
+          local line_count = vim.api.nvim_buf_line_count(0)
+          if line < 1 or line > line_count or col < 0 or col > #vim.fn.getline(line) then
             goto continue
           end
 
@@ -97,20 +105,20 @@
           end
 
           -- adjust positions of off-screen marks to be barely on the screen
-          if line + 1 < top_line then
-            line = top_line - 1
-          elseif line + 1 > bottom_line then
-            line = bottom_line - 1
+          if line < top_line then
+            line = top_line
+            col = 0
+          elseif line > bottom_line then
+            line = bottom_line
+            col = 0
           end
 
           -- draw marks
-          if line + 1 >= top_line and line < bottom_line then
-            vim.api.nvim_buf_set_extmark(0, ns, line, col, {
-              virt_text = { { mark.mark:sub(2), "RadarMark" } },
-              virt_text_pos = "overlay",
-              priority = 200,
-            })
-          end
+          vim.api.nvim_buf_set_extmark(0, ns, line-1, col, {
+            virt_text = { { mark.mark:sub(2), "RadarMark" } },
+            virt_text_pos = "inline",
+            priority = 200,
+          })
           ::continue::
         end
 
@@ -128,7 +136,9 @@
           vim.api.nvim_buf_get_lines(0, bottom_line - 1, bottom_line, false)[1]
         )
 
-        local mark_list = vim.fn.getmarklist(vim.fn.bufnr('%'))
+        local mark_list = {}
+        table.foreach(vim.fn.getmarklist(), function(_, v) if string.match(v.mark, "%u") ~= nil then table.insert(mark_list, v) end end)
+        table.foreach(vim.fn.getmarklist(vim.fn.bufnr('%')), function(_, v) table.insert(mark_list, v) end)
 
         vim.highlight.range(
           0,
@@ -151,10 +161,12 @@
 
           if type(key) == 'number' then
             local mark = vim.fn.nr2char(key)
-            if jump_to_column then
-              vim.cmd("normal! `" .. mark)
+            local cmd = string.format("normal! %s" .. mark, jump_to_column and "`" or "'")
+            local succ, err_msg = pcall(function() vim.cmd(cmd) end)
+            if not succ then
+              print(err_msg)
             else
-              vim.cmd("normal! '" .. mark)
+              vim.cmd("normal! zz")
             end
             break
           end
