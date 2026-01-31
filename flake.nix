@@ -48,6 +48,11 @@
     # weekly updated nix-index database for nixpkgs/nixos-unstable channel
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
+
+    niri = {
+      url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -105,6 +110,7 @@
             })
             pkgsOverlay
             standaloneDolphinOverlay
+            inputs.niri.overlays.niri
           ];
         };
 

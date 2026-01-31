@@ -39,6 +39,7 @@ in
 
   config = mkIf cfg.enable {
     services.xremap = {
+      enable = true;
       serviceMode = "system";
       # withX11 = (cfg.wm == "x11");
       # withSway = (cfg.wm == "sway");

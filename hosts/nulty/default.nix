@@ -11,6 +11,7 @@ with inputs;
   imports = [
     ./hardware-configuration.nix
     "${self}/modules/xorg.nix"
+    "${self}/modules/sway.nix"
     "${self}/modules/remap.nix"
 
     "${self}/users/mo"

@@ -13,6 +13,8 @@
     "${self}/nixvim"
 
     "${self}/home-manager-modules/de/sway.nix"
+    "${self}/home-manager-modules/de/niri.nix"
+
     "${self}/home-manager-modules/gui/kde-apps.nix"
     "${self}/home-manager-modules/gui/neohtop.nix"
     "${self}/home-manager-modules/gui/firefox.nix"

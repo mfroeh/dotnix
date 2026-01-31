@@ -11,6 +11,8 @@ with inputs;
   imports = [
     ./hardware-configuration.nix
     "${self}/modules/xorg.nix"
+    "${self}/modules/sway.nix"
+    "${self}/modules/niri.nix"
     "${self}/modules/remap.nix"
 
     "${self}/users/mo"
@@ -55,7 +57,7 @@ with inputs;
     # powerManagement is experimental
     powerManagement.enable = true;
 
-    # wether to use nouveau driver
+    # whether to use nouveau driver
     open = false;
 
     # enable nvidia-settings

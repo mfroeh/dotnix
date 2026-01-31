@@ -1,5 +1,6 @@
-{ pkgs, ... }:
+{ ... }:
 {
+  # this has no effect in wayland
   services.xserver = {
     enable = true;
     xkb.layout = "us";
@@ -10,21 +11,4 @@
     # interval between automatically generated keypresses
     autoRepeatInterval = 50;
   };
-
-  services.displayManager = {
-    enable = true;
-    sddm = {
-      enable = true;
-      wayland = {
-        enable = true;
-      };
-    };
-  };
-
-  # this makes sway show up in SDDM, the configuration is done using home manager
-  programs.sway.enable = true;
-  # this enabled swaylock to actually unlock a session
-  security.pam.services.swaylock = { };
-
-  security.polkit.enable = true;
 }
