@@ -12,7 +12,10 @@
   flake.modules.homeManager.nixvim =
     { pkgs, lib, ... }:
     {
-      imports = [ inputs.nixvim.homeModules.default ];
+      imports = [
+        inputs.nixvim.homeModules.default
+        inputs.self.modules.homeManager.neovide
+      ];
 
       programs.nixvim.imports = [
         ./_commands.nix
@@ -23,7 +26,6 @@
         ./_fzf.nix
         ./_git.nix
         ./_org.nix
-        ./_neovide.nix
         ./_flash.nix
         ./_zen.nix
         ./_statusline.nix
@@ -47,7 +49,6 @@
       programs.zsh.shellAliases = {
         "vi" = "nvim";
         "vim" = "nvim";
-        "nv" = "neovide";
       };
 
       programs.nixvim = {

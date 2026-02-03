@@ -18,7 +18,7 @@
       home-manager = {
         useGlobalPkgs = true;
         useUserPackages = true;
-        backupFileExtension = ".batckup";
+        backupFileExtension = ".backup";
         users.mo = inputs.self.modules.homeManager.mo;
       };
     };

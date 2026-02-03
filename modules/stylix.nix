@@ -4,6 +4,10 @@
     { pkgs, ... }:
     {
       imports = [ inputs.stylix.nixosModules.default ];
+      home-manager.sharedModules = [
+        inputs.self.modules.homeManager.stylix
+      ];
+
       stylix.enable = true;
       stylix.autoEnable = true;
       stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-material-dark-hard.yaml";
@@ -37,7 +41,6 @@
         name = "phinger-cursors-light";
         size = 24;
       };
-      stylix.targets.firefox.profileNames = [ "default" ];
 
       # pkgs.whitesur-icon-theme	WhiteSur-dark
       stylix.icons = {
@@ -50,7 +53,8 @@
     };
 
   flake.modules.homeManager.stylix = {
-    imports = [ inputs.stylix.homeManagerModules.default ];
+    imports = [ ];
     stylix.enable = true;
+    stylix.targets.firefox.profileNames = [ "default" ];
   };
 }

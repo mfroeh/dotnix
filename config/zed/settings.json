@@ -11,11 +11,6 @@
     "dark": "Material Icon Theme",
     "light": "Material Icon Theme"
   },
-  "ui_font_size": 16.0,
-  "ui_font_family": "DejaVu Sans",
-  "buffer_font_size": 16.0,
-  "buffer_font_weight": 400,
-  "buffer_font_family": "JetBrainsMono Nerd Font",
   "pane_split_direction_horizontal": "down",
   "pane_split_direction_vertical": "right",
   "cursor_blink": false,
