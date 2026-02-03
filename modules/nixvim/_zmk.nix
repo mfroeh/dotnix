@@ -1,0 +1,27 @@
+let
+  _glove80 = [
+    "x x x x x _ _ _ _ _ _ _ _ x x x x x"
+    "x x x x x x _ _ _ _ _ _ x x x x x x"
+    "x x x x x x _ _ _ _ _ _ x x x x x x"
+    "x x x x x x _ _ _ _ _ _ x x x x x x"
+    "x x x x x x x x x x x x x x x x x x"
+    "x x x x x _ x x x x x x _ x x x x x"
+  ];
+  corne = [
+    "x x x x x x x x x x x x x x"
+    "x x x x x x x x x x x x x x"
+    "x x x x x x _ _ x x x x x x"
+    "_ _ _ x x x _ _ x x x _ _ _"
+  ];
+in
+{
+
+  plugins.qmk = {
+    enable = true;
+    settings = {
+      variant = "zmk";
+      layout = corne;
+      name = "unused_for_zmk";
+    };
+  };
+}

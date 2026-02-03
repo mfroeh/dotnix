@@ -1,5 +1,3 @@
-// For information on how to configure Zed, see the Zed
-// documentation: https://zed.dev/docs/configuring-zed
 {
   "disable_ai": true,
   "show_edit_predictions": false,
@@ -7,23 +5,17 @@
     "diagnostics": false,
     "metrics": false
   },
-  // theme
-  "theme": {
-    "mode": "system",
-    "light": "Gruvbox Light",
-    "dark": "Gruvbox Dark"
-  },
+  "theme": "Base16 Gruvbox Material Dark, Hard",
   "icon_theme": {
     "mode": "system",
     "dark": "Material Icon Theme",
     "light": "Material Icon Theme"
   },
-  // font
-  "ui_font_size": 16,
-  "ui_font_family": "Helvetica",
-  "buffer_font_size": 14.0,
+  "ui_font_size": 16.0,
+  "ui_font_family": "DejaVu Sans",
+  "buffer_font_size": 16.0,
   "buffer_font_weight": 400,
-  "buffer_font_family": "Hack Nerd Font Mono",
+  "buffer_font_family": "JetBrainsMono Nerd Font",
   "pane_split_direction_horizontal": "down",
   "pane_split_direction_vertical": "right",
   "cursor_blink": false,
@@ -47,28 +39,22 @@
     "entry_spacing": "standard",
     "auto_reveal_entries": true
   },
-
   "use_autoclose": true,
   "use_auto_surround": true,
-
   "autosave": {
     "after_delay": {
       "milliseconds": 200
     }
   },
-
-  // dont show collaboration button
-  "collaboration_panel": { "button": false },
-
-  // vim
+  "collaboration_panel": {
+    "button": false
+  },
   "vim_mode": true,
   "vim": {
     "use_system_clipboard": "always",
     "toggle_relative_line_numbers": true
   },
-
   "auto_update": false,
-
   "auto_install_extensions": {
     "nix": true,
     "nvim-nightfox": true,
@@ -80,11 +66,11 @@
     "neocmake": true,
     "srcery": true
   },
-
-  // languages
   "languages": {
     "Nix": {
-      "language_servers": ["nixd"],
+      "language_servers": [
+        "nixd"
+      ],
       "formatter": {
         "external": {
           "command": "nixfmt"
@@ -93,18 +79,21 @@
     },
     "Go": {
       "show_edit_predictions": false,
-      // "language_servers": ["gopls", "golangci-lint"]
-      "language_servers": ["gopls"]
+      "language_servers": [
+        "gopls"
+      ]
     },
     "C++": {
-      "language_servers": ["clangd"]
+      "language_servers": [
+        "clangd"
+      ]
     },
     "Rust": {
-      "language_servers": ["rust-analyzer"]
+      "language_servers": [
+        "rust-analyzer"
+      ]
     }
   },
-
-  // language servers
   "lsp": {
     "golangci-lint": {
       "initialization_options": {
@@ -120,9 +109,7 @@
     },
     "rust-analyzer": {
       "initialization_options": {
-        "check": {
-          // "command": "clippy"
-        }
+        "check": {}
       }
     }
   }

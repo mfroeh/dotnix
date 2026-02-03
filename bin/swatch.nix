@@ -3,8 +3,6 @@
 pkgs.writeShellApplication {
   name = "swatch";
 
-  runtimeInputs = [ ];
-
   text = ''
     nowSeconds=$(date +%s)sec
     while true; do

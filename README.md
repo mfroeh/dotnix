@@ -1,13 +1,20 @@
-# My NixOS, Nix-Darwin, Home-Manager Setup
+Systems flake with dendritic pattern for my nixos (embedded homeManager), nix-darwin (embedded homeManager) and standalone homeManager systems.
 
-## Systems
+**Configurations**
 | Name      | Platform       | OS       | Specs          |
 |-----------|----------------|----------|----------------|
-| xya       | aarch64-darwin | macOS 15 | MacBook Pro 14 |
-| $\lambda$ | x86_64-linux   | NixOS    | 9700k, 1080 Ti |
+| $\lambda$ | x86_64-linux with HM   | NixOS    | 9700k, 1080 Ti |
+| xya       | aarch64-darwin with HM | macOS 15 | MacBook Pro 14 |
 
-## Nix-darwin bootstrap
-`nix run --extra-experimental-features "nix-command flakes" nix-darwin -- switch --flake .#xya`
+Build a VM image of the systems configuration and run it
 
-## Home-manager bootstrap
-`nix run github:nix-community/home-manager -- switch --flake .#$USERNAME@$(hostname)`
+```bash
+nix build .#nixosConfigurations.lambda.config.system.build.vm
+NIX_DISK_IMAGE=~/test-vm-disk.qcow2 ./result/bin/run-nixos-vm
+```
+
+Rules:
+* We differentiate between standalone homeManager and system managed homeManager. Only for users that are intended for standalone homeManager use do we create a homeConfiguration, system managed users are embedded with the system configuration.
+* If a feature requires both system and homeManager configuration, use the [Multi Context Aspect](https://github.com/Doc-Steve/dendritic-design-with-flake-parts/wiki/Dendritic_Aspects#multi-context-aspect) and then include only the system module in system configurations.
+* If a feature requires only a homeManager configuration, only create that and use it in the homeManager configuration.
+
