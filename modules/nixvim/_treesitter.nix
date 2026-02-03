@@ -1,6 +1,5 @@
 { pkgs, ... }:
 {
-
   plugins.treesitter = {
     enable = true;
     grammarPackages =
@@ -65,7 +64,7 @@
   };
 
   # adds indentation textobjects `ii` and `ai` as well as move with `[i` and `]i`
-  plugins.indent-tools.enable = true;
+  plugins.indent-tools.enable = false;
 
   keymaps = [
     {
