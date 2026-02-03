@@ -93,6 +93,11 @@
         mode = "v";
         action = "<Esc>/\\%V";
       }
+      {
+        key = "<c-]>";
+        mode = "t";
+        action = "<c-\\><c-n>";
+      }
       # dont move cursor when joining lines
       # {
       #   key = "J";

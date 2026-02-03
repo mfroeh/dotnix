@@ -110,7 +110,7 @@ with inputs;
     prismlauncher
     rclone
 
-    config.boot.kernelPackages.perf
+    perf
 
     discord
     vlc

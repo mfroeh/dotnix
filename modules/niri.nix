@@ -14,6 +14,8 @@
     package = pkgs.niri-unstable;
   };
 
+  environment.systemPackages = [ pkgs.xwayland-satellite ];
+
   # https://nixos.wiki/wiki/Wayland
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 }

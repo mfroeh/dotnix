@@ -28,6 +28,7 @@
     ./go.nix
     ./nix.nix
     ./typst.nix
+    ./markdown.nix
   ];
 
   # clipboard providers on X11/Wayland
