@@ -3,20 +3,20 @@
   "show_edit_predictions": false,
   "telemetry": {
     "diagnostics": false,
-    "metrics": false
+    "metrics": false,
   },
   "theme": "Base16 Gruvbox Material Dark, Hard",
   "icon_theme": {
     "mode": "system",
     "dark": "Material Icon Theme",
-    "light": "Material Icon Theme"
+    "light": "Material Icon Theme",
   },
   "pane_split_direction_horizontal": "down",
   "pane_split_direction_vertical": "right",
   "cursor_blink": false,
   "relative_line_numbers": true,
   "scrollbar": {
-    "show": "never"
+    "show": "never",
   },
   "ensure_final_newline_on_save": false,
   "scroll_beyond_last_line": "off",
@@ -25,29 +25,29 @@
     "git_status": true,
     "file_icons": true,
     "show_close_button": "hidden",
-    "show_diagnostics": "all"
+    "show_diagnostics": "all",
   },
   "file_finder": {
-    "modal_max_width": "medium"
+    "modal_max_width": "medium",
   },
   "project_panel": {
     "entry_spacing": "standard",
-    "auto_reveal_entries": true
+    "auto_reveal_entries": true,
   },
   "use_autoclose": true,
   "use_auto_surround": true,
   "autosave": {
     "after_delay": {
-      "milliseconds": 200
-    }
+      "milliseconds": 200,
+    },
   },
   "collaboration_panel": {
-    "button": false
+    "button": false,
   },
   "vim_mode": true,
   "vim": {
     "use_system_clipboard": "always",
-    "toggle_relative_line_numbers": true
+    "toggle_relative_line_numbers": true,
   },
   "auto_update": false,
   "auto_install_extensions": {
@@ -59,35 +59,27 @@
     "git-firefly": true,
     "just": true,
     "neocmake": true,
-    "srcery": true
+    "srcery": true,
   },
   "languages": {
     "Nix": {
-      "language_servers": [
-        "nixd"
-      ],
+      "language_servers": ["nixd"],
       "formatter": {
         "external": {
-          "command": "nixfmt"
-        }
-      }
+          "command": "nixfmt",
+        },
+      },
     },
     "Go": {
       "show_edit_predictions": false,
-      "language_servers": [
-        "gopls"
-      ]
+      "language_servers": ["gopls"],
     },
     "C++": {
-      "language_servers": [
-        "clangd"
-      ]
+      "language_servers": ["clangd"],
     },
     "Rust": {
-      "language_servers": [
-        "rust-analyzer"
-      ]
-    }
+      "language_servers": ["rust-analyzer"],
+    },
   },
   "lsp": {
     "golangci-lint": {
@@ -98,14 +90,18 @@
           "--output.json.path",
           "stdout",
           "--show-stats=false",
-          "--issues-exit-code=1"
-        ]
-      }
+          "--issues-exit-code=1",
+        ],
+      },
     },
     "rust-analyzer": {
       "initialization_options": {
-        "check": {}
-      }
-    }
-  }
+        "check": {},
+      },
+    },
+  },
+  "buffer_font_family": "JetBrainsMono Nerd Font",
+  "buffer_font_size": 13.333333333333334,
+  "ui_font_family": "DejaVu Sans",
+  "ui_font_size": 13.333333333333334,
 }

@@ -1,11 +1,11 @@
 {
-  programs.nixvim.userCommands = {
+  userCommands = {
     SO = {
       command = "source $MYVIMRC";
     };
   };
 
-  programs.nixvim.autoCmd = [
+  autoCmd = [
     {
       desc = "highlight selection on yank";
       event = [ "TextYankPost" ];

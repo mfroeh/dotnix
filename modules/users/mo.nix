@@ -49,6 +49,16 @@
         lfs.enable = true;
       };
 
+      programs.mangohud = {
+        enable = true;
+        enableSessionWide = true;
+        settingsPerApplication = {
+          vlc = {
+            no_display = true;
+          };
+        };
+      };
+
       home.packages = with pkgs; [
         neohtop
         leetcode-cli

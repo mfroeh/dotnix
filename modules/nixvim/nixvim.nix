@@ -119,12 +119,6 @@
           updatetime = 300;
         };
 
-        colorschemes.gruvbox.enable = true;
-        colorschemes.gruvbox.settings = {
-          terminal_colors = true;
-          contrast = "hard";
-        };
-
         # core plugins
         plugins = {
           # until https://github.com/nix-community/nixd/issues/653 closed

@@ -1,4 +1,4 @@
-{ inputs, self, ... }:
+{ inputs, ... }:
 {
   flake.modules.nixos.stylix =
     { pkgs, ... }:
@@ -30,7 +30,7 @@
         };
 
         sizes = {
-          applications = 12;
+          applications = 10;
           desktop = 10;
           popups = 10;
           terminal = 10;
@@ -42,19 +42,20 @@
         size = 24;
       };
 
-      # pkgs.whitesur-icon-theme	WhiteSur-dark
       stylix.icons = {
         enable = true;
         package = pkgs.numix-icon-theme-circle;
         dark = "Numix-Circle";
       };
       stylix.polarity = "dark";
-      stylix.image = "${self}/config/wallpapers/aishot-3463.jpg";
     };
 
   flake.modules.homeManager.stylix = {
     imports = [ ];
     stylix.enable = true;
-    stylix.targets.firefox.profileNames = [ "default" ];
+    stylix.targets.firefox = {
+      profileNames = [ "default" ];
+      firefoxGnomeTheme.enable = true;
+    };
   };
 }

@@ -21,7 +21,32 @@
         package = pkgs.niri-unstable;
       };
 
-      environment.systemPackages = with pkgs; [ xwayland-satellite ];
+      environment.systemPackages = with pkgs; [
+        xwayland-satellite
+        wl-clipboard
+      ];
+
+      # DBus service that allows applications (in particular file managers) to query and mount storage devices
+      security.polkit = {
+        enable = true;
+      };
+      systemd.user.services.niri-flake-polkit.enable = false;
+      systemd.user.services.gnome-polkit = {
+        description = "PolicyKit Authentication Agent provided by niri-flake";
+        wantedBy = [ "niri.service" ];
+        after = [ "graphical-session.target" ];
+        partOf = [ "graphical-session.target" ];
+        serviceConfig = {
+          Type = "simple";
+          ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+          Restart = "on-failure";
+          RestartSec = 1;
+          TimeoutStopSec = 10;
+        };
+      };
+      services.dbus.enable = true;
+      services.udisks2.enable = true;
+      services.gvfs.enable = true;
 
       # https://nixos.wiki/wiki/Wayland
       environment.sessionVariables.NIXOS_OZONE_WL = "1";
@@ -45,12 +70,8 @@
         enable = true;
         timeouts = [
           {
-            timeout = 601;
-            command = "${pkgs.niri}/bin/niri msg action power-off-monitors";
-          }
-          {
             timeout = 600;
-            command = "${pkgs.swaylock}/bin/swaylock -f' before-sleep 'swaylock -f";
+            command = "${pkgs.niri}/bin/niri msg action power-off-monitors";
           }
         ];
         events.before-sleep = "${pkgs.swaylock}/bin/swaylock -f";
@@ -60,7 +81,15 @@
         enable = true;
       };
 
-      home.packages = [ ];
+      home.packages = with pkgs; [
+        swww
+        nautilus
+        gnome-calculator
+        loupe
+        papers
+        gnome-characters
+        amberol
+      ];
 
       programs.alacritty.enable = true;
 
@@ -84,10 +113,13 @@
           showResultsImmediately = true;
           maxEntries = null;
           plugins = [
+            "${pkgs.anyrun}/lib/libniri_focus.so"
             "${pkgs.anyrun}/lib/libapplications.so"
             "${pkgs.anyrun}/lib/libsymbols.so"
+            "${pkgs.anyrun}/lib/librink.so"
           ];
         };
       };
+
     };
 }

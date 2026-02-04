@@ -29,9 +29,6 @@
       ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}="0x8086" ATTR{device}="0xa36d" ATTR{power/wakeup}="disabled"
     '';
 
-    # DBus service that allows applications (in particular file managers) to query and mount storage devices
-    services.udisks2.enable = true;
-
     # TODO: if graphics don't work, first enable this (but as I understand, this should be xorg only)
     services.xserver.videoDrivers = [ "nvidia" ];
 

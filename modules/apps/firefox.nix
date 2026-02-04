@@ -35,8 +35,6 @@
             user_pref("sidebar.revamp", true);
             user_pref("sidebar.verticalTabs", true);
             user_pref("sidebar.visibility", "always-show");
-            // dark mode
-            user_pref("browser.theme.content-theme", 2);
             // newtabpage
             user_pref("browser.newtabpage.activity-stream.newtabWallpapers.wallpaper", "abstract-orange");
             user_pref("browser.newtabpage.activity-stream.feeds.topsites", true);

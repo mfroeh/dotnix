@@ -1,6 +1,5 @@
-{ pkgs, ... }:
 {
-  programs.nixvim.plugins = {
+  plugins = {
     lsp.servers.tinymist = {
       enable = true;
     };
@@ -16,8 +15,9 @@
     };
   };
 
-  home.packages = [
-    pkgs.typst
-    pkgs.typstyle
-  ];
+  # TODO: doesnt work
+  # hmConfig.home.packages = [
+  #   pkgs.typst
+  #   pkgs.typstyle
+  # ];
 }

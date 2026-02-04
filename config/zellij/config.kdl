@@ -196,4 +196,4 @@ default_shell "zsh"
 default_mode "normal"
 
 // serialize sessions to disk for full resurrection
-session_serialization false
+session_serialization true

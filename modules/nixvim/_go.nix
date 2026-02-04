@@ -1,12 +1,12 @@
 { pkgs, ... }:
 {
-  programs.nixvim.plugins.lsp.servers.gopls = {
+  plugins.lsp.servers.gopls = {
     enable = true;
     package = pkgs.gopls;
     packageFallback = true;
   };
 
-  programs.nixvim.extraPlugins = [
+  extraPlugins = [
     (pkgs.vimUtils.buildVimPlugin {
       name = "gotests";
       src = pkgs.fetchFromGitHub {
@@ -18,12 +18,12 @@
     })
   ];
 
-  programs.nixvim.extraConfigLua = ''
+  extraConfigLua = ''
     vim.g.gotests_bin = "${pkgs.gotests}/bin/gotests"
     require("gotests").setup {}
   '';
 
-  programs.nixvim.userCommands = {
+  userCommands = {
     GotoTests = {
       command.__raw = ''
         function()
@@ -55,7 +55,7 @@
     };
   };
 
-  programs.nixvim.keymaps = [
+  keymaps = [
     {
       key = "<leader>tt";
       mode = "n";

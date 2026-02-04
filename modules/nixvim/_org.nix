@@ -1,6 +1,6 @@
 { pkgs, ... }:
 {
-  programs.nixvim.plugins.neorg = {
+  plugins.neorg = {
     enable = true;
     settings = {
       load = {

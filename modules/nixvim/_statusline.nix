@@ -1,5 +1,5 @@
 {
-  programs.nixvim.extraConfigLuaPost = ''
+  extraConfigLuaPost = ''
     local function cleanStr(str)
       -- % is the escape character in lua patterns
       local clean = string.gsub(str, "%%#.-#", "")
