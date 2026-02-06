@@ -9,6 +9,14 @@
     };
   };
 
+  flake.modules.darwin.nixvim = {
+    home-manager.sharedModules = [ inputs.self.modules.homeManager.nixvim ];
+    environment.variables = {
+      EDITOR = "nvim";
+      VISUAL = "nvim";
+    };
+  };
+
   flake.modules.homeManager.nixvim =
     { pkgs, lib, ... }:
     {

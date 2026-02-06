@@ -24,7 +24,8 @@ in
         nixos-home-manager.expr = "(builtins.getFlake (builtins.toString ~/dotnix)).nixosConfigurations.lambda.options.home-manager.users.type.getSubOptions []";
       }
       // lib.optionalAttrs pkgs.stdenv.isDarwin {
-        darwin.expr = "(builtins.getFlake (builtins.toString ~/dotnix)).darwinConfigurations.xya.options";
+        darwin.expr = "(builtins.getFlake (builtins.toString ~/dotnix)).darwinConfigurations.eta.options";
+        darwin-home-manager.expr = "(builtins.getFlake (builtins.toString ~/dotnix)).darwinConfigurations.eta.options.home-manager.users.type.getSubOptions []";
       };
     };
   };

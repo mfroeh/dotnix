@@ -28,6 +28,20 @@
       ];
     };
 
+  flake.modules.darwin.personalApps = {
+    homebrew = {
+      enable = true;
+      onActivation.cleanup = "uninstall";
+      casks = [
+        "linearmouse"
+        "appcleaner"
+        "rectangle"
+        "obs"
+      ];
+      brews = [ ];
+    };
+  };
+
   flake.modules.homeManager.personalApps =
     { config, ... }:
     {

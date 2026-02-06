@@ -1,6 +1,6 @@
 {
   flake.modules.homeManager.xdg =
-    { config, ... }:
+    { config, pkgs, ... }:
     {
       xdg = {
         enable = true;
@@ -11,7 +11,7 @@
 
         # sets XDG_DESKTOP_DIR, ...
         userDirs = {
-          enable = true;
+          enable = pkgs.stdenv.isLinux;
           desktop = "${config.home.homeDirectory}/Desktop";
           documents = "${config.home.homeDirectory}/Documents";
           download = "${config.home.homeDirectory}/Downloads";

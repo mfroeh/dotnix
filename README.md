@@ -4,7 +4,7 @@ Systems flake with dendritic pattern for my nixos (embedded homeManager), nix-da
 | Name      | Platform       | OS       | Specs          |
 |-----------|----------------|----------|----------------|
 | $\lambda$ | x86_64-linux with HM   | NixOS    | 9700k, 1080 Ti |
-| xya       | aarch64-darwin with HM | macOS 15 | MacBook Pro 14 |
+| eta       | aarch64-darwin with HM | macOS 15 | MacBook Pro 14 |
 
 Build a VM image of the systems configuration and run it
 

@@ -1,7 +1,7 @@
 { self, inputs, ... }:
 {
   flake.modules.homeManager.nixRelated =
-    { ... }:
+    { pkgs, ... }:
     {
       # weekly updated nix-index database for nixpkgs/nixos-unstable channel
       imports = [ inputs.nix-index-database.homeModules.default ];
@@ -29,6 +29,8 @@
             fi
         }
       '';
+
+      home.packages = with pkgs; [ nix-tree ];
 
       # if you try to run a command which does not exist, checks the command against all binaries in nixpkgs/nixos-unstable channel
       # provides bin/nix-locate, which you can use like `nix-locate -r bin/make$` (where -r is for using regex)

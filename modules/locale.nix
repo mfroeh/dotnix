@@ -15,4 +15,8 @@
       LC_TIME = "de_DE.UTF-8";
     };
   };
+
+  flake.modules.darwin.locale = {
+    time.timeZone = "Europe/Berlin";
+  };
 }

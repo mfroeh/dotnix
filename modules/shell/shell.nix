@@ -5,6 +5,11 @@
     home-manager.sharedModules = [ inputs.self.modules.homeManager.shell ];
   };
 
+  flake.modules.darwin.shell = {
+    imports = [ inputs.self.modules.darwin.zsh ];
+    home-manager.sharedModules = [ inputs.self.modules.homeManager.shell ];
+  };
+
   flake.modules.homeManager.shell = {
     imports = with inputs.self.modules.homeManager; [
       archivers

@@ -12,7 +12,7 @@
       ];
 
       home = rec {
-        stateVersion = "25.11";
+        stateVersion = "26.05";
         username = "moritz.froehlich";
         homeDirectory = if pkgs.stdenv.isLinux then "/home/${username}" else "/Users/${username}";
       };

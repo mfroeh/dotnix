@@ -6,6 +6,12 @@
       users.defaultUserShell = pkgs.zsh;
     };
 
+  flake.modules.darwin.zsh =
+    { pkgs, ... }:
+    {
+      environment.shells = [ pkgs.zsh ];
+    };
+
   flake.modules.homeManager.zsh =
     { pkgs, ... }:
     {

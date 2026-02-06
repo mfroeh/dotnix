@@ -23,6 +23,26 @@
       };
     };
 
+  flake.modules.darwin.mo =
+    { ... }:
+    {
+      imports = [ inputs.home-manager.darwinModules.home-manager ];
+
+      # shell has to bet set manually using chsh, as nix-darwin will only do it for nix-darwin managed users
+      users.users.mo = {
+        description = "mfroeh";
+        home = "/Users/mo";
+      };
+      system.primaryUser = "mo";
+
+      home-manager = {
+        useGlobalPkgs = true;
+        useUserPackages = true;
+        backupFileExtension = ".backup";
+        users.mo = inputs.self.modules.homeManager.mo;
+      };
+    };
+
   flake.modules.homeManager.mo =
     { pkgs, ... }:
     {
@@ -34,7 +54,7 @@
       ];
 
       home = rec {
-        stateVersion = "25.11";
+        stateVersion = "26.05";
         username = "mo";
         homeDirectory = if pkgs.stdenv.isLinux then "/home/${username}" else "/Users/${username}";
       };
@@ -50,7 +70,7 @@
       };
 
       programs.mangohud = {
-        enable = true;
+        enable = pkgs.stdenv.isLinux;
         enableSessionWide = true;
         settingsPerApplication = {
           vlc = {
