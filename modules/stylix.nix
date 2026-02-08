@@ -1,13 +1,11 @@
 { inputs, lib, ... }:
 {
-  flake.modules.nixos.stylix =
-    { ... }:
-    {
-      imports = [ inputs.stylix.nixosModules.default ];
-      home-manager.sharedModules = [
-        inputs.self.modules.homeManager.stylix
-      ];
-    };
+  flake.modules.nixos.stylix = {
+    imports = [ inputs.stylix.nixosModules.default ];
+    home-manager.sharedModules = [
+      inputs.self.modules.homeManager.stylix
+    ];
+  };
 
   flake.modules.darwin.stylix = {
     imports = [ inputs.stylix.darwinModules.default ];

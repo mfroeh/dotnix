@@ -38,6 +38,7 @@
         ./_zen.nix
         ./_statusline.nix
         ./_marks.nix
+        ./_lint.nix
 
         # TODO: check these again
         ./_cmp.nix

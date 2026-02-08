@@ -11,15 +11,6 @@ bind --mode=ex <C-k> ex.prev_completion
 
 bind <C-e> editor
 
-set incsearch true
-bind / fillcmdline find
-bind ? fillcmdline find -?
-bind n findnext 1
-bind N findnext -1
-bind gn findselect
-bind gN composite findnext --search-from-view --reverse; findselect
-bind ,<Space> nohlsearch
-
 set searchurls.no https://search.nixos.org/options?query=
 set searchurls.np https://search.nixos.org/packages?query=
 set searchurls.ho https://home-manager-options.extranix.com/?query=
