@@ -5,7 +5,7 @@
     "diagnostics": false,
     "metrics": false
   },
-  "theme": "Base16 Gruvbox Material Dark, Hard",
+  "theme": "Base16 OceanicNext",
   "icon_theme": {
     "mode": "system",
     "dark": "Material Icon Theme",

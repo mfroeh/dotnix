@@ -12,6 +12,7 @@
       environment.systemPackages = with pkgs; [
         coreutils-full
         ntfs3g
+        mtpfs
         rclone
         perf
         discord
