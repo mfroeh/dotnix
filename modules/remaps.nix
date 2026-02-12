@@ -58,30 +58,19 @@
       };
     };
 
-  flake.modules.darwin.remaps =
-    { pkgs, ... }:
-    {
-      services.karabiner-elements = {
-        enable = true;
-        package = pkgs.karabiner-elements.overrideAttrs (old: {
-          version = "14.13.0";
-
-          src = pkgs.fetchurl {
-            inherit (old.src) url;
-            hash = "sha256-gmJwoht/Tfm5qMecmq1N6PSAIfWOqsvuHU8VDJY8bLw=";
-          };
-
-          dontFixup = true;
-        });
-      };
-      home-manager.sharedModules = [
-        (
-          { config, ... }:
-          {
-            home.file.".config/karabiner/karabiner.json".source =
-              config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotnix/config/karabiner/config.json";
-          }
-        )
-      ];
+  flake.modules.darwin.remaps = {
+    services.karabiner-elements = {
+      enable = false;
     };
+    home-manager.sharedModules = [
+      (
+        { config, ... }:
+        {
+          home.file.".config/karabiner/karabiner.json".source =
+            config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotnix/config/karabiner/config.json";
+          home.file.".config/karabiner/karabiner.json".force = true;
+        }
+      )
+    ];
+  };
 }

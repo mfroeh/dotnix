@@ -17,7 +17,8 @@
       nixvim
     ];
 
-    system.stateVersion = 4;
+    system.stateVersion = 6;
+    ids.gids.nixbld = 30000;
 
     networking.hostName = "eta";
     networking.computerName = "eta";

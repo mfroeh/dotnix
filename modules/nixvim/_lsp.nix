@@ -126,8 +126,11 @@
 
   plugins.fidget.enable = true;
 
+  plugins.inc-rename.enable = true;
+
   # some more bindings are done with fzf-lua
   keymaps = [
+    # Reminder: if you hit this key again whilst the eocs are already open, you will move in normal mode to the docs window
     {
       key = "K";
       mode = "n";
@@ -154,7 +157,12 @@
     {
       key = "cd";
       mode = "n";
-      action = "<cmd>:lua vim.lsp.buf.rename()<cr>";
+      action.__raw = ''
+        function() 
+          return ":IncRename " .. vim.fn.expand("<cword>")
+        end
+      '';
+      options.expr = true;
     }
     {
       key = "<c-.>";

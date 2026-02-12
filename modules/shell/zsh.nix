@@ -30,6 +30,10 @@
           # e.g. nix path-info nixpkgs#firefox - also works with nix wrapped binaries (generally shell scripts): e.g. nix path-info $(which myBinary)
           "npi" = "nix path-info";
           "gfh" = "git-file-history";
+
+          # TODO at some point maybe move this together with the nixvim config once we've migrated it to flake-parts modules
+          "journal" = ''nvim -c "lua vim.api.nvim_input('<Space>jn')"'';
+          "braindump" = ''nvim -c "lua vim.api.nvim_input('<Space>bd')"'';
         };
 
         autocd = true; # cd /some/dir == /some/dir, cd ../.. == ...

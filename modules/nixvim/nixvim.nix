@@ -33,7 +33,6 @@
         ./_zmk.nix
         ./_fzf.nix
         ./_git.nix
-        ./_org.nix
         ./_flash.nix
         ./_zen.nix
         ./_statusline.nix

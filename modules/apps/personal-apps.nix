@@ -38,6 +38,8 @@
         "appcleaner"
         "rectangle"
         "obs"
+        # until nix-darwin service fixed
+        "karabiner-elements"
       ];
       brews = [ ];
     };
