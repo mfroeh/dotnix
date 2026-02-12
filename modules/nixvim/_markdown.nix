@@ -35,6 +35,24 @@
       '';
     }
     {
+      mode = [ "n" ];
+      key = "<leader>jl";
+      action.__raw = ''
+        function()
+          require('fzf-lua').files({ cwd = "~/Journal" })
+        end
+      '';
+    }
+    {
+      mode = [ "n" ];
+      key = "<leader>j/";
+      action.__raw = ''
+        function()
+          require('fzf-lua').live_grep({ cwd = "~/Journal" })
+        end
+      '';
+    }
+    {
       mode = [
         "n"
       ];
@@ -47,6 +65,24 @@
                 CreateNote(path)
               end
           end)
+        end
+      '';
+    }
+    {
+      mode = [ "n" ];
+      key = "<leader>bl";
+      action.__raw = ''
+        function()
+          require('fzf-lua').files({ cwd = "~/Notes" })
+        end
+      '';
+    }
+    {
+      mode = [ "n" ];
+      key = "<leader>b/";
+      action.__raw = ''
+        function()
+          require('fzf-lua').live_grep({ cwd = "~/Notes" })
         end
       '';
     }
