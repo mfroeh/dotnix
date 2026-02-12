@@ -128,6 +128,9 @@
 
   plugins.inc-rename.enable = true;
 
+  plugins.wtf.enable = true;
+  plugins.wtf.settings.search_engine = "google";
+
   # some more bindings are done with fzf-lua
   keymaps = [
     # Reminder: if you hit this key again whilst the eocs are already open, you will move in normal mode to the docs window
@@ -168,6 +171,11 @@
       key = "<c-.>";
       mode = "n";
       action = "<cmd>:lua vim.lsp.buf.code_action()<cr>";
+    }
+    {
+      key = "<leader>ws";
+      mode = "n";
+      action = "<cmd>:lua require('wtf').search()<cr>";
     }
   ];
 
