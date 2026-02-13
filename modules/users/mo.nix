@@ -47,10 +47,12 @@
     { pkgs, ... }:
     {
       imports = with inputs.self.modules.homeManager; [
+        agenix
         xdg
         zed
         firefox
         ghostty
+        rclone
       ];
 
       home = rec {
@@ -67,16 +69,6 @@
           init.defaultBranch = "main";
         };
         lfs.enable = true;
-      };
-
-      programs.mangohud = {
-        enable = pkgs.stdenv.isLinux;
-        enableSessionWide = true;
-        settingsPerApplication = {
-          vlc = {
-            no_display = true;
-          };
-        };
       };
 
       home.packages = with pkgs; [

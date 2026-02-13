@@ -13,7 +13,6 @@
         coreutils-full
         ntfs3g
         mtpfs
-        rclone
         perf
         discord
         vlc
