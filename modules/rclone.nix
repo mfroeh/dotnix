@@ -11,6 +11,7 @@
             secrets = {
               client_id = config.age.secrets.google-drive-client-id.path;
               client_secret = config.age.secrets.google-drive-client-secret.path;
+              token = config.age.secrets.google-drive-token.path;
             };
             config = {
               type = "drive";

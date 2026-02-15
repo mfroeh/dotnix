@@ -14,6 +14,7 @@
         secrets = {
           google-drive-client-id.file = "${self}/secrets/google-drive-client-id.age";
           google-drive-client-secret.file = "${self}/secrets/google-drive-client-secret.age";
+          google-drive-token.file = "${self}/secrets/google-drive-token.age";
         };
       };
     };
