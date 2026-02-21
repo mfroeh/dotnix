@@ -89,6 +89,7 @@
         papers
         gnome-characters
         amberol
+        nirius
       ];
 
       programs.alacritty.enable = true;
