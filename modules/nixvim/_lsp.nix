@@ -38,6 +38,24 @@
         packageFallback = true;
       };
 
+      yamlls = {
+        enable = true;
+        package = pkgs.yaml-language-server;
+        packageFallback = true;
+      };
+
+      terraformls = {
+        enable = true;
+        package = pkgs.terraform-ls;
+        packageFallback = true;
+      };
+
+      dockerls = {
+        enable = true;
+        package = pkgs.dockerfile-language-server;
+        packageFallback = true;
+      };
+
       protols = {
         enable = true;
         package = pkgs.protols;
@@ -79,6 +97,7 @@
         # same story as with rust_analyzer
         installGhc = true;
       };
+
     };
 
     inlayHints = true;
