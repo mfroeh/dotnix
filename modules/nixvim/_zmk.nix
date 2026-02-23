@@ -1,5 +1,5 @@
 let
-  _glove80 = [
+  glove80 = [
     "x x x x x _ _ _ _ _ _ _ _ x x x x x"
     "x x x x x x _ _ _ _ _ _ x x x x x x"
     "x x x x x x _ _ _ _ _ _ x x x x x x"
@@ -7,7 +7,7 @@ let
     "x x x x x x x x x x x x x x x x x x"
     "x x x x x _ x x x x x x _ x x x x x"
   ];
-  corne = [
+  _corne = [
     "x x x x x x x x x x x x x x"
     "x x x x x x x x x x x x x x"
     "x x x x x x _ _ x x x x x x"
@@ -20,7 +20,7 @@ in
     enable = true;
     settings = {
       variant = "zmk";
-      layout = corne;
+      layout = glove80;
       name = "unused_for_zmk";
     };
   };
