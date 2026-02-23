@@ -25,3 +25,5 @@ colourscheme --url https://raw.githubusercontent.com/srcery-colors/srcery-web/re
 
 blacklistadd monkeytype.com
 blacklistadd speedtyper.dev
+blacklistadd calendar.google.com
+blacklistadd mail.proton.me
