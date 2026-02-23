@@ -43,51 +43,30 @@
       {
         mode = "n";
         key = "<leader>rr";
-        action = "<cmd>FzfLua resume<cr>";
+        action = ":lua require('fzf-lua').resume()<cr>";
       }
       # files
       {
         mode = "n";
         key = "<c-p>";
-        action = "<cmd>FzfLua files<cr>";
+        action = ":lua require('fzf-lua').files()<cr>";
       }
       {
         mode = "n";
         key = "<leader>.";
-        action = "<cmd>FzfLua files<cr>";
+        action = ":lua require('fzf-lua').files({ cwd = vim.fn.expand('%:p:h') })<cr>";
       }
-      {
-        mode = "n";
-        key = "<leader>of";
-        action = "<cmd>FzfLua files<cr>";
-      }
-      # buffers
+      # history
       {
         mode = "n";
         key = "<c-,>";
-        action = "<cmd>FzfLua buffers<cr>";
-      }
-      {
-        mode = "n";
-        key = "<leader>,";
-        action = "<cmd>FzfLua buffers<cr>";
-      }
-      {
-        mode = "n";
-        key = "<leader>ob";
-        action = "<cmd>FzfLua buffers<cr>";
-      }
-      # old files
-      {
-        mode = "n";
-        key = "<leader>oo";
-        action = "<cmd>FzfLua oldfiles<cr>";
+        action = ":lua require('fzf-lua').history()<cr>";
       }
       # grep
       {
         mode = "n";
         key = "<leader>/";
-        action = "<cmd>FzfLua live_grep<cr>";
+        action = ":lua require('fzf-lua').live_grep({ winopts = { preview = { hidden = false } } })<cr>";
       }
       {
         mode = "v";
@@ -97,7 +76,7 @@
             local visualStart = vim.fn.getpos("v")
             local cursor = vim.fn.getpos(".")
             local visualSelection = table.concat(vim.fn.getregion(visualStart, cursor, { type = vim.fn.mode() }))
-            require('fzf-lua').live_grep({ query = visualSelection })
+            require('fzf-lua').live_grep({ query = visualSelection, winopts = { preview = { hidden = false } } })
           end
         '';
       }
