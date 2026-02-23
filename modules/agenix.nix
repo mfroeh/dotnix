@@ -15,7 +15,12 @@
           google-drive-client-id.file = "${self}/secrets/google-drive-client-id.age";
           google-drive-client-secret.file = "${self}/secrets/google-drive-client-secret.age";
           google-drive-token.file = "${self}/secrets/google-drive-token.age";
+          gemini-api-key.file = "${self}/secrets/gemini-api-key.age";
         };
+      };
+
+      home.sessionVariables = {
+        "GEMINI_API_KEY" = "$(cat ${config.age.secrets.gemini-api-key.path})";
       };
     };
 }

@@ -1,6 +1,20 @@
 { self, ... }:
 {
   flake.nixvim.cmp = {
+    plugins.minuet = {
+      enable = true;
+      settings = {
+        provider = "gemini";
+        provider_options = {
+          gemini = {
+            model = "gemini-2.5-flash";
+            api_key = "GEMINI_API_KEY";
+            stream = true;
+          };
+        };
+      };
+    };
+
     plugins.blink-cmp = {
       enable = true;
       setupLspCapabilities = true;
@@ -117,12 +131,24 @@
         signature = {
           enabled = true;
         };
-        sources.default = [
-          "lsp"
-          "path"
-          "snippets"
-          "buffer"
-        ];
+        sources = {
+          default = [
+            "lsp"
+            "path"
+            "snippets"
+            "buffer"
+            "minuet"
+          ];
+          providers = {
+            minuet = {
+              name = "minuet";
+              module = "minuet.blink";
+              async = true;
+              timeout_ms = 3000;
+              score_offset = 50;
+            };
+          };
+        };
       };
     };
 

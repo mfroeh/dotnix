@@ -7,4 +7,5 @@ in
   "google-drive-client-id.age".publicKeys = keys;
   "google-drive-client-secret.age".publicKeys = keys;
   "google-drive-token.age".publicKeys = keys;
+  "gemini-api-key.age".publicKeys = keys;
 }
