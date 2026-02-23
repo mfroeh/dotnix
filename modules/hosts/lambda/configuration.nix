@@ -35,12 +35,8 @@
         ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}="0x8086" ATTR{device}="0xa36d" ATTR{power/wakeup}="disabled"
       '';
 
-      # TODO: if graphics don't work, first enable this (but as I understand, this should be xorg only)
       services.xserver.videoDrivers = [ "nvidia" ];
-
-      # TODO: maybe check what we can make modular here (and what we still need)
       networking.networkmanager.enable = true;
-      programs.nm-applet.enable = true;
 
       # TODO: required for screen sharing on wayland
       # services.pipewire.enable = true;

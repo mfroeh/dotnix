@@ -55,6 +55,8 @@
   flake.modules.homeManager.niri =
     { pkgs, config, ... }:
     {
+      imports = [ inputs.self.modules.homeManager.waybar ];
+
       programs.niri.settings = null;
       programs.niri.config = null;
 
@@ -75,10 +77,6 @@
           }
         ];
         events.before-sleep = "${pkgs.swaylock}/bin/swaylock -f";
-      };
-
-      programs.waybar = {
-        enable = true;
       };
 
       home.packages = with pkgs; [
