@@ -165,5 +165,48 @@
             options.expr = true;
           }
         ];
+
+      # Enhances % to work with tree-sitter (quotes, if/else, etc.)
+      plugins.vim-matchup = {
+        enable = true;
+        treesitter.enable = true;
+        settings = {
+          matchparen_deferred = 1;
+          # Disable offscreen match display for performance
+          matchparen_offscreen = {
+            __empty = null;
+          };
+        };
+      };
+
+      # does not work after non backwards compatible changes to treesitter.
+      # check again once compatible again.
+      # see https://github.com/RRethy/nvim-treesitter-textsubjects/pull/53/changes
+      # ; will select a syntactical container (class, function, etc.) depending on your location in the syntax tree.
+      # i; will select the body of a syntactical container depending on your location in the syntax tree.
+      # . will select the most relevant part of the syntax tree depending on your location in it.
+      # , repeats the last selection
+      #
+      # extraPlugins = [
+      #   (pkgs.vimUtils.buildVimPlugin {
+      #     name = "nvim-treesitter-textsubjects";
+      #     src = pkgs.fetchFromGitHub {
+      #       owner = "RRethy";
+      #       repo = "nvim-treesitter-textsubjects";
+      #       rev = "master";
+      #       hash = "sha256-gJlM0diDmyvmW5l/QIpUe2bDTZg8XekLBcFOoxeUW4E=";
+      #     };
+      #   })
+      # ];
+      # extraConfigLuaPost = ''
+      #   require('nvim-treesitter-textsubjects').configure({
+      #       prev_selection = ',',
+      #       keymaps = {
+      #           ['.'] = 'textsubjects-smart',
+      #           [';'] = 'textsubjects-container-outer',
+      #           ['i;'] = 'textsubjects-container-inner',
+      #       },
+      #   })
+      # '';
     };
 }
