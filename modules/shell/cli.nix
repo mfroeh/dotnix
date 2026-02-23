@@ -22,6 +22,8 @@
         asciinema
         asciinema-agg
 
+        tokei
+
         (import "${self}/bin/swatch.nix" { inherit pkgs; })
 
         bat-extras.prettybat
