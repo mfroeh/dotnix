@@ -11,6 +11,9 @@ bind --mode=ex <C-k> ex.prev_completion
 
 bind <C-e> editor
 
+unbind <C-f>
+unbind <C-b>
+
 set searchurls.no https://search.nixos.org/options?query=
 set searchurls.np https://search.nixos.org/packages?query=
 set searchurls.ho https://home-manager-options.extranix.com/?query=

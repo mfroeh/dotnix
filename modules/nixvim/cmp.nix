@@ -2,7 +2,7 @@
 {
   flake.nixvim.cmp = {
     plugins.minuet = {
-      enable = true;
+      enable = false;
       settings = {
         provider = "gemini";
         provider_options = {
@@ -137,17 +137,7 @@
             "path"
             "snippets"
             "buffer"
-            "minuet"
           ];
-          providers = {
-            minuet = {
-              name = "minuet";
-              module = "minuet.blink";
-              async = true;
-              timeout_ms = 3000;
-              score_offset = 50;
-            };
-          };
         };
       };
     };

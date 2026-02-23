@@ -4,6 +4,11 @@
     {
       programs.waybar = {
         enable = true;
+        style = ''
+          #tray {
+            padding-right: 4px;
+          }
+        '';
         settings.mainBar = {
           modules-left = [
             "niri/workspaces"
@@ -42,7 +47,7 @@
           };
 
           tray = {
-            spacing = 8;
+            spacing = 4;
           };
 
           "custom/gpu" = {
