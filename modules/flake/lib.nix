@@ -9,6 +9,12 @@
     default = { };
   };
 
+  options.flake.nixvim = lib.mkOption {
+    type = lib.types.attrsOf lib.types.unspecified;
+    default = { };
+    description = "Nixvim configuration modules";
+  };
+
   config.flake.lib = {
     mkNixos = system: name: {
       ${name} = inputs.nixpkgs.lib.nixosSystem {

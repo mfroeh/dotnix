@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ inputs, lib, ... }:
 {
   flake.modules.nixos.nixvim = {
     home-manager.sharedModules = [ inputs.self.modules.homeManager.nixvim ];
@@ -18,36 +18,15 @@
   };
 
   flake.modules.homeManager.nixvim =
-    { pkgs, lib, ... }:
+    { pkgs, ... }:
     {
       imports = [
         inputs.nixvim.homeModules.default
         inputs.self.modules.homeManager.neovide
       ];
 
-      programs.nixvim.imports = [
-        ./_commands.nix
-        ./_keymaps.nix
-        ./_lsp.nix
-        ./_treesitter.nix
-        ./_zmk.nix
-        ./_fzf.nix
-        ./_git.nix
-        ./_flash.nix
-        ./_zen.nix
-        ./_statusline.nix
-        ./_marks.nix
-        ./_lint.nix
-
-        # TODO: check these again
-        ./_cmp.nix
-        ./_random.nix
-
-        ./_go.nix
-        ./_nix.nix
-        ./_typst.nix
-        ./_markdown.nix
-      ];
+      # Auto-collect all flake.nixvim.* modules
+      programs.nixvim.imports = lib.attrValues inputs.self.nixvim;
 
       home.sessionVariables = {
         EDITOR = "nvim";
@@ -129,10 +108,6 @@
 
         # core plugins
         plugins = {
-          # until https://github.com/nix-community/nixd/issues/653 closed
-          lsp.servers.nixd.package =
-            inputs.nixd-completion-in-attr-sets-fix.packages.${pkgs.stdenv.hostPlatform.system}.nixd;
-
           mini-icons = {
             enable = true;
             mockDevIcons = true;
