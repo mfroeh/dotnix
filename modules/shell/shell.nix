@@ -12,6 +12,7 @@
 
   flake.modules.homeManager.shell = {
     imports = with inputs.self.modules.homeManager; [
+      claude-code
       archivers
       atuin
       cli
