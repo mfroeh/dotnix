@@ -49,7 +49,7 @@
               "x"
               "o"
             ];
-            action = ":lua require('nvim-treesitter-textobjects.select').select_textobject('${capture}', 'textobjects')<cr>";
+            action.__raw = "function() require('nvim-treesitter-textobjects.select').select_textobject('${capture}', 'textobjects') end";
             options.silent = true;
           };
           treesitter-jump-mapping-next-start = key: capture: {
@@ -59,7 +59,7 @@
               "x"
               "o"
             ];
-            action = ":lua require('nvim-treesitter-textobjects.move').goto_next_start('${capture}', 'textobjects')<cr>";
+            action.__raw = "function() require('nvim-treesitter-textobjects.move').goto_next_start('${capture}', 'textobjects') end";
             options.silent = true;
           };
           treesitter-jump-mapping-prev-start = key: capture: {
@@ -69,7 +69,7 @@
               "x"
               "o"
             ];
-            action = ":lua require('nvim-treesitter-textobjects.move').goto_previous_start('${capture}', 'textobjects')<cr>";
+            action.__raw = "function() require('nvim-treesitter-textobjects.move').goto_previous_start('${capture}', 'textobjects') end";
             options.silent = true;
           };
         in
@@ -77,7 +77,7 @@
           {
             key = "[x";
             mode = "n";
-            action = ":lua require('treesitter-context').go_to_context(vim.v.count1)<cr>";
+            action.__raw = "function() require('treesitter-context').go_to_context(vim.v.count1) end";
             options.silent = true;
           }
           # select
@@ -107,7 +107,7 @@
               "x"
               "o"
             ];
-            action = ":lua require('nvim-treesitter-textobjects.repeatable_move').repeat_last_move()<cr>";
+            action.__raw = "function() require('nvim-treesitter-textobjects.repeatable_move').repeat_last_move() end";
             options.silent = true;
           }
           {
@@ -117,7 +117,7 @@
               "x"
               "o"
             ];
-            action = ":lua require('nvim-treesitter-textobjects.repeatable_move').repeat_last_move_opposite()<cr>";
+            action.__raw = "function() require('nvim-treesitter-textobjects.repeatable_move').repeat_last_move_opposite() end";
             options.silent = true;
           }
           {
@@ -127,7 +127,7 @@
               "x"
               "o"
             ];
-            action = ":lua require('nvim-treesitter-textobjects.repeatable_move').builtin_f_expr()<cr>";
+            action.__raw = "require('nvim-treesitter-textobjects.repeatable_move').builtin_f_expr";
             options.silent = true;
             options.expr = true;
           }
@@ -138,7 +138,7 @@
               "x"
               "o"
             ];
-            action = ":lua require('nvim-treesitter-textobjects.repeatable_move').builtin_F_expr()<cr>";
+            action.__raw = "require('nvim-treesitter-textobjects.repeatable_move').builtin_F_expr";
             options.silent = true;
             options.expr = true;
           }
@@ -149,7 +149,7 @@
               "x"
               "o"
             ];
-            action = ":lua require('nvim-treesitter-textobjects.repeatable_move').builtin_t_expr()<cr>";
+            action.__raw = "require('nvim-treesitter-textobjects.repeatable_move').builtin_t_expr";
             options.silent = true;
             options.expr = true;
           }
@@ -160,7 +160,7 @@
               "x"
               "o"
             ];
-            action = ":lua require('nvim-treesitter-textobjects.repeatable_move').builtin_T_expr()<cr>";
+            action.__raw = "require('nvim-treesitter-textobjects.repeatable_move').builtin_T_expr";
             options.silent = true;
             options.expr = true;
           }
