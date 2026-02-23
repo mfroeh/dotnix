@@ -1,4 +1,9 @@
-{ inputs, ... }:
+{
+  inputs,
+  self,
+  lib,
+  ...
+}:
 {
   imports = [
     inputs.treefmt-nix.flakeModule
@@ -6,7 +11,17 @@
   ];
 
   perSystem =
-    { pkgs, config, ... }:
+    { config, system, ... }:
+    let
+      pkgs = import inputs.nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+      };
+      binDir = "${self}/bin";
+      binScripts = lib.pipe (builtins.readDir binDir) [
+        (lib.mapAttrsToList (name: _: import "${binDir}/${name}" { inherit pkgs; }))
+      ];
+    in
     {
       pre-commit = {
         settings.hooks = {
@@ -32,7 +47,7 @@
 
       devShells.default = pkgs.mkShell {
         shellHook = config.pre-commit.installationScript;
-        buildInputs = [ config.treefmt.build.wrapper ];
+        buildInputs = [ config.treefmt.build.wrapper ] ++ binScripts;
       };
     };
 }
