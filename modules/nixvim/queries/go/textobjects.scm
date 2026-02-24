@@ -2,18 +2,17 @@
 
 ; all other elements
 (literal_value
-  "," @_start
+  "," @element.outer
   .
-  (_) @element.inner
-  (#make-range! "element.outer" @_start @element.inner))
+  (_) @element.inner @element.outer)
 
 ; first element
 (literal_value
   .
-  (_) @element.inner
+  (_) @element.inner @element.outer
   .
-  ","? @_end
-  (#make-range! "element.outer" @element.inner @_end))
+  ","? @element.outer)
+
 
 (literal_value
   (_) @element.inner)

@@ -88,8 +88,8 @@
           (treesitter-select-mapping "aC" "@class.outer")
           (treesitter-select-mapping "iC" "@class.inner")
           # only defined by me so not complete for all languages
-          (treesitter-select-mapping "ae" "@element.inner")
-          (treesitter-select-mapping "ie" "@element.outer")
+          (treesitter-select-mapping "ie" "@element.inner")
+          (treesitter-select-mapping "ae" "@element.outer")
           # jump
           # todo: figure out sensible mapping for [[ and ]] (maybe scopes?)
           (treesitter-jump-mapping-prev-start "[a" "@parameter.outer")
