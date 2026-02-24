@@ -14,6 +14,7 @@
         mo
 
         personalApps
+        docker
         shell
         nixvim
         stylix
