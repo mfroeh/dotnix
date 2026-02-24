@@ -9,6 +9,7 @@
         settings = {
           app-notifications = false;
           confirm-close-surface = false;
+          keybind = "ctrl+,=unbind";
         };
       };
     };
