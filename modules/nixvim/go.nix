@@ -20,6 +20,7 @@
         })
       ];
 
+      extraPackages = [ pkgs.gotests ];
       extraConfigLuaPost = ''
         vim.g.gotests_bin = "${pkgs.gotests}/bin/gotests"
         require("gotests").setup {}
