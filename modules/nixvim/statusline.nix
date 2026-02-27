@@ -77,14 +77,14 @@
       local sep = " "
       local function getLeft()
         local humanReadableMode = {
-          ['n']      = 'NRM',
-          ['v']      = 'VIS',
-          ['V']      = 'V-L',
-          ['\22']    = 'V-B',
-          ['i']      = 'INS',
-          ['R']      = 'REP',
-          ['c']      = 'CMD',
-          ['t']      = 'TER',
+          ['n']      = '%#MiniStatuslineModeNormal#NRM%#StatusLine#',
+          ['v']      = '%#MiniStatuslineModeVisual#VIS%#StatusLine#',
+          ['V']      = '%#MiniStatuslineModeVisual#V-L%#StatusLine#',
+          ['\22']      = '%#MiniStatuslineModeVisual#V-B%#StatusLine#',
+          ['i']      = '%#MiniStatuslineModeInsert#INS%#StatusLine#',
+          ['R']      = '%#MiniStatuslineModeReplace#REP%#StatusLine#',
+          ['c']      = '%#MiniStatuslineModeCommand#CMD%#StatusLine#',
+          ['t']      = '%#MiniStatuslineModeOther#TER%#StatusLine#',
         }
         local modeChar = vim.fn.mode()
         local mode = humanReadableMode[modeChar] or modeChar

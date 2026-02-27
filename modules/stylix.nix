@@ -22,7 +22,7 @@
         {
           enable = true;
           autoEnable = true;
-          base16Scheme = "${pkgs.base16-schemes}/share/themes/oceanicnext.yaml";
+          base16Scheme = "${pkgs.base16-schemes}/share/themes/onedark.yaml";
 
           fonts = {
             monospace = {
@@ -65,6 +65,7 @@
           icons = {
             enable = true;
             package = pkgs.numix-icon-theme-circle;
+            light = "Numix-Circle";
             dark = "Numix-Circle";
           };
         })

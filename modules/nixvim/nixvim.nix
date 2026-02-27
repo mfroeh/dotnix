@@ -18,7 +18,7 @@
   };
 
   flake.modules.homeManager.nixvim =
-    { pkgs, ... }:
+    { pkgs, config, ... }:
     {
       imports = [
         inputs.nixvim.homeModules.default
@@ -43,6 +43,7 @@
         clipboard.register = [ "unnamedplus" ];
 
         opts = {
+          background = config.stylix.polarity;
           number = true;
           relativenumber = true;
 

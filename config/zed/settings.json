@@ -5,7 +5,7 @@
     "diagnostics": false,
     "metrics": false
   },
-  "theme": "Base16 OceanicNext",
+  "theme": "Base16 OneDark",
   "icon_theme": {
     "mode": "system",
     "dark": "Material Icon Theme",
