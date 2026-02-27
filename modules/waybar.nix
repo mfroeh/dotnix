@@ -5,8 +5,9 @@
       programs.waybar = {
         enable = true;
         style = ''
-          #tray {
+          #custom-power {
             padding-right: 4px;
+            padding-left: 4px;
           }
         '';
         settings.mainBar = {
@@ -22,6 +23,7 @@
             "custom/gpu"
             "cpu"
             "tray"
+            "custom/power"
           ];
 
           clock = {
@@ -76,6 +78,12 @@
             format-source-muted = "󰍭 muted";
             on-click-right = "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle";
           };
+
+          "custom/power" = {
+            format = "⏻";
+            tooltip = false;
+            on-click = "wlogout";
+          };
         };
       };
 
@@ -83,6 +91,7 @@
 
       home.packages = [
         pkgs.pavucontrol
+        pkgs.wlogout
       ];
     };
 }
